@@ -1,7 +1,7 @@
 import axios from "axios";
 import storage from "../storage/storage";
 const axiosInstance = axios.create({
-    baseURL: 'http://10.152.1.136:4000/'
+    baseURL: 'http://10.152.1.213:4000/'
 });
 export const getResponse = async ({ url,}) => {
     try {

@@ -13,13 +13,14 @@ export default function PostContext({ getUsePostData, responseFilterData }) {
                 url: 'post'
             }).then((data) => {
                 setResponseData(data.data)
+                console.log(data.data)
             }).catch((error) => {
                 console.log(error)
             })
         } else {
             setResponseData(getUsePostData)
         }
-    }, [responseData, setResponseData, axios, route, route.name, getUsePostData])
+    }, [setResponseData, axios, route, route.name, getUsePostData])
     const postLikeApi = async (_id) => {
         try {
             const { jwt, userid } = await getloginData()
@@ -59,7 +60,7 @@ export default function PostContext({ getUsePostData, responseFilterData }) {
                             <Image style={styles.Image} source={require('../../assets/icon.png')}></Image>
                             <Text style={styles.PressableButtonText}>{item.postShare}</Text>
                         </Pressable>
-                        <Pressable style={styles.PressableButton} onPress={()=>postLikeApi(item._id)}>
+                        <Pressable style={styles.PressableButton} onPress={() => postLikeApi(item._id)}>
                             <Image style={styles.Image} source={require('../../assets/icon.png')}></Image>
                             <Text style={styles.PressableButtonText}>{item.postLike}</Text>
                         </Pressable>
@@ -76,30 +77,24 @@ export default function PostContext({ getUsePostData, responseFilterData }) {
 const styles = StyleSheet.create({
     postContextHeaderName: {
         fontSize: 20,
-        fontWeight: 'blod'
+        fontWeight: 'bold'
     },
     PressableButtonText: {
         fontSize: 20,
-        fontWeight: 'heavy'
+        fontWeight: 'bold'
     },
     PressableButton: {
-        display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
         gap: 8,
     },
     postContext: {
+        marginHorizontal: 'auto',
         borderRadius: 10,
         padding: 8,
-        marginHorizontal: 'auto',
         width: '90%',
-        height: 'auto',
         backgroundColor: 'gray',
         marginTop: 24,
-        display: 'flex',
-        rowGap: 8,
-        justifyContent: 'space-between'
     },
     postcontexHeader: {
         width: '100%',
@@ -109,22 +104,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: 40
     },
     postcontexHeaderAndName: {
-        width: null,
-        height: null,
-        display: 'flex',
         flexDirection: 'row',
-        columnGap: 8,
-        justifyContent: 'space-between',
+        gap: 8,
         alignItems: 'center',
     },
-    /*  postContextHeaderImageView: {
-         borderStyle: 'solid',
-         borderWidth: 1,
-         borderBlockColor: 'black',
-     }, */
     postContextHeaderImage: {
         width: 60,
         height: 60,
@@ -135,31 +120,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
-        textAlignVertical: 'center',
-        flex: 1,
         width: '100%',
-        height: null,
-        marginTop: 8,
+        padding: 8,
         backgroundColor: 'gray',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     postcontextBottom: {
-        width: '100%',
-        height: 'auto',
-        marginTop: 8,
-        backgroundColor: 'gray',
-        display: 'flex',
         flexDirection: "row",
         justifyContent: 'space-between',
     },
     Image: {
         width: 40,
         height: 40,
-        borderBlockColor: 'black',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: 'black'
     }
-})
+});

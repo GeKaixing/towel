@@ -2,7 +2,6 @@ import { View, Text, ScrollView } from 'react-native'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import PostHeader from './postComponents/PostHeader'
 import PostContext from './postComponents/PostContext'
-
 import axiosInstance from '../axios/axios'
 export default function Post() {
   const [inputTextData, setInputTextData] = useState('')

@@ -152,15 +152,15 @@ towel 是一个三端同步的项目，在基于expess框架下编写后端项�
 * 注册验证（nodemailer的实践）
 * 文件上传（multer的实践）
 * 消息推送 (socket的实践)
-web/移动端 使用同一技术栈react，小程序使用uniapp/vue
-* 移动端使用expo 开发环境，快速开发
-* 移动端使用同一个ui/ux，ui统一，icon统一使用[iconpark](https://iconpark.oceanengine.com/home)
+react/Rn 使用同一技术栈react，小程序使用uniapp/vue
+* RN使用expo 开发环境，快速开发
+* 小程序和RN使用同一个ui/ux，ui统一，icon统一使用[iconpark](https://iconpark.oceanengine.com/home)
 * 均使用socket.io进行消息推送，axios进行数据请求
 ### 3.1项目疑惑和不足
 为什么没有使用typescript？
-* 因为是个人开发，使用TS编译消耗时间长，使用代码变得冗长，所以并没有采用了typescript，
+* 因为是个人开发，使用TS编译消耗时间长，使用代码变得冗长，所以并没有采用了typescript。          
 为什么没有使用react rudex
-* 更多的是使用react的useReduce和useContext做状态管理或者状态提升，使用状态管理的组件并不多，没有必要引入redux框。
+* 更多的是使用react的useReduce和useContext做状态管理或者状态提升，使用状态管理的组件并不多，没有必要引入redux框。  
 为什么叫towel/毛巾
 * 因为我的毛巾烂掉了，没有任何含义
 
@@ -184,6 +184,11 @@ UI/UX原型图
 
 * [移动端](https://www.figma.com/design/2gIurz4y0gsaTvm834N7C2/towel?node-id=0-1&t=w9M5U50Kbn8FrIIS-1) 
 * [web端](https://www.figma.com/design/e13QKKoeeCC2t0cufq3cUp/towel?m=auto&t=w9M5U50Kbn8FrIIS-6)
-* 项目截图
-![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/%E6%88%AA%E5%B1%8F2024-06-18%2000.44.03.png)
+* web项目截图
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web_towel.png)
 后续添加其他截图
+* 小程序项目截图
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/uni_towel.png)
+后续添加其他截图
+* RN项目截图
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/RN_towel.png)
