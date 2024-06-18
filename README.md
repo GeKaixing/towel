@@ -177,7 +177,7 @@ react/Rn 使用同一技术栈react，小程序使用uniapp/vue
 * 将添加广告模块
 * 完善web的响应式布局
 ## 4 项目整体架构
-<img src="https://github.com/GeKaixing/towel/raw/main/README_static/Frame%201.png" alt="架构" style="zoom: 50%;" />
+<img src="https://github.com/GeKaixing/towel/raw/main/README_static/Frame%201.png" alt="架构" width="400" height="450"  />
 
 [架构修改](https://www.figma.com/design/vnC7Axj82RQ5kOXDD56Elb/Untitled?node-id=1-2&t=X9Wmf6wcpk2Dfj7Y-1)
 ## 5. 项目截图
