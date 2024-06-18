@@ -1,0 +1,53 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 170px;
+    width: 600px;
+}
+
+.name {
+    width: 15rem;
+    height: 1.5rem;
+    margin-top: 10px;
+}
+
+.password {
+    width: 15rem;
+    height: 1.5rem;
+    margin-top: 10px;
+ 
+}
+
+.button {
+    margin-top: 10px;
+    width: 6rem;
+    height: 1.5rem;
+}
+
+.signup {
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.signup:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    font-size: 4.5rem;
+    height: 6.5rem;
+}
+
+.tip {
+    position: relative;
+}
+
+.EyeOutlined,.EyeInvisibleOutlined {
+    position: absolute;
+    top: 40%;
+    left: 222px;
+    z-index: 2;
+
+}

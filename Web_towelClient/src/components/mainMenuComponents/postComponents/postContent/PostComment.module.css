@@ -1,0 +1,67 @@
+.postDeleteBox{
+    box-sizing: border-box;
+    position:absolute;
+    right: 0;
+    width: 200px;
+    background-color: #d5d5d5; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 9999;
+    gap: 8px;
+    border-radius: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.postDeleteBoxButton{
+    border-radius: 10px;
+    font-weight: bold;
+    border: 1px solid black;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.comments {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    width: 600px;
+    border: 1px solid #000000;
+    padding: 8px;
+    background-color:white;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.handimg {
+    width: 2rem;
+    height: 2rem;
+    background-color: rgb(85, 37, 95);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.headimgs {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Reply {
+    margin-left: 10px;
+}

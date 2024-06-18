@@ -1,0 +1,99 @@
+.commentpage {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+.message {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 600px;
+}
+
+.messagebox {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.thisshowname {
+    padding-top: 10px;
+    gap: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.handimg {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgb(85, 37, 95);
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.handname {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+.handname:hover {
+    text-decoration: underline
+}
+
+.thisshowcontent {
+    display: flex;
+    font-weight: bold;
+}
+
+.thisshowbottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 20px;
+
+}
+
+.thisshowbottom :nth-child(1) {
+    text-decoration: none;
+}
+
+.MessageFilled {
+    color: #000;
+}
+
+.MessageFilled:hover {
+    color: rgb(89, 152, 204);
+    text-decoration: underline;
+}
+
+.star:hover {
+    color: rgb(231, 233, 125);
+}
+
+.share:hover {
+    color: rgb(131, 204, 89);
+}
+
+.whitelike {
+    color: rgb(0, 0, 0);
+}
+
+.whitelike:hover {
+    color: rgb(188, 27, 27);
+}
+
+.redlike {
+    color: rgb(188, 27, 27);
+}

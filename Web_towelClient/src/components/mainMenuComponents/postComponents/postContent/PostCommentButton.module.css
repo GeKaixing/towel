@@ -1,0 +1,29 @@
+.reply{   
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-around;
+}
+.replynumbe{
+margin-left: 10px;
+
+}
+.replyimport{ 
+    display: flex;
+    justify-content: center;
+}
+.replybutton{
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.like{
+    margin-left: 10px;
+}
+.like:hover{
+    color: rgb(188, 27, 27);
+}
+
+.submitreply:hover{
+    cursor: pointer;
+}
