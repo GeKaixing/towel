@@ -57,7 +57,6 @@ web/移动端 使用同一技术栈react，小程序使用uniapp/vue
 * 移动端使用expo 开发环境，快速开发
 * 移动端使用同一个ui/ux，ui统一，icon统一使用[iconpark](https://iconpark.oceanengine.com/home)
 * 均使用socket.io进行消息推送，axios进行数据请求
-* 三端目录统一
 ### 3.1项目疑惑和不足
 为什么没有使用typescript？
 * 因为是个人开发，使用TS编译消耗时间长，使用代码变得冗长，所以并没有采用了typescript，
@@ -89,3 +88,4 @@ UI/UX原型图
 * [web端](https://www.figma.com/design/e13QKKoeeCC2t0cufq3cUp/towel?m=auto&t=w9M5U50Kbn8FrIIS-6)
 * 项目截图
 ![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/%E6%88%AA%E5%B1%8F2024-06-18%2000.44.03.png)
+后续添加其他截图
