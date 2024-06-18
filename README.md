@@ -1,15 +1,114 @@
 # towel/毛巾
 一个 web/android/ios/uniapp 小程序的论坛app，将````持续开源和维护````
 ## 1. 项目启动
-web端启动，须安装node和git或者DOWNLOAD ZIP  
+开发环境：macOS monterey 12.4
+安装[node](https://nodejs.org/en)和[git](https://git-scm.com/downloads)     
+1. node版本>=21.6.1，下载适合的系统相对应的版本  
+   * 验证node版本和是否安装成功
+````
+ node -v
+````
+1. 安装[git](https://git-scm.com/downloads)下载适合的系统相对应的版本   
+   * 验证git版本和是否安装成功
+````
+ git -v
+````
+1. 安装[mongoDB](https://www.mongodb.com/try/download/community)下载适合的系统相对应的版本   
+   * 验证mongosh版本和是否安装成功
+````
+ mongosh --version
+````
+**web端启动**，须安装node和git
+   
 
     git clone https://github.com/GeKaixing/towel.git  
 
 进入根目录
 
-    cd towel
-    npm i
+    cd Web_towelClient
+安装所需要的依赖包   
+
+    npm i  
+
+启动开发服务器  
+
     npm run start
+安装服务器 **须安装node和mongodb** 
+
+    cd towelSever
+安装所需要的依赖包   
+
+    npm i  
+启动开发服务器  
+
+    nodemon
+### 1.1项目目录结构
+web端目录结构
+````
+├── App.js    二级主入口
+├── components    组件 
+│   ├── MainMenu.js    导航栏
+│   ├── MainMenu.module.css
+│   └── mainMenuComponents    导航栏组件
+│       ├── About.js    关于
+│       ├── About.module.css
+│       ├── Add.js    添加
+│       ├── Message.js    消息
+│       ├── Post.js     文章
+│       ├── Post.module.css
+│       ├── Search.js     搜索
+│       ├── User.js    用户
+│       ├── User.module.css
+│       ├── addComponents  添加组件
+│       │   ├── AddContent.js    添加主页
+│       │   └── AddContent.module.css
+│       ├── messageComponents    消息组件
+│       │   ├── Message.module.css
+│       │   └── MessageConten.js    消息主页
+│       ├── postComponents    文章组件
+│       │   ├── Post.js    文章主页
+│       │   ├── Post.module.css
+│       │   ├── PostPage.js    文章数据
+│       │   └── postContent    进入文章/文章详细页
+│       │       ├── PostComment.js    文章回复
+│       │       ├── PostComment.module.css
+│       │       ├── PostCommentButton.js    文章回复按钮
+│       │       ├── PostCommentButton.module.css
+│       │       ├── PostContent.js    文章内容/入口
+│       │       ├── PostContent.module.css
+│       │       ├── PostInput.js    文章回复评论框
+│       │       ├── PostInput.module.css
+│       │       ├── PostReplyContent.js    回复内容/二级评论内容
+│       │       └── PostReplyContent.module.css
+│       └── userComponents    组件
+│           ├── Login.js    登录
+│           ├── Login.module.css
+│           ├── Signup.js    注册
+│           ├── Signup.module.css
+│           └── userHomePageComponts    用户管理组件
+│               ├── UserArticle.js    用户文章
+│               ├── UserComment.js    用户评论
+│               ├── UserHomePage.js    用户主页/入口
+│               ├── UserHomePage.module.css    
+│               └── UserReply.js    用户回复
+├── context
+│   ├── noReadNumbers.js    消息数量数据
+│   └── searchData.js    搜索数据
+├── index.css
+├── index.js    主入口
+├── router
+│   ├── Protected.js    路由守卫
+│   ├── Routers.js    路由入口
+│   └── Routers.module.css
+└── socket
+    └── socket.js
+
+
+````
+后端目录结构
+````
+├── index.js 主入口，全部代码
+````
 ## 2. 项目使用的技术栈，npm i安装了对应不同技术栈，编写时间2024/06/15
 web端使用技术栈react/react-router/axios/socket
 
@@ -78,8 +177,7 @@ web/移动端 使用同一技术栈react，小程序使用uniapp/vue
 * 将添加广告模块
 * 完善web的响应式布局
 ## 4 项目整体架构
-
-![架构](https://github.com/GeKaixing/towel/raw/main/README_static/Frame%201.png)
+* ![架构](https://github.com/GeKaixing/towel/raw/main/README_static/Frame%201.png)
 [架构修改](https://www.figma.com/design/vnC7Axj82RQ5kOXDD56Elb/Untitled?node-id=1-2&t=X9Wmf6wcpk2Dfj7Y-1)
 ## 5. 项目截图
 UI/UX原型图 
