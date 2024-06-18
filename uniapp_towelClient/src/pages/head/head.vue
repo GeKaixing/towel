@@ -1,44 +1,9 @@
 <template>
 	<view class="search">
-		<view class="navBar">
-			<view class="navBarLeft">
-				<view>
-					推荐
-				</view>
-				<view class="moreIcon" @click="isshowDataSelectHanlder"
-					:style="{ transform: isshowDataSelect ? 'rotate(-120deg)' : 'rotate(90deg)' }">
-					^
-				</view>
-			</view>
-			<view class="dataSelect" v-if="isshowDataSelect">
-				<view>
-					推荐
-				</view>
-				<view>
-					游戏
-				</view>
-				<view>
-					动漫
-				</view>
-				<view>
-					体育
-				</view>
-				<view>
-					情感
-				</view>
-				<view>
-					文学
-				</view>
-				<view>
-					娱乐
-				</view>
-			</view>
-		</view>
-		<form @submit="fliterHandle">
-			<input v-model="fliterData" type="text" class="searchInput" placeholder="输入关键词搜索" />
-			<!-- <button class='searchIcon' @click="fliterHandle"></button> -->
+		<form @submit="fliterHandle" class="searchInput"  >
+			<input v-model="fliterData" type="text" placeholder="输入关键词搜索" />
 		</form>
-		<span @click="fliterHandle" class="searchBtn">搜索</span>
+		<view @click="fliterHandle" class="searchBtn">搜索</view>
 	</view>
 </template>
 <script setup>
@@ -80,12 +45,6 @@ const fliterHandle = () => {
 	}
 
 }
-
-const isshowDataSelect = ref(false)
-const isshowDataSelectHanlder = () => {
-	console.log(isshowDataSelect.value);
-	isshowDataSelect.value = !isshowDataSelect.value;
-}
 </script>
 <style>
 .search {
@@ -95,29 +54,12 @@ const isshowDataSelectHanlder = () => {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: flex-end;
 }
-
-.navBarLeft {
-	display: flex;
-	flex-direction: row;
-	width: 240rpx;
-	height: 100rpx;
-	font-size: 64rpx;
-	font-weight: bolder;
-	background-color: #F1FAEE;
-	justify-content: center;
-	align-items: center;
-	border-radius: 8rpx;
-}
-
 .searchInput {
-	margin-left: 16rpx;
-	margin-right: 14rpx;
+	width: 90%;
 	background-color: #F5F5F5;
 	border-radius: 8rpx;
 }
-
 .searchBtn {
 	font-size: 32rpx;
 	font-weight: bold;
