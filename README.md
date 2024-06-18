@@ -79,7 +79,13 @@ web/移动端 使用同一技术栈react，小程序使用uniapp/vue
 * 将添加广告模块
 * 完善web的响应式布局
 ## 4 项目整体架构
-![架构](https://github.com/GeKaixing/towel/raw/main/READMEstatic/Frame%201.png)
+
+![架构](https://github.com/GeKaixing/towel/raw/main/README_static/Frame%201.png)
 [架构修改](https://www.figma.com/design/vnC7Axj82RQ5kOXDD56Elb/Untitled?node-id=1-2&t=X9Wmf6wcpk2Dfj7Y-1)
 ## 5. 项目截图
-![项目截图](https://github.com/GeKaixing/towel/raw/main/READMEstatic/%E6%88%AA%E5%B1%8F2024-06-18%2000.44.03.png)
+UI/UX原型图 
+
+* [移动端](https://www.figma.com/design/2gIurz4y0gsaTvm834N7C2/towel?node-id=0-1&t=w9M5U50Kbn8FrIIS-1) 
+* [web端](https://www.figma.com/design/e13QKKoeeCC2t0cufq3cUp/towel?m=auto&t=w9M5U50Kbn8FrIIS-6)
+* 项目截图
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/%E6%88%AA%E5%B1%8F2024-06-18%2000.44.03.png)
