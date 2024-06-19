@@ -57,6 +57,7 @@ const fliterHandle = () => {
 }
 .searchInput {
 	width: 90%;
+	height: 60rpx;
 	background-color: #F5F5F5;
 	border-radius: 8rpx;
 }

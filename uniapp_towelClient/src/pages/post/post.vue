@@ -18,8 +18,7 @@
 			</view>
 			<view class="foot">
 				<view>
-					<check-one theme="outline" size="24" fill="#536371"/>
-					<image class="share" src="../../static/logo.png"></image>
+					<image class="comment" src="../../static/logo.png"></image>
 					<span class='shateNumber'>{{ item.postShare }}</span>
 				</view>
 				<view>
@@ -37,8 +36,6 @@
 	<view class="hint" v-if="likeState">动作重复了</view>
 </template>
 <script setup>
-import '@icon-park/vue-next/styles/index.css';
-import {CheckOne} from '@icon-park/vue-next'
 import { usePostStore } from '../piniaStore/postStore';
 import { ref, onMounted, computed, watch } from "vue";
 import { useHeadStore } from '../piniaStore/headStore.js'
@@ -167,7 +164,7 @@ const likehandler = (_id) => {
 .post {
 	display: flex;
 	flex-direction: column;
-
+	margin-top: 12rpx;
 }
 
 view {

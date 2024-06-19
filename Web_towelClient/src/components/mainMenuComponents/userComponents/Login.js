@@ -37,7 +37,9 @@ export default function Login() {
     return (
         <div className={style.login}>
             {/* 登录页面 */}
-            <div className={style.logo}>logo</div>
+            <div className={style.logo}>
+           <img src={process.env.PUBLIC_URL + '/logo.png'} ></img> 
+            </div>
             <input className={style.name} type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder='名字'>
             </input>
             <div className={style.tip}>

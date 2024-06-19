@@ -40,6 +40,7 @@
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
     "@dcloudio/uni-app": "3.0.0-4000820240401001",
     "@dcloudio/uni-app-plus": "3.0.0-4000820240401001",
     "@dcloudio/uni-components": "3.0.0-4000820240401001",
@@ -55,7 +56,6 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4000820240401001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4000820240401001",
     "@hyoga/uni-socket.io": "^3.0.4",
-    "@icon-park/vue-next": "^1.4.2",
     "pinia": "^2.0.36",
     "socket.io-client": "^4.7.5",
     "vue": "3.3.11",

@@ -27,8 +27,8 @@ export default function Signup() {
         }
       ).then((response) => {
         if (response.data.status) {
-          window.location.href='/login'
-        }else{
+          window.location.href = '/login'
+        } else {
           alert('注册失败')
         }
       })
@@ -69,7 +69,9 @@ export default function Signup() {
   return (
     <div className={style.signup}>
       {/* 注册页面 */}
-      <div className={style.logo}>logo</div>
+      <div className={style.logo}>
+        <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
+      </div>
       <input className={style.name} type='text' value={valuename_signup} onChange={(e) => { e.preventDefault(); setValuename_signup(e.target.value) }} placeholder='账号'>
       </input>
       <input type='password' className={style.password} value={valuepassword_signup} onChange={(e) => { e.preventDefault(); setValuepassword_signup(e.target.value) }} placeholder='密码'>
