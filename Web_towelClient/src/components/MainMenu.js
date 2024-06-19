@@ -26,7 +26,9 @@ export default function MainMenu() {
       <div className={style.bar} >
         {
           width < 750 ? null :
-            <div className={style.logo}>logo</div>
+            <div className={style.logo}>
+              <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
+            </div>
         }
         <Link className={style.link} to="/"> <div><HomeFilled />{width < 750 ? null : "主页"}</div></Link>
         <Link className={style.link} to="/about"><div><BulbFilled />{width < 750 ? null : "关于"}</div></Link>

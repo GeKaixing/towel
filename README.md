@@ -1,5 +1,11 @@
 # towel/毛巾
-一个 web/android/ios/uniapp 小程序的论坛app，将````持续开源和维护````
+<div align=center>
+<img src='https://github.com/GeKaixing/towel/raw/main/README_static/logo.png'/>
+</div>
+
+一个 web/android/ios/uniapp 小程序的论坛app，将````持续开源和维护````           
+主题颜色:rgba(134, 196, 248, 1)             
+副颜色:rgba(248, 196, 134, 1)
 ## 1. 项目启动
 开发环境：macOS monterey 12.4
 安装[node](https://nodejs.org/en)和[git](https://git-scm.com/downloads)     
