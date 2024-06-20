@@ -1,6 +1,6 @@
 <template>
-	<postUserSelect v-if="userSelect" @child-click='userSelectHandlerEmit' :saveUserDataProps="saveUserData"
-		type='post'></postUserSelect>
+	<postUserSelect v-if="userSelect" @child-click='userSelectHandlerEmit' :saveUserDataProps="saveUserData" type='post'>
+	</postUserSelect>
 	<view v-for="(item, index) in fliterData" class="post" :key='index'>
 		<view class="box" @click="toDetailPage(item)">
 			<view class="head">
@@ -44,7 +44,7 @@ import { useCommentReplyInputStore } from '../piniaStore/comment_reply_input.js'
 import postUserSelect from "./postUserSelect/postUserSelect.vue";
 import { useloginStore } from '../piniaStore/loginStore.js'
 import { onLoad, onShow } from '@dcloudio/uni-app';
-import {useSocketStore}from '../piniaStore/socketStore'
+import { useSocketStore } from '../piniaStore/socketStore'
 const headStore = useHeadStore()
 const loginStore = useloginStore()
 const postStore = usePostStore()
@@ -58,8 +58,11 @@ const likeState = ref(false),
 	userSelect = ref(false),
 	saveUserData = ref({ userName: '', Id: '' });
 //进入页面就加载socket.io
-onMounted(()=>{
-	useSocketStore().connect()
+onMounted(() => {
+	if (uni.getStorageSync('jwt')) {
+		useSocketStore().connect()
+	}
+
 })
 const userSelectHandler = (userName, postId) => {
 	saveUserData.value.userName = userName;
@@ -75,7 +78,7 @@ const fliterData = computed(() => {
 	//bug 分析用于用户点击查看直接的发的帖子，但是它点击首页不会切换状态
 	return inputState.value ? result.value : fliterDataStore.value
 })
-onShow(()=>{
+onShow(() => {
 	//查看当前路由
 	var pages = getCurrentPages();
 	var page = pages[pages.length - 1];

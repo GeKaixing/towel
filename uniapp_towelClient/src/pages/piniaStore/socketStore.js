@@ -17,13 +17,9 @@ export const useSocketStore = defineStore("socketStore", () => {
         return socketInstance.value;
     }
     const connect=()=>{
-        getSocketInstance().on("connect", () => {
-                    
-                        }); 
-        getSocketInstance().emit('username', {userid: uni.getStorageSync('userid')});
-        getSocketInstance().on('username', (res) => {
-            sockeData.value=res.data
-        });
+        getSocketInstance().on("connect", () => { 
+            console.log(`Socket connected with id: ${socketInstance.value.id}`);
+        }); 
         getSocketInstance().on(`${uni.getStorageSync('userid')}`, (res) => {
             sockeData.value=res.data
         });
