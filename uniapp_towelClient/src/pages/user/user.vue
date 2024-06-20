@@ -20,7 +20,7 @@
 		<useReply v-else-if="chooseUserMassageBarState.userReply"></useReply>
 	</view>
 	<view v-else class="loginform">
-		<span>LOGO占位</span>
+		<image src="../../static/logo.png" class="logo"></image>
 		<input type="text" class="inputtext" placeholder="用户名" v-model="loginName" />
 		<input type="password" class="inputpassword" placeholder="密码" v-model="loginPassword" />
 		<button type="submit" class="inputsubmit" @click="loginHandelr">登录</button>
@@ -183,6 +183,10 @@ const outLoginHandler = () => {
 </script>
 
 <style>
+.logo{
+	width: 100rpx;
+	height: 100rpx;
+}
 .userMesssageHead {
 	display: flex;
 	flex-direction: row;
