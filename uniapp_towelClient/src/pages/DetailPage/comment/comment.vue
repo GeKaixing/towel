@@ -41,10 +41,11 @@
 			<!-- 三元运算判断发送什么，使用什么函数 -->
 			<!-- store.sendReply 发送回复  -->
 			<!-- sendComment 发送评论 -->
-			<view class="submitButton" type="submit"
-				@click="isShow ? store.sendReply(commentInput, props.postID) : sendComment()">发送
-			</view>	
-			<view class="sendSImage" @click="sendIMage">图片</view>
+			<image class="submitButton" type="submit"
+				@click="isShow ? store.sendReply(commentInput, props.postID) : sendComment()"
+				src="../../../static/Images/发送.svg">
+			</image>	
+			<image  class="sendSImage"  @click="sendIMage" src="../../../static/Images/图片添加.svg"></image>
 		</view>
 	</view>
 </template>
@@ -258,7 +259,7 @@ const sendComment = () => {
 
 .sendSImage {
 	height: 75rpx;
-	background-color: aqua;
+
 	width: 10%;
 	border-radius: 16rpx;
 }
@@ -292,7 +293,6 @@ const sendComment = () => {
 }
 
 .submitButton {
-	background-color: rgb(225, 219, 255);
 	height: 75rpx;
 	width: 10%;
 	border-radius: 16rpx;
