@@ -11,7 +11,7 @@
 				<view class="commentLike">
 					<view @click='showSelectHandler(item.users[0].username,item._id)'>...</view>
 					<view @click="likehandler(item._id)"  class="commentLikeBox">
-						<image class='commentLikeIcon' src="../../../static/logo.png"></image>
+						<image class='commentLikeIcon' src="../../../static/Images/赞.svg"></image>
 						<view class="commentLikeNumber">{{ item.commentLike }}</view>
 					</view>
 				</view>

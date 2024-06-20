@@ -2,7 +2,7 @@
 	<view class="message">
 		<view class="messageOne" @click="toPushMessage()">
 			<view class="messageIcon">
-				<image src="../../static/logo.png"></image>
+				<image src="../../static/Images/评论.svg"></image>
 				<view>@我的</view>
 			</view>
 			<view class="rightShow">
@@ -16,7 +16,7 @@
 		</view>
 		<view class="messageTwo">
 			<view class="messageIcon">
-				<image src="../../static/logo.png"></image>
+				<image src="../../static/Images/赞.svg"></image>
 				<view>点赞</view>
 			</view>
 			<view>></view>
