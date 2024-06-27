@@ -1,18 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
 import { LikeFilled, StarFilled, RocketFilled, MessageFilled } from '@ant-design/icons';
 import style from './AddContent.module.css';
-import { CloseOutlined } from '@ant-design/icons';
 
-export default function Portal({ isshow, access }) {
-    // 设置返回上一级路由
-    const navigate = useNavigate();
+
+export default function Portal() {
     const loginDataParse = JSON.parse(localStorage.getItem('loginData'));
     const [textareaData, settextareaData] = useState('');
     const [showImageData, setShowImageData] = useState('');
     const [responseImageData, setResponseImageData] = useState('')
-    const [responseSendData, setResponseSendData] = useState({})
     const upImageApi = async (e) => {
         e.preventDefault();
         try {
@@ -51,7 +47,7 @@ export default function Portal({ isshow, access }) {
     const sendPostApi = async () => {
         try {
             const loginDataParse = JSON.parse(localStorage.getItem('loginData'));
-            const response = await axios({
+            await axios({
                 url: `http://127.0.0.1:4000/addpost`,
                 method: 'post',
                 data: {
@@ -68,8 +64,6 @@ export default function Portal({ isshow, access }) {
                     'Authorization': `Bearer ${loginDataParse.jwt}`,
                 }
             });
-            console.log(response.data)
-            setResponseSendData(response.data)
         } catch (error) { console.log(error) }
     }
     return (
@@ -86,7 +80,7 @@ export default function Portal({ isshow, access }) {
                         <textarea
                             value={textareaData}
                             onChange={(e) => settextareaData(e.target.value)}
-                            style={{ resize: 'none', resize: "vertical" }}
+                            style={{ resize: "vertical" }}
                         />
                     </div>
                     <div className={style.thisshowbottom}>

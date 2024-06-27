@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import style from './Signup.module.css'
-import { useNavigate } from 'react-router-dom'
-import axios, { Axios } from 'axios'
+import axios from 'axios'
 export default function Signup() {
   const [valuename_signup, setValuename_signup] = useState('') // 获取账号
   const [valuepassword_signup, setValuepassword_signup] = useState('')  // 获取密码
   const [inputEmailData, setInputEmailData] = useState('')  // 获取邮箱
   const [verificationcode, setVerificationCode] = useState('')  // 获取验证码
   // 后端返回的设置注册状态
-  const [signupstate, setsignupstate] = useState(true)
+  const signupstate=true
   const [isEmail, setEmail] = useState(false)
   const signupApi = async () => {
     if (isEmail && valuename_signup && valuepassword_signup && verificationcode) {
@@ -70,6 +69,7 @@ export default function Signup() {
     <div className={style.signup}>
       {/* 注册页面 */}
       <div className={style.logo}>
+        {/* global process*/}
         <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
       </div>
       <input className={style.name} type='text' value={valuename_signup} onChange={(e) => { e.preventDefault(); setValuename_signup(e.target.value) }} placeholder='账号'>

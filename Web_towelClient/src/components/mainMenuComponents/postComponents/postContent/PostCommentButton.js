@@ -1,9 +1,9 @@
-import axios from 'axios'
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import Replycontent from './PostReplyContent'
 import style from './PostCommentButton.module.css'
 import { LikeFilled } from '@ant-design/icons'
-export default function Reply({ likes, commentid, setInputData, commentName,reLoad }) {
+import propTypes from 'prop-types'
+export default function Reply({ likes, commentid, setInputData, commentName, reLoad }) {
     /*        回复评论组件        */
     // 控制回复预览的显示
     const [replyshow, isreplyshow] = useState(false)
@@ -25,4 +25,11 @@ export default function Reply({ likes, commentid, setInputData, commentName,reLo
                 : null}
         </>
     )
+}
+Reply.propTypes = {
+    likes:propTypes.number.isRequired,
+    commentid:propTypes.number.isRequired,
+    setInputData:propTypes.func.isRequired,
+    commentName:propTypes.string.isRequired,
+    reLoad:propTypes.func.isRequired
 }

@@ -87,7 +87,7 @@ export default function Message() {
         'Authorization': `Bearer ${localStorageData.jwt}`
       }
     })
-      .then((response) => {
+      .then(() => {
         setReLoadNotifications(!reLoadnotifications)
       })
       .catch((error) => { console.log(error) })

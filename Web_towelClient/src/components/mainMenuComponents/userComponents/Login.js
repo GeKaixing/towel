@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, } from 'react-router-dom'
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
 import style from './Login.module.css'
@@ -38,6 +38,7 @@ export default function Login() {
         <div className={style.login}>
             {/* 登录页面 */}
             <div className={style.logo}>
+                  {/* global process*/}
            <img src={process.env.PUBLIC_URL + '/logo.png'} ></img> 
             </div>
             <input className={style.name} type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder='名字'>

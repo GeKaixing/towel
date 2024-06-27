@@ -1,17 +1,19 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Link, json, useNavigate } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import style from './Post.module.css'
 import { LikeFilled, StarFilled, RocketFilled, MessageFilled } from '@ant-design/icons';
+import PropTypes from 'prop-types';
+/* props $ */
+
 export default function Post(props) {
     /*          根目录的文章           */
-    const navigate = useNavigate()
-    const [firststyle, setfirststyle] = useState(false)
-    const [localStorageData, setLocalStorageData] = useState({})
-    // 收藏数&状态
-    const [favoritestate, setfavoritestate] = useState(false)
-    const postDeleteBox = useRef()
-    const [targetID, setTargetID] = useState('')
+    const navigate = useNavigate();
+    const [localStorageData, setLocalStorageData] = useState({});
+    const postDeleteBox = useRef();
+    const [targetID, setTargetID] = useState('');
+    const firststyle = true;
+    const favoritestate = true;
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
             setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
@@ -23,7 +25,7 @@ export default function Post(props) {
         }
         window.addEventListener('click', handleClick)
         return () => {
-        window.removeEventListener('click', handleClick);
+            window.removeEventListener('click', handleClick);
         }
     }, [localStorage])
     // 点赞按钮
@@ -126,3 +128,21 @@ export default function Post(props) {
         </div>
     )
 }
+Post.propTypes = {
+    id: PropTypes.string.isRequired,
+    headimg: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    contenttheme: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    postImages: PropTypes.string,
+    likes: PropTypes.number.isRequired,
+    comments: PropTypes.number.isRequired,
+    favorites: PropTypes.number.isRequired,
+    postUserId: PropTypes.string.isRequired,
+    reload: PropTypes.shape({
+        reload: PropTypes.bool.isRequired,
+        setLoad: PropTypes.func.isRequired,
+    }).isRequired,
+    reloadUserArticle: PropTypes.func.isRequired,
+    setreloadUserArticle: PropTypes.func.isRequired,
+};
