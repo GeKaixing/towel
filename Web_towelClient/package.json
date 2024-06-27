@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
-    "@ant-design/icons": "^5.1.4",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

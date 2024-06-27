@@ -36,12 +36,24 @@
 .name {
     font-size: 20px;
 }
+.name:hover{
+    font-weight: bold;
+    text-decoration: underline rgba(248, 196, 134, 1);
+    text-decoration-thickness:3px;
+   
+}
 
 .userhistory {
     display: flex;
     justify-content: space-around;
+    cursor: pointer, 
 }
-
+.userhistory>div:hover{
+    text-decoration: underline rgba(248, 196, 134, 1);
+    text-decoration-thickness:3px;
+    font-weight: bold;
+    cursor: pointer, 
+}
 .loginout {
     color: red;
 }

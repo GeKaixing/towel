@@ -19,6 +19,8 @@ margin-left: 10px;
 }
 .like{
     margin-left: 10px;
+    width: 18px;
+    height: 18px;
 }
 .like:hover{
     color: rgb(188, 27, 27);

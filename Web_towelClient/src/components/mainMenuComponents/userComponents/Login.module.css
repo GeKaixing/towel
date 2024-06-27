@@ -46,8 +46,11 @@
 
 .EyeOutlined,.EyeInvisibleOutlined {
     position: absolute;
-    top: 40%;
+    top: 12px;
+    transform: translateX(-50%);
     left: 222px;
     z-index: 2;
+    height: 24px;
+    width: 24px;;
 
 }
