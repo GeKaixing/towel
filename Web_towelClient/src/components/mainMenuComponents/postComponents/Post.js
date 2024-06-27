@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import style from './Post.module.css'
-import { LikeFilled, StarFilled, RocketFilled, MessageFilled } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 /* props $ */
 
@@ -12,8 +11,12 @@ export default function Post(props) {
     const [localStorageData, setLocalStorageData] = useState({});
     const postDeleteBox = useRef();
     const [targetID, setTargetID] = useState('');
-    const firststyle = true;
-    const favoritestate = true;
+    const [mouseOver, setMouseOver] = useState({
+        share: false,
+        comments: false,
+        star: false,
+        like: false,
+    });
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
             setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
@@ -82,6 +85,20 @@ export default function Post(props) {
             setTargetID(id)
         }
     }
+    class PostIcon {
+        constructor(path) {
+            {/* global process*/ }
+            this.path = process.env.PUBLIC_URL + path
+        }
+    }
+    const postIcon1 = new PostIcon('/static/postIcon/赞.svg')
+    const postIcon2 = new PostIcon('/static/postIcon/评论.svg')
+    const postIcon3 = new PostIcon('/static/postIcon/星星.svg')
+    const postIcon4 = new PostIcon('/static/postIcon/分享.svg')
+    const postIcon11 = new PostIcon('/static/postIconPitchUp/赞.svg')
+    const postIcon22 = new PostIcon('/static/postIconPitchUp/评论.svg')
+    const postIcon33 = new PostIcon('/static/postIconPitchUp/星星.svg')
+    const postIcon44 = new PostIcon('/static/postIconPitchUp/分享.svg')
     return (
         <div className={style.messagebigbox} onClick={navgatehandle}>
             <div className={style.messagebox}>
@@ -103,36 +120,61 @@ export default function Post(props) {
                     </div>
 
                 </div>
-                <div className={style.thisshowtheme} onClick={e => e.stopPropagation()}>
-                    <Link>{props.contenttheme}</Link>
-                </div>
+
                 <div className={style.thisshowcontent}>
                     {props.content}
                     {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className={style.img}></img>)}
                 </div>
-                <div className={style.thisshowbottom} >
-                    <div>
-                        <Link id='like' className={firststyle ? style.redlike : style.whitelike} onClick={likehandle}><LikeFilled />{props.likes}</Link>
+                <div className={style.postBottom} >
+                    <div className={style.likesIcon} onClick={likehandle}
+                        onMouseEnter={() => setMouseOver({ ...mouseOver, like: true })}
+                        onMouseLeave={() => setMouseOver({ ...mouseOver, like: false })}
+                    >
+                        {mouseOver.like ?
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon11.path}  alt='点赞'></img>
+                            :
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path}  alt='点赞'></img>}
+                        {props.likes}
                     </div>
-                    <div>
-                        <Link className={style.MessageFilled} ><MessageFilled />{props.comments}</Link>
+                    <div className={style.starIcon}
+                        onMouseEnter={() => setMouseOver({ ...mouseOver, comments: true })}
+                        onMouseLeave={() => setMouseOver({ ...mouseOver, comments: false })}>
+                        {mouseOver.comments ?
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon22.path} alt='评论'></img>
+                            :
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon2.path} alt='评论'></img>}
+                        {props.comments}
                     </div>
-                    <div className={favoritestate ? style.nostar : style.star} onClick={upfavoritehandler} >
-                        <StarFilled />收藏{props.favorites}
+                    <div className={style.star} onClick={upfavoritehandler}
+                        onMouseEnter={() => setMouseOver({ ...mouseOver, star: true })}
+                        onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
+                        {
+                            mouseOver.star ?
+                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon33.path} alt='收藏'></img>
+                                :
+                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon3.path} alt='收藏'></img>
+
+                        }
+                        {props.favorites}
                     </div>
-                    <div className={style.share} onClick={sharehandler}>
-                        <RocketFilled />分享
+                    <div className={style.share} onClick={sharehandler}
+                        onMouseEnter={() => setMouseOver({ ...mouseOver, share: true })}
+                        onMouseLeave={() => setMouseOver({ ...mouseOver, share: false })}>
+                        {mouseOver.share ?
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon44.path} alt='分享'></img>
+                            :
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon4.path} alt='分享'></img>
+                        }
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 Post.propTypes = {
     id: PropTypes.string.isRequired,
     headimg: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    contenttheme: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     postImages: PropTypes.string,
     likes: PropTypes.number.isRequired,

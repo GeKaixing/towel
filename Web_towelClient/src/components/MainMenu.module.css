@@ -2,7 +2,10 @@
     height: 100%;
     width: 200px;
 }
-
+img{
+    width: 32px;
+    height: 32px;
+}
 .bar {
     display: flex;
     flex-direction: column;
@@ -16,6 +19,7 @@
     background-color: #f6f6f6;
     border-radius: 10px;
     display: flex;
+    flex-direction: row;
     width: 150px;
     height: 50px;
     color: #000;
@@ -57,7 +61,6 @@
         align-content:center
         
     }
-
     .link {
         width: 55%;
     }

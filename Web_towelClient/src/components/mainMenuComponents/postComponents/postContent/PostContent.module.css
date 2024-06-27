@@ -64,36 +64,7 @@
     height: 20px;
 
 }
-
 .thisshowbottom :nth-child(1) {
+    display: flex;
     text-decoration: none;
-}
-
-.MessageFilled {
-    color: #000;
-}
-
-.MessageFilled:hover {
-    color: rgb(89, 152, 204);
-    text-decoration: underline;
-}
-
-.star:hover {
-    color: rgb(231, 233, 125);
-}
-
-.share:hover {
-    color: rgb(131, 204, 89);
-}
-
-.whitelike {
-    color: rgb(0, 0, 0);
-}
-
-.whitelike:hover {
-    color: rgb(188, 27, 27);
-}
-
-.redlike {
-    color: rgb(188, 27, 27);
 }

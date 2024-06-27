@@ -11,12 +11,13 @@
     margin-bottom: 24px;
     border-radius: 10px;
 }
-.postDeleteBox{
+
+.postDeleteBox {
     box-sizing: border-box;
-    position:absolute;
+    position: absolute;
     right: 0;
     width: 200px;
-    background-color: #d5d5d5; 
+    background-color: #d8d8d8;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,7 +27,8 @@
     padding-top: 8px;
     padding-bottom: 8px;
 }
-.postDeleteBoxButton{
+
+.postDeleteBoxButton {
     border-radius: 10px;
     font-weight: bold;
     border: 1px solid black;
@@ -36,6 +38,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .messagebox {
     display: flex;
     flex-direction: column;
@@ -83,51 +86,36 @@
 
 }
 
-.thisshowbottom {
+.postBottom {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     height: 20px;
-
 }
 
-.thisshowbottom :nth-child(1) {
-    text-decoration: none;
+.likesIcon {
+    display: flex;
 }
 
-.MessageFilled {
+.starIcon {
     color: #000;
+    display: flex;
 }
 
-.MessageFilled:hover {
+.likesIcon:hover,
+.starIcon:hover,
+.star:hover,
+.share:hover {
     color: rgb(89, 152, 204);
     text-decoration: underline;
 }
 
 .star {
     color: #000;
+    display: flex;
 }
 
-.nostar {
-    color: red;
-}
-
-.star:hover {
-    color: rgb(231, 233, 125);
-}
-
-.share:hover {
+.share {
     color: rgb(131, 204, 89);
-}
-
-.whitelike {
-    color: rgb(0, 0, 0);
-}
-
-.whitelike:hover {
-    color: rgb(188, 27, 27);
-}
-
-.redlike {
-    color: rgb(188, 27, 27);
+    display: flex;
 }

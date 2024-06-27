@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link, } from 'react-router-dom'
-import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
 import style from './Login.module.css'
 import axios from 'axios'
 export default function Login() {
@@ -28,7 +27,7 @@ export default function Login() {
             localStorage.setItem('loginData', data)
             setValuename('')
             setValuepassword('')
-            window.location.href='/';
+            window.location.href = '/';
         }
         catch (error) {
             console.log(error)
@@ -38,8 +37,8 @@ export default function Login() {
         <div className={style.login}>
             {/* 登录页面 */}
             <div className={style.logo}>
-                  {/* global process*/}
-           <img src={process.env.PUBLIC_URL + '/logo.png'} ></img> 
+                {/* global process*/}
+                <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
             </div>
             <input className={style.name} type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder='名字'>
             </input>
@@ -47,8 +46,9 @@ export default function Login() {
                 <input className={style.password} type={showpassword ? 'text' : 'password'} value={valuepassword} onChange={(e) => { setValuepassword(e.target.value) }} placeholder='密码'></input>
                 {/* 显示密码的图标 */}
                 {showpassword ?
-                    <EyeOutlined className={style.EyeOutlined}  onClick={()=>setshowpassword(!showpassword)}/> :
-                    <EyeInvisibleOutlined className={style.EyeInvisibleOutlined}  onClick={()=>setshowpassword(!showpassword)}/>
+                    <img className={style.EyeOutlined} onClick={() => setshowpassword(!showpassword)} src={`${process.env.PUBLIC_URL}/static/otherIcon/预览打开.svg`} alt="预览打开" />
+                    :
+                    <img className={style.EyeInvisibleOutlined} onClick={() => setshowpassword(!showpassword)} src={`${process.env.PUBLIC_URL}/static/otherIcon/预览关闭.svg`} alt="预览关闭" />
                 }
             </div>
             <button className={style.button} onClick={LoginApi}>
