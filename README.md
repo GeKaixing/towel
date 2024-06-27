@@ -161,7 +161,7 @@ towel 是一个三端同步的项目，在基于expess框架下编写后端项�
 * 消息推送 (socket的实践)
 react/Rn 使用同一技术栈react，小程序使用uniapp/vue
 * RN使用expo 开发环境，快速开发
-* 小程序和RN使用同一个ui/ux，ui统一，icon统一使用[iconpark](https://iconpark.oceanengine.com/home)
+* 小程序和RN和web使用同一个ui/ux，ui统一，icon统一使用[iconpark](https://iconpark.oceanengine.com/home)
 * 均使用socket.io进行消息推送，axios进行数据请求
 * Eslint 工程化（Web）
 ### 3.1项目疑惑和不足
@@ -175,7 +175,6 @@ react/Rn 使用同一技术栈react，小程序使用uniapp/vue
 不足：
 * 未做性能优化
 * 未使用reids去做缓存
-* 移动端使用iconpark/web使用ant-design/icons，icon不统一
 ### 3.2 后续将完成的功能
 * 使用redis进行后端的性能优化，实现排行榜功能，数据缓存等，首页文章推送算法
 * 使用socket.io私聊功能
