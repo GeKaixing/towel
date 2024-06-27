@@ -7,7 +7,7 @@ export default function Search() {
     return (
         <div style={{ width: '600px' }}>
             {(state.length!==0) ?
-                state.map((item, index) => <Post
+                state.map((item) => <Post
                     key={item._id}
                     id={item._id}
                     name={item.user[0].username}

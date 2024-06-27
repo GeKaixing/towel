@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import style from './User.module.css'
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import { searchDatauseContext } from '../../context/searchData';
 export default function User() {
     // 解构login的state
     const [localStorageData, setLocalStorage] = useState({})

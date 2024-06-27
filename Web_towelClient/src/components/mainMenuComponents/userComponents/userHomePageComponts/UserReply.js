@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import PostReplyContent from '../../postComponents/postContent/PostReplyContent'
-export default function UserReply({ localStorageData }) {
+import propTypes from 'prop-types'
+function UserReply({ localStorageData }) {
     const [userReplyData, setUserReplyData] = useState([]);
     const [reloadUserReply, setreloadUserReplys] = useState(false)
     useEffect(() => {
@@ -18,8 +19,15 @@ export default function UserReply({ localStorageData }) {
         else {
             setUserReplyData([])
         }
-    }, [localStorageData,reloadUserReply])
+    }, [localStorageData, reloadUserReply])
     return (
         <PostReplyContent userReplyData={userReplyData} reloadUserReply={reloadUserReply} setreloadUserReplys={setreloadUserReplys}></PostReplyContent>
     )
 }
+UserReply.propTypes = {
+    localStorageData: propTypes.shape({
+      userid: propTypes.string.isRequired, // userid 必须是字符串并且是必填项
+      jwt: propTypes.string.isRequired     // jwt 必须是字符串并且是必填项
+    }).isRequired  // localStorageData 必须是对象并且是必填项
+  };
+export default UserReply;

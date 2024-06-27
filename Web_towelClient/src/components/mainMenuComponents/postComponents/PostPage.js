@@ -1,7 +1,8 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Post from './Post'
+import propTypes from 'prop-types'
 export default function Hompage({ userarticles,reloadUserArticle,setreloadUserArticle }) {
   const { pathname } = useLocation()
   const [articles, setarticles] = useState([])
@@ -20,7 +21,7 @@ export default function Hompage({ userarticles,reloadUserArticle,setreloadUserAr
       {/* pathname根据是否再/ route判断形式什么组件，当不在"/"显示用户发布的POST */}
       {
         pathname === '/' ?
-          articles.map(function (item, index) {
+          articles.map(function (item) {
             return (
               <Post
                 key={item._id}
@@ -39,7 +40,7 @@ export default function Hompage({ userarticles,reloadUserArticle,setreloadUserAr
             );
           }
           ) :
-          userarticles.map(function (item, index) {
+          userarticles.map(function (item) {
             return (
               <Post
                 key={item._id}
@@ -64,4 +65,8 @@ export default function Hompage({ userarticles,reloadUserArticle,setreloadUserAr
     </div >
   )
 }
-
+Hompage.propTypes={
+  userarticles:propTypes.array.isRequired,
+  reloadUserArticle:propTypes.func.isRequired,
+  setreloadUserArticle:propTypes.func.isRequired,
+}

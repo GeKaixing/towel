@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import style from './PostComment.module.css';
 import Reply from './PostCommentButton';
 import { useLocation, useNavigate } from 'react-router';
-
+import propTypes from 'prop-types'
 export default function PostComment({ postId, setInputData, reLoad, userCommentData, setreloadUserlikes, reloadUserlikes }) {
     const [commentdata, setCommentData] = useState([]);
     const [localStorageData, setLocalStorageData] = useState({});
@@ -26,16 +26,16 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     }, [reLoad, userCommentData, postId, reloadPostComment]);
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if(PostCommentRef.current){
+            if (PostCommentRef.current) {
                 if (!(event.target.className === PostCommentRef.current.className)) {
                     setShowOptions('')
-                }  
+                }
             }
-          
+
         };
         window.addEventListener('click', handleClickOutside);
         return () => {
-         window.removeEventListener('click', handleClickOutside);
+            window.removeEventListener('click', handleClickOutside);
         };
     }, []);
 
@@ -58,7 +58,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                 'Authorization': `Bearer ${localStorageData.jwt}`,
             },
         })
-            .then((response) => {
+            .then(() => {
                 seReLoadPostComment(!reloadPostComment);
                 setreloadUserlikes(!reloadUserlikes);
             })
@@ -136,4 +136,12 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
             ))}
         </div>
     );
+}
+PostComment.propTypes = {
+    postId:propTypes.number.isRequired,
+    setInputData:propTypes.func.isRequired,
+    reLoad:propTypes.bool.isRequired,
+    userCommentData:propTypes.object.isRequired,
+    setreloadUserlikes:propTypes.func.isRequired,
+    reloadUserlikes:propTypes.func.isRequired,
 }

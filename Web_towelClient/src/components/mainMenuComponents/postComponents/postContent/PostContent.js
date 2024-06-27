@@ -1,7 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useQuery, useQueryClient } from 'react-query';
-import { useParams, Link, useLocation } from 'react-router-dom'
+import {Link, useLocation } from 'react-router-dom'
 import PostInput from './PostInput';
 import style from './PostContent.module.css'
 import { LikeFilled, StarFilled, RocketFilled } from '@ant-design/icons';

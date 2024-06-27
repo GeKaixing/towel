@@ -27,6 +27,7 @@ export default function MainMenu() {
         {
           width < 750 ? null :
             <div className={style.logo}>
+              {/* global process*/}
               <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
             </div>
         }

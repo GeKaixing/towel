@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import style from './PostReplyContent.module.css'
 import { useLocation, useNavigate } from 'react-router'
+import propTypes from 'prop-types'
 
 export default function Replycontent({ reLoad, commentid, userReplyData, setInputData, reloadUserReply, setreloadUserReplys }) {
     const [localStorageData, setLocalStorageData] = useState({})
@@ -39,7 +40,7 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
         };
         window.addEventListener('click', handleClickOutside);
         return () => {
-        window.removeEventListener('click', handleClickOutside);
+            window.removeEventListener('click', handleClickOutside);
         };
     }, []);
 
@@ -51,7 +52,7 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
                 'Authorization': `Bearer ${localStorageData.jwt}`
             }
         })
-            .then((response) => {
+            .then(() => {
                 setReLoadPostReply(!reLoadPostReply)
                 setreloadUserReplys(!reloadUserReply)
             })
@@ -109,4 +110,12 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
             ))}
         </div>
     )
+}
+Replycontent.propTypes = {
+    reLoad: propTypes.bool.isRequired,
+    commentid: propTypes.string.isRequired,
+    userReplyData: propTypes.object.isRequired,
+    setInputData: propTypes.func.isRequired,
+    reloadUserReply: propTypes.bool.isRequired,
+    setreloadUserReplys: propTypes.func.isRequired
 }

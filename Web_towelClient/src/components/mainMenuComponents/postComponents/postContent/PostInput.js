@@ -1,9 +1,11 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PostComment from './PostComment'
 import style from './PostInput.module.css'
 import { useNavigate } from 'react-router'
 import { getSocket } from '../../../../socket/socket'
+import propTypes from 'prop-types'
+
 export default function Comment({ postId }) {
     const navigate = useNavigate()
     const [localStorageData, setLocalStorageData] = useState({})
@@ -101,4 +103,7 @@ export default function Comment({ postId }) {
         </>
 
     )
+}
+Comment.propTypes={
+    postId:propTypes.string.isRequired
 }
