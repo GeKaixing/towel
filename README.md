@@ -163,6 +163,7 @@ react/Rn 使用同一技术栈react，小程序使用uniapp/vue
 * RN使用expo 开发环境，快速开发
 * 小程序和RN使用同一个ui/ux，ui统一，icon统一使用[iconpark](https://iconpark.oceanengine.com/home)
 * 均使用socket.io进行消息推送，axios进行数据请求
+* Eslint 工程化（Web）
 ### 3.1项目疑惑和不足
 为什么没有使用typescript？
 * 因为是个人开发，使用TS编译消耗时间长，使用代码变得冗长，所以并没有采用了typescript。          
@@ -170,7 +171,7 @@ react/Rn 使用同一技术栈react，小程序使用uniapp/vue
 * 更多的是使用react的useReduce和useContext做状态管理或者状态提升，使用状态管理的组件并不多，没有必要引入redux框。  
 为什么叫towel/毛巾
 * 因为我的毛巾烂掉了，没有任何含义
-
+  
 不足：
 * 未做性能优化
 * 未使用reids去做缓存
