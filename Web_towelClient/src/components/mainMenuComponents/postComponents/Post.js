@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import style from './Post.module.css'
 import PropTypes from 'prop-types';
 /* props $ */
-
 export default function Post(props) {
     /*          根目录的文章           */
     const navigate = useNavigate();
@@ -118,9 +117,7 @@ export default function Post(props) {
                                 <span className={style.postDeleteBoxButton}>举报</span>
                             </div> : null}
                     </div>
-
                 </div>
-
                 <div className={style.thisshowcontent}>
                     {props.content}
                     {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className={style.img}></img>)}
@@ -131,9 +128,9 @@ export default function Post(props) {
                         onMouseLeave={() => setMouseOver({ ...mouseOver, like: false })}
                     >
                         {mouseOver.like ?
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon11.path}  alt='点赞'></img>
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon11.path} alt='点赞'></img>
                             :
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path}  alt='点赞'></img>}
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>}
                         {props.likes}
                     </div>
                     <div className={style.starIcon}

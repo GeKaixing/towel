@@ -14,6 +14,7 @@ const fs = require('fs');
 const { Server } = require('socket.io');
 const nodemailer = require('nodemailer');
 const { log } = require("console");
+const { type } = require("os");
 const server = http.createServer(app);
 app.use(cors({ origin: 'http://localhost:3000' }))
 const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
@@ -38,6 +39,10 @@ const POST = new mongoose.Schema({
     postShare: Number,
     postLike: Number,
     postComment: Number,
+    postFavorite:{
+        type:Number,
+        default:0
+    },
 })
 const COMMENT = new mongoose.Schema({
     postId: { type: mongoose.Schema.Types.ObjectID, ref: 'POSTS' },
@@ -327,6 +332,7 @@ app.get('/post', async (req, res) => {
                     postImages: 1,
                     postText: 1,
                     postShare: 1,
+                    postFavorite:1,
                     postLike: { $size: '$likes' },
                     postComment: { $size: '$comments' },
                     /* 'postImages.staticUrl': 1, */
@@ -405,6 +411,7 @@ app.post('/fliterpsot', async (req, res) => {
                     postUserName: 1, */
                     postText: 1,
                     postUserId: 1,
+                    postFavorite:1,
                     postShare: 1,
                     postLike: { $size: '$likes' },
                     postComment: { $size: '$comments' },
@@ -632,6 +639,7 @@ app.get('/getusepost/:id', async (req, res) => {
                     postText: 1,
                     postShare: 1,
                     postUserId: 1,
+                    postFavorite:1,
                     postLike: { $size: '$likes' },
                     postComment: { $size: '$comments' },
                     'postImages.staticUrl': 1,
@@ -1008,6 +1016,7 @@ const likeRouter = function (url, targetType) {
         }
     });
 }
+//点赞post
 likeRouter('/post/like/:id', 'post');
 // 点赞评论
 likeRouter('/comments/like/:id', 'comment');

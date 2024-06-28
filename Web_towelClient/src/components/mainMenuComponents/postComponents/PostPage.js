@@ -1,9 +1,12 @@
 import axios from 'axios'
-import React, {useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Post from './Post'
 import propTypes from 'prop-types'
-export default function Hompage({ userarticles,reloadUserArticle,setreloadUserArticle }) {
+export default function Hompage({ userarticles = [], reloadUserArticle = false, setreloadUserArticle = function () { } }) {
+  console.log(userarticles)
+  console.log(reloadUserArticle)
+  console.log(setreloadUserArticle)
   const { pathname } = useLocation()
   const [articles, setarticles] = useState([])
   const [reload, setLoad] = useState(false)
@@ -11,6 +14,7 @@ export default function Hompage({ userarticles,reloadUserArticle,setreloadUserAr
     axios.get('http://127.0.0.1:4000/post')
       .then((response) => {
         setarticles(response.data)
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error.message)
@@ -31,7 +35,7 @@ export default function Hompage({ userarticles,reloadUserArticle,setreloadUserAr
                 content={item.postText}
                 comments={item.postComment}
                 likes={item.postLike}
-                favorites={item.favorites}
+                favorites={item.postFavorite}
                 postImages={item.postImages}
                 postUserId={item.postUserId}
                 reload={{ reload, setLoad }}
@@ -50,7 +54,7 @@ export default function Hompage({ userarticles,reloadUserArticle,setreloadUserAr
                 content={item.postText}
                 comments={item.postComment}
                 likes={item.postLike}
-                favorites={item.favorites}
+                favorites={item.postFavorite}
                 postImages={item.postImages}
                 postUserId={item.postUserId}
                 reload={{ reload, setLoad }}
@@ -65,8 +69,8 @@ export default function Hompage({ userarticles,reloadUserArticle,setreloadUserAr
     </div >
   )
 }
-Hompage.propTypes={
-  userarticles:propTypes.array.isRequired,
-  reloadUserArticle:propTypes.func.isRequired,
-  setreloadUserArticle:propTypes.func.isRequired,
+Hompage.propTypes = {
+  userarticles: propTypes.array,
+  reloadUserArticle: propTypes.bool,
+  setreloadUserArticle: propTypes.func,
 }
