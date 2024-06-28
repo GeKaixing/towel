@@ -138,10 +138,10 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     );
 }
 PostComment.propTypes = {
-    postId:propTypes.number.isRequired,
-    setInputData:propTypes.func.isRequired,
-    reLoad:propTypes.bool.isRequired,
-    userCommentData:propTypes.object.isRequired,
-    setreloadUserlikes:propTypes.func.isRequired,
-    reloadUserlikes:propTypes.func.isRequired,
+    postId:propTypes.string,
+    setInputData:propTypes.func,
+    reLoad:propTypes.bool,
+    userCommentData:propTypes.object,
+    setreloadUserlikes:propTypes.func,
+    reloadUserlikes:propTypes.bool,
 }

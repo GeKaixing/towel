@@ -105,5 +105,5 @@ export default function Comment({ postId }) {
     )
 }
 Comment.propTypes={
-    postId:propTypes.string.isRequired
+    postId:propTypes.string
 }

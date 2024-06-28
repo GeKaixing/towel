@@ -43,9 +43,9 @@ export default function Reply({ likes, commentid, setInputData, commentName, reL
     )
 }
 Reply.propTypes = {
-    likes: propTypes.number.isRequired,
-    commentid: propTypes.number.isRequired,
+    likes: propTypes.number,
+    commentid: propTypes.string.isRequired,
     setInputData: propTypes.func.isRequired,
     commentName: propTypes.string.isRequired,
-    reLoad: propTypes.func.isRequired
+    reLoad: propTypes.bool.isRequired
 }

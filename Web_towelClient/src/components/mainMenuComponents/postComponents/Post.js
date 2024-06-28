@@ -182,6 +182,6 @@ Post.propTypes = {
         reload: PropTypes.bool.isRequired,
         setLoad: PropTypes.func.isRequired,
     }).isRequired,
-    reloadUserArticle: PropTypes.func.isRequired,
-    setreloadUserArticle: PropTypes.func.isRequired,
+    reloadUserArticle: PropTypes.bool,
+    setreloadUserArticle: PropTypes.func,
 };
