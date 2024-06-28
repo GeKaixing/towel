@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import style from './PostComment.module.css';
-import Reply from './PostCommentButton';
+import PostCommentButton from './PostCommentButton';
 import { useLocation, useNavigate } from 'react-router';
 import propTypes from 'prop-types'
 export default function PostComment({ postId, setInputData, reLoad, userCommentData, setreloadUserlikes, reloadUserlikes }) {
@@ -31,7 +31,6 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                     setShowOptions('')
                 }
             }
-
         };
         window.addEventListener('click', handleClickOutside);
         return () => {
@@ -121,15 +120,17 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                     <span style={{ marginLeft: '2rem' }}>{item.commentText}</span>
                     <div className={style.Replyimport}>
                         <div className={style.Reply}>
-                            <Reply
+                            <PostCommentButton
                                 reLoad={reLoad}
                                 setInputData={setInputData}
                                 commentName={item.users[0].username}
                                 cid={item._id}
                                 commentid={item._id}
                                 replycontent={item.replycontent}
-                                likes={item.likes}
-                            ></Reply>
+                                likes={item.commentLike}
+                                reloadPostComment={reloadPostComment}
+                                seReLoadPostComment={seReLoadPostComment}
+                            ></PostCommentButton>
                         </div>
                     </div>
                 </li>
@@ -138,10 +139,10 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     );
 }
 PostComment.propTypes = {
-    postId:propTypes.string,
-    setInputData:propTypes.func,
-    reLoad:propTypes.bool,
-    userCommentData:propTypes.object,
-    setreloadUserlikes:propTypes.func,
-    reloadUserlikes:propTypes.bool,
+    postId: propTypes.string,
+    setInputData: propTypes.func,
+    reLoad: propTypes.bool,
+    userCommentData: propTypes.object,
+    setreloadUserlikes: propTypes.func,
+    reloadUserlikes: propTypes.bool,
 }

@@ -33,14 +33,55 @@ export default function Post(props) {
     // 点赞按钮
     const likehandle = (event) => {
         event.stopPropagation()
-        console.log('in development')
+        axios({
+            url: `http://127.0.0.1:4000/post/like/${props.id}`,
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${localStorageData.jwt}`
+            },
+            data: {
+                data: {
+                    userId: localStorageData.userid
+                }
+            }
+        })
+            .then((response) => {
+                if (response.status === 201) {
+                    props.reload.setLoad(!props.reload.reload)
+                } else if (response.status === 200) {
+                    alert(response.data.message)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
     // 更新按钮
-    const upfavoritehandler = (e) => {
+    const favoritehandler = (e) => {
         e.stopPropagation()
-        console.log('in development')
+        axios({
+            url: `http://127.0.0.1:4000/post/favorite/${props.id}`,
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${localStorageData.jwt}`
+            },
+            data: {
+                data: {
+                    userId: localStorageData.userid
+                }
+            }
+        })
+            .then((response) => {
+                if (response.status === 201) {
+                    props.reload.setLoad(!props.reload.reload)
+                } else if (response.status === 200) {
+                    alert(response.data.message)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
-
     // 跳转到指点的路由的函数
     const navgatehandle = (e) => {
         e.stopPropagation()
@@ -142,7 +183,7 @@ export default function Post(props) {
                             <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon2.path} alt='评论'></img>}
                         {props.comments}
                     </div>
-                    <div className={style.star} onClick={upfavoritehandler}
+                    <div className={style.star} onClick={favoritehandler}
                         onMouseEnter={() => setMouseOver({ ...mouseOver, star: true })}
                         onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
                         {
