@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import PostInput from './PostInput';
 import style from './PostContent.module.css'
+import axios from 'axios';
 export default function Content() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
+    const [localStorageData, setLocalStorageData] = useState({});
     //获取当前路由
     const { pathname, state } = useLocation()
     const [mouseOver, setMouseOver] = useState({
@@ -13,8 +15,12 @@ export default function Content() {
         like: false,
     });
     useEffect(() => {
+        if (localStorage.getItem('loginData')) {
+            setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
+        }
         if (state) {
             const data = JSON.parse(state)
+            console.log(data)
             if (data.from) {
                 const datas = {
                     comments: data[0].postComment,
@@ -35,12 +41,54 @@ export default function Content() {
     // 点赞按钮
     const likehandle = (event) => {
         event.stopPropagation()
-        console.log('in development')
+        axios({
+            url: `http://127.0.0.1:4000/post/like/${contentdata.id}`,
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${localStorageData.jwt}`
+            },
+            data: {
+                data: {
+                    userId: localStorageData.userid
+                }
+            }
+        })
+            .then((response) => {
+                if (response.status === 201) {
+                    setcontent({ ...contentdata, likes: contentdata.likes + 1 })
+                } else if (response.status === 200) {
+                    alert(response.data.message)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
     // 更新按钮
-    const upfavoritehandler = (event) => {
+    const favoritehandler = (event) => {
         event.stopPropagation()
-        console.log('in development')
+        axios({
+            url: `http://127.0.0.1:4000/post/favorite/${contentdata.id}`,
+            method: 'post',
+            headers: {
+                'Authorization': `Bearer ${localStorageData.jwt}`
+            },
+            data: {
+                data: {
+                    userId: localStorageData.userid
+                }
+            }
+        })
+            .then((response) => {
+                if (response.status === 201) {
+                    setcontent({ ...contentdata, favorites: contentdata.favorites + 1 })
+                } else if (response.status === 200) {
+                    alert(response.data.message)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
     // 分享按钮
     const sharehandler = () => {
@@ -93,7 +141,7 @@ export default function Content() {
                                 <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>}
                             {contentdata.likes}
                         </div>
-                        <div className={style.star} onClick={upfavoritehandler}
+                        <div className={style.star} onClick={favoritehandler}
                             onMouseEnter={() => setMouseOver({ ...mouseOver, star: true })}
                             onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
                             {

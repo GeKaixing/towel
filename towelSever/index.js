@@ -14,6 +14,7 @@ const fs = require('fs');
 const { Server } = require('socket.io');
 const nodemailer = require('nodemailer');
 const { log } = require("console");
+const { type } = require("os");
 const server = http.createServer(app);
 app.use(cors({ origin: 'http://localhost:3000' }))
 const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
@@ -38,6 +39,10 @@ const POST = new mongoose.Schema({
     postShare: Number,
     postLike: Number,
     postComment: Number,
+    postFavorite: {
+        type: Number,
+        default: 0
+    },
 })
 const COMMENT = new mongoose.Schema({
     postId: { type: mongoose.Schema.Types.ObjectID, ref: 'POSTS' },
@@ -94,6 +99,11 @@ const LIKE = new mongoose.Schema({
     targetType: { type: String, required: true },
     targetId: { type: mongoose.Schema.Types.ObjectID, required: true },
 })
+const FAVORITE = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectID, required: true, ref: 'USERS' },
+    targetType: { type: String, required: true },
+    targetId: { type: mongoose.Schema.Types.ObjectID, required: true },
+})
 
 const STATICDATA = new mongoose.Schema({
     staticType: { type: String, required: true },
@@ -122,6 +132,7 @@ const COMMENTS = mongoose.model('COMMENTS', COMMENT)
 const REPLYS = mongoose.model('REPLYS', REPLY)
 const USERS = mongoose.model('USERS', USER)
 const LIKES = mongoose.model('LIKES', LIKE)
+const FAVORITES = mongoose.model('FAVORITES', FAVORITE)
 const STATICDATAS = mongoose.model('STATICDATAS', STATICDATA)
 const MENTIONS = mongoose.model('MENTIONS', MENTION)
 const verificationCodes = mongoose.model('verificationCodes', verificationCode)
@@ -305,6 +316,14 @@ app.get('/post', async (req, res) => {
             },
             {
                 $lookup: {
+                    from: 'favorites',//这里要填mongoose compass的集合的名字
+                    localField: '_id',
+                    foreignField: 'targetId',
+                    as: 'favorites'
+                }
+            },
+            {
+                $lookup: {
                     from: 'likes',//这里要填mongoose compass的集合的名字
                     localField: '_id',
                     foreignField: 'targetId',
@@ -327,6 +346,7 @@ app.get('/post', async (req, res) => {
                     postImages: 1,
                     postText: 1,
                     postShare: 1,
+                    postFavorite: { $size: '$favorites' },
                     postLike: { $size: '$likes' },
                     postComment: { $size: '$comments' },
                     /* 'postImages.staticUrl': 1, */
@@ -376,6 +396,14 @@ app.post('/fliterpsot', async (req, res) => {
             },
             {
                 $lookup: {
+                    from: 'favorites',//这里要填mongoose compass的集合的名字
+                    localField: '_id',
+                    foreignField: 'targetId',
+                    as: 'favorites'
+                }
+            },
+            {
+                $lookup: {
                     from: 'likes',//这里要填mongoose compass的集合的名字
                     localField: '_id',
                     foreignField: 'targetId',
@@ -405,6 +433,7 @@ app.post('/fliterpsot', async (req, res) => {
                     postUserName: 1, */
                     postText: 1,
                     postUserId: 1,
+                    postFavorite: { $size: '$favorites' },
                     postShare: 1,
                     postLike: { $size: '$likes' },
                     postComment: { $size: '$comments' },
@@ -598,6 +627,14 @@ app.get('/getusepost/:id', async (req, res) => {
             },
             {
                 $lookup: {
+                    from: 'favorites',//这里要填mongoose compass的集合的名字
+                    localField: '_id',
+                    foreignField: 'targetId',
+                    as: 'favorites'
+                }
+            },
+            {
+                $lookup: {
                     from: 'comments',
                     localField: '_id',
                     foreignField: 'postId',
@@ -632,6 +669,7 @@ app.get('/getusepost/:id', async (req, res) => {
                     postText: 1,
                     postShare: 1,
                     postUserId: 1,
+                    postFavorite: { $size: '$favorites' },
                     postLike: { $size: '$likes' },
                     postComment: { $size: '$comments' },
                     'postImages.staticUrl': 1,
@@ -991,7 +1029,7 @@ const likeRouter = function (url, targetType) {
             });
             if (existingLike) {
                 const likes = await LIKES.find({ targetType: targetType_value, targetId: new mongoose.Types.ObjectId(commentId) });
-                return res.status(400).json({ message: '已经点赞了，不能重复点赞', likenum: likes.length });
+                return res.status(200).json({ message: '已经点赞了，不能重复点赞', likenum: likes.length });
             } else {
                 const newLike = new LIKES({
                     userId: new mongoose.Types.ObjectId(userId),
@@ -1008,12 +1046,42 @@ const likeRouter = function (url, targetType) {
         }
     });
 }
+
+//点赞post
 likeRouter('/post/like/:id', 'post');
 // 点赞评论
 likeRouter('/comments/like/:id', 'comment');
 // 点赞回复
 likeRouter('/replies/like/:id', 'reply');
 
+//收藏post API
+app.post('/post/favorite/:id', async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const userId = req.body.data.userId;
+        const existingLike = await FAVORITES.findOne({
+            userId: new mongoose.Types.ObjectId(userId),
+            targetType: 'post',
+            targetId: new mongoose.Types.ObjectId(postId)
+        });
+        if (existingLike) {
+            const likes = await FAVORITES.find({ targetType: 'post', targetId: new mongoose.Types.ObjectId(postId) });
+            return res.status(200).json({ message: '已经收藏了，不能重复收藏', likenum: likes.length });
+        } else {
+            const newLike = new FAVORITES({
+                userId: new mongoose.Types.ObjectId(userId),
+                targetType: 'post',
+                targetId: new mongoose.Types.ObjectId(postId)
+            });
+            await newLike.save();
+            const likes = await FAVORITES.find({ targetType: 'post', targetId: new mongoose.Types.ObjectId(postId) });
+            res.status(201).json({ newLike, likenum: likes.length });
+        }
+
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 //delete like button
 app.delete('/dellike/:id', async (req, res) => {
     try {
