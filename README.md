@@ -114,7 +114,27 @@ web端目录结构
 ````
 后端目录结构
 ````
-├── index.js 主入口，全部代码
+src
+├── DB 数据库模块
+│   ├── commentModule.js 评论
+│   ├── favoriftModule.js 收藏
+│   ├── index.js 数据库模块主入口
+│   ├── likeModule.js 喜欢
+│   ├── mentionModule.js 提醒消息
+│   ├── postModule.js 帖子
+│   ├── replyModule.js 评论
+│   ├── staticdataModule.js 静态地址
+│   ├── userModule.js 用户
+│   └── verificationcodeModule.js 验证码
+├── auth
+│   └── index.js 权鉴
+├── authRoute 权鉴过路由
+│   └── index.js 
+├── commonRoute 公开路由
+│   └── index.js
+└── socket 消息通知
+   └── index.js 
+├── index.js 主入口
 ````
 ## 2. 项目使用的技术栈，npm i安装了对应不同技术栈，编写时间2024/06/15
 web端使用技术栈react/react-router/axios/socket
