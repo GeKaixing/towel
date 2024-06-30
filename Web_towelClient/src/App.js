@@ -4,6 +4,7 @@ import { searchDatauseContext } from './context/searchData'
 import { noReadNumbers } from './context/noReadNumbers'
 import { initSocket } from './socket/socket'
 export const MessageResponseDataContext = createContext(null)
+export const selectLightorDarkContext = createContext(null)
 export default function App() {
     const [searchData, setsearchData] = useState([]);
     const [noReadNumber, setNoReadNumber] = useState('')
@@ -17,11 +18,46 @@ export default function App() {
             });
         }
     }, [])
+    const [colorModel, setColorModel] = useState(false)
+    useEffect(() => {
+        const body = document.body;
+        const colorModeldata = localStorage.getItem('color-model');
+        if (colorModeldata === 'system') {
+            const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            colorSchemeQuery.addEventListener('change', (event) => {
+                if (event.matches) {
+                    body.setAttribute('color-model', 'dark');
+                } else {
+                    body.setAttribute('color-model', 'light');
+                }
+            })
+
+        } else {
+            switch (colorModeldata) {
+                case 'light':
+                    body.setAttribute('color-model', `light`);
+                    break;
+                case 'dark':
+                    body.setAttribute('color-model', `dark`);
+                    break;
+                case 'system':
+                    var colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;//ture 现在系统处于深色模式
+                    colorSchemeQuery ? body.setAttribute('color-model', `dark`) : body.setAttribute('color-model', `light`);
+                    break;
+                default:
+                    body.setAttribute('color-model', `light`);
+                    break;
+            }
+        }
+
+    }, [colorModel, window])
     return (
         <searchDatauseContext.Provider value={{ searchData, setsearchData }}>
             <noReadNumbers.Provider value={{ noReadNumber, setNoReadNumber }}>
                 <MessageResponseDataContext.Provider value={{ MessageResponseData, setMessageResponseData }}>
-                    <Routers />
+                    <selectLightorDarkContext.Provider value={{ colorModel, setColorModel }}>
+                        <Routers />
+                    </selectLightorDarkContext.Provider>
                 </MessageResponseDataContext.Provider>
             </noReadNumbers.Provider>
         </searchDatauseContext.Provider>

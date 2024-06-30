@@ -49,7 +49,7 @@
     flex-direction: column;
     gap: 8px;
     width: 600px;
-    background-color: white;
+    background-color: var(--boxColor);
     margin-top: 8px;
     margin-bottom: 24px;
     border-radius: 10px;
@@ -60,6 +60,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    background-color: var(--boxColor);
 }
 
 .thisshowname {
@@ -73,8 +74,7 @@
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-    color: #000;
-
+    color: var(--fontColor);
 }
 
 .handimg {

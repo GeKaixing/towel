@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 8px;
     width: 600px;
-    background-color: white;
+    background-color: var(--boxColor);
     border: 1px solid black;
     margin-top: 8px;
     margin-bottom: 24px;
@@ -17,7 +17,7 @@
     position: absolute;
     right: 0;
     width: 200px;
-    background-color: #d8d8d8;
+    background-color: var(--boxHoverColor); ;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,7 +38,9 @@
     justify-content: center;
     align-items: center;
 }
-
+.more{
+    color: var(--fontColor);
+}
 .messagebox {
     display: flex;
     flex-direction: column;
@@ -57,7 +59,7 @@
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-    color: #000;
+    color: var(--fontColor);
 
 }
 
@@ -83,7 +85,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-
+    color: var(--fontColor);
 }
 
 .postBottom {
@@ -91,14 +93,16 @@
     flex-direction: row;
     justify-content: space-around;
     height: 20px;
+    color: var(--fontColor);
 }
 
 .likesIcon {
     display: flex;
+    color: var(--fontColor);
 }
 
 .starIcon {
-    color: #000;
+    color: var(--fontColor);
     display: flex;
 }
 
@@ -111,7 +115,7 @@
 }
 
 .star {
-    color: #000;
+    color: var(--fontColor);
     display: flex;
 }
 

@@ -12,6 +12,10 @@
     margin-bottom: 5px;
     width: 15rem;
     height: 2rem;
+    background-color: var(--boxColor);
+    border: none;
+    color: var(--fontColor);
+    border: 1px solid #000000;
 
 }
 .commentbutton {
@@ -19,6 +23,11 @@
     margin-bottom: 5px;
     width: 4rem;
     height: 2rem;
+    background-color: var(--boxColor);
+    border: none;
+    border:1px solid black;
+    border-radius: 10px;
+    color: var(--fontColor);
 }
 
 .commentbutton:hover {
@@ -28,12 +37,13 @@
 .inputReplyData {
     width: 4rem;
     height: 2rem;
-    border: 1px solid black;
+    border: 1px solid var(--boxColor);
     border-radius: 8px;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
+    color: var(--fontColor);
 }
 
 .inputReplyDataDelButton {

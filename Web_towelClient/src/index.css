@@ -6,4 +6,17 @@
 }
 html{
     overflow-y:scroll ;
+   
+}
+body[color-model='dark']{
+    background-color: black;
+    --fontColor: white;
+    --boxColor: #101010;
+    --boxHoverColor: #202020;
+}
+body[color-model='light']{
+    background-color: white;
+    --fontColor: black;
+    --boxColor: #f6f6f6;
+    --boxHoverColor: #d8d8d8;
 }

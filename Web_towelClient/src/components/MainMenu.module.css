@@ -33,13 +33,13 @@ img {
 
 .link {
     margin-top: 15px;
-    background-color: #f6f6f6;
+    background-color: var(--boxColor);
     border-radius: 10px;
     display: flex;
     flex-direction: row;
     width: 150px;
     height: 50px;
-    color: #000;
+    color:var(--fontColor);
     text-decoration: none;
     font-size: 20px;
     justify-content: center;
@@ -47,7 +47,7 @@ img {
 }
 
 .link:hover {
-    background-color: #d8d8d8;
+    background-color: var(--boxHoverColor);
 }
 
 .logo {
@@ -67,8 +67,7 @@ img {
     .bar {
         height: 48px;
         width: 100%;
-        background-color: #f6f6f6;
-        position: fixed;
+            position: fixed;
         left: 50%;
         transform: translateX(-50%);
         bottom: 0;

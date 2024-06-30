@@ -3,7 +3,7 @@
     position:absolute;
     right: 0;
     width: 200px;
-    background-color: #d8d8d8; 
+    background-color: var(--boxHoverColor); 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,6 +12,9 @@
     border-radius: 10px;
     padding-top: 8px;
     padding-bottom: 8px;
+}
+.more{
+    color: var(--fontColor);
 }
 .postDeleteBoxButton{
     border-radius: 10px;
@@ -30,7 +33,7 @@
     width: 600px;
     border: 1px solid #000000;
     padding: 8px;
-    background-color:white;
+    background-color:var(--boxColor);
     box-sizing: border-box;
     border-radius: 10px;
 }
@@ -41,7 +44,9 @@
     align-items: center;
     justify-content: space-between;
 }
-
+.commentText{
+    color: var(--fontColor);
+}
 .handimg {
     width: 2rem;
     height: 2rem;
@@ -60,6 +65,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    color: var(--fontColor);
 }
 
 .Reply {

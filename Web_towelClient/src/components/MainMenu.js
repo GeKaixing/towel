@@ -12,7 +12,6 @@ export default function MainMenu() {
       setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
     }
     const handlerResize = () => {
-      console.log(window.innerWidth)
       setwidth(window.innerWidth)
     }
     // 警听
@@ -52,6 +51,7 @@ export default function MainMenu() {
   const Howshowicon2 = new Howshowicon('/static/MainMenuIcon/提示.svg', '/static/MainMenuIconPitchUp/提示.svg')
   const Howshowicon3 = new Howshowicon('/static/MainMenuIcon/评论.svg', '/static/MainMenuIconPitchUp/评论.svg')
   const Howshowicon4 = new Howshowicon('/static/MainMenuIcon/添加.svg', '/static/MainMenuIconPitchUp/添加.svg')
+  const Howshowicon5 = new Howshowicon('/static/MainMenuIcon/设置.svg', '/static/MainMenuIconPitchUp/设置.svg')
   return (
     <div>
       <div className={style.bar} >
@@ -70,6 +70,7 @@ export default function MainMenu() {
             <img src={Howshowicon3.howshowicon('/Message').path}></img>{width < 750 ? null : "消息"}
             <div>{noReadNumber}</div>
           </div></Link>
+          {width < 750 ? null :<Link className={style.link} to='/setting' ><img src={Howshowicon5.howshowicon('/setting').path}></img> 设置</Link>}
         {localStorageData.jwt ? width < 1000 ? <Link className={`${style.link} ${style.headimgName}`} to={`/userhomepage/${localStorageData.userid}`}><img className={style.headimg} src={localStorageData.headimg}></img><span className={style.userName}>{localStorageData.username}</span></Link> : null : null}
         {localStorageData.jwt ? null : <Link className={style.link} to="/login">{width < 750 ? null : "登录"}</Link>}
       </div>

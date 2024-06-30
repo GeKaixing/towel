@@ -11,24 +11,33 @@
     width: 15rem;
     height: 1.5rem;
     margin-top: 10px;
+    background-color: var(--boxColor);
+    border: none;
+    color: var(--fontColor);
 }
 
 .password {
     width: 15rem;
     height: 1.5rem;
     margin-top: 10px;
- 
+    background-color: var(--boxColor);
+    border: none;
+    color: var(--fontColor);
 }
 
 .button {
     margin-top: 10px;
     width: 6rem;
     height: 1.5rem;
+    background-color: var(--boxColor);
+    border: none;
+    color: var(--fontColor);
 }
 
 .signup {
     margin-top: 10px;
     text-decoration: none;
+    color: var(--fontColor);
 }
 
 .signup:hover {

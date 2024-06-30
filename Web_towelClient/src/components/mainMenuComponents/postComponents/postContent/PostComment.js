@@ -95,8 +95,8 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                             </div>
                             <div onClick={() => setInputData('@' + item.users[0].username + ':')}>{item.users[0].username}</div>
                         </div>
-                        <div onClick={() => toggleOptions(item._id)} style={{ position: 'relative' }} ref={PostCommentRef} className='PostCommentRef'>
-                            ...
+                        <div onClick={() => toggleOptions(item._id)} style={{ position: 'relative',color:'var(--fontColor)' }} ref={PostCommentRef} className='PostCommentRef' >
+                           ...
                             {showOptions === item._id && (
                                 <div className={style.postDeleteBox} onClick={e => e.stopPropagation()} >
                                     {localStorageData.userid === item.users[0]._id ? (
@@ -117,7 +117,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                             )}
                         </div>
                     </span>
-                    <span style={{ marginLeft: '2rem' }}>{item.commentText}</span>
+                    <span style={{ marginLeft: '2rem' }} className={style.commentText}>{item.commentText}</span>
                     <div className={style.Replyimport}>
                         <div className={style.Reply}>
                             <PostCommentButton

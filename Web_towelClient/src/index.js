@@ -10,6 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //查询/mutation/修改使用react-query 
 const queryClient = new QueryClient()
 document.documentElement.style.fontSize = 100 / 750 + 'vm';
+document.body.setAttribute('color-model', `light`);
 root.render(
     <BrowserRouter>
         <QueryClientProvider client={queryClient}>
