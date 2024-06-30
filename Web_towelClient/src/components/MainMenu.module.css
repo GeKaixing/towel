@@ -1,10 +1,12 @@
-.headimgName{
+.headimgName {
     display: flex;
 }
-.userName{
+
+.userName {
     font-size: 14px;
     font-weight: bold;
 }
+
 .headimg {
 
     width: 40px;
@@ -39,7 +41,7 @@ img {
     flex-direction: row;
     width: 150px;
     height: 50px;
-    color:var(--fontColor);
+    color: var(--fontColor);
     text-decoration: none;
     font-size: 20px;
     justify-content: center;
@@ -67,7 +69,7 @@ img {
     .bar {
         height: 48px;
         width: 100%;
-            position: fixed;
+        position: fixed;
         left: 50%;
         transform: translateX(-50%);
         bottom: 0;

@@ -43,6 +43,27 @@ const authMiddleware = require('./src/auth/index')
 const commonRoute = require('./src/commonRoute/index')
 const authRoute = require('./src/authRoute/index')
 // common API
+const axios = require('axios');
+app.get('/HPImageArchive', async (req, res) => {
+    try {
+        const response = await axios.get('https://cn.bing.com/HPImageArchive.aspx', {
+            params: {
+                format: 'js',
+                idx: 0,
+                n: 1,
+                nc: 1586183781119,
+                pid: 'hp',
+                uhd: 1,
+                uhdwidth: 2880,
+                uhdheight: 1620
+            }
+        });
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).send('Error fetching data');
+    }
+});
+
 app.use(commonRoute)
 //auth API
 app.use(authMiddleware)
@@ -68,6 +89,7 @@ app.post('/upload/:id', upload, async (req, res) => {
         res.status(500).json({ massage: error.massage })
     }
 })
+
 server.listen(PORT, () => {
     console.log(
         'server is open'

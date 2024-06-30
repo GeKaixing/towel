@@ -14,6 +14,10 @@ import PostContent from '../components/mainMenuComponents/postComponents/postCon
 import Add from '../components/mainMenuComponents/Add'
 import Search from '../components/mainMenuComponents/Search'
 import Setting from '../components/mainMenuComponents/Setting'
+import SettingUserForgetPage from '../components/mainMenuComponents/settingComponents/SettingUserPage/SettingUserForgetPage'
+import SettingBackgroundImg from '../components/mainMenuComponents/settingComponents/SettingBackgroundPage/SettingBackgroundImg'
+import SettingDeactivate from '../components/mainMenuComponents/settingComponents/SettingUserPage/SettingDeactivate'
+import SettingAccount from '../components/mainMenuComponents/settingComponents/SettingUserPage/SettingAccount'
 export default function Routers() {
     return (
         <div className={style.layout}>
@@ -27,7 +31,12 @@ export default function Routers() {
                         <Route path='/userhomepage/:id' element={<UserHomePage></UserHomePage>}></Route>
                         <Route path='/post' element={<Add></Add>}></Route>
                     </Route>
-                    <Route path='/setting' element={<Setting />}></Route>
+                    <Route path='/setting' element={<Setting />}>
+                        <Route path='/setting/backgroundimg' element={<SettingBackgroundImg />}> </Route>
+                        <Route path='/setting/forget' element={<SettingUserForgetPage />}> </Route>
+                        <Route path='/setting/deactivate' element={<SettingDeactivate />}> </Route>
+                        <Route path='/setting/account' element={<SettingAccount />}> </Route>
+                    </Route>
                     <Route path='/search' element={<Search />}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/signup' element={<Signup />}></Route>

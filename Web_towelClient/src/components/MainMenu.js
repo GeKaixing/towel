@@ -75,10 +75,10 @@ export default function MainMenu() {
         {localStorageData.jwt ? null : <Link className={style.link} to="/login">{width < 750 ? null : "登录"}</Link>}
       </div>
       {/* 脱离文档流，父元素坍塌问题 */}
-      {
+   {/*    {
         width < 750 ? null :
           <div className={style.leftplace}></div>
-      }
+      } */}
 
     </div >
   )
