@@ -32,7 +32,6 @@ export default function Routers() {
                     <Route path='/homepage/:id' element={<PostContent ></PostContent>}></Route>
                 </Routes>
             </div>
-
             <User></User>
         </div>
 

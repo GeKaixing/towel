@@ -3,8 +3,3 @@
     flex-direction: row;
     justify-content: center;
 }
-@media (max-width:1000px) {
-    .layout{
-        justify-content: flex-start 
-    }
-}
