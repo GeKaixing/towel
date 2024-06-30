@@ -1,0 +1,28 @@
+.SettingUserForgetPage {
+    color: var(--fontColor);
+}
+
+.SettingUserForgetPageForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.SettingUserForgetPageForm>input {
+    width: 15rem;
+    height: 1.5rem;
+    margin-top: 10px;
+    background-color: var(--boxColor);
+    border: none;
+    color: var(--fontColor);
+}
+
+.SettingUserForgetPageFormSendCode,.SettingUserForgetPageFormSubmitBotton{
+    width: 6rem;
+    height: 1.5rem;
+    background-color: var(--boxColor);
+    border: none;
+    color: var(--fontColor);
+}

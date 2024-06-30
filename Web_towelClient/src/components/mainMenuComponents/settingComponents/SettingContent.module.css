@@ -1,30 +1,10 @@
-.settingContent {
+.settingContent{
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
-    text-align: center;
 }
-
-.settingContent>div {
-    width: 80px;
-    height: 60px;
-    border-radius: 10px;
-    background-color: var(--boxColor);
-    color: var(--fontColor);
+.settingleftContent{
+    width: 100%;
+    margin-left: 8px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-}
-
-.settingContent>div:hover {
-    background-color: var(--boxHoverColor);
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgba(134, 196, 248, 1);
 }

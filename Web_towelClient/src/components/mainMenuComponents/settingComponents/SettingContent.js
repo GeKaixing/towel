@@ -1,32 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react'
-import style from './SettingContent.module.css'
-import { selectLightorDarkContext } from '../../../App'
-export default function SettingContent() {
-  //暗黑模式 
-  const { colorModel, setColorModel } = useContext(selectLightorDarkContext)
-  const [colorModeldata, setColorModeldata] = useState(null)
-  const autoColorHandler = () => {
-    localStorage.setItem('color-model', 'system')
-    setColorModel(!colorModel)
-  }
-  const selectLightHandler = () => {
-    localStorage.setItem('color-model', 'light')
-    setColorModel(!colorModel)
-  }
-  const selectDarkHandler = () => {
-    localStorage.setItem('color-model', 'dark')
-    setColorModel(!colorModel)
-  }
-  useEffect(() => {
-    const colorModeldata = localStorage.getItem('color-model');
-    setColorModeldata(colorModeldata)
-  }, [colorModel])
+import React from 'react'
+import SettingBackground from './SettingBackground'
+import SettingUser from './SettingUser'
+import style from './settingContent.module.css'
+import { Outlet } from 'react-router'
+
+export default function settingContent() {
   return (
     <div className={style.settingContent}>
-      <div>背景</div>
-      <div onClick={autoColorHandler}>跟随系统{colorModeldata === 'system' ? <div className={style.dot}></div> : null}</div>
-      <div onClick={selectLightHandler}>白天{colorModeldata === 'light' ? <div className={style.dot}></div> : null}</div>
-      <div onClick={selectDarkHandler}>晚上{colorModeldata === 'dark' ? <div className={style.dot}></div> : null}</div>
+      <div className={style.settingMenu}>
+        <SettingBackground />
+        <SettingUser></SettingUser>
+      </div>
+      <div className={style.settingleftContent}>
+        <Outlet></Outlet>
+      </div>
     </div>
   )
 }
