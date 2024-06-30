@@ -1,34 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import style from './SettingBackgroundImg.module.css'
 import axios from 'axios'
+import { selectLightorDarkContext } from '../../../../App'
 export default function SettingBackgroundImg() {
-    const [imgData, setImgDage] = useState('')
+    const [imgData, setImgDate] = useState('')
+    const { colorModel ,setColorModel} = useContext(selectLightorDarkContext)
     const SettingBackgroundImgHandler = (e) => {
-        setImgDage(e.target.file[0])
+        setImgDate(e.target.file[0])
         console.log(imgData)
     }
     const SettingBackgroundBingImgHandler = () => {
         axios({ url: 'http://127.0.0.1:4000/HPImageArchive' })
-            .then((response) => { setImgDage('https://cn.bing.com' + response.data.images[0].url) })
+            .then((response) => {
+                setImgDate('https://cn.bing.com' + response.data.images[0].url)
+                localStorage.setItem('backgroundimg', 'https://cn.bing.com' + response.data.images[0].url)
+                localStorage.setItem('color-model', 'bing')
+                setColorModel(!colorModel)
+            })
             .catch((error) => { console.log(error) })
     }
+    useEffect(() => {
+        document.getElementById('bgi').style.backgroundImage = `url(${localStorage.getItem('backgroundimg')})`
+        document.getElementById('bgi').style.backgroundSize = 'cover';
+        document.getElementById('bgi').style.backgroundPosition = 'center';
+        document.getElementById('bgi').style.zIndex = '-1';
+        document.getElementById('bgi').style.position = 'absolute';
+        document.getElementById('bgi').style.top = '0';
+        document.getElementById('bgi').style.left = '0';
+        document.getElementById('bgi').style.height = '100vh';
+        document.getElementById('bgi').style.width = '100%';
+        document.getElementById('bgi').style.margin = '0';
+    }, [imgData,colorModel])
     return (
         <div className={style.SettingBackgroundImg}>
-            <div className={style.img}
-                style={{
-                    backgroundImage: `url(${imgData})`,
-                     backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      zIndex: -1, // 设置一个较低的z-index值
-                      position: 'absolute', // 可能需要调整元素的定位方式
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      margin: 0 
-                }}
-             ></div>
-            <div onClick={SettingBackgroundBingImgHandler}>使用bing每日壁纸</div>
-            <form onSubmit={(e) => e.defaultPrevented()}>
+            <div onClick={SettingBackgroundBingImgHandler } className={style.SettingBackgroundImgBing}>使用bing每日壁纸</div>
+            <form onSubmit={(e) => e.preventDefault()}>
                 <input type='file' onChange={SettingBackgroundImgHandler}></input>
             </form>
         </div>

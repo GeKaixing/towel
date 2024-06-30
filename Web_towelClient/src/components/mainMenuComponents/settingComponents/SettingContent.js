@@ -1,10 +1,10 @@
 import React from 'react'
 import SettingBackground from './SettingBackground'
 import SettingUser from './SettingUser'
-import style from './settingContent.module.css'
+import style from './SettingContent.module.css'
 import { Outlet } from 'react-router'
 
-export default function settingContent() {
+export default function SettingContent() {
   return (
     <div className={style.settingContent}>
       <div className={style.settingMenu}>
