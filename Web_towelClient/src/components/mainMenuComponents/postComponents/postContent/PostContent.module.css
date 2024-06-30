@@ -11,6 +11,7 @@
     vertical-align: middle;
     text-align: center;
 }
+
 .message {
     display: flex;
     flex-direction: row;
@@ -45,7 +46,7 @@
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-    color: #000;
+    color: var(--fontColor);
 }
 
 .handname:hover {
@@ -55,6 +56,7 @@
 .thisshowcontent {
     display: flex;
     font-weight: bold;
+    color: var(--fontColor);
 }
 
 .thisshowbottom {
@@ -62,12 +64,14 @@
     flex-direction: row;
     justify-content: space-around;
     height: 20px;
-
+    color: var(--fontColor);
 }
+
 .thisshowbottom :nth-child(1) {
     display: flex;
     text-decoration: none;
 }
-.star{
+
+.star {
     display: flex;
 }

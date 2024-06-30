@@ -91,13 +91,13 @@ export default function Portal() {
                         <div className={style.handimg}>
                             <img src={loginDataParse.headimg} className={style.img} alt="user" />
                         </div>
-                        <div className={style.handname}>{'name'}</div>
+                        <div className={style.handname}>{loginDataParse.username}</div>
                     </div>
                     <div className={style.thisshowcontent}>
                         <textarea
                             value={textareaData}
                             onChange={(e) => settextareaData(e.target.value)}
-                            style={{ resize: "vertical" }}
+                            style={{ resize: "vertical",backgroundColor:'var(--boxColor)',color:'var(--fontColor)' }}
                         />
                     </div>
                     <div className={style.thisshowbottom}>

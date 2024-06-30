@@ -13,11 +13,12 @@ import Protected from './Protected'
 import PostContent from '../components/mainMenuComponents/postComponents/postContent/PostContent'
 import Add from '../components/mainMenuComponents/Add'
 import Search from '../components/mainMenuComponents/Search'
+import Setting from '../components/mainMenuComponents/Setting'
 export default function Routers() {
     return (
         <div className={style.layout}>
             <MainMenu ></MainMenu>
-            <div style={{width:'648px',display:'flex',justifyContent:'center',}}>
+            <div style={{ width: '648px', display: 'flex', justifyContent: 'center', }}>
                 <Routes>
                     <Route path='/' element={<Post></Post>}></Route>
                     <Route element={<Protected />}>
@@ -26,6 +27,7 @@ export default function Routers() {
                         <Route path='/userhomepage/:id' element={<UserHomePage></UserHomePage>}></Route>
                         <Route path='/post' element={<Add></Add>}></Route>
                     </Route>
+                    <Route path='/setting' element={<Setting />}></Route>
                     <Route path='/search' element={<Search />}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/signup' element={<Signup />}></Route>

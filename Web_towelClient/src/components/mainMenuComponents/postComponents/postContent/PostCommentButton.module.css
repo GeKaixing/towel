@@ -1,34 +1,45 @@
-.reply{   
+.reply {
     display: flex;
     flex-direction: row;
     width: 90%;
     justify-content: space-around;
     align-items: center;
 }
-.replynumbe{
-margin-left: 10px;
 
+.replynumbe {
+    margin-left: 10px;
+    color: var(--fontColor);
 }
-.replyimport{ 
+
+.replyText {
+    color: var(--fontColor);
+}
+
+.replyText:hover,
+.replynumbe:hover {
+    color: rgba(134, 196, 248, 1);
+}
+
+.replyimport {
     display: flex;
     justify-content: center;
 }
-.replybutton{
+
+.replybutton {
     display: flex;
     justify-content: center;
     cursor: pointer;
 }
-.like{
+
+.like {
     display: flex;
     justify-content: center;
     margin-left: 10px;
     width: 18px;
     height: 18px;
-}
-.like:hover{
-    color: rgb(188, 27, 27);
+    color: var(--fontColor);
 }
 
-.submitreply:hover{
+.submitreply:hover {
     cursor: pointer;
 }

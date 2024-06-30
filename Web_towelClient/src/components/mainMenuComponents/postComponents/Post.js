@@ -149,7 +149,7 @@ export default function Post(props) {
                         </div>
                         <Link className={style.handname}>{props.name}</Link>
                     </div>
-                    <div onClick={() => targetIDHandler(props.id)} style={{ position: "relative" }} >...
+                    <div onClick={() => targetIDHandler(props.id)} style={{ position: "relative" }}className={style.more}>...
                         {targetID === props.id ?
                             <div className={style.postDeleteBox} onClick={e => e.stopPropagation()} ref={postDeleteBox}>
                                 {(localStorageData.userid === props.postUserId) ?

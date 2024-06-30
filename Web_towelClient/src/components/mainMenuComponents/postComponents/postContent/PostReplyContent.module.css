@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content:space-between;
     padding-left: 1.5rem;
-    
+    color: var(--fontColor);
 }
 
 .replycontents {
@@ -14,7 +14,7 @@
     position:absolute;
     right: 0;
     width: 200px;
-    background-color: #d8d8d8; 
+    background-color: var(--boxHoverColor); 
     display: flex;
     flex-direction: column;
     align-items: center;
