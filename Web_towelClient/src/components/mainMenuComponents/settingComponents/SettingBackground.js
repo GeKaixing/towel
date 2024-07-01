@@ -28,7 +28,6 @@ export default function SettingBackground() {
     }
     useEffect(() => {
         const colorModeldata = localStorage.getItem('color-model');
-        console.log(colorModeldata)
         setColorModeldata(colorModeldata)
     }, [colorModel])
     return (
