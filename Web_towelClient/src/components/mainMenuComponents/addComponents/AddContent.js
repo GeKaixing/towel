@@ -47,24 +47,31 @@ export default function Portal() {
     };
     const sendPostApi = async () => {
         try {
-            const loginDataParse = JSON.parse(localStorage.getItem('loginData'));
-            await axios({
-                url: `http://127.0.0.1:4000/addpost`,
-                method: 'post',
-                data: {
+            if (textareaData) {
+                const loginDataParse = JSON.parse(localStorage.getItem('loginData'));
+                await axios({
+                    url: `http://127.0.0.1:4000/addpost`,
+                    method: 'post',
                     data: {
-                        UserId: loginDataParse.userid,
-                        Text: textareaData,
-                        Image: responseImageData,
-                        Share: 0,
-                        Like: 0,
-                        Comment: 0
+                        data: {
+                            UserId: loginDataParse.userid,
+                            Text: textareaData,
+                            Image: responseImageData,
+                            Share: 0,
+                            Like: 0,
+                            Comment: 0
+                        }
+                    },
+                    headers: {
+                        'Authorization': `Bearer ${loginDataParse.jwt}`,
                     }
-                },
-                headers: {
-                    'Authorization': `Bearer ${loginDataParse.jwt}`,
-                }
-            });
+                });
+                settextareaData('')
+                setShowImageData('')
+            }else{
+                alert('不要空哦')
+            }
+
         } catch (error) { console.log(error) }
     }
 
@@ -97,7 +104,7 @@ export default function Portal() {
                         <textarea
                             value={textareaData}
                             onChange={(e) => settextareaData(e.target.value)}
-                            style={{ resize: "vertical",backgroundColor:'var(--boxColor)',color:'var(--fontColor)' }}
+                            style={{ resize: "vertical", backgroundColor: 'var(--boxColor)', color: 'var(--fontColor)' }}
                         />
                     </div>
                     <div className={style.thisshowbottom}>
