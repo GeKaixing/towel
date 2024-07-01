@@ -18,5 +18,11 @@ const USER = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    phoneNumber: {
+        type: String,
+    },
+    birthday: {
+        type: String,
+    },
 })
-module.exports=USER;
+module.exports = USER;
