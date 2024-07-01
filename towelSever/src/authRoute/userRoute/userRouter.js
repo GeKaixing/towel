@@ -88,8 +88,40 @@ router.post('/deactivateaccount', async (req, res) => {
         if (!(userAndemail || user)) {
             return res.status(400).json({ meassge: '验证码错误', status: false })
         }
-         await USERS.deleteOne({ email: email })
-        res.status(201).json({  status: true })
+        await USERS.deleteOne({ email: email })
+        res.status(201).json({ status: true })
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+});
+router.post('/modifyingausername', async (req, res) => {
+    try {
+        const { newusername, id } = req.body.data
+        const userAndemail = await USERS.findOne({ username:newusername });//false
+        if (userAndemail) { return res.status(400).json({ meassge: '用户名重复哦', status: false }) }
+        const data = await USERS.findOneAndUpdate(
+            { _id: id },
+            { username: newusername },
+            { new: true, useFindAndModify: false } // 确保返回更新后的文档，并使用新的 findOneAndUpdate 行为
+        );
+        res.status(200).send(data);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+});
+router.post('/modifyingiphoneNumber', async (req, res) => {
+    try {
+        const { phoneNumber, id } = req.body.data
+        const userAndemail = await USERS.findOne({ _id:id });//false
+        if (!userAndemail) { return res.status(400).json({ meassge: '找不到账号', status: false }) }
+        const data = await USERS.findOneAndUpdate(
+            { _id: id },
+            { phoneNumber: phoneNumber },
+            { new: true, useFindAndModify: false } // 确保返回更新后的文档，并使用新的 findOneAndUpdate 行为
+        );
+        res.status(200).send(data);
     }
     catch (error) {
         res.status(500).json({ message: error.message })

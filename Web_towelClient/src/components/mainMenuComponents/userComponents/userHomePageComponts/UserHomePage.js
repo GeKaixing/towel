@@ -42,7 +42,7 @@ export default function UserHomePage() {
           </div>
           <p className={style.name}> {localStorageData.username}</p>
         </div>
-        <div className={style.loginout} onClick={closeAnAccountHanlder}>注销</div>
+        <div className={style.loginout} onClick={closeAnAccountHanlder}>登出</div>
       </div>
       <div className={style.userhistory}>
         <div onClick={() => { setseletcpage('UserArticle') }}>文章</div>
