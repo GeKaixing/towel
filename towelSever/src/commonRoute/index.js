@@ -160,7 +160,7 @@ router.post('/forgetpassword', async (req, res) => {
     }
 });
 
-router.post('/registerRegister', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const { username, password, email, code } = req.body.data
         const userAndemail = await USERS.findOne({ $or: [{ username }, { email }] });//false

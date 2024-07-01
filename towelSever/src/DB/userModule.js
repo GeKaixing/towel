@@ -20,9 +20,11 @@ const USER = new mongoose.Schema({
     },
     phoneNumber: {
         type: String,
+        default: '无'
     },
     birthday: {
         type: String,
+        default: '无'
     },
 })
 module.exports = USER;

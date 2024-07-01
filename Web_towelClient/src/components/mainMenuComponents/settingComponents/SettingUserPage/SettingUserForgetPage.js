@@ -78,7 +78,7 @@ export default function SettingUserForgetPage() {
                 }).then(res => {
                     console.log(res.data)
                 }).catch(() => {
-                    alert('用户名或邮箱或邮箱错误')
+                    alert('用户名或邮箱或验证码错误')
                 })
             }else{
                 alert('别空着')
