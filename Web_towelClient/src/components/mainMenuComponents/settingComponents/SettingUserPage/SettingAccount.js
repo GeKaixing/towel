@@ -1,25 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import style from './SettingAccount.module.css'
+import axios from 'axios';
 export default function SettingAccount() {
-    const [localStorageData, setLocalStorageData] = useState({});
-
+    const [responseData, setResponseData] = useState({})
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
-            setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
+            const localStorageData = JSON.parse(localStorage.getItem('loginData'));
+            axios({
+                url: `http://127.0.0.1:4000/userinfo/${localStorageData.userid}`,
+                headers: {
+                    'Authorization': `Bearer ${localStorageData.jwt}`,
+                }
+            }).then(response => {
+                setResponseData(response.data)
+            }).catch((error) => {
+                console.log(error)
+            })
         }
     }, [])
     return (
         <div className={style.SettingAccount}>
+            <img src={responseData.headimg} className={style.headimg}></img>
             <p><strong>id</strong></p>
-            <p>{localStorageData.userid}</p>
+            <p>{responseData._id}</p>
             <p><strong>用户名</strong></p>
-            <p>{localStorageData.username}</p>
+            <p>{responseData.username}</p>
             <p><strong>电子邮件</strong></p>
-            <p>example@gmail.com</p>
+            <p>{responseData.email}</p>
             <p><strong>电话号码</strong></p>
-            <p>123-4567-8900</p>
+            <p>{responseData.iphoneNumber===undefined?'无':responseData.iphoneNumber}</p>
             <p><strong>生日</strong></p>
-            <p>无</p>
+            <p>{responseData.birthday===undefined?'无':responseData.birthday}</p>
         </div>
     )
 }

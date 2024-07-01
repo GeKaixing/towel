@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    position: relative;
 }
 
 .SettingUserForgetPageForm>input {
@@ -17,12 +17,40 @@
     background-color: var(--boxColor);
     border: none;
     color: var(--fontColor);
+
 }
 
-.SettingUserForgetPageFormSendCode,.SettingUserForgetPageFormSubmitBotton{
+.SettingUserForgetPageFormSendCode,
+.SettingUserForgetPageFormSubmitBotton {
     width: 6rem;
     height: 1.5rem;
     background-color: var(--boxColor);
     border: none;
     color: var(--fontColor);
+}
+
+.EyeOutlined,
+.EyeInvisibleOutlined {
+    position: absolute;
+    top: 78px;
+    transform: translateX(-50%);
+    left: 222px;
+    z-index: 2;
+    height: 24px;
+    width: 24px;
+    ;
+
+}
+
+.EyeOutlined2,
+.EyeInvisibleOutlined2 {
+    position: absolute;
+    top: 112px;
+    transform: translateX(-50%);
+    left: 222px;
+    z-index: 2;
+    height: 24px;
+    width: 24px;
+    ;
+
 }

@@ -42,6 +42,7 @@ socketio(io)
 const authMiddleware = require('./src/auth/index')
 const commonRoute = require('./src/commonRoute/index')
 const authRoute = require('./src/authRoute/index')
+const userRoute =require('./src/authRoute/userRoute/userRouter')
 // common API
 const axios = require('axios');
 app.get('/HPImageArchive', async (req, res) => {
@@ -66,9 +67,11 @@ app.get('/HPImageArchive', async (req, res) => {
 
 app.use(commonRoute)
 //auth API
+
 app.use(authMiddleware)
 ////auth API
 app.use(authRoute)
+app.use(userRoute)
 app.post('/upload/:id', upload, async (req, res) => {
     try {
         const { targetId, staticType } = Object.assign({}, req.body)
