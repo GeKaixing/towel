@@ -36,6 +36,7 @@ img {
 .link {
     margin-top: 15px;
     background-color: var(--boxColor);
+    box-shadow: var(--boxShadow);
     border-radius: 10px;
     display: flex;
     flex-direction: row;

@@ -1,10 +1,10 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import style from './SettingBackgroundImg.module.css'
 import axios from 'axios'
 import { selectLightorDarkContext } from '../../../../App'
 export default function SettingBackgroundImg() {
     const [imgData, setImgDate] = useState('')
-    const { colorModel ,setColorModel} = useContext(selectLightorDarkContext)
+    const { colorModel, setColorModel } = useContext(selectLightorDarkContext)
     const SettingBackgroundImgHandler = (e) => {
         setImgDate(e.target.file[0])
         console.log(imgData)
@@ -20,20 +20,21 @@ export default function SettingBackgroundImg() {
             .catch((error) => { console.log(error) })
     }
     useEffect(() => {
-        document.getElementById('bgi').style.backgroundImage = `url(${localStorage.getItem('backgroundimg')})`
-        document.getElementById('bgi').style.backgroundSize = 'cover';
-        document.getElementById('bgi').style.backgroundPosition = 'center';
-        document.getElementById('bgi').style.zIndex = '-1';
-        document.getElementById('bgi').style.position = 'absolute';
-        document.getElementById('bgi').style.top = '0';
-        document.getElementById('bgi').style.left = '0';
-        document.getElementById('bgi').style.height = '100vh';
-        document.getElementById('bgi').style.width = '100%';
-        document.getElementById('bgi').style.margin = '0';
-    }, [imgData,colorModel])
+        const bgi = document.getElementById('bgi')
+        bgi.style.backgroundImage = `url(${localStorage.getItem('backgroundimg')})`
+        bgi.style.backgroundSize = 'cover';
+        bgi.style.backgroundPosition = 'center';
+        bgi.style.zIndex = '-1';
+        bgi.style.position = 'absolute';
+        bgi.style.top = '0';
+        bgi.style.left = '0';
+        bgi.style.height = '100vh';
+        bgi.style.width = '100%';
+        bgi.style.margin = '0';
+    }, [imgData, colorModel])
     return (
         <div className={style.SettingBackgroundImg}>
-            <div onClick={SettingBackgroundBingImgHandler } className={style.SettingBackgroundImgBing}>使用bing每日壁纸</div>
+            <div onClick={SettingBackgroundBingImgHandler} className={style.SettingBackgroundImgBing}>使用bing每日壁纸</div>
             <form onSubmit={(e) => e.preventDefault()}>
                 <input type='file' onChange={SettingBackgroundImgHandler}></input>
             </form>

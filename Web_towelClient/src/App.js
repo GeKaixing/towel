@@ -40,6 +40,20 @@ export default function App() {
                 case 'dark':
                     body.setAttribute('color-model', `dark`);
                     break;
+                case 'bing':
+                    body.setAttribute('color-model', `bing`);
+                    var bgi = document.getElementById('bgi')
+                    bgi.style.backgroundImage = `url(${localStorage.getItem('backgroundimg')})`
+                    bgi.style.backgroundSize = 'cover';
+                    bgi.style.backgroundPosition = 'center';
+                    bgi.style.zIndex = '-1';
+                    bgi.style.position = 'absolute';
+                    bgi.style.top = '0';
+                    bgi.style.left = '0';
+                    bgi.style.height = '100vh';
+                    bgi.style.width = '100%';
+                    bgi.style.margin = '0';
+                    break;
                 case 'system':
                     var colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;//ture 现在系统处于深色模式
                     colorSchemeQuery ? body.setAttribute('color-model', `dark`) : body.setAttribute('color-model', `light`);
