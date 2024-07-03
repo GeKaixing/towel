@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import style from './SettingAccount.module.css'
 import axios from 'axios';
+import { DatePicker, Space } from 'antd';
 export default function SettingAccount() {
     const [responseData, setResponseData] = useState({})
     const [localStorageData, setLocalStorageData] = useState({});
+    const [isShowBirthday, setisSHowBirthday] = useState(false);
+    const [Birthday, setBirthday] = useState('');
 
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
@@ -15,13 +18,12 @@ export default function SettingAccount() {
                     'Authorization': `Bearer ${localStorageData.jwt}`,
                 }
             }).then(response => {
-                console.log(response.data)
                 setResponseData(response.data)
             }).catch((error) => {
                 console.log(error)
             })
         }
-    }, [])
+    }, [Birthday])
     const ModifyingaUserName = () => {
         const newusername = prompt('你的新名字:');
         if (newusername !== null) {
@@ -77,10 +79,37 @@ export default function SettingAccount() {
                 console.log(error)
             })
         }
-
+    }
+    const ModifyingiBirthday = () => {
+        setisSHowBirthday(() => !isShowBirthday)
+    }
+    const onChangeHandler = (date, dateString) => {
+        setBirthday(dateString)
+    };
+    const ModifyingiSendBirthday = () => {
+        if (Birthday) {
+            axios({
+                url: 'http://127.0.0.1:4000/modifyingbirthday',
+                method: 'post',
+                data: {
+                    data: {
+                        birthday: Birthday,
+                        id: localStorageData.userid
+                    }
+                },
+                headers: {
+                    'Authorization': `Bearer ${localStorageData.jwt}`,
+                }
+            }).then(() => {
+                setisSHowBirthday(() => !isShowBirthday)
+            }).catch((error) => {
+                alert('唉')
+                console.log(error)
+            })
+        }
     }
     return (
-        <div className={style.SettingAccount}>
+        <div className={style.SettingAccount} style={{ position: "relative" }}>
             <img src={responseData.headimg} className={style.headimg}></img>
             <p><strong>id</strong></p>
             <p>{responseData._id}</p>
@@ -90,8 +119,14 @@ export default function SettingAccount() {
             <p>{responseData.email}</p>
             <p><strong>电话号码</strong><button onClick={ModifyingiIphoneNumber}>修改</button></p>
             <p>{responseData.phoneNumber === undefined ? '无' : responseData.phoneNumber}</p>
-            <p><strong>生日</strong></p>
-            <p>{responseData.birthday === undefined ? '无' : responseData.birthday}</p>
+            <p><strong>生日</strong><button onClick={ModifyingiBirthday}>修改</button></p>
+            <p>{Birthday ? Birthday : responseData.birthday === undefined ? '无' : responseData.birthday}</p>
+            {isShowBirthday ? <div style={{ position: 'absolute' }}>
+                <Space direction="vertical" locale='zh-CN' placement="topLeft" >
+                    <DatePicker onChange={onChangeHandler} locale={'zh-CN'} placement="topLeft" />
+                </Space>
+                <br />
+                <button onClick={ModifyingiSendBirthday}>确认</button> </div> : null}
         </div>
     )
 }
