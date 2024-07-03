@@ -2,18 +2,21 @@
     display: flex;
 }
 
-.userName {
-    font-size: 14px;
-    font-weight: bold;
-}
-
 .headimg {
-
     width: 40px;
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
+    flex-shrink: 0; /* 防止图片缩小 */
 }
+
+.userName {
+    font-size: 14px;
+    font-weight: bold;
+    flex-grow: 1; /* 允许用户名部分占据剩余空间 */
+}
+
+
 
 .leftplace {
     height: 100%;
@@ -100,7 +103,7 @@ img {
     }
 
     .link {
-        width: 75%;
+        width: 100%;
     }
 
 }

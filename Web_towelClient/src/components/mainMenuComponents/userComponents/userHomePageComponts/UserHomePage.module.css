@@ -1,9 +1,10 @@
-.userhomepageHeadimgAndName{    
+.userhomepageHeadimgAndName {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
 }
+
 .userhomepage {
     width: 600px;
     display: flex;
@@ -13,11 +14,13 @@
 .userhomepageHead {
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid black;
     padding: 8px;
 }
+
+
 
 .headimg {
     width: 3rem;
@@ -37,11 +40,12 @@
     font-size: 20px;
     color: var(--fontColor);
 }
-.name:hover{
+
+.name:hover {
     font-weight: bold;
     text-decoration: underline rgba(248, 196, 134, 1);
-    text-decoration-thickness:3px;
-   
+    text-decoration-thickness: 3px;
+
 }
 
 .userhistory {
@@ -50,12 +54,14 @@
     cursor: pointer;
     color: var(--fontColor);
 }
-.userhistory>div:hover{
+
+.userhistory>div:hover {
     text-decoration: underline rgba(248, 196, 134, 1);
-    text-decoration-thickness:3px;
+    text-decoration-thickness: 3px;
     font-weight: bold;
-    cursor: pointer, 
+    cursor: pointer,
 }
+
 .loginout {
     color: red;
 }

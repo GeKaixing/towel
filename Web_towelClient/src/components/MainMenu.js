@@ -62,20 +62,23 @@ export default function MainMenu() {
               <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
             </div>
         }
-        <Link className={style.link} to="/"> <img src={Howshowicon1.home().path} ></img>{width < 750 ? null : "主页"}</Link>
-        <Link className={style.link} to="/about"><img src={Howshowicon2.howshowicon('/about').path}></img>{width < 750 ? null : "关于"}</Link>
-        <Link className={style.link} to='/post' ><img src={Howshowicon4.howshowicon('/post').path}></img>{width < 750 ? null : "发帖"}</Link>
+        <Link className={style.link} to="/"> <img src={Howshowicon1.home().path} ></img>{width < 1000 ? null : "主页"}</Link>
+        <Link className={style.link} to="/about"><img src={Howshowicon2.howshowicon('/about').path}></img>{width < 1000 ? null : "关于"}</Link>
+        <Link className={style.link} to='/post' ><img src={Howshowicon4.howshowicon('/post').path}></img>{width < 1000 ? null : "发帖"}</Link>
         <Link className={style.link} to='/Message' >
           <div style={{ display: 'flex', flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-            <img src={Howshowicon3.howshowicon('/Message').path}></img>{width < 750 ? null : "消息"}
+            <img src={Howshowicon3.howshowicon('/Message').path}></img>{width < 1000 ? null : "消息"}
             <div>{noReadNumber}</div>
           </div></Link>
-          {width < 750 ? null :<Link className={style.link} to='/setting' ><img src={Howshowicon5.howshowicon('/setting').path}></img> 设置</Link>}
-        {localStorageData.jwt ? width < 1000 ? <Link className={`${style.link} ${style.headimgName}`} to={`/userhomepage/${localStorageData.userid}`}><img className={style.headimg} src={localStorageData.headimg}></img><span className={style.userName}>{localStorageData.username}</span></Link> : null : null}
-        {localStorageData.jwt ? null : <Link className={style.link} to="/login">{width < 750 ? null : "登录"}</Link>}
+        {width < 750 ? null : <Link className={style.link} to='/setting' ><img src={Howshowicon5.howshowicon('/setting').path}></img> {width < 1000 ? null : "设置"}</Link>}
+        {localStorageData.jwt ?
+          width < 1000 ? <Link className={`${style.link} ${style.headimgName}`} to={`/userhomepage/${localStorageData.userid}`}>
+            <img className={style.headimg} src={localStorageData.headimg}></img>
+            <span className={style.userName}>{localStorageData.username}</span></Link> : null : null}
+        {localStorageData.jwt ? null : <Link className={style.link} to="/login">{"登录"}</Link>}
       </div>
       {/* 脱离文档流，父元素坍塌问题 */}
-   {/*    {
+      {/*    {
         width < 750 ? null :
           <div className={style.leftplace}></div>
       } */}
