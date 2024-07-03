@@ -127,4 +127,20 @@ router.post('/modifyingiphoneNumber', async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 });
+router.post('/modifyingbirthday', async (req, res) => {
+    try {
+        const { birthday, id } = req.body.data
+        const userAndemail = await USERS.findOne({ _id:id });//false
+        if (!userAndemail) { return res.status(400).json({ meassge: '找不到账号', status: false }) }
+        const data = await USERS.findOneAndUpdate(
+            { _id: id },
+            { birthday: birthday },
+            { new: true, useFindAndModify: false } // 确保返回更新后的文档，并使用新的 findOneAndUpdate 行为
+        );
+        res.status(200).send(data);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+});
 module.exports = router;
