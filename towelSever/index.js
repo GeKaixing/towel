@@ -42,7 +42,7 @@ socketio(io)
 const authMiddleware = require('./src/auth/index')
 const commonRoute = require('./src/commonRoute/index')
 const authRoute = require('./src/authRoute/index')
-const userRoute =require('./src/authRoute/userRoute/userRouter')
+const userRoute = require('./src/authRoute/userRoute/userRouter')
 // common API
 const axios = require('axios');
 app.get('/HPImageArchive', async (req, res) => {
@@ -88,6 +88,36 @@ app.post('/upload/:id', upload, async (req, res) => {
         )
         const datatosave = await data.save();
         res.status(200).send(datatosave)
+    } catch (error) {
+        res.status(500).json({ massage: error.massage })
+    }
+})
+//上传用户头像
+app.post('/uploadHeadImg/:id', upload, async (req, res) => {
+    try {
+        const { targetId, staticType } = Object.assign({}, req.body)
+        const userid = req.params.id
+       
+        const userAndemail = await USERS.findOne({ _id: userid });//false
+        if (!userAndemail) { return res.status(400).json({ meassge: '找不到账号', status: false }) }
+
+        const uuid = crypto.randomUUID()
+        const filepath = uuid + "_" + (req.file.originalname)
+        fs.renameSync(req.file.path, `upload/${filepath}`);
+        const data = new STATICDATAS({
+            staticType: staticType,
+            targetId: new mongoose.Types.ObjectId(targetId),
+            staticUrl: `http://127.0.0.1:4000/${filepath}`,
+            userId: new mongoose.Types.ObjectId(userid)
+        }
+        )
+        await data.save();
+        const datas = await USERS.findOneAndUpdate(
+            { _id: userid },
+            { headimg: `http://127.0.0.1:4000/${filepath}` },
+            { new: true, useFindAndModify: false } // 确保返回更新后的文档，并使用新的 findOneAndUpdate 行为
+        );
+        res.status(200).send(datas.headimg)
     } catch (error) {
         res.status(500).json({ massage: error.massage })
     }
