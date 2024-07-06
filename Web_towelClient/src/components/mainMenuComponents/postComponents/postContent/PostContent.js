@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import PostInput from './PostInput';
 import style from './PostContent.module.css'
 import axios from 'axios';
@@ -7,6 +7,7 @@ export default function Content() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
     const [localStorageData, setLocalStorageData] = useState({});
+    const navigate = useNavigate()
     //获取当前路由
     const { pathname, state } = useLocation()
     const [mouseOver, setMouseOver] = useState({
@@ -112,56 +113,63 @@ export default function Content() {
     const postIcon11 = new PostIcon('/static/postIconPitchUp/赞.svg')
     const postIcon33 = new PostIcon('/static/postIconPitchUp/星星.svg')
     const postIcon44 = new PostIcon('/static/postIconPitchUp/分享.svg')
+
     return (
-        <div className={style.commentpage}>
-            <div className={style.message}>
-                <div className={style.messagebox}>
-                    <div className={style.thisshowname}>
-                        <img src={contentdata.headimg} style={{
-                            width: '40px',
-                            height: '40px',
-                            borderRadius: '50%',
-                            overflow: "hidden",
-                        }}></img>
-                        <Link className={style.handname} >{contentdata.name}</Link>
-                    </div>
-
-                    <div className={style.thisshowcontent}>
-                        {contentdata.content}
-                        {(contentdata.postImages?.length === 0 || contentdata.postImages === '') ? null : (<img src={contentdata.postImages} className={style.img}></img>)}
-                    </div>
-                    <div className={style.thisshowbottom} onClick={likehandle}>
-                        <div className={style.likesIcon}
-                            onMouseEnter={() => setMouseOver({ ...mouseOver, like: true })}
-                            onMouseLeave={() => setMouseOver({ ...mouseOver, like: false })}
-                        >
-                            {mouseOver.like ?
-                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon11.path} alt='点赞'></img>
-                                :
-                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>}
-                            {contentdata.likes}
+        <div style={{ display: 'flex', flexDirection: 'column', }}>
+            <div className={style.H5header} onClick={() => navigate(-1)}>
+                <button>{"<"}</button>
+                <div>帖子</div>
+            </div>
+            <div className={style.commentpage}>
+                <div className={style.message}>
+                    <div className={style.messagebox}>
+                        <div className={style.thisshowname}>
+                            <img src={contentdata.headimg} style={{
+                                width: '40px',
+                                height: '40px',
+                                borderRadius: '50%',
+                                overflow: "hidden",
+                            }}></img>
+                            <Link className={style.handname} >{contentdata.name}</Link>
                         </div>
-                        <div className={style.star} onClick={favoritehandler}
-                            onMouseEnter={() => setMouseOver({ ...mouseOver, star: true })}
-                            onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
-                            {
-                                mouseOver.star ?
-                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon33.path} alt='收藏'></img>
+
+                        <div className={style.thisshowcontent}>
+                            {contentdata.content}
+                            {(contentdata.postImages?.length === 0 || contentdata.postImages === '') ? null : (<img src={contentdata.postImages} className={style.img}></img>)}
+                        </div>
+                        <div className={style.thisshowbottom} onClick={likehandle}>
+                            <div className={style.likesIcon}
+                                onMouseEnter={() => setMouseOver({ ...mouseOver, like: true })}
+                                onMouseLeave={() => setMouseOver({ ...mouseOver, like: false })}
+                            >
+                                {mouseOver.like ?
+                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon11.path} alt='点赞'></img>
                                     :
-                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon3.path} alt='收藏'></img>
+                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>}
+                                {contentdata.likes}
+                            </div>
+                            <div className={style.star} onClick={favoritehandler}
+                                onMouseEnter={() => setMouseOver({ ...mouseOver, star: true })}
+                                onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
+                                {
+                                    mouseOver.star ?
+                                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon33.path} alt='收藏'></img>
+                                        :
+                                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon3.path} alt='收藏'></img>
 
-                            }{contentdata.favorites}
+                                }{contentdata.favorites}
+                            </div>
+                            <div className={style.share} onClick={sharehandler}
+                                onMouseEnter={() => setMouseOver({ ...mouseOver, share: true })}
+                                onMouseLeave={() => setMouseOver({ ...mouseOver, share: false })}>
+                                {mouseOver.share ?
+                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon44.path} alt='分享'></img>
+                                    :
+                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon4.path} alt='分享'></img>
+                                } </div>
                         </div>
-                        <div className={style.share} onClick={sharehandler}
-                            onMouseEnter={() => setMouseOver({ ...mouseOver, share: true })}
-                            onMouseLeave={() => setMouseOver({ ...mouseOver, share: false })}>
-                            {mouseOver.share ?
-                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon44.path} alt='分享'></img>
-                                :
-                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon4.path} alt='分享'></img>
-                            } </div>
+                        <PostInput postId={contentdata.id}></PostInput>
                     </div>
-                    <PostInput postId={contentdata.id}></PostInput>
                 </div>
             </div>
         </div>
