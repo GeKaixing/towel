@@ -42,7 +42,7 @@ export default function UserHomePage() {
           </div>
           <p className={style.name}> {localStorageData.username}</p>
         </div>
-        <div style={{display:'flex',gap:'8px'}}>
+        <div style={{ display: 'flex', gap: '8px' }}>
           {window.innerWidth < 750 ? <div onClick={() => Navigate("/setting")}>设置</div> : null}
           <div className={style.loginout} onClick={closeAnAccountHanlder}>登出</div>
         </div>

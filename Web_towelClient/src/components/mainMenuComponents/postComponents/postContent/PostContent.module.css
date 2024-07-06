@@ -75,3 +75,35 @@
 .star {
     display: flex;
 }
+
+.H5header {
+    display: none;
+}
+
+@media screen and (max-width:750px) {
+    .H5header{
+        display: block;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+    }
+    .H5header>button{
+        background-origin: gray;    
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: none;
+        font-size: 20px;
+        flex-wrap: nowrap;
+    }
+    .H5header:nth-child(2){
+        height: 20px;
+        width: 20px;
+        color: aqua;
+        border-radius: 50%;
+        text-orientation: sideways;
+        flex-wrap: nowrap;
+    }
+}
