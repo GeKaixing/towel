@@ -8,6 +8,7 @@ export default function SettingAccount() {
     const [isShowBirthday, setisSHowBirthday] = useState(false);
     const [Birthday, setBirthday] = useState('');
 
+
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
             const localStorageData = JSON.parse(localStorage.getItem('loginData'));
@@ -108,9 +109,57 @@ export default function SettingAccount() {
             })
         }
     }
+    const upImageApi = async (e) => {
+        e.preventDefault();
+        try {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function () { };
+            reader.readAsDataURL(file);
+            await ModifyingaUpLoadNewHeadImg(file);
+        } catch (error) { console.log(error) }
+
+    };
+    const ModifyingaUpLoadNewHeadImg = async (file) => {
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('targetId', localStorageData.userid);
+            formData.append('staticType', 'add');
+            const data = await axios({
+                url: `http://127.0.0.1:4000/uploadHeadImg/${localStorageData.userid}`,
+                method: 'post',
+                data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${localStorageData.jwt}`,
+                }
+            });
+            if (data.data) {
+                const oldData = JSON.parse(localStorage.getItem('loginData'));
+                oldData.headimg = data.data;
+                const newData = JSON.stringify(oldData)
+                localStorage.setItem('loginData', newData);
+                window.location.href = '/'
+            } else {
+                alert('上传失败')
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div className={style.SettingAccount} style={{ position: "relative" }}>
-            <img src={responseData.headimg} className={style.headimg}></img>
+            <p style={{ display: 'flex', alignItems: "center" }}>
+                <img src={responseData.headimg} className={style.headimg}></img>
+                <label className={style.uploadNewHeadImg} htmlFor='uploadNewHeadImg' title='修改' >
+                    修改
+                </label>
+                <input type='file' id='uploadNewHeadImg' onChange={upImageApi} style={{ display: "none" }}></input>
+            </p>
+
             <p><strong>id</strong></p>
             <p>{responseData._id}</p>
             <p><strong>用户名</strong><button onClick={ModifyingaUserName}>修改</button></p>
