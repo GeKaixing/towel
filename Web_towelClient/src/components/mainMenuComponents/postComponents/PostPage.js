@@ -1,15 +1,14 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Post from './Post'
 import propTypes from 'prop-types'
-export default function Hompage({ userarticles = [], reloadUserArticle=false, setreloadUserArticle}) {
+import {getPost} from '../../../services/post/post'
+export default function PostPage({ userarticles = [], reloadUserArticle=false, setreloadUserArticle}) {
   const { pathname } = useLocation()
   const [articles, setarticles] = useState([])
   const [reload, setLoad] = useState(false)
   useEffect(() => {
-    axios.get('http://127.0.0.1:4000/post')
-      .then((response) => {
+    getPost() .then((response) => {
         setarticles(response.data)
       })
       .catch((error) => {
@@ -65,7 +64,7 @@ export default function Hompage({ userarticles = [], reloadUserArticle=false, se
     </div >
   )
 }
-Hompage.propTypes = {
+PostPage.propTypes = {
   userarticles: propTypes.array,
   reloadUserArticle: propTypes.bool,
   setreloadUserArticle: propTypes.func,

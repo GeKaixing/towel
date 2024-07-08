@@ -22,7 +22,6 @@ export default function Login() {
                     }
                 }
             })
-            console.log(reponseData.data)
             const data = JSON.stringify(reponseData.data)
             localStorage.setItem('loginData', data)
             setValuename('')

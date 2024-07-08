@@ -3,6 +3,7 @@ const ObjectID = require('mongodb').ObjectId;
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const {
     POSTS,
     COMMENTS,

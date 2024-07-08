@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import style from './SettingBackground.module.css'
-import { selectLightorDarkContext } from '../../../App'
+import { selectLightorDarkContext } from '../../../store/selectLightorDark'
 import { useNavigate } from "react-router-dom";
 
 export default function SettingBackground() {

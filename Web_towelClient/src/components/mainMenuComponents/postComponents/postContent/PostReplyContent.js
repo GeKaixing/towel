@@ -1,11 +1,12 @@
-import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import style from './PostReplyContent.module.css'
 import { useLocation, useNavigate } from 'react-router'
 import propTypes from 'prop-types'
+import useLocalStorage from '../../../../hooks/useLocaStorage'
+import { getAllreply, getOnePost, postDelReply } from '../../../../services/post/post'
 
 export default function Replycontent({ reLoad, commentid, userReplyData, setInputData, reloadUserReply, setreloadUserReplys }) {
-    const [localStorageData, setLocalStorageData] = useState({})
+    const [localStorageData] = useLocalStorage();
     const [responseData, setResponseData] = useState([])
     const [reLoadPostReply, setReLoadPostReply] = useState(false)
     const [showOptions, setShowOptions] = useState('')
@@ -14,13 +15,8 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (localStorage.getItem('loginData')) {
-            setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
-        }
         if (useRoutes.pathname.split('/')[1] === 'homepage') {
-            axios({
-                url: `http://127.0.0.1:4000/allreply/${commentid}`
-            }).then((response) => {
+            getAllreply(commentid).then((response) => {
                 setResponseData(response.data)
             }).catch((error) => {
                 console.log(error)
@@ -45,14 +41,7 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
     }, []);
 
     const deletReplyHandler = (replyId) => {
-        axios({
-            url: `http://127.0.0.1:4000/delreply/${replyId}`,
-            method: "delete",
-            headers: {
-                'Authorization': `Bearer ${localStorageData.jwt}`
-            }
-        })
-            .then(() => {
+        postDelReply(replyId).then(() => {
                 setReLoadPostReply(!reLoadPostReply)
                 setreloadUserReplys(!reloadUserReply)
             })
@@ -68,11 +57,11 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
     }
 
     const getOnePostApi = (POSEID) => {
-        axios({
+/*         axios({
             url: `http://127.0.0.1:4000/findonepost/${POSEID}`,
             headers: { 'Authorization': `Bearer ${localStorageData.jwt}` }
-        })
-            .then((response) => {
+        }) */
+        getOnePost(POSEID).then((response) => {
                 const data = JSON.stringify({ ...response.data, from: 'user' })
                 navigate(`/homepage/${POSEID}`, { state: data });
             })
@@ -114,8 +103,8 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
 Replycontent.propTypes = {
     reLoad: propTypes.bool.isRequired,
     commentid: propTypes.string.isRequired,
-    userReplyData: propTypes.object.isRequired,
-    setInputData: propTypes.func.isRequired,
-    reloadUserReply: propTypes.bool.isRequired,
-    setreloadUserReplys: propTypes.func.isRequired
+    userReplyData: propTypes.object,
+    setInputData: propTypes.func,
+    reloadUserReply: propTypes.bool,
+    setreloadUserReplys: propTypes.func
 }

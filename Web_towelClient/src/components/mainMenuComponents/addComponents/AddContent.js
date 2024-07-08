@@ -1,11 +1,13 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import style from './AddContent.module.css';
+import useLocalStorage from '../../../hooks/useLocaStorage';
+import { postAddPost, postUpLoad } from '../../../services/add/add';
 
 
 export default function Portal() {
-    const loginDataParse = JSON.parse(localStorage.getItem('loginData'));
     const [textareaData, settextareaData] = useState('');
+    const [localStorageData] = useLocalStorage()
+    const loginDataParse = localStorageData
     const [showImageData, setShowImageData] = useState('');
     const [responseImageData, setResponseImageData] = useState('')
     const [isHovered, setIsHovered] = useState(false);
@@ -30,17 +32,12 @@ export default function Portal() {
             formData.append('file', file);
             formData.append('targetId', loginDataParse.userid);
             formData.append('staticType', 'add');
-            const response = await axios({
-                url: `http://127.0.0.1:4000/upload/${loginDataParse.userid}`,
-                method: 'post',
-                data: formData,
+            const response = await postUpLoad(loginDataParse.userid, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${loginDataParse.jwt}`,
                 }
-            });
+            })
             setResponseImageData(response.data.staticUrl);
-
         } catch (error) {
             console.log(error);
         }
@@ -49,26 +46,19 @@ export default function Portal() {
         try {
             if (textareaData) {
                 const loginDataParse = JSON.parse(localStorage.getItem('loginData'));
-                await axios({
-                    url: `http://127.0.0.1:4000/addpost`,
-                    method: 'post',
+                await postAddPost({
                     data: {
-                        data: {
-                            UserId: loginDataParse.userid,
-                            Text: textareaData,
-                            Image: responseImageData,
-                            Share: 0,
-                            Like: 0,
-                            Comment: 0
-                        }
-                    },
-                    headers: {
-                        'Authorization': `Bearer ${loginDataParse.jwt}`,
+                        UserId: loginDataParse.userid,
+                        Text: textareaData,
+                        Image: responseImageData,
+                        Share: 0,
+                        Like: 0,
+                        Comment: 0
                     }
-                });
+                })
                 settextareaData('')
                 setShowImageData('')
-            }else{
+            } else {
                 alert('不要空哦')
             }
 

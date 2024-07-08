@@ -1,16 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import style from './MainMenu.module.css'
-import { noReadNumbers } from '../context/noReadNumbers';
+import { noReadNumbers } from '../store/noReadNumbers';
+import useLocaStorage from '../hooks/useLocaStorage'
 export default function MainMenu() {
   const [width, setwidth] = useState(window.innerWidth)
-  const [localStorageData, setLocalStorageData] = useState({})
+  const [localStorageData] = useLocaStorage()
   const { noReadNumber } = useContext(noReadNumbers)
   const router = useLocation()
   useEffect(() => {
-    if (localStorage.getItem('loginData')) {
-      setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
-    }
     const handlerResize = () => {
       setwidth(window.innerWidth)
     }
