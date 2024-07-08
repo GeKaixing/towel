@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import style from './Message.module.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router';
-import { noReadNumbers } from '../../../context/noReadNumbers';
-import { MessageResponseDataContext } from '../../../App'
+import { noReadNumbers } from '../../../store/noReadNumbers';
+import { MessageResponseDataContext } from '../../../store/MessageResponseData'
 export default function Message() {
   const { MessageResponseData: responseData, setMessageResponseData: setResponseData } = useContext(MessageResponseDataContext)//responseData,setResponseData
   const [localStorageData, setLocalStorageData] = useState({})

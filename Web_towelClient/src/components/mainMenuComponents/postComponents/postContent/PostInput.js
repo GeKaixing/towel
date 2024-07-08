@@ -1,40 +1,28 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+
+import React, {useState } from 'react'
 import PostComment from './PostComment'
 import style from './PostInput.module.css'
 import { useNavigate } from 'react-router'
 import { getSocket } from '../../../../socket/socket'
 import propTypes from 'prop-types'
+import { postAddPostComment, postAddPostReply } from '../../../../services/post/post'
+import useLocalStorage from '../../../../hooks/useLocaStorage'
 
-export default function Comment({ postId }) {
+export default function PostInput({ postId }) {
     const navigate = useNavigate()
-    const [localStorageData, setLocalStorageData] = useState({})
+    const [localStorageData] =  useLocalStorage()
+   
     const [inputData, setInputData] = useState('')//get the input value
     const [inputReplyData, setInputReplyData] = useState({}) //get thie input valur that who is @ value
     const [reLoad, seReLoad] = useState(false)//使相关了的get请求刷新
-    useEffect(() => {
-        if (localStorage.getItem('loginData')) {
-            setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
-        }
-
-    }, [])
     function sendInputData() {
-        axios({
-            url: `http://127.0.0.1:4000/addcomment/${postId}`,
-            method: 'post',
-            headers: {
-                'Authorization': `Bearer ${localStorageData.jwt}`
-            },
-            data: {
-                data: {
-                    postId: postId,
-                    commentUserId: localStorageData.userid,
-                    Text: inputData,
-                    Image: null,
-                    Like: 0
-                }
-            }
-        }).then(() => {
+        postAddPostComment(postId,{ data: {
+            postId: postId,
+            commentUserId: localStorageData.userid,
+            Text: inputData,
+            Image: null,
+            Like: 0
+        }}).then(() => {
             setInputData('')
             seReLoad(!reLoad)
         }).catch((error) => {
@@ -56,25 +44,16 @@ export default function Comment({ postId }) {
         }
     }
     const sendInputReplyDataApi = () => {
-        axios({
-            url: `http://127.0.0.1:4000/addreply`,
-            method: 'post',
-            headers: {
-                'Authorization': `Bearer ${localStorageData.jwt}`
-            },
-            data: {
-                data: {
-                    postId: postId,
-                    commentId: inputReplyData.commentid,
-                    replyUserId: localStorageData.userid,
-                    replyText: inputData,
-                    replyToreplyUserId: inputReplyData.replyToreplyUserId || null,
-                    replyImages: null,
-                    replyLike: 0,
-                    replyComment: null
-                }
-            }
-        }).then(() => {
+        postAddPostReply({ data: {
+            postId: postId,
+            commentId: inputReplyData.commentid,
+            replyUserId: localStorageData.userid,
+            replyText: inputData,
+            replyToreplyUserId: inputReplyData.replyToreplyUserId || null,
+            replyImages: null,
+            replyLike: 0,
+            replyComment: null
+        }}).then(() => {
             const socket = getSocket()
             if (inputReplyData.replyToreplyUserId) {
                 console.log(inputReplyData.replyToreplyUserId)
@@ -104,6 +83,6 @@ export default function Comment({ postId }) {
 
     )
 }
-Comment.propTypes={
+PostInput.propTypes={
     postId:propTypes.string
 }

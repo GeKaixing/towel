@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const ObjectID = require('mongodb').ObjectId;
-
+const mongoose = require('mongoose');
 const {
     POSTS,
     COMMENTS,
@@ -434,11 +434,13 @@ router.delete('/delreply/:id', async (req, res) => {
       参数2：类型
       返回值：点赞api
   */
+
 const likeRouter = function (url, targetType) {
     const url_value = url;
     const targetType_value = targetType;
     router.post(url_value, async (req, res) => {
         try {
+
             const commentId = req.params.id;
             const userId = req.body.data.userId;
             const existingLike = await LIKES.findOne({

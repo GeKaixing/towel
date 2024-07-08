@@ -1,12 +1,13 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import style from './PostComment.module.css';
 import PostCommentButton from './PostCommentButton';
 import { useLocation, useNavigate } from 'react-router';
 import propTypes from 'prop-types'
+import useLocalStorage from '../../../../hooks/useLocaStorage';
+import { getComment, getOnePost, postDelComment } from '../../../../services/post/post';
 export default function PostComment({ postId, setInputData, reLoad, userCommentData, setreloadUserlikes, reloadUserlikes }) {
     const [commentdata, setCommentData] = useState([]);
-    const [localStorageData, setLocalStorageData] = useState({});
+    const [localStorageData] = useLocalStorage();
     const [showOptions, setShowOptions] = useState('');
     const useRoutes = useLocation();
     const navigate = useNavigate();
@@ -14,10 +15,6 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     const PostCommentRef = useRef(null);
 
     useEffect(() => {
-        const loginData = localStorage.getItem('loginData');
-        if (loginData) {
-            setLocalStorageData(JSON.parse(loginData));
-        }
         if (useRoutes.pathname.split('/')[1] === 'homepage') {
             getCommentApi();
         } else {
@@ -41,7 +38,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     const getCommentApi = async () => {
         try {
             if (postId) {
-                const response = await axios.get(`http://127.0.0.1:4000/comment/${postId}`);
+                const response = await getComment(postId)
                 setCommentData(response.data);
             }
         } catch (error) {
@@ -50,14 +47,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     };
 
     const deleteHandler = (commentId) => {
-        axios({
-            url: `http://127.0.0.1:4000/delcomment/${commentId}`,
-            method: 'delete',
-            headers: {
-                'Authorization': `Bearer ${localStorageData.jwt}`,
-            },
-        })
-            .then(() => {
+        postDelComment(commentId).then(() => {
                 seReLoadPostComment(!reloadPostComment);
                 setreloadUserlikes(!reloadUserlikes);
             })
@@ -71,11 +61,12 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     };
 
     const getOnePostApi = (POSEID) => {
-        axios({
+    /*     axios({
             url: `http://127.0.0.1:4000/findonepost/${POSEID}`,
             headers: { 'Authorization': `Bearer ${localStorageData.jwt}` },
         })
-            .then((response) => {
+             */
+        getOnePost(POSEID).then((response) => {
                 const data = JSON.stringify({ ...response.data, from: 'user' });
                 navigate(`/homepage/${POSEID}`, { state: data });
             })
@@ -95,8 +86,8 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                             </div>
                             <div onClick={() => setInputData('@' + item.users[0].username + ':')}>{item.users[0].username}</div>
                         </div>
-                        <div onClick={() => toggleOptions(item._id)} style={{ position: 'relative',color:'var(--fontColor)' }} ref={PostCommentRef} className='PostCommentRef' >
-                           ...
+                        <div onClick={() => toggleOptions(item._id)} style={{ position: 'relative', color: 'var(--fontColor)' }} ref={PostCommentRef} className='PostCommentRef' >
+                            ...
                             {showOptions === item._id && (
                                 <div className={style.postDeleteBox} onClick={e => e.stopPropagation()} >
                                     {localStorageData.userid === item.users[0]._id ? (

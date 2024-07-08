@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import style from './SettingBackgroundImg.module.css'
 import axios from 'axios'
-import { selectLightorDarkContext } from '../../../../App'
+import { selectLightorDarkContext } from '../../../../store/selectLightorDark'
 export default function SettingBackgroundImg() {
     const [imgData, setImgDate] = useState('')
     const { colorModel, setColorModel } = useContext(selectLightorDarkContext)

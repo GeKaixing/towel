@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import PostInput from './PostInput';
 import style from './PostContent.module.css'
-import axios from 'axios';
-export default function Content() {
+// import axios from 'axios';
+import { postPostfavorite, postPostLike } from '../../../../services/post/post';
+import useLocalStorage from '../../../../hooks/useLocaStorage';
+export default function PostContent() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
-    const [localStorageData, setLocalStorageData] = useState({});
+    const [localStorageData ] =  useLocalStorage()
     const navigate = useNavigate()
     //获取当前路由
     const { pathname, state } = useLocation()
@@ -16,12 +18,9 @@ export default function Content() {
         like: false,
     });
     useEffect(() => {
-        if (localStorage.getItem('loginData')) {
-            setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
-        }
+       
         if (state) {
             const data = JSON.parse(state)
-            console.log(data)
             if (data.from) {
                 const datas = {
                     comments: data[0].postComment,
@@ -42,7 +41,7 @@ export default function Content() {
     // 点赞按钮
     const likehandle = (event) => {
         event.stopPropagation()
-        axios({
+       /*  axios({
             url: `http://127.0.0.1:4000/post/like/${contentdata.id}`,
             method: 'post',
             headers: {
@@ -52,6 +51,11 @@ export default function Content() {
                 data: {
                     userId: localStorageData.userid
                 }
+            }
+        }) */
+        postPostLike(contentdata.id, {
+            data: {
+                userId: localStorageData.userid
             }
         })
             .then((response) => {
@@ -68,7 +72,7 @@ export default function Content() {
     // 更新按钮
     const favoritehandler = (event) => {
         event.stopPropagation()
-        axios({
+      /*   axios({
             url: `http://127.0.0.1:4000/post/favorite/${contentdata.id}`,
             method: 'post',
             headers: {
@@ -78,6 +82,11 @@ export default function Content() {
                 data: {
                     userId: localStorageData.userid
                 }
+            }
+        }) */
+        postPostfavorite(contentdata.id, {
+            data: {
+                userId: localStorageData.userid
             }
         })
             .then((response) => {

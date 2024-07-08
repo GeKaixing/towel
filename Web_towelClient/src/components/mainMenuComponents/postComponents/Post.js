@@ -1,13 +1,14 @@
-import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import style from './Post.module.css'
 import PropTypes from 'prop-types';
+import { postPostLike, deletePost, postPostfavorite } from '../../../services/post/post'
+import useLocalStorage from '../../../hooks/useLocaStorage';
 /* props $ */
 export default function Post(props) {
     /*          根目录的文章           */
     const navigate = useNavigate();
-    const [localStorageData, setLocalStorageData] = useState({});
+    const [localStorageData] = useLocalStorage();
     const postDeleteBox = useRef();
     const [targetID, setTargetID] = useState('');
     const [mouseOver, setMouseOver] = useState({
@@ -17,9 +18,6 @@ export default function Post(props) {
         like: false,
     });
     useEffect(() => {
-        if (localStorage.getItem('loginData')) {
-            setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
-        }
         const handleClick = (e) => {
             if (!(e.target === postDeleteBox.current)) {
                 setTargetID('');
@@ -33,25 +31,18 @@ export default function Post(props) {
     // 点赞按钮
     const likehandle = (event) => {
         event.stopPropagation()
-        axios({
-            url: `http://127.0.0.1:4000/post/like/${props.id}`,
-            method: 'post',
-            headers: {
-                'Authorization': `Bearer ${localStorageData.jwt}`
-            },
+        postPostLike(props.id, {
             data: {
-                data: {
-                    userId: localStorageData.userid
-                }
+                userId: localStorageData.userid
+            }
+        }).then((response) => {
+            console.log(response.data)
+            if (response.status === 201) {
+                props.reload.setLoad(!props.reload.reload)
+            } else if (response.status === 200) {
+                alert(response.data.message)
             }
         })
-            .then((response) => {
-                if (response.status === 201) {
-                    props.reload.setLoad(!props.reload.reload)
-                } else if (response.status === 200) {
-                    alert(response.data.message)
-                }
-            })
             .catch((error) => {
                 console.log(error)
             })
@@ -59,25 +50,18 @@ export default function Post(props) {
     // 更新按钮
     const favoritehandler = (e) => {
         e.stopPropagation()
-        axios({
-            url: `http://127.0.0.1:4000/post/favorite/${props.id}`,
-            method: 'post',
-            headers: {
-                'Authorization': `Bearer ${localStorageData.jwt}`
-            },
+        postPostfavorite(props.id, {
             data: {
-                data: {
-                    userId: localStorageData.userid
-                }
+                userId: localStorageData.userid
+            }
+        }).then((response) => {
+
+            if (response.status === 201) {
+                props.reload.setLoad(!props.reload.reload)
+            } else if (response.status === 200) {
+                alert(response.data.message)
             }
         })
-            .then((response) => {
-                if (response.status === 201) {
-                    props.reload.setLoad(!props.reload.reload)
-                } else if (response.status === 200) {
-                    alert(response.data.message)
-                }
-            })
             .catch((error) => {
                 console.log(error)
             })
@@ -101,14 +85,7 @@ export default function Post(props) {
     }
     const deletePostApi = () => {
         if (localStorageData.userid === props.postUserId) {
-            axios({
-                url: `http://127.0.0.1:4000/delpost/${props.id}`,
-                method: 'delete',
-                headers: {
-                    'Authorization': `Bearer ${localStorageData.jwt}`
-                }
-            }).then((res) => {
-                console.log(res.data)
+            deletePost(props.id).then(() => {
                 props.reload.setLoad(!props.reload.reload)
                 props.setreloadUserArticle(!props.reloadUserArticle)
             }).catch((error) => {
@@ -149,7 +126,7 @@ export default function Post(props) {
                         </div>
                         <Link className={style.handname}>{props.name}</Link>
                     </div>
-                    <div onClick={() => targetIDHandler(props.id)} style={{ position: "relative" }}className={style.more}>...
+                    <div onClick={() => targetIDHandler(props.id)} style={{ position: "relative" }} className={style.more}>...
                         {targetID === props.id ?
                             <div className={style.postDeleteBox} onClick={e => e.stopPropagation()} ref={postDeleteBox}>
                                 {(localStorageData.userid === props.postUserId) ?

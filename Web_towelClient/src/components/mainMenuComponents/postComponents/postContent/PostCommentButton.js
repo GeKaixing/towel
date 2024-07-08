@@ -1,40 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Replycontent from './PostReplyContent'
 import style from './PostCommentButton.module.css'
 import propTypes from 'prop-types'
-import axios from 'axios'
-export default function PostCommentButton({ likes, commentid, setInputData, commentName, reLoad,reloadPostComment,seReLoadPostComment }) {
+import useLocalStorage from '../../../../hooks/useLocaStorage'
+import { postCommentsLike } from '../../../../services/post/post'
+export default function PostCommentButton({ likes, commentid, setInputData, commentName, reLoad, reloadPostComment, seReLoadPostComment }) {
     /*        回复评论组件        */
     // 控制回复预览的显示
     const [replyshow, isreplyshow] = useState(false)
-    const [localStorageData, setLocalStorageData] = useState({});
+    const [localStorageData] = useLocalStorage();
     const [mouseOver, setMouseOver] = useState(false);
-    useEffect(() => {
-        if (localStorage.getItem('loginData')) {
-            setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
-        }
-    }, [])
     const likeHandle = (event) => {
         event.stopPropagation()
-        axios({
-            url: `http://127.0.0.1:4000/comments/like/${commentid}`,
-            method: 'post',
-            headers: {
-                'Authorization': `Bearer ${localStorageData.jwt}`
-            },
+        postCommentsLike(commentid, {
             data: {
-                data: {
-                    userId: localStorageData.userid
-                }
+                userId: localStorageData.userid
+            }
+        }).then((response) => {
+            if (response.status === 201) {
+                seReLoadPostComment(!reloadPostComment)
+            } else if (response.status === 200) {
+                alert(response.data.message)
             }
         })
-            .then((response) => {
-                if (response.status === 201) {
-                    seReLoadPostComment(!reloadPostComment)
-                } else if (response.status === 200) {
-                    alert(response.data.message)
-                }
-            })
             .catch((error) => {
                 console.log(error)
             })
@@ -79,6 +67,6 @@ PostCommentButton.propTypes = {
     setInputData: propTypes.func.isRequired,
     commentName: propTypes.string.isRequired,
     reLoad: propTypes.bool.isRequired,
-    reloadPostComment:propTypes.bool.isRequired,
-    seReLoadPostComment:propTypes.func.isRequired,
+    reloadPostComment: propTypes.bool.isRequired,
+    seReLoadPostComment: propTypes.func.isRequired,
 }
