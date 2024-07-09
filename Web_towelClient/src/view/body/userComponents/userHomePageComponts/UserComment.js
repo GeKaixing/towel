@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import PostComment from '../../postComponents/postContent/PostComment'
 import PropTypes from 'prop-types'
+import { getUseComment } from '../../../../services/user/user'
 
 export default function Userlikes({ localStorageData }) {
   /*        用户点赞的文章      */
@@ -10,10 +10,7 @@ export default function Userlikes({ localStorageData }) {
   const [reloadUserlikes, setreloadUserlikes] = useState(false)
   //获取loginReducer 切片的用户数据
   useEffect(() => {
-    axios({
-      url: `http://127.0.0.1:4000/getusecomment/${localStorageData.userid}`,
-      headers: { 'Authorization': `Bearer ${localStorageData.jwt}` }
-    })
+    getUseComment(localStorageData.userid)
       .then((response) => {
         setUserCommentData(response.data)
       })

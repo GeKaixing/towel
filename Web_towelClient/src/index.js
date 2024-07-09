@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 document.documentElement.style.fontSize = 100 / 750 + 'vm';
 document.body.setAttribute('color-model', `light`);

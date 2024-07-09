@@ -1,5 +1,6 @@
 .settingContent{
     display: flex;
+    width: 600px;
 }
 .settingleftContent{
     width: 100%;
