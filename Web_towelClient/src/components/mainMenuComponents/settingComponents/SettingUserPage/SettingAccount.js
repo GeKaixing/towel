@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import style from './SettingAccount.module.css'
-import axios from 'axios';
 import { DatePicker, Space } from 'antd';
+import { getUserinfo, postModifyingausername, postModifyingbirthday, postModifyingiphoneNumber } from '../../../../services/setting/setting';
+import useLocalStorage from '../../../../hooks/useLocaStorage';
+import { postUpLoad } from '../../../../services/add/add';
 export default function SettingAccount() {
     const [responseData, setResponseData] = useState({})
-    const [localStorageData, setLocalStorageData] = useState({});
+    const [localStorageData, setLocalStorageData] = useLocalStorage();
     const [isShowBirthday, setisSHowBirthday] = useState(false);
     const [Birthday, setBirthday] = useState('');
 
 
     useEffect(() => {
-        if (localStorage.getItem('loginData')) {
-            const localStorageData = JSON.parse(localStorage.getItem('loginData'));
+        if (localStorageData) {
             setLocalStorageData(localStorageData)
-            axios({
-                url: `http://127.0.0.1:4000/userinfo/${localStorageData.userid}`,
-                headers: {
-                    'Authorization': `Bearer ${localStorageData.jwt}`,
-                }
-            }).then(response => {
+            getUserinfo(localStorageData.userid).then(response => {
                 setResponseData(response.data)
             }).catch((error) => {
                 console.log(error)
@@ -28,17 +24,10 @@ export default function SettingAccount() {
     const ModifyingaUserName = () => {
         const newusername = prompt('你的新名字:');
         if (newusername !== null) {
-            axios({
-                url: 'http://127.0.0.1:4000/modifyingausername',
-                method: 'post',
+            postModifyingausername({
                 data: {
-                    data: {
-                        newusername: newusername,
-                        id: localStorageData.userid
-                    }
-                },
-                headers: {
-                    'Authorization': `Bearer ${localStorageData.jwt}`,
+                    newusername: newusername,
+                    id: localStorageData.userid
                 }
             }).then(() => {
                 const oldData = JSON.parse(localStorage.getItem('loginData'));
@@ -46,9 +35,8 @@ export default function SettingAccount() {
                 const newData = JSON.stringify(oldData)
                 localStorage.setItem('loginData', newData);
                 window.location.href = '/'
-            }).catch((error) => {
+            }).catch(() => {
                 alert('用户名已经存在哦')
-                console.log(error)
             })
         }
 
@@ -56,28 +44,14 @@ export default function SettingAccount() {
     const ModifyingiIphoneNumber = () => {
         const phoneNumber = prompt('你的新电话:');
         if (phoneNumber !== null) {
-            axios({
-                url: 'http://127.0.0.1:4000/modifyingiphoneNumber',
-                method: 'post',
+            postModifyingiphoneNumber({
                 data: {
-                    data: {
-                        phoneNumber: phoneNumber,
-                        id: localStorageData.userid
-                    }
-                },
-                headers: {
-                    'Authorization': `Bearer ${localStorageData.jwt}`,
+                    phoneNumber: phoneNumber,
+                    id: localStorageData.userid
                 }
-            }).then((res) => {/* 
-                const oldData = JSON.parse(localStorage.getItem('loginData'));
-                oldData.username = newusername;
-                const newData = JSON.stringify(oldData)
-                localStorage.setItem('loginData', newData); */
-                console.log(res.data)
-                // window.location.href = '/'
-            }).catch((error) => {
+            }).then(() => {
+            }).catch(() => {
                 alert('唉')
-                console.log(error)
             })
         }
     }
@@ -89,24 +63,17 @@ export default function SettingAccount() {
     };
     const ModifyingiSendBirthday = () => {
         if (Birthday) {
-            axios({
-                url: 'http://127.0.0.1:4000/modifyingbirthday',
-                method: 'post',
+            postModifyingbirthday({
                 data: {
-                    data: {
-                        birthday: Birthday,
-                        id: localStorageData.userid
-                    }
-                },
-                headers: {
-                    'Authorization': `Bearer ${localStorageData.jwt}`,
+                    birthday: Birthday,
+                    id: localStorageData.userid
                 }
-            }).then(() => {
-                setisSHowBirthday(() => !isShowBirthday)
-            }).catch((error) => {
-                alert('唉')
-                console.log(error)
             })
+                .then(() => {
+                    setisSHowBirthday(() => !isShowBirthday)
+                }).catch(() => {
+                    alert('唉')
+                })
         }
     }
     const upImageApi = async (e) => {
@@ -127,15 +94,7 @@ export default function SettingAccount() {
             formData.append('file', file);
             formData.append('targetId', localStorageData.userid);
             formData.append('staticType', 'add');
-            const data = await axios({
-                url: `http://127.0.0.1:4000/uploadHeadImg/${localStorageData.userid}`,
-                method: 'post',
-                data: formData,
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${localStorageData.jwt}`,
-                }
-            });
+            const data = await postUpLoad(localStorageData.userid, { formData })
             if (data.data) {
                 const oldData = JSON.parse(localStorage.getItem('loginData'));
                 oldData.headimg = data.data;

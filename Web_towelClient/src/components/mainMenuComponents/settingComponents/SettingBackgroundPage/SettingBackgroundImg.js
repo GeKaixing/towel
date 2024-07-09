@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import style from './SettingBackgroundImg.module.css'
-import axios from 'axios'
 import { selectLightorDarkContext } from '../../../../store/selectLightorDark'
+import { getHPImageArchive } from '../../../../services/setting/setting'
 export default function SettingBackgroundImg() {
     const [imgData, setImgDate] = useState('')
     const { colorModel, setColorModel } = useContext(selectLightorDarkContext)
@@ -24,14 +24,13 @@ export default function SettingBackgroundImg() {
         }
     }
     const SettingBackgroundBingImgHandler = () => {
-        axios({ url: 'http://127.0.0.1:4000/HPImageArchive' })
-            .then((response) => {
-                setImgDate('https://cn.bing.com' + response.data.images[0].url)
-                localStorage.setItem('backgroundimg', 'https://cn.bing.com' + response.data.images[0].url)
-                localStorage.setItem('color-model', 'bing')
-                localStorage.setItem('background-model', 'bing')
-                setColorModel(!colorModel)
-            })
+        getHPImageArchive().then((response) => {
+            setImgDate('https://cn.bing.com' + response.data.images[0].url)
+            localStorage.setItem('backgroundimg', 'https://cn.bing.com' + response.data.images[0].url)
+            localStorage.setItem('color-model', 'bing')
+            localStorage.setItem('background-model', 'bing')
+            setColorModel(!colorModel)
+        })
             .catch((error) => { console.log(error) })
     }
     useEffect(() => {
