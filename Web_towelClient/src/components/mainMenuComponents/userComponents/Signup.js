@@ -1,36 +1,32 @@
 import React, { useState } from 'react'
 import style from './Signup.module.css'
-import axios from 'axios'
+import { postRegister } from '../../../services/Signup/signup'
+import { getNodemailerRegister } from '../../../services/nodemailerRegister/nodemailerRegister'
 export default function Signup() {
   const [valuename_signup, setValuename_signup] = useState('') // 获取账号
   const [valuepassword_signup, setValuepassword_signup] = useState('')  // 获取密码
   const [inputEmailData, setInputEmailData] = useState('')  // 获取邮箱
   const [verificationcode, setVerificationCode] = useState('')  // 获取验证码
   // 后端返回的设置注册状态
-  const signupstate=true
+  const signupstate = true
   const [isEmail, setEmail] = useState(false)
   const signupApi = async () => {
     if (isEmail && valuename_signup && valuepassword_signup && verificationcode) {
-      axios(
-        {
-          url: 'http://127.0.0.1:4000/register',
-          method: 'post',
-          data: {
-            data: {
-              username: valuename_signup,
-              password: valuepassword_signup,
-              email: inputEmailData,
-              code: verificationcode
-            }
-          }
-        }
-      ).then((response) => {
-        if (response.data.status) {
-          window.location.href = '/login'
-        } else {
-          alert('注册失败')
+      postRegister({
+        data: {
+          username: valuename_signup,
+          password: valuepassword_signup,
+          email: inputEmailData,
+          code: verificationcode
         }
       })
+        .then((response) => {
+          if (response.data.status) {
+            window.location.href = '/login'
+          } else {
+            alert('注册失败')
+          }
+        })
         .catch((error) => console.log(error))
     } else {
       alert('别空着')
@@ -44,15 +40,11 @@ export default function Signup() {
   }
   const sendEmailRegister = () => {
     if (isEmail && valuename_signup && valuepassword_signup) {
-      axios({
-        url: 'http://127.0.0.1:4000/nodemailerRegister',
-        method: 'post',
+      getNodemailerRegister({
         data: {
-          data: {
-            username: valuename_signup,
-            password: valuepassword_signup,
-            email: inputEmailData
-          }
+          username: valuename_signup,
+          password: valuepassword_signup,
+          email: inputEmailData
         }
       }).then(res => {
         if (res.data.code === 201) {

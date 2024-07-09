@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, } from 'react-router-dom'
 import style from './Login.module.css'
-import axios from 'axios'
+import { postLogin } from '../../../services/login/login'
 export default function Login() {
     // 设置账号init
     const [valuename, setValuename] = useState('')
@@ -12,14 +12,10 @@ export default function Login() {
     // uselonginMutation Api
     const LoginApi = async () => {
         try {
-            const reponseData = await axios({
-                url: 'http://127.0.0.1:4000/login',
-                method: 'post',
+            const reponseData = await postLogin({
                 data: {
-                    data: {
-                        password: valuepassword,
-                        username: valuename
-                    }
+                    password: valuepassword,
+                    username: valuename
                 }
             })
             const data = JSON.stringify(reponseData.data)
