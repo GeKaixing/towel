@@ -1,23 +1,24 @@
 import React from 'react'
 import { Routes, Route, } from 'react-router-dom'
 import style from "./Routers.module.css"
-import MainMenu from '../components/MainMenu'
-import About from '../components/mainMenuComponents/About'
-import Post from '../components/mainMenuComponents/Post'
-import Login from '../components/mainMenuComponents/userComponents/Login'
-import Signup from '../components/mainMenuComponents/userComponents/Signup'
-import UserHomePage from '../components/mainMenuComponents/userComponents/userHomePageComponts/UserHomePage'
-import Message from '../components/mainMenuComponents/Message'
-import User from '../components/mainMenuComponents/User'
+import MainMenu from '../view/head/MainMenu'
+import About from '../view/body/aboutComponents/About'
+import Post from '../view/body/postComponents/PostPage'
+import Login from '../view/body/userComponents/Login'
+import Signup from '../view/body/userComponents/Signup'
+import UserHomePage from '../view/body/userComponents/userHomePageComponts/UserHomePage'
+import Message from '../view/body/messageComponents/MessageConten'
+import User from '../view/foot/User'
 import Protected from './Protected'
-import PostContent from '../components/mainMenuComponents/postComponents/postContent/PostContent'
-import Add from '../components/mainMenuComponents/Add'
-import Search from '../components/mainMenuComponents/Search'
-import Setting from '../components/mainMenuComponents/Setting'
-import SettingUserForgetPage from '../components/mainMenuComponents/settingComponents/SettingUserPage/SettingUserForgetPage'
-import SettingBackgroundImg from '../components/mainMenuComponents/settingComponents/SettingBackgroundPage/SettingBackgroundImg'
-import SettingDeactivate from '../components/mainMenuComponents/settingComponents/SettingUserPage/SettingDeactivate'
-import SettingAccount from '../components/mainMenuComponents/settingComponents/SettingUserPage/SettingAccount'
+import PostContent from '../view/body/postComponents/postContent/PostContent'
+import Add from '../view/body/addComponents/AddContent'
+import Search from '../components/Search'
+import Setting from '../view/body/settingComponents/SettingContent'
+import SettingUserForgetPage from '../view/body/settingComponents/SettingUserPage/SettingUserForgetPage'
+import SettingBackgroundImg from '../view/body/settingComponents/SettingBackgroundPage/SettingBackgroundImg'
+import SettingDeactivate from '../view/body/settingComponents/SettingUserPage/SettingDeactivate'
+import SettingAccount from '../view/body/settingComponents/SettingUserPage/SettingAccount'
+import NotRouter from '../components/NotRouter'
 export default function Routers() {
     return (
         <div className={style.layout}>
@@ -41,6 +42,7 @@ export default function Routers() {
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/signup' element={<Signup />}></Route>
                     <Route path='/homepage/:id' element={<PostContent ></PostContent>}></Route>
+                    <Route path="*" element={<NotRouter/>}></Route>
                 </Routes>
             </div>
             <User></User>

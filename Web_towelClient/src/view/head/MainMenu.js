@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import style from './MainMenu.module.css'
-import { noReadNumbers } from '../store/noReadNumbers';
-import useLocaStorage from '../hooks/useLocaStorage'
+import { noReadNumbers } from '../../store/noReadNumbers';
+import useLocaStorage from '../../hooks/useLocaStorage'
 export default function MainMenu() {
   const [width, setwidth] = useState(window.innerWidth)
   const [localStorageData] = useLocaStorage()

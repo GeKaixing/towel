@@ -1,7 +1,7 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Post from '../../postComponents/PostPage'
 import PropTypes from 'prop-types'
+import { getUsePost } from '../../../../services/user/user'
 
 export default function UserArticle({localStorageData }) {
   /*        用户发布的文章      */
@@ -10,10 +10,7 @@ export default function UserArticle({localStorageData }) {
   const [reloadUserArticle,setreloadUserArticle]=useState(false)
   useEffect(() => {
     if (localStorageData.userid) {
-      axios({
-        url: `http://127.0.0.1:4000/getusepost/${localStorageData.userid}`,
-        headers: { 'Authorization': `Bearer ${localStorageData.jwt}` }
-      })
+      getUsePost(localStorageData.userid)
         .then((response) => {
           setuserarticles(response.data)
         })

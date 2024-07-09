@@ -1,4 +1,6 @@
 .message {
+    width: 600px;
+    margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;

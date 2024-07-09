@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Post from './Post'
 import propTypes from 'prop-types'
 import {getPost} from '../../../services/post/post'
+import style from "./postpage.module.css"
 export default function PostPage({ userarticles = [], reloadUserArticle=false, setreloadUserArticle}) {
   const { pathname } = useLocation()
   const [articles, setarticles] = useState([])
@@ -10,13 +11,14 @@ export default function PostPage({ userarticles = [], reloadUserArticle=false, s
   useEffect(() => {
     getPost() .then((response) => {
         setarticles(response.data)
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error.message)
       })
   }, [reload])
   return (
-    <div >
+    <div className={style.postpage}>
       {/* pathname根据是否再/ route判断形式什么组件，当不在"/"显示用户发布的POST */}
       {
         pathname === '/' ?

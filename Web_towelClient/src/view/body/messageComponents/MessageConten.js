@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import style from './Message.module.css'
-import axios from 'axios'
 import { useNavigate } from 'react-router';
 import { noReadNumbers } from '../../../store/noReadNumbers';
 import { MessageResponseDataContext } from '../../../store/MessageResponseData'
+import { deleteNotifications, getNotifications, postReadnotifications } from '../../../services/message/Message';
+import { getOnePost } from '../../../services/post/post';
 export default function Message() {
   const { MessageResponseData: responseData, setMessageResponseData: setResponseData } = useContext(MessageResponseDataContext)//responseData,setResponseData
-  const [localStorageData, setLocalStorageData] = useState({})
   const navigate = useNavigate()
   const { setNoReadNumber } = useContext(noReadNumbers)
   const [targetID, setTargetID] = useState('')
@@ -15,16 +15,9 @@ export default function Message() {
   useEffect(() => {
     let localStorageDatas;
     if (localStorage.getItem('loginData')) {
-      setLocalStorageData(JSON.parse(localStorage.getItem('loginData')))
       localStorageDatas = JSON.parse(localStorage.getItem('loginData'));
-      axios({
-        url: `http://127.0.0.1:4000/notifications/${localStorageDatas.userid}`,
-        headers: {
-          'Authorization': `Bearer ${localStorageDatas.jwt}`
-        },
-      }).then((response) => {
+      getNotifications(localStorageDatas.userid).then((response) => {
         setResponseData(response.data)
-        console.log(response.data)
         const filterData = response.data.filter((item) => {
           return item.read === false
         })
@@ -48,26 +41,15 @@ export default function Message() {
     };
   }, []);
   const getOnePostApi = (POSEID, id, read) => {
-    axios({
-      url: `http://127.0.0.1:4000/findonepost/${POSEID}`,
-      headers: { 'Authorization': `Bearer ${localStorageData.jwt}` }
+    getOnePost(POSEID).then((response) => {
+      const data = JSON.stringify({ ...response.data, from: 'user' })
+      navigate(`/homepage/${POSEID}`, { state: data });
+      if (!read) { readnotificationsApi(id) }
     })
-      .then((response) => {
-        const data = JSON.stringify({ ...response.data, from: 'user' })
-        navigate(`/homepage/${POSEID}`, { state: data });
-        if (!read) { readnotificationsApi(id) }
-      })
       .catch((error) => { console.log(error) })
   }
   const readnotificationsApi = (id) => {
-    axios({
-      url: `http://127.0.0.1:4000/readnotifications/${id}`,
-      method: 'post',
-      headers: {
-        'Authorization': `Bearer ${localStorageData.jwt}`
-      }
-    }).then(response => {
-      console.log(response.data)
+    postReadnotifications(id).then(() => {
     }).catch((error) => {
       console.log(error)
     })
@@ -80,14 +62,7 @@ export default function Message() {
     }
   }
   const deletReplyHandler = (Id) => {
-    axios({
-      url: `http://127.0.0.1:4000/delnotifications/${Id}   `,
-      method: "delete",
-      headers: {
-        'Authorization': `Bearer ${localStorageData.jwt}`
-      }
-    })
-      .then(() => {
+    deleteNotifications(Id) .then(() => {
         setReLoadNotifications(!reLoadnotifications)
       })
       .catch((error) => { console.log(error) })

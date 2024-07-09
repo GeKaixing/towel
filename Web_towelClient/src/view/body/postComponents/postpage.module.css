@@ -1,8 +1,8 @@
-.home{
-width:600px
+.postpage{
+    width: 600px;
 }
 @media (max-width:1000px) {
-    .home{
+    .messagebigbox{
         width:100%;
         display: flex;
         justify-content: center;
