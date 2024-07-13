@@ -10,8 +10,8 @@ export const postPostfavorite=(id,data)=>{
    return auth({ url: `post/favorite/${id}`,data})
 }
 //删除文章
-export const deletePost=(id,data)=>{
-   return auth({ url: `delpost/${id}`,data})
+export const deletePost=(id)=>{
+   return auth({ url: `delpost/${id}`})
 }
 //添加评论
 export const postAddPostComment=(id,data)=>{

@@ -116,6 +116,16 @@ export default function Post(props) {
     const postIcon22 = new PostIcon('/static/postIconPitchUp/评论.svg')
     const postIcon33 = new PostIcon('/static/postIconPitchUp/星星.svg')
     const postIcon44 = new PostIcon('/static/postIconPitchUp/分享.svg')
+
+    const array = [{
+        title: localStorageData.userid === props.postUserId ? '删除' : null,
+        onclick: localStorageData.userid === props.postUserId ? deletePostApi : null,
+    }, {
+
+        title: '举报',
+        onclick: () => console.log('举报成功'),
+    }]
+    console.log(array)
     return (
         <div className={style.messagebigbox} onClick={navgatehandle}>
             <div className={style.messagebox}>
@@ -128,12 +138,13 @@ export default function Post(props) {
                     </div>
                     <div onClick={() => targetIDHandler(props.id)} style={{ position: "relative" }} className={style.more}>...
                         {targetID === props.id ?
-                            <div className={style.postDeleteBox} onClick={e => e.stopPropagation()} ref={postDeleteBox}>
-                                {(localStorageData.userid === props.postUserId) ?
-                                    <span className={style.postDeleteBoxButton} onClick={deletePostApi}>删除</span> :
-                                    null}
-                                <span className={style.postDeleteBoxButton}>举报</span>
-                            </div> : null}
+                             <div className={style.postDeleteBox} onClick={e => e.stopPropagation()} ref={postDeleteBox}>
+                                 {(localStorageData.userid === props.postUserId) ?
+                                     <span className={style.postDeleteBoxButton} onClick={deletePostApi}>删除</span> :
+                                     null}
+                                 <span className={style.postDeleteBoxButton}>举报</span>
+                             </div>  
+                           : null}
                     </div>
                 </div>
                 <div className={style.thisshowcontent}>

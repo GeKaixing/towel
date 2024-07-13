@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route, } from 'react-router-dom'
-import style from "./Routers.module.css"
+// import style from "./Routers.module.css"
 import MainMenu from '../view/head/MainMenu'
 import About from '../view/body/aboutComponents/About'
 import Post from '../view/body/postComponents/PostPage'
@@ -21,9 +21,9 @@ import SettingAccount from '../view/body/settingComponents/SettingUserPage/Setti
 import NotRouter from '../components/NotRouter'
 export default function Routers() {
     return (
-        <div className={style.layout}>
+        <div className='flex flex-row justify-center'>
             <MainMenu ></MainMenu>
-            <div style={{ width: '648px', display: 'flex', justifyContent: 'center', }}>
+            <div className='w-[648px] flex flex-col justify-center items-center'>
                 <Routes>
                     <Route path='/' element={<Post></Post>}></Route>
                     <Route element={<Protected />}>
