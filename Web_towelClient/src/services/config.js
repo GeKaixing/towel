@@ -38,7 +38,7 @@ auth.interceptors.request.use(
     return Promise.reject(error);
   }
 ); */
-
+/* 
 // 响应拦截器
 auth.interceptors.response.use(
   response => {
@@ -78,7 +78,7 @@ auth.interceptors.response.use(
     }
     return Promise.reject(error);
   }
-);
+); */
 
 
 export { auth, open };

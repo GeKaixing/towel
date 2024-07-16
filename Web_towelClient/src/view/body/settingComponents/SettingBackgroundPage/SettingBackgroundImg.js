@@ -47,13 +47,14 @@ export default function SettingBackgroundImg() {
         bgi.style.margin = '0';
     }, [imgData, colorModel])
     return (
-        <div className={style.SettingBackgroundImg}>
-            <div onClick={SettingBackgroundBingImgHandler} className={style.SettingBackgroundImgBing}>使用bing每日壁纸
-                {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'bing' ? <div className={style.dot}></div> : null : null}
+        <div className='flex flex-col justify-center items-center space-y-2'>
+            <div onClick={SettingBackgroundBingImgHandler} className=' flex items-center text-[--fontColor] font-bold'>使用bing每日壁纸
+                {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'bing' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
             </div>
-            <form onSubmit={(e) => e.preventDefault()}>
-                <input type='file' onChange={SettingBackgroundImgHandler} accept="image/*"></input>
-                {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'diy' ? <div className={style.dot}></div> : null : null}
+            <form onSubmit={(e) => e.preventDefault()} className='flex flex-col  items-center '> 
+                <input className='hidden' htmlFor='upload' type='file' onChange={SettingBackgroundImgHandler} accept="image/*"></input>
+                <label id='upload' className='w-12 h-12 bg-[--boxColor] flex justify-center items-center'>上传</label>
+                {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'diy' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
             </form>
         </div>
     )

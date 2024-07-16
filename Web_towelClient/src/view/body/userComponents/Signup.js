@@ -58,9 +58,9 @@ export default function Signup() {
     }
   }
   return (
-    <div className={style.signup}>
+    <div className='flex justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex-col space-y-2'>
       {/* 注册页面 */}
-      <div className={style.logo}>
+      <div className='w-10 h-10'>
         {/* global process*/}
         <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
       </div>

@@ -7,7 +7,21 @@ const initSocket = (userId) => {
   });
 
   socket.on("connect", () => {
-    console.log(`Socket connected with id: ${socket.id}`);
+    console.log(`连接成功,您连接的id是: ${socket.id}`);
+
+  });
+  socket.on("connect_error", (err) => {
+    console.error('连接错误:', err);
+  });
+
+  socket.on("connect_timeout", () => {
+    console.error('连接超时');
+  });
+  socket.on("disconnect", (reason) => {
+    if (reason === 'io server disconnect') {
+      console.log('服务器断开连接，尝试重新连接...');
+      socket.connect();
+    }
   });
   return socket;
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import style from './AddContent.module.css';
+// import style from './AddContent.module.css';
 import useLocalStorage from '../../../hooks/useLocaStorage';
 import { postAddPost, postUpLoad } from '../../../services/add/add';
 
@@ -81,23 +81,29 @@ export default function Portal() {
     const postIcon7 = new PostIcon('/static/MainMenuIconPitchUp/添加.svg')
 
     return (
-        <div className={style.addContent}>
-            <div className={style.messagebigbox}>
-                <div className={style.messagebox}>
-                    <div className={style.thisshowname}>
-                        <div className={style.handimg}>
-                            <img src={loginDataParse.headimg} className={style.img} alt="user" />
-                        </div>
-                        <div className={style.handname}>{loginDataParse.username}</div>
+        <div className='flex flex-col w-full px-2 py-2 '>
+            <div className='flex flex-row w-full bg-[--boxColor] px-2 py-2 rounded-my-rounded-10px'>
+                {/* the box */}
+                <div className='w-full'>
+                    {/* headImg userName */}
+                    <div className='flex flex-row  items-center space-x-2 '>
+                        <img src={loginDataParse.headimg} className='h-10 w-10 rounded-full' alt="user" />
+                        <div className='font-bold text=[--fontColor]'>{loginDataParse.username}</div>
                     </div>
-                    <div className={style.thisshowcontent}>
+                    {/* textContent */}
+                  
                         <textarea
                             value={textareaData}
                             onChange={(e) => settextareaData(e.target.value)}
+                            className='w-full bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor]'
+                            sp="false"
+                            placeholder="请输入内容"
+                            rows={1}
+                            maxLength={1000}
                             style={{ resize: "vertical", backgroundColor: 'var(--boxColor)', color: 'var(--fontColor)' }}
-                        />
-                    </div>
-                    <div className={style.thisshowbottom}>
+                        ></textarea>
+                    {/* boxBottom */}
+                    <div className='flex justify-around h-5 w-full'>
                         <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path}></img>
                         <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon2.path}></img>
                         <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon3.path}></img>
@@ -105,14 +111,15 @@ export default function Portal() {
                     </div>
                 </div>
             </div>
-            <div className={style.addbutton}>
+            {/* 功能 */}
+            <div className='flex flex-col justify-center items-center mt-2'>
                 {showImageData && (
                     <>
                         <img src={showImageData} alt="preview" style={{ width: '50px', height: '50px', borderRadius: '10px' }} />
-                        <div className={style.inputFlie} onClick={() => setShowImageData('')}>删除图片</div>
+                        <div className='w-12 h-12' onClick={() => setShowImageData('')}>删除图片</div>
                     </>
                 )}
-                <label htmlFor='inputfile' className={style.inputFlie} title='添加图片'
+                <label htmlFor='inputfile' className='w-12 h-12' title='添加图片'
                     onMouseEnter={() => setIsHoveredImage(true)}
                     onMouseLeave={() => setIsHoveredImage(false)}
                 >
@@ -123,7 +130,7 @@ export default function Portal() {
                     }
                 </label>
                 <input type="file" id='inputfile' style={{ display: 'none' }} onChange={upImageApi} />
-                <div className={style.addbuttonAdd} onClick={sendPostApi}
+                <div className='w-12 h-12' onClick={sendPostApi}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}>
                     {

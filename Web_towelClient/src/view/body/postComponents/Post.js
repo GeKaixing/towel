@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import style from './Post.module.css'
 import PropTypes from 'prop-types';
 import { postPostLike, deletePost, postPostfavorite } from '../../../services/post/post'
 import useLocalStorage from '../../../hooks/useLocaStorage';
+import DeleteBox from '../../../components/DeleteBox';
 /* props $ */
 export default function Post(props) {
     /*          根目录的文章           */
@@ -116,32 +116,31 @@ export default function Post(props) {
     const postIcon22 = new PostIcon('/static/postIconPitchUp/评论.svg')
     const postIcon33 = new PostIcon('/static/postIconPitchUp/星星.svg')
     const postIcon44 = new PostIcon('/static/postIconPitchUp/分享.svg')
+
+    const reportApi=()=>{
+        alert('举报成功')
+    }
+
     return (
-        <div className={style.messagebigbox} onClick={navgatehandle}>
-            <div className={style.messagebox}>
-                <div className={style.thisshowname} onClick={e => e.stopPropagation()} style={{ justifyContent: 'space-between', fontWeight: 'bold' }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div className={style.handimg}>
-                            <img src={props.headimg} className={style.img}></img>
-                        </div>
-                        <Link className={style.handname}>{props.name}</Link>
+        <div className='flex flex-col text-[--fontColor] justify-center mb-6 border-[--boxColor] hover:border-[--boxHoverColor] border-solid border-2  rounded-my-rounded-10px  p-2' onClick={navgatehandle}>
+            <div className='flex flex-col space-y-2 '>
+                <div className='flex flex-row justify-between items-center' onClick={e => e.stopPropagation()} style={{ justifyContent: 'space-between', fontWeight: 'bold' }}>
+                    <div className='flex flex-row space-x-2 items-center'>
+                        <img src={props.headimg} className='w-10 h-10 rounded-full'></img>
+                        <Link className='font-blod '>{props.name}</Link>
                     </div>
-                    <div onClick={() => targetIDHandler(props.id)} style={{ position: "relative" }} className={style.more}>...
+                    <div onClick={() => targetIDHandler(props.id)}  className='relative'>...
                         {targetID === props.id ?
-                            <div className={style.postDeleteBox} onClick={e => e.stopPropagation()} ref={postDeleteBox}>
-                                {(localStorageData.userid === props.postUserId) ?
-                                    <span className={style.postDeleteBoxButton} onClick={deletePostApi}>删除</span> :
-                                    null}
-                                <span className={style.postDeleteBoxButton}>举报</span>
-                            </div> : null}
+                            <DeleteBox postUserId={props.postUserId} deleteHandler={deletePostApi} DeleteBox={postDeleteBox} reportHandler={reportApi}></DeleteBox>
+                            : null}
                     </div>
                 </div>
-                <div className={style.thisshowcontent}>
+                <div className='felx flex-col space-y-2'>
                     {props.content}
-                    {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className={style.img}></img>)}
+                    {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-full h-full'></img>)}
                 </div>
-                <div className={style.postBottom} >
-                    <div className={style.likesIcon} onClick={likehandle}
+                <div className='flex flex-row justify-around h-5 text-[--fontColor]' >
+                    <div className='flex flex-row items-center hover:text-[host]' onClick={likehandle}
                         onMouseEnter={() => setMouseOver({ ...mouseOver, like: true })}
                         onMouseLeave={() => setMouseOver({ ...mouseOver, like: false })}
                     >
@@ -151,7 +150,7 @@ export default function Post(props) {
                             <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>}
                         {props.likes}
                     </div>
-                    <div className={style.starIcon}
+                    <div className='flex flex-row items-center'
                         onMouseEnter={() => setMouseOver({ ...mouseOver, comments: true })}
                         onMouseLeave={() => setMouseOver({ ...mouseOver, comments: false })}>
                         {mouseOver.comments ?
@@ -160,7 +159,8 @@ export default function Post(props) {
                             <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon2.path} alt='评论'></img>}
                         {props.comments}
                     </div>
-                    <div className={style.star} onClick={favoritehandler}
+                    <div className='flex flex-row items-center'
+                        onClick={favoritehandler}
                         onMouseEnter={() => setMouseOver({ ...mouseOver, star: true })}
                         onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
                         {
@@ -172,7 +172,8 @@ export default function Post(props) {
                         }
                         {props.favorites}
                     </div>
-                    <div className={style.share} onClick={sharehandler}
+                    <div className='flex flex-row items-center'
+                        onClick={sharehandler}
                         onMouseEnter={() => setMouseOver({ ...mouseOver, share: true })}
                         onMouseLeave={() => setMouseOver({ ...mouseOver, share: false })}>
                         {mouseOver.share ?
@@ -191,15 +192,18 @@ Post.propTypes = {
     headimg: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
-    postImages: PropTypes.string,
+    postImages: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string),
+      ]),
     likes: PropTypes.number.isRequired,
     comments: PropTypes.number.isRequired,
-    favorites: PropTypes.number.isRequired,
+    favorites: PropTypes.number,
     postUserId: PropTypes.string.isRequired,
     reload: PropTypes.shape({
         reload: PropTypes.bool.isRequired,
         setLoad: PropTypes.func.isRequired,
-    }).isRequired,
+    }),
     reloadUserArticle: PropTypes.bool,
     setreloadUserArticle: PropTypes.func,
 };

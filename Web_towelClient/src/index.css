@@ -1,4 +1,7 @@
 /* eslint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
 
     padding: 0;
@@ -9,7 +12,11 @@ html {
     overflow-y: scroll;
 
 }
-
+:root{
+    --hostColor: rgba(134, 196, 248,1);
+    --hostTransparencyColor: rgba(134, 196, 248,0.4);
+    --assistantColor:rgba(248, 196, 134, 1)
+}
 body[color-model='dark'] {
     background-color: black;
     --fontColor: white;

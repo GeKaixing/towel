@@ -1,7 +1,7 @@
 import { auth } from "../config";
 //查询消息
-export const getNotifications=()=>{
-    return auth({url:'notifications',method:'get'})
+export const getNotifications=(id)=>{
+    return auth({url:`notifications/${id}`,method:'get'})
 }
 //
 export const postReadnotifications=(id)=>{
