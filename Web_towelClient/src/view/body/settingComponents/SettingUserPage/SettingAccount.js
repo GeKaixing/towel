@@ -14,6 +14,7 @@ export default function SettingAccount() {
     useEffect(() => {
         if (localStorageData) {
             setLocalStorageData(localStorageData)
+            console.log(localStorageData.userid)
             getUserinfo(localStorageData.userid).then(response => {
                 setResponseData(response.data)
             }).catch((error) => {
@@ -110,7 +111,7 @@ export default function SettingAccount() {
         }
     }
     return (
-        <div className={style.SettingAccount} style={{ position: "relative" }}>
+        <div className='flex flex-col justify-center items-center text-[--fontColor]' style={{ position: "relative" }}>
             <p style={{ display: 'flex', alignItems: "center" }}>
                 <img src={responseData.headimg} className={style.headimg}></img>
                 <label className={style.uploadNewHeadImg} htmlFor='uploadNewHeadImg' title='修改' >

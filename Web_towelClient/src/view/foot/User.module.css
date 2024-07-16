@@ -1,5 +1,6 @@
 .user {
-    width: 200px;
+    width: 350px;
+    margin-right: 70px;
 }
 
 @media (max-width:1000px) {
@@ -49,9 +50,6 @@
     position: relative;
     height: 2rem;
     display: flex;
-    margin-top: 15px;
- 
-
 }
 
 .searchimport {

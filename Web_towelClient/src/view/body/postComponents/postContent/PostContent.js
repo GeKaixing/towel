@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import PostInput from './PostInput';
-import style from './PostContent.module.css'
+// import style from './PostContent.module.css'
 // import axios from 'axios';
 import { postPostfavorite, postPostLike } from '../../../../services/post/post';
 import useLocalStorage from '../../../../hooks/useLocaStorage';
 export default function PostContent() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
-    const [localStorageData ] =  useLocalStorage()
+    const [localStorageData] = useLocalStorage()
     const navigate = useNavigate()
     //获取当前路由
     const { pathname, state } = useLocation()
@@ -18,7 +18,7 @@ export default function PostContent() {
         like: false,
     });
     useEffect(() => {
-       
+
         if (state) {
             const data = JSON.parse(state)
             if (data.from) {
@@ -41,18 +41,6 @@ export default function PostContent() {
     // 点赞按钮
     const likehandle = (event) => {
         event.stopPropagation()
-       /*  axios({
-            url: `http://127.0.0.1:4000/post/like/${contentdata.id}`,
-            method: 'post',
-            headers: {
-                'Authorization': `Bearer ${localStorageData.jwt}`
-            },
-            data: {
-                data: {
-                    userId: localStorageData.userid
-                }
-            }
-        }) */
         postPostLike(contentdata.id, {
             data: {
                 userId: localStorageData.userid
@@ -72,18 +60,6 @@ export default function PostContent() {
     // 更新按钮
     const favoritehandler = (event) => {
         event.stopPropagation()
-      /*   axios({
-            url: `http://127.0.0.1:4000/post/favorite/${contentdata.id}`,
-            method: 'post',
-            headers: {
-                'Authorization': `Bearer ${localStorageData.jwt}`
-            },
-            data: {
-                data: {
-                    userId: localStorageData.userid
-                }
-            }
-        }) */
         postPostfavorite(contentdata.id, {
             data: {
                 userId: localStorageData.userid
@@ -124,30 +100,23 @@ export default function PostContent() {
     const postIcon44 = new PostIcon('/static/postIconPitchUp/分享.svg')
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', }}>
-            <div className={style.H5header} onClick={() => navigate(-1)}>
-                <button>{"<"}</button>
-                <div>帖子</div>
-            </div>
-            <div className={style.commentpage}>
-                <div className={style.message}>
-                    <div className={style.messagebox}>
-                        <div className={style.thisshowname}>
-                            <img src={contentdata.headimg} style={{
-                                width: '40px',
-                                height: '40px',
-                                borderRadius: '50%',
-                                overflow: "hidden",
-                            }}></img>
-                            <Link className={style.handname} >{contentdata.name}</Link>
+        <div className='flex flex-col p-2'>
+          
+            <div className='flex flex-col '>
+                <div className=''>
+                    <div className=''>
+                        <div className='flex items-center f space-x-2 mb-2'>
+                            <img src={contentdata.headimg} className='w-10 h-10 rounded-my-rounded-10px'></img>
+                            <Link className='font-blod' >{contentdata.name}</Link>
                         </div>
-
-                        <div className={style.thisshowcontent}>
-                            {contentdata.content}
-                            {(contentdata.postImages?.length === 0 || contentdata.postImages === '') ? null : (<img src={contentdata.postImages} className={style.img}></img>)}
+                        <div className='flex flex-col justify-center items-center text-[--fontColor] font-bold' >
+                            <div className='self-start'>
+                                {contentdata.content}
+                            </div>
+                            {(contentdata.postImages?.length === 0 || contentdata.postImages === '') ? null : (<img src={contentdata.postImages} className=''></img>)}
                         </div>
-                        <div className={style.thisshowbottom} onClick={likehandle}>
-                            <div className={style.likesIcon}
+                        <div className='flex w-full flex-row justify-around h-5 ' onClick={likehandle}>
+                            <div className='flex '
                                 onMouseEnter={() => setMouseOver({ ...mouseOver, like: true })}
                                 onMouseLeave={() => setMouseOver({ ...mouseOver, like: false })}
                             >
@@ -157,7 +126,7 @@ export default function PostContent() {
                                     <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>}
                                 {contentdata.likes}
                             </div>
-                            <div className={style.star} onClick={favoritehandler}
+                            <div className='flex ' onClick={favoritehandler}
                                 onMouseEnter={() => setMouseOver({ ...mouseOver, star: true })}
                                 onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
                                 {
@@ -168,7 +137,7 @@ export default function PostContent() {
 
                                 }{contentdata.favorites}
                             </div>
-                            <div className={style.share} onClick={sharehandler}
+                            <div className='flex ' onClick={sharehandler}
                                 onMouseEnter={() => setMouseOver({ ...mouseOver, share: true })}
                                 onMouseLeave={() => setMouseOver({ ...mouseOver, share: false })}>
                                 {mouseOver.share ?

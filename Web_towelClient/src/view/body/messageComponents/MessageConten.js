@@ -85,7 +85,7 @@ export default function Message() {
               </div> : null}
           </div>
         </div>
-      )) : <div>暂无回复</div>}
+      )) : <div className='p-2'>暂无回复</div>}
     </div>
   )
 }

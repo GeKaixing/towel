@@ -29,10 +29,10 @@ export default function Login() {
         }
     }
     return (
-        <div className={style.login}>
+        <div className=' flex justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex-col space-y-2'>
             {/* 登录页面 */}
-            <div className={style.logo}>
-                {/* global process*/}
+            {/* global process*/}
+            <div  className='w-10 h-10 '> 
                 <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
             </div>
             <input className={style.name} type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder='名字'>
@@ -46,10 +46,10 @@ export default function Login() {
                     <img className={style.EyeInvisibleOutlined} onClick={() => setshowpassword(!showpassword)} src={`${process.env.PUBLIC_URL}/static/otherIcon/预览关闭.svg`} alt="预览关闭" />
                 }
             </div>
-            <button className={style.button} onClick={LoginApi}>
+            <button className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor]' onClick={LoginApi}>
                 登录
             </button>
-            <Link className={style.signup} to={"/signup"}>注册</Link>
+            <Link className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-center' to={"/signup"}>注册</Link>
         </div>
 
     )

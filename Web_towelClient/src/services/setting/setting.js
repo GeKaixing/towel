@@ -4,7 +4,7 @@ export const getHPImageArchive = () => {
     return open({ url: 'HPImageArchive' })
 }
 export const getUserinfo = (id) => {
-    return auth({ url: `userinfo/${id}` })
+    return auth({ url: `userinfo/${id}`,method:'get'})
 }
 //修改用户名
 export const postModifyingausername = (data) => {

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { noReadNumbers } from '../../store/noReadNumbers';
 import useLocaStorage from '../../hooks/useLocaStorage';
 import MainMenuLink from '../../components/MainMenuLink';
@@ -48,14 +48,19 @@ export default function MainMenu() {
     new HowShowIcon('/static/MainMenuIcon/评论.svg', '/static/MainMenuIconPitchUp/评论.svg'),
     new HowShowIcon('/static/MainMenuIcon/添加.svg', '/static/MainMenuIconPitchUp/添加.svg'),
     new HowShowIcon('/static/MainMenuIcon/设置.svg', '/static/MainMenuIconPitchUp/设置.svg'),
+    new HowShowIcon('/static/MainMenuIcon/进入.svg', '/static/MainMenuIconPitchUp/进入 .svg'),
   ];
 
   return (
-    <div className='w-[150px]  flex justify-center max-sm:hidden'>
-      <div className='flex fixed flex-col justify-center mt-10 max-sm:hidden'>
-        <div className='flex justify-center items-center text-7xl '>
+    <>
+      <div className=' flex md:mr-4 md:mt-2 md:ml-4 md:w-20 md:h-[80%] md:py-2   md:flex-col 
+        lg:w-[250px] lg:left-[60x] lg:bg-transparent
+       gap-2 px-2 fixed md:left-0 max-md:bottom-2  justify-around w-full bg-[--boxColor] items-center rounded-my-rounded-10px'>
+        <div className='hidden md:block md:w-10 md:h-10
+          lg:w-20 lg:h-20
+        '>
           {/* global process */}
-          <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='font-[4.5rem]' />
+          <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='' />
         </div>
         <MainMenuLink to="/" src={icons[0].home().path} text='主页' />
         <MainMenuLink to="/about" src={icons[1].getIcon('/about').path} text='关于' />
@@ -63,14 +68,22 @@ export default function MainMenu() {
         <MainMenuLink to="/Message" src={icons[2].getIcon('/Message').path} text='消息'>
           <div>{noReadNumber}</div>
         </MainMenuLink>
-        <MainMenuLink className='max-md:hidden' to="/setting" src={icons[4].getIcon('/setting').path} text='设置' />
-        {localStorageData.jwt && width < 1000 ? (
-          <MainMenuLink to={`/userhomepage/${localStorageData.userid}`} src={localStorageData.headimg} >
-            <span className='text-sm grow-1 font-bold'>{localStorageData.username}</span>
-          </MainMenuLink>
-        ) : null}
-        {!localStorageData.jwt && <MainMenuLink to="/login" text='登录' />}
+        <MainMenuLink  to="/setting" src={icons[4].getIcon('/setting').path} text='设置' />
+        {localStorageData.jwt &&
+          <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center lg:space-x-2'}>
+            <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover'>
+              <img className='w-10 h-10 rounded-full' src={localStorageData.headimg} ></img>
+            </div>
+            <div className='max-lg:hidden lg:block'>{localStorageData.username}</div>
+          </Link>
+        }
+         {!localStorageData.jwt && <MainMenuLink  to="/login" src={icons[5].getIcon('/login').path} text='登录' />}
+
+        {/* {!localStorageData.jwt && <MainMenuLink to="/login" text='登录' />} */}
       </div>
-    </div>
+      <div className='max-md:hidden md:mr-4 md:ml-4 md:mt-2 md:w-20 md:h-[auto] md:py-2
+      lg:w-[360px] 
+      '></div>
+    </>
   );
 }

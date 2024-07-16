@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import style from './PostComment.module.css';
+// import style from './PostComment.module.css';
 import PostCommentButton from './PostCommentButton';
 import { useLocation, useNavigate } from 'react-router';
 import propTypes from 'prop-types'
-import useLocalStorage from '../../../../hooks/useLocaStorage';
 import { getComment, getOnePost, postDelComment } from '../../../../services/post/post';
+import DeleteBox from '../../../../components/DeleteBox';
 export default function PostComment({ postId, setInputData, reLoad, userCommentData, setreloadUserlikes, reloadUserlikes }) {
     const [commentdata, setCommentData] = useState([]);
-    const [localStorageData] = useLocalStorage();
-    const [showOptions, setShowOptions] = useState('');
+    // const [localStorageData] = useLocalStorage();
+    const [targetID, setTargetID] = useState('');
     const useRoutes = useLocation();
     const navigate = useNavigate();
     const [reloadPostComment, seReLoadPostComment] = useState(false);
-    const PostCommentRef = useRef(null);
 
     useEffect(() => {
         if (useRoutes.pathname.split('/')[1] === 'homepage') {
@@ -21,19 +20,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
             setCommentData(userCommentData);
         }
     }, [reLoad, userCommentData, postId, reloadPostComment]);
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (PostCommentRef.current) {
-                if (!(event.target.className === PostCommentRef.current.className)) {
-                    setShowOptions('')
-                }
-            }
-        };
-        window.addEventListener('click', handleClickOutside);
-        return () => {
-            window.removeEventListener('click', handleClickOutside);
-        };
-    }, []);
+
 
     const getCommentApi = async () => {
         try {
@@ -48,28 +35,28 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
 
     const deleteHandler = (commentId) => {
         postDelComment(commentId).then(() => {
-                seReLoadPostComment(!reloadPostComment);
-                setreloadUserlikes(!reloadUserlikes);
-            })
+            seReLoadPostComment(!reloadPostComment);
+            setreloadUserlikes(!reloadUserlikes);
+        })
             .catch((error) => {
                 console.log(error);
             });
     };
 
-    const toggleOptions = (commentId) => {
-        setShowOptions(showOptions === commentId ? '' : commentId);
-    };
+    const targetIDHandler = (id) => {
+        if (targetID === id) {
+            setTargetID('');
+        } else {
+            setTargetID(id);
+        }
+    }
 
     const getOnePostApi = (POSEID) => {
-    /*     axios({
-            url: `http://127.0.0.1:4000/findonepost/${POSEID}`,
-            headers: { 'Authorization': `Bearer ${localStorageData.jwt}` },
-        })
-             */
+
         getOnePost(POSEID).then((response) => {
-                const data = JSON.stringify({ ...response.data, from: 'user' });
-                navigate(`/homepage/${POSEID}`, { state: data });
-            })
+            const data = JSON.stringify({ ...response.data, from: 'user' });
+            navigate(`/homepage/${POSEID}`, { state: data });
+        })
             .catch((error) => {
                 console.log(error);
             });
@@ -78,39 +65,31 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     return (
         <div>
             {commentdata.map((item) => (
-                <li key={item._id} className={style.comments}>
-                    <span className={style.comment}>
-                        <div className={style.name}>
-                            <div className={style.handimg}>
-                                <img src={item.users[0].headimg} className={style.headimgs} alt="user" />
-                            </div>
+                <li key={item._id} className='flex flex-col p-2 border-2 rounded-my-rounded-10px mb-2 border-[--boxColor] hover:border-[--boxHoverColor]'>
+                    <span className='flex justify-between mb-2'>
+                        <div className='flex space-x-2 items-center'>
+                            <img src={item.users[0].headimg} className='h-10 w-10 rounded-full' alt="user" />
                             <div onClick={() => setInputData('@' + item.users[0].username + ':')}>{item.users[0].username}</div>
+
                         </div>
-                        <div onClick={() => toggleOptions(item._id)} style={{ position: 'relative', color: 'var(--fontColor)' }} ref={PostCommentRef} className='PostCommentRef' >
-                            ...
-                            {showOptions === item._id && (
-                                <div className={style.postDeleteBox} onClick={e => e.stopPropagation()} >
-                                    {localStorageData.userid === item.users[0]._id ? (
-                                        <span className={style.postDeleteBoxButton} onClick={() => deleteHandler(item._id)}>
-                                            删除
-                                        </span>
-                                    ) : null}
+                        <div onClick={() => targetIDHandler(item._id)} className='relative' >...
+                            {targetID === item._id &&
+                                <DeleteBox postUserId={item.users[0]._id} deleteHandler={() => deleteHandler(item._id)}>
                                     {useRoutes.pathname.split('/')[1] !== 'homepage' ? (
-                                        <span className={style.postDeleteBoxButton} onClick={() => getOnePostApi(item.postId)}>
+                                        <span className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => getOnePostApi(item.postId)}>
                                             进入文章
                                         </span>
                                     ) : null}
-                                    <span className={style.postDeleteBoxButton} onClick={() => setInputData({ targetName: '@' + item.users[0].username, commentid: item._id })}>
+                                    <span className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => setInputData({ targetName: '@' + item.users[0].username, commentid: item._id })}>
                                         回复{item.users[0].username}
                                     </span>
-                                    <span className={style.postDeleteBoxButton}>举报</span>
-                                </div>
-                            )}
+                                </DeleteBox>
+                            }
                         </div>
                     </span>
-                    <span style={{ marginLeft: '2rem' }} className={style.commentText}>{item.commentText}</span>
-                    <div className={style.Replyimport}>
-                        <div className={style.Reply}>
+                    <span className='ml-5'>{item.commentText}</span>
+                    <div className=''>
+                        <div className=''>
                             <PostCommentButton
                                 reLoad={reLoad}
                                 setInputData={setInputData}
