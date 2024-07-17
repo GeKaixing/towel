@@ -35,7 +35,7 @@ export default function User() {
                 <form className={style.search} onSubmit={(e) => { e.preventDefault() }} >
                     <input className='w-full bg-[--boxColor] border-none rounded-my-rounded-10px' type='text' placeholder='search more' value={searchData} onChange={(e) => { e.preventDefault(); setSearechData(e.target.value) }}></input>
                     {/* global process*/}
-                    <img type='submit' onClick={searchDataApi} className={style.SearchOutlined}
+                    <img  onClick={searchDataApi} className={style.SearchOutlined}
                         onMouseEnter={() => setMouseOver(true)}
                         onMouseLeave={() => setMouseOver(false)}
                         src={`${process.env.PUBLIC_URL}/static/${mouseOver ? 'otherIconPitchUp' : 'otherIcon'}/搜索.svg`} alt="搜索" />

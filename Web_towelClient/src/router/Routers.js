@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Routes, Route, useLocation, useNavigate, } from 'react-router-dom'
 // import style from "./Routers.module.css"
 import MainMenu from '../view/head/MainMenu'
@@ -20,29 +20,15 @@ import SettingDeactivate from '../view/body/settingComponents/SettingUserPage/Se
 import SettingAccount from '../view/body/settingComponents/SettingUserPage/SettingAccount'
 import NotRouter from '../components/NotRouter'
 import useLocalStorage from '../hooks/useLocaStorage'
+import H5header from '../components/H5header'
 export default function Routers() {
-    const { pathname } = useLocation()
-    const navigate = useNavigate()
-    const [localStorageData, setLocalStorage] = useLocalStorage()
-    console.log(pathname)
-    console.log(pathname.split('/')[1])
-    const navigateHandler = () => {
-        pathname === '/' ? navigate(`/userhomepage/${localStorageData.userid}`) : navigate(-1)
-    }
     return (
         <div className='flex '>
             <MainMenu></MainMenu>
             {/* 先不动，到了一点的宽度再动 */}
             <div className='max-lg:w-full lg:w-[600px] lg:ml-6'>
-                {/* h5  */}
-                <div className='md:hidden flex items-center space-x-2 mt-2 mb-2 text-[--fontColor] ' >
-                    <button className='w-10 h-10 ml-2 mr-2 bg-[--boxColor] rounded-full hover:bg-[--boxHoverColor]' onClick={navigateHandler}>
-                        {pathname === '/' ?
-                            <img src={localStorageData.headimg} className='w-full h-full rounded-full' ></img> : "<"}
-                    </button>
-                    <div>{pathname === '/' ? '主页' : '帖子'}</div>
-                    <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='w-10 h-10 self-center' onClick={() => window.scrollTo({ top: 0 })}></img>
-                </div>
+                {/* h5Header  */}
+               <H5header></H5header>
                 <Routes>
                     <Route path='/' element={<Post></Post>}></Route>
                     <Route element={<Protected />}>
@@ -52,7 +38,6 @@ export default function Routers() {
                         <Route path='/post' element={<Add></Add>}></Route>
                     </Route>
                     <Route path='/setting' element={<Setting />}>
-
                     </Route>
                     <Route path='/setting/backgroundimg' element={<SettingBackgroundImg />}> </Route>
                     <Route path='/setting/forget' element={<SettingUserForgetPage />}> </Route>
