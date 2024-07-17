@@ -6,9 +6,9 @@ import { PropTypes } from 'prop-types'
 export default function MainMenuLink({ to, src, text, children, className }) {
 
     return (
-        <Link to={to} className={'lg:flex lg:flex-row lg:items-center lg:space-x-2' }>
-            <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover'>
-                <img  src={src} ></img>
+        <Link to={to} className={'lg:flex lg:flex-row lg:items-center lg:mb-5' }>
+            <div className='w-10 h-10 rounded-full max-lg:m-0 lg:mr-10 '>
+                <img className=' w-10 h-10 ' src={src} ></img>
             </div>
             < MainMenuTitle text={text}></MainMenuTitle>
             {children}

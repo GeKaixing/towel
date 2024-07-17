@@ -48,14 +48,17 @@ export default function MainMenu() {
     new HowShowIcon('/static/MainMenuIcon/评论.svg', '/static/MainMenuIconPitchUp/评论.svg'),
     new HowShowIcon('/static/MainMenuIcon/添加.svg', '/static/MainMenuIconPitchUp/添加.svg'),
     new HowShowIcon('/static/MainMenuIcon/设置.svg', '/static/MainMenuIconPitchUp/设置.svg'),
-    new HowShowIcon('/static/MainMenuIcon/进入.svg', '/static/MainMenuIconPitchUp/进入 .svg'),
+    new HowShowIcon('/static/MainMenuIcon/进入.svg', '/static/MainMenuIconPitchUp/进入.svg'),
   ];
 
   return (
     <>
       <div className=' flex md:mr-4 md:mt-2 md:ml-4 md:w-20 md:h-[80%] md:py-2   md:flex-col 
-        lg:w-[250px] lg:left-[60x] lg:bg-transparent
-       gap-2 px-2 fixed md:left-0 max-md:bottom-2  justify-around w-full bg-[--boxColor] items-center rounded-my-rounded-10px'>
+        lg:w-[360px]  lg:bg-transparent
+        px-2 fixed md:left-0 max-md:bottom-2  
+       justify-around w-full items-center rounded-my-rounded-10px
+     
+       '>
         <div className='hidden md:block md:w-10 md:h-10
           lg:w-20 lg:h-20
         '>
@@ -70,8 +73,8 @@ export default function MainMenu() {
         </MainMenuLink>
         <MainMenuLink  to="/setting" src={icons[4].getIcon('/setting').path} text='设置' />
         {localStorageData.jwt &&
-          <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center lg:space-x-2'}>
-            <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover'>
+          <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center '}>
+            <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover lg:mr-10'>
               <img className='w-10 h-10 rounded-full' src={localStorageData.headimg} ></img>
             </div>
             <div className='max-lg:hidden lg:block'>{localStorageData.username}</div>
@@ -82,7 +85,7 @@ export default function MainMenu() {
         {/* {!localStorageData.jwt && <MainMenuLink to="/login" text='登录' />} */}
       </div>
       <div className='max-md:hidden md:mr-4 md:ml-4 md:mt-2 md:w-20 md:h-[auto] md:py-2
-      lg:w-[360px] 
+      lg:w-[376px]    border-[--boxColor] hover:border-[--boxHoverColor] border-solid border-r-2
       '></div>
     </>
   );

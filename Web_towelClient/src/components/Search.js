@@ -5,7 +5,7 @@ import Post from '../view/body/postComponents/Post'
 export default function Search() {
     const { state } = useLocation()
     return (
-        <div style={{ width: '600px' }}>
+        <div className='w-full p-2'>
             {(state.length!==0) ?
                 state.map((item) => <Post
                     key={item._id}
