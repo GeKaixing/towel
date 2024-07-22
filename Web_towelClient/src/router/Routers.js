@@ -46,7 +46,7 @@ export default function Routers() {
                     <Route path='/search' element={<Search />}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/signup' element={<Signup />}></Route>
-                    <Route path='/homepage/:id' element={<PostContent ></PostContent>}></Route>
+                    <Route path='/postcontent/:id' element={<PostContent ></PostContent>}></Route>
                     <Route path="*" element={<NotRouter />}></Route>
                 </Routes>
 

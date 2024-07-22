@@ -5,6 +5,12 @@ import PostInput from './PostInput';
 // import axios from 'axios';
 import { postPostfavorite, postPostLike } from '../../../../services/post/post';
 import useLocalStorage from '../../../../hooks/useLocaStorage';
+import likeIcon from '../../../../assets/static/postIcon/赞.svg'
+import startIcon from '../../../../assets/static/postIcon/星星.svg'
+import shareIcon from '../../../../assets/static/postIcon/分享.svg'
+import likeIPichcon from '../../../../assets/static/postIconPitchUp/赞.svg'
+import startPichIcon from '../../../../assets/static/postIconPitchUp/星星.svg'
+import sharePichIcon from '../../../../assets/static/postIconPitchUp/分享.svg'
 export default function PostContent() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
@@ -91,13 +97,13 @@ export default function PostContent() {
             this.path = process.env.PUBLIC_URL + path
         }
     }
-    let postIcon1 = new PostIcon('/static/postIcon/赞.svg')
-    let postIcon3 = new PostIcon('/static/postIcon/星星.svg')
-    let postIcon4 = new PostIcon('/static/postIcon/分享.svg')
+    let postIcon1 = new PostIcon(likeIcon)
+    let postIcon3 = new PostIcon(startIcon)
+    let postIcon4 = new PostIcon(shareIcon)
 
-    const postIcon11 = new PostIcon('/static/postIconPitchUp/赞.svg')
-    const postIcon33 = new PostIcon('/static/postIconPitchUp/星星.svg')
-    const postIcon44 = new PostIcon('/static/postIconPitchUp/分享.svg')
+    const postIcon11 = new PostIcon(likeIPichcon)
+    const postIcon33 = new PostIcon(startPichIcon)
+    const postIcon44 = new PostIcon(sharePichIcon)
 
     return (
         <div className='flex flex-col p-2'>

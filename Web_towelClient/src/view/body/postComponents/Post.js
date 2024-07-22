@@ -4,6 +4,14 @@ import PropTypes from 'prop-types';
 import { postPostLike, deletePost, postPostfavorite } from '../../../services/post/post'
 import useLocalStorage from '../../../hooks/useLocaStorage';
 import DeleteBox from '../../../components/DeleteBox';
+import likeIcon from '../../../assets/static/postIcon/赞.svg'
+import commentIcon from '../../../assets/static/postIcon/评论.svg'
+import startIcon from '../../../assets/static/postIcon/星星.svg'
+import shareIcon from '../../../assets/static/postIcon/分享.svg'
+import likeIPichcon from '../../../assets/static/postIconPitchUp/赞.svg'
+import commentPichIcon from '../../../assets/static/postIconPitchUp/评论.svg'
+import startPichIcon from '../../../assets/static/postIconPitchUp/星星.svg'
+import sharePichIcon from '../../../assets/static/postIconPitchUp/分享.svg'
 /* props $ */
 export default function Post(props) {
     /*          根目录的文章           */
@@ -71,12 +79,12 @@ export default function Post(props) {
         e.stopPropagation()
         const data = JSON.stringify(props)
         /*在ulr加/斜杠和不加是有区别的，加入会把路径替换，不加这是在路径后面加上这个路径  */
-        navigate(`/homepage/${props.id}`, { state: data });
+        navigate(`/postcontent/${props.id}`, { state: data });
     };
     // 分享按钮设置，点击然后分享url
     const sharehandler = (e) => {
         e.stopPropagation()
-        const pathname = `http://localhost:3000/homepage/${props.id}`
+        const pathname = `http://localhost:3000/postcontent/${props.id}`
         navigator.clipboard.writeText(pathname).then(() => {
             console.log("复制成功");
         }, (error) => {
@@ -108,14 +116,14 @@ export default function Post(props) {
             this.path = process.env.PUBLIC_URL + path
         }
     }
-    const postIcon1 = new PostIcon('/static/postIcon/赞.svg')
-    const postIcon2 = new PostIcon('/static/postIcon/评论.svg')
-    const postIcon3 = new PostIcon('/static/postIcon/星星.svg')
-    const postIcon4 = new PostIcon('/static/postIcon/分享.svg')
-    const postIcon11 = new PostIcon('/static/postIconPitchUp/赞.svg')
-    const postIcon22 = new PostIcon('/static/postIconPitchUp/评论.svg')
-    const postIcon33 = new PostIcon('/static/postIconPitchUp/星星.svg')
-    const postIcon44 = new PostIcon('/static/postIconPitchUp/分享.svg')
+    const postIcon1 = new PostIcon(likeIcon)
+    const postIcon2 = new PostIcon(commentIcon)
+    const postIcon3 = new PostIcon(startIcon)
+    const postIcon4 = new PostIcon(shareIcon)
+    const postIcon11 = new PostIcon(likeIPichcon)
+    const postIcon22 = new PostIcon(commentPichIcon)
+    const postIcon33 = new PostIcon(startPichIcon)
+    const postIcon44 = new PostIcon(sharePichIcon)
 
     const reportApi=()=>{
         alert('举报成功')

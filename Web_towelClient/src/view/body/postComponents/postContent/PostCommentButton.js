@@ -4,6 +4,8 @@ import style from './PostCommentButton.module.css'
 import propTypes from 'prop-types'
 import useLocalStorage from '../../../../hooks/useLocaStorage'
 import { postCommentsLike } from '../../../../services/post/post'
+import likeIcon from '../../../../assets/static/postIcon/赞.svg'
+import likePithIcon from '../../../../assets/static/postIconPitchUp/赞.svg'
 export default function PostCommentButton({ likes, commentid, setInputData, commentName, reLoad, reloadPostComment, seReLoadPostComment }) {
     /*        回复评论组件        */
     // 控制回复预览的显示
@@ -33,9 +35,9 @@ export default function PostCommentButton({ likes, commentid, setInputData, comm
             this.path = process.env.PUBLIC_URL + path
         }
     }
-    let postIcon1 = new PostIcon('/static/postIcon/赞.svg')
+    let postIcon1 = new PostIcon(likeIcon)
 
-    const postIcon11 = new PostIcon('/static/postIconPitchUp/赞.svg')
+    const postIcon11 = new PostIcon(likePithIcon)
     return (
         <>
             <div className={style.reply}>

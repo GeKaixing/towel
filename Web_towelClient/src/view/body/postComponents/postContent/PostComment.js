@@ -14,7 +14,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     const [reloadPostComment, seReLoadPostComment] = useState(false);
 
     useEffect(() => {
-        if (useRoutes.pathname.split('/')[1] === 'homepage') {
+        if (useRoutes.pathname.split('/')[1] === 'postcontent') {
             getCommentApi();
         } else {
             setCommentData(userCommentData);
@@ -55,7 +55,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
 
         getOnePost(POSEID).then((response) => {
             const data = JSON.stringify({ ...response.data, from: 'user' });
-            navigate(`/homepage/${POSEID}`, { state: data });
+            navigate(`/postcontent/${POSEID}`, { state: data });
         })
             .catch((error) => {
                 console.log(error);
