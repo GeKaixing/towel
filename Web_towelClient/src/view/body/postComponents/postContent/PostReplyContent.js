@@ -12,7 +12,7 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
     const [targetID, setTargetID] = useState('');
 
     useEffect(() => {
-        if (useRoutes.pathname.split('/')[1] === 'homepage') {
+        if (useRoutes.pathname.split('/')[1] === 'postcontent') {
             getAllreply(commentid).then((response) => {
                 setResponseData(response.data)
             }).catch((error) => {
@@ -42,7 +42,7 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
     const getOnePostApi = (POSEID) => {
         getOnePost(POSEID).then((response) => {
             const data = JSON.stringify({ ...response.data, from: 'user' })
-            navigate(`/homepage/${POSEID}`, { state: data });
+            navigate(`/postcontent/${POSEID}`, { state: data });
         }).catch((error) => {
             console.log(error)
         })

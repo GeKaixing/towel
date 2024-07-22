@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import style from './User.module.css'
 import axios from 'axios';
+import sreachIcon from '../../assets/static/otherIcon/搜索.svg'
+import sreachPitchIcon from '../../assets/static/otherIconPitchUp/搜索.svg'
+import headimgIcon from '../../assets/static/otherIcon/head-img.svg'
 export default function User() {
     // 解构login的state
     const [localStorageData, setLocalStorage] = useState({})
@@ -38,7 +41,7 @@ export default function User() {
                     <img  onClick={searchDataApi} className={style.SearchOutlined}
                         onMouseEnter={() => setMouseOver(true)}
                         onMouseLeave={() => setMouseOver(false)}
-                        src={`${process.env.PUBLIC_URL}/static/${mouseOver ? 'otherIconPitchUp' : 'otherIcon'}/搜索.svg`} alt="搜索" />
+                        src={mouseOver ? sreachPitchIcon:sreachIcon} alt="搜索" />
                 </form>
             </section>
 
@@ -53,7 +56,7 @@ export default function User() {
             <div className='flex flex-col items-center w-full'>
                 <div>推荐关注</div>
                 <div className='flex  flex-col px-2 justify-between w-full space-y-2'>
-                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8  flex-shrink-0 flex-nowrap rounded-full border-none object-cover'><img src={process.env.PUBLIC_URL+'/head-img.svg'}></img></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div>关注</div></div>
+                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8  flex-shrink-0 flex-nowrap rounded-full border-none object-cover'><img src={headimgIcon}></img></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div>关注</div></div>
                     <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap bg-black rounded-full border-none overflow-hidden'></div><Link to={`/userhomepage/${localStorageData.userid}`} className="text-[--fontColor] ">{localStorageData.username}</Link><div>关注</div></div>
                     <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap bg-black rounded-full border-none overflow-hidden'></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div>关注</div></div>
                     <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap bg-black rounded-full border-none overflow-hidden'></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div>关注</div></div>

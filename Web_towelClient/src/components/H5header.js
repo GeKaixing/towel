@@ -1,14 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useLocation,useNavigate } from 'react-router'
-
+import leftIcon from '../assets/static/otherIcon/左_left.svg'
+import sreachIcon from '../assets/static/otherIcon/搜索.svg'
+import sreachPithIcon from '../assets/static/otherIconPitchUp/搜索.svg'
 export default function H5header() {
     const [cc, setcc] = useState('')
    const navigate= useNavigate()
     const { pathname } = useLocation()
     const dd = () => {
         switch (pathname.split('/')[1]) {
-
             case 'post':
                 setcc('添加')
                 break;
@@ -58,7 +59,7 @@ export default function H5header() {
         <div className='md:hidden flex items-center space-x-2 mt-2 mb-2 text-[--fontColor]  justify-between border-[--boxColor] hover:border-[--boxHoverColor] border-solid border-b-2 ' >
             <div className='flex w-1/2 items-center space-x-2  ml-2 '> 
                 <button className='w-10 h-10 bg-[--boxColor] rounded-full  flex justify-center items-center' onClick={() => window.history.back()}>
-                    <img src='/static/otherIcon/左_left.svg'></img>
+                    <img src={leftIcon}></img>
                 </button>
                 <div>{cc}</div>
             </div>
@@ -71,7 +72,7 @@ export default function H5header() {
                 <img onClick={searchDataApi} className='w-6 h-6'
                     onMouseEnter={() => setMouseOver(true)}
                     onMouseLeave={() => setMouseOver(false)}
-                    src={`${process.env.PUBLIC_URL}/static/${mouseOver ? 'otherIconPitchUp' : 'otherIcon'}/搜索.svg`} alt="搜索" />
+                    src={mouseOver ?sreachIcon :sreachPithIcon} alt="搜索" />
             </div>
         </div>
     )
