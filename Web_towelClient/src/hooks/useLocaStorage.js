@@ -6,7 +6,7 @@ export default function useLocalStorage() {
         return savedData ? JSON.parse(savedData) : {};
     });
 
-    useEffect(() => {
+    useEffect(() => { 
         const handleStorageChange = () => {
             const savedData = localStorage.getItem('loginData');
             setLocalStorageData(savedData ? JSON.parse(savedData) : {});
