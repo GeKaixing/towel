@@ -11,8 +11,7 @@ const menu = ref([
 ])
 </script>
 <template>
-    <main class="
-    drfcd flex  rounded-lg  ">
+    <main class=" drfcd flex  rounded-lg  ">
         <div class="w-full flex  flex-col gap-2">
             <RouterLink v-for="(item, index) in menu " :key="index"
                 :to="item.url"

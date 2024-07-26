@@ -8,13 +8,15 @@ import user from './views/body/user/user.vue'
 import Foot from './views/foot/Foot.vue'
 </script>
 <template>
-  <div class="flex gap-2 px-10 py-2">
+  <div class="flex pt-2  ">
     <Head></Head>
     <!-- <Post></Post> -->
     <!-- <postContent></postContent> -->
-     <!-- <add></add> -->
-      <!-- <user></user> -->
+    <!-- <add></add> -->
+    <!-- <user></user> -->
+     <div class="ml-[30%] w-[30%]">
       <RouterView></RouterView>
+     </div>
     <Foot></Foot>
   </div>
 </template>

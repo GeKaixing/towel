@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-    <main class="flex-1 flex flex-col rounded-lg  gap-2">
+    <main class="flex-1 flex flex-col  rounded-lg  gap-2">
         <div class="w-full h-auto flex "> 
             <div class="flex  items-center gap-2">
                 <div class="w-12 h-12 rounded-full bg-gray-500">
