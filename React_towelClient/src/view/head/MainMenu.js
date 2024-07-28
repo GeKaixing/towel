@@ -17,7 +17,7 @@ import demo44 from '../../assets/static/MainMenuIconPitchUp/设置.svg'
 import demo55 from '../../assets/static/MainMenuIconPitchUp/进入.svg'
 
 export default function MainMenu() {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [, setWidth] = useState(window.innerWidth);
   const [localStorageData] = useLocaStorage();
   const { noReadNumber } = useContext(noReadNumbers);
   const router = useLocation();

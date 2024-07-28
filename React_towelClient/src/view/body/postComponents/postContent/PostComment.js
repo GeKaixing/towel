@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import style from './PostComment.module.css';
 import PostCommentButton from './PostCommentButton';
 import { useLocation, useNavigate } from 'react-router';

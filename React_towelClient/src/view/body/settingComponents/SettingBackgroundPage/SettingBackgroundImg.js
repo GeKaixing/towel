@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import style from './SettingBackgroundImg.module.css'
+// import style from './SettingBackgroundImg.module.css'
 import { selectLightorDarkContext } from '../../../../store/selectLightorDark'
 import { getHPImageArchive } from '../../../../services/setting/setting'
 export default function SettingBackgroundImg() {

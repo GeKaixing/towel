@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import PostInput from './PostInput';
 // import style from './PostContent.module.css'
 // import axios from 'axios';
@@ -15,7 +15,7 @@ export default function PostContent() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
     const [localStorageData] = useLocalStorage()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     //获取当前路由
     const { pathname, state } = useLocation()
     const [mouseOver, setMouseOver] = useState({

@@ -12,7 +12,7 @@ export default function PostPage({ userarticles = [], reloadUserArticle=false, s
     getPost().then((response) => {
         setarticles(response.data)
       })
-      .catch((error) => {
+      .catch(() => {
         setarticles(postJson)
       })
   }, [reload])

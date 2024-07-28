@@ -37,7 +37,6 @@ export default function User() {
             <section className='sticky top-2 mb-4'>
                 <form className={style.search} onSubmit={(e) => { e.preventDefault() }} >
                     <input className='w-full bg-[--boxColor] border-none rounded-my-rounded-10px' type='text' placeholder='search more' value={searchData} onChange={(e) => { e.preventDefault(); setSearechData(e.target.value) }}></input>
-                    {/* global process*/}
                     <img  onClick={searchDataApi} className={style.SearchOutlined}
                         onMouseEnter={() => setMouseOver(true)}
                         onMouseLeave={() => setMouseOver(false)}

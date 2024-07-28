@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import style from './UserHomePage.module.css'
+import React, { useState } from 'react'
+// import style from './UserHomePage.module.css'
 import UserArticle from './UserArticle'
 import UserComment from './UserComment'
 import UserReply from './UserReply'

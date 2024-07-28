@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Routes, Route, useLocation, useNavigate, } from 'react-router-dom'
+import React  from 'react'
+import { Routes, Route, } from 'react-router-dom'
 // import style from "./Routers.module.css"
 import MainMenu from '../view/head/MainMenu'
 import About from '../view/body/aboutComponents/About'
@@ -19,7 +19,7 @@ import SettingBackgroundImg from '../view/body/settingComponents/SettingBackgrou
 import SettingDeactivate from '../view/body/settingComponents/SettingUserPage/SettingDeactivate'
 import SettingAccount from '../view/body/settingComponents/SettingUserPage/SettingAccount'
 import NotRouter from '../components/NotRouter'
-import useLocalStorage from '../hooks/useLocaStorage'
+// import useLocalStorage from '../hooks/useLocaStorage'
 import H5header from '../components/H5header'
 export default function Routers() {
     return (

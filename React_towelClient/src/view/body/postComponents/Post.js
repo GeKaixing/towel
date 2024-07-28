@@ -125,7 +125,7 @@ export default function Post(props) {
     const postIcon33 = new PostIcon(startPichIcon)
     const postIcon44 = new PostIcon(sharePichIcon)
 
-    const reportApi=()=>{
+    const reportApi = () => {
         alert('举报成功')
     }
 
@@ -133,11 +133,11 @@ export default function Post(props) {
         <div className='flex flex-col text-[--fontColor] justify-center mb-6 border-[--boxColor] hover:border-[--boxHoverColor] border-solid border-2  rounded-my-rounded-10px  p-2' onClick={navgatehandle}>
             <div className='flex flex-col space-y-2 '>
                 <div className='flex flex-row justify-between items-center' onClick={e => e.stopPropagation()} style={{ justifyContent: 'space-between', fontWeight: 'bold' }}>
-                    <div className='flex flex-row space-x-2 items-center'>
-                        <img src={props.headimg} className='w-10 h-10 rounded-full'></img>
+                    <div className='flex flex-row space-x-2 items-center object-fill'>
+                        <img src={props.headimg} className='w-10 h-10 rounded-full '></img>
                         <Link className='font-blod '>{props.name}</Link>
                     </div>
-                    <div onClick={() => targetIDHandler(props.id)}  className='relative'>...
+                    <div onClick={() => targetIDHandler(props.id)} className='relative'>...
                         {targetID === props.id ?
                             <DeleteBox postUserId={props.postUserId} deleteHandler={deletePostApi} DeleteBox={postDeleteBox} reportHandler={reportApi}></DeleteBox>
                             : null}
@@ -145,7 +145,11 @@ export default function Post(props) {
                 </div>
                 <div className='felx flex-col space-y-2'>
                     {props.content}
-                    {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-full h-full'></img>)}
+                    <div className='flex justify-between flex-wrap gap-2'>
+                        {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
+                        {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
+                        {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
+                    </div>
                 </div>
                 <div className='flex flex-row justify-around h-5 text-[--fontColor]' >
                     <div className='flex flex-row items-center hover:text-[host]' onClick={likehandle}
@@ -203,7 +207,7 @@ Post.propTypes = {
     postImages: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.arrayOf(PropTypes.string),
-      ]),
+    ]),
     likes: PropTypes.number.isRequired,
     comments: PropTypes.number.isRequired,
     favorites: PropTypes.number,

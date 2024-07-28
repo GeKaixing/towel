@@ -103,7 +103,7 @@ export default function Portal() {
                             value={textareaData}
                             onChange={(e) => settextareaData(e.target.value)}
                             className='w-full bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor]'
-                            sp="false"
+                            
                             placeholder="请输入内容"
                             rows={1}
                             maxLength={1000}
