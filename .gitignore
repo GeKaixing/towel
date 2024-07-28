@@ -8,7 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 # node_modules
 RN_towelClient/node_modules
-Web_towelClient/node_modules
+React_towelClient/node_modules
+Vue_towelClient/node_modules
 towelSever/node_modules
 uniapp_towelClient/node_modules
 RN_towelClient/.DS_Store
