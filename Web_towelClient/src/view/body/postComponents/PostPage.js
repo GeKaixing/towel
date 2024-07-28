@@ -3,16 +3,17 @@ import { useLocation } from 'react-router-dom';
 import Post from './Post'
 import propTypes from 'prop-types'
 import {getPost} from '../../../services/post/post'
+import postJson from '../../../assets/json/post.json'
 export default function PostPage({ userarticles = [], reloadUserArticle=false, setreloadUserArticle}) {
   const { pathname } = useLocation()
   const [articles, setarticles] = useState([])
   const [reload, setLoad] = useState(false)
   useEffect(() => {
-    getPost() .then((response) => {
+    getPost().then((response) => {
         setarticles(response.data)
       })
       .catch((error) => {
-        console.log(error.message)
+        setarticles(postJson)
       })
   }, [reload])
   return (

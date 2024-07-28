@@ -7,7 +7,7 @@
         "postShare": 0,
         "user": {
             "username": "test",
-            "headimg": "http://127.0.0.1:4000/1eac4dd2-a292-4999-828d-ffa29c1fe1bc_test.png"
+            "headimg": "https://raw.githubusercontent.com/GeKaixing/towel/main/README_static/logo.png"
         },
         "postFavorite": 2,
         "postLike": 2,
@@ -21,7 +21,7 @@
         "postShare": 0,
         "user": {
             "username": "test",
-            "headimg": "http://127.0.0.1:4000/1eac4dd2-a292-4999-828d-ffa29c1fe1bc_test.png"
+            "headimg": "https://raw.githubusercontent.com/GeKaixing/towel/main/README_static/logo.png"
         },
         "postFavorite": 1,
         "postLike": 1,
@@ -31,11 +31,11 @@
         "_id": "668c0820325abc1022f9690b",
         "postUserId": "6682baae94a2250cc3480174",
         "postText": "l",
-        "postImages": "http://127.0.0.1:4000/c0b0be11-18e8-4f07-9347-f8e5fd01d4e1_æªå±2024-06-30 17.46.52.png",
+        "postImages": "https://raw.githubusercontent.com/GeKaixing/towel/main/README_static/logo.png",
         "postShare": 0,
         "user": {
             "username": "demo",
-            "headimg": "http://127.0.0.1:4000/19dc8d58-2f8e-4ed2-a1b5-22317d95597b_æªå±2024-06-30 17.46.52.png"
+            "headimg": "https://raw.githubusercontent.com/GeKaixing/towel/main/README_static/logo.png"
         },
         "postFavorite": 0,
         "postLike": 0,
