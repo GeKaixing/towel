@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "./static/css/main.2ce6f722.css",
+    "main.js": "./static/js/main.cd034b9c.js",
+    "static/media/head-img.svg": "./static/media/head-img.e2fcde42750c778b00b08be841d1868b.svg",
+    "static/media/设置.svg": "./static/media/设置.9ee704d2c223b504bc1149c1b624c354.svg",
+    "static/media/提示.svg": "./static/media/提示.ef613b69d2ed1002442f86cd71d7a0e0.svg",
+    "static/media/搜索.svg": "./static/media/搜索.294a431159c3f60e34d300c32775aca4.svg",
+    "static/media/图片添加.svg": "./static/media/图片添加.d44a7c7bca4a66a121196d947b47609b.svg",
+    "static/media/赞.svg": "./static/media/赞.1eb14420d2295570fac7b448ad45823e.svg",
+    "index.html": "./index.html",
+    "static/media/首页.svg": "./static/media/首页.15326fb69ae5aff06e5c443b3384e7d2.svg",
+    "static/media/预览关闭.svg": "./static/media/预览关闭.8a0ad8c47788e2976ad2f1978db000c1.svg",
+    "static/media/评论.svg": "./static/media/评论.a68ab3a3ad0c18b474a554fa4058797d.svg",
+    "static/media/预览打开.svg": "./static/media/预览打开.240a477c3fe68d7c9d3633f5148eded2.svg",
+    "static/media/进入.svg": "./static/media/进入.d5dd1fdf8e02354d393dae0956933aff.svg",
+    "static/media/添加.svg": "./static/media/添加.42a456d654678e72f44b55177097a3ff.svg",
+    "static/media/星星.svg": "./static/media/星星.c938acce4397464d6aa38a607b0d642c.svg",
+    "static/media/分享.svg": "./static/media/分享.a9086f3d5e457de8606ad14f80ebb58f.svg",
+    "static/media/左_left.svg": "./static/media/左_left.4f423a3a7cb6ebce990267cb2ceb6e14.svg",
+    "main.2ce6f722.css.map": "./static/css/main.2ce6f722.css.map",
+    "main.cd034b9c.js.map": "./static/js/main.cd034b9c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2ce6f722.css",
+    "static/js/main.cd034b9c.js"
+  ]
+}
