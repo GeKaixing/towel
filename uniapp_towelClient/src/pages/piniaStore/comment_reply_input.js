@@ -44,8 +44,6 @@ export const useCommentReplyInputStore = defineStore('commentReplyInput', () => 
         * 问题出在 data._id || data.commentId
         * reply也有_id  data._id
         */
-        // console.log('这是commentid',data._id || data.commentId)
-        console.log(data.commentId || data._id)
         const commentId = data.commentId || data._id,
             replyToreplyUserId = commentUserId || data.replyToreplyUserId,
             replyToreplyUser = commenrUserName || data.replyToreplyUser.headimg,
@@ -71,10 +69,10 @@ export const useCommentReplyInputStore = defineStore('commentReplyInput', () => 
         const {
             commentId,
             replyUserId,
-            replyToreplyUserId = null,
+            replyToreplyUserId ,
             replyToreplyUser: { username: replyToreplyUserusername },
             replyUser: { username } } = sendData.value;
-        console.log(commentId)
+
         uni.request({
             url: `http://127.0.0.1:4000/addreply`,
             method: 'POST',
@@ -95,7 +93,7 @@ export const useCommentReplyInputStore = defineStore('commentReplyInput', () => 
             },
             success: (res) => {
                 commentInput.value = ''
-                socket.emit(`${replyToreplyUserId || replyUserId}`);
+                socket.emit(`newMessage`, {newMessage: true,userid:replyToreplyUserId})
                 watchState.value = !(watchState.value)
 
             },

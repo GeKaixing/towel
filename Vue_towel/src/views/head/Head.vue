@@ -11,13 +11,14 @@ const title = ref([{title:'首页',url:'/'},
     ])
 </script>
 <template>
-    <header>
-        <nav class="fixed  flex flex-col  justify-around items-end  w-[22%] h-1/2  ">
+    <header class="w-[20%] fixed  top-2   ml-[10%] flex justify-start ">
+        <nav class=" flex flex-col w-full  justify-around items-end  h-1/2 ">
             <RouterLink v-for=" (item, index) in title" :key="index" :to="item.url" 
-                class="w-1/2 h-[50px] bg-white flex justify-start items-center hover:bg-gray-300 rounded-lg font-bold">
+                class=" w-full h-[50px]
+                text-lg font-bold
+                bg-white flex justify-start items-center hover:bg-gray-300 rounded-lg ">
                 {{ item.title }}</RouterLink>
         </nav>
     </header>
-    <div class="w-[30%] h-1/2 bg-black "> </div><!-- 处理fixed 元素 -->
 </template>
 <style></style>

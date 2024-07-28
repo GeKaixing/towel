@@ -64,11 +64,10 @@ export default function MainMenu() {
   ];
   return (
     <>
-      <div className=' flex md:mr-4 md:mt-2 md:ml-4 md:w-20 md:h-[80%] md:py-2   md:flex-col 
-        lg:w-[360px]  lg:bg-transparent
+      <div className=' flex md:mr-4 md:mt-2 md:ml-4 md:w-20 md:h-[80%] md:py-2 md:flex-col 
+        lg:w-[20%] lg:ml-[10%]
         px-2 fixed md:left-0 max-md:bottom-2  
-       justify-around w-full items-center rounded-my-rounded-10px
-     
+        justify-around w-full items-center rounded-my-rounded-10px
        '>
         <div className='hidden md:block md:w-10 md:h-10
           lg:w-20 lg:h-20
@@ -95,9 +94,9 @@ export default function MainMenu() {
 
         {/* {!localStorageData.jwt && <MainMenuLink to="/login" text='登录' />} */}
       </div>
-      <div className='max-md:hidden md:mr-4 md:ml-4 md:mt-2 md:w-20 md:h-[auto] md:py-2
+     {/*  <div className='max-md:hidden md:mr-4 md:ml-4 md:mt-2 md:w-20 md:h-[auto] md:py-2
       lg:w-[376px]   border-[--boxColor] hover:border-[--boxHoverColor] border-solid border-r-2
-      '></div>
+      '></div> */}
     </>
   );
 }

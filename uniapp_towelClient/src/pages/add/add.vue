@@ -88,8 +88,8 @@ const dleImage = () => {
             </view>
         </view>
         <view class="bottomBox">
-            <view @click="chooseImage" class="addImage">添加图片</view>
-            <view class="add" @click="add">添加</view>
+            <image @click="chooseImage" class="addImage" src="/static/Images/图片添加.svg"></image>
+            <image class="add" @click="add" src="/static/Images/添加.svg"></image>
         </view>
     </view>
     <view v-else>
@@ -123,16 +123,12 @@ const dleImage = () => {
 .addImage {
     width: 100rpx;
     height: 100rpx;
-    background-color: aqua;
-    background-image: url("../../static/logo.png");
     background-size:cover
 }
 
 .add {
     width: 100rpx;
     height: 100rpx;
-    background-color: rgb(199, 66, 148);
-    background-image: url("../../static/logo.png");
     background-size:cover
 }
 

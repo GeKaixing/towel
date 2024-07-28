@@ -33,7 +33,7 @@ export default function User() {
             .catch((error) => { console.log(error) })
     }
     return (
-        <div className=' ml-[70px] w-[300px] mr-[100px] max-lg:hidden'>
+        <div className='  w-[20%] mr-[10%] max-lg:hidden'>
             <section className='sticky top-2 mb-4'>
                 <form className={style.search} onSubmit={(e) => { e.preventDefault() }} >
                     <input className='w-full bg-[--boxColor] border-none rounded-my-rounded-10px' type='text' placeholder='search more' value={searchData} onChange={(e) => { e.preventDefault(); setSearechData(e.target.value) }}></input>

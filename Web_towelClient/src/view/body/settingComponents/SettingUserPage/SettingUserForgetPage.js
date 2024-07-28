@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react'
 import style from './SettingUserForgetPage.module.css'
 import axios from 'axios'
+import eyeIconOpen from '../../../../assets/static/otherIcon/预览打开.svg'
+import eyeIconClose from '../../../../assets/static/otherIcon/预览关闭.svg'
 export default function SettingUserForgetPage() {
-    const [localStorageData, setLocalStorageData] = useState({});
+    const [,setLocalStorageData] = useState({});
     const [inputData, setinputData] = useState({
         user: '',
         email: '',
@@ -95,15 +97,15 @@ export default function SettingUserForgetPage() {
                 {isShowCode ? <input type='code' placeholder='电子邮件验证码' value={inputData.code} onChange={codeHandle}></input> : null}
                 <input type={showpassword ? 'text' : 'password'} placeholder='新密码' value={inputData.password} onChange={passwordHandle}></input>
                 {showpassword ?
-                    <img className={style.EyeOutlined} onClick={() => setshowpassword(!showpassword)} src={`${process.env.PUBLIC_URL}/static/otherIcon/预览打开.svg`} alt="预览打开" />
+                    <img className={style.EyeOutlined} onClick={() => setshowpassword(!showpassword)} src={eyeIconOpen} alt="预览打开" />
                     :
-                    <img className={style.EyeInvisibleOutlined} onClick={() => setshowpassword(!showpassword)} src={`${process.env.PUBLIC_URL}/static/otherIcon/预览关闭.svg`} alt="预览关闭" />
+                    <img className={style.EyeInvisibleOutlined} onClick={() => setshowpassword(!showpassword)} src={eyeIconClose} alt="预览关闭" />
                 }
                 <input type={showpassword2 ? 'text' : 'password'} placeholder='确认密码密码' value={inputData.password2} onChange={password2Handle}></input>
                 {showpassword2 ?
-                    <img className={style.EyeOutlined2} onClick={() => setshowpassword2(!showpassword2)} src={`${process.env.PUBLIC_URL}/static/otherIcon/预览打开.svg`} alt="预览打开" />
+                    <img className={style.EyeOutlined2} onClick={() => setshowpassword2(!showpassword2)} src={eyeIconOpen} alt="预览打开" />
                     :
-                    <img className={style.EyeInvisibleOutlined2} onClick={() => setshowpassword2(!showpassword2)} src={`${process.env.PUBLIC_URL}/static/otherIcon/预览关闭.svg`} alt="预览关闭" />
+                    <img className={style.EyeInvisibleOutlined2} onClick={() => setshowpassword2(!showpassword2)} src={eyeIconClose} alt="预览关闭" />
                 }
                 <input type='submit' className={style.SettingUserForgetPageFormSendCode} value='发送验证码' onClick={sendCodeHandle}></input>
                 <input type='submit' className={style.SettingUserForgetPageFormSubmitBotton} onClick={submitHandler} ></input>

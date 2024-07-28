@@ -26,7 +26,6 @@
  mongosh --version
 ````
 **web端启动**，须安装node和git
-   
 
     git clone https://github.com/GeKaixing/towel.git  
 
@@ -48,7 +47,17 @@
     npm i  
 启动开发服务器  
 
+    nodex index.js
+
+使用nodemon自动刷新
+
     nodemon
+
+当window系统无法识别nodemon(修改执行策略)
+
+    Set-ExecutionPolicy RemoteSigned
+
+
 ### 1.1项目目录结构
 web端目录结构
 ````

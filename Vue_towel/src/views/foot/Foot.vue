@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-    <footer class="p-2 space-y-2">
+    <footer class="p-2 space-y-2  w-[20%] mr-[10%] ">
         <form class='h-12 w-full bg-gray-500 flex gap-2 rounded-lg'>
             <input class='w-full h-full rounded-lg bg-slate-600'>
             <button class="h-16 w-16 rounded-full ">发送</button>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import style from './Signup.module.css'
 import { postRegister } from '../../../services/Signup/signup'
 import { getNodemailerRegister } from '../../../services/nodemailerRegister/nodemailerRegister'
+import { Link } from 'react-router-dom'
 export default function Signup() {
   const [valuename_signup, setValuename_signup] = useState('') // 获取账号
   const [valuepassword_signup, setValuepassword_signup] = useState('')  // 获取密码
@@ -82,6 +83,9 @@ export default function Signup() {
       <button onClick={signupApi} className={style.button}>
         注册
       </button>
+      <Link  to={'/login'} className={[style.button,'text-center']} >
+        登录
+      </Link>
       {signupstate ? null : <div>账号重复</div>}
     </div >
   )
