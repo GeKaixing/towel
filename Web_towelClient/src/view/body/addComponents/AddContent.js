@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 // import style from './AddContent.module.css';
 import useLocalStorage from '../../../hooks/useLocaStorage';
 import { postAddPost, postUpLoad } from '../../../services/add/add';
-
+import likeIcon from '../../../assets/static/postIcon/赞.svg'
+import commentIcon from '../../../assets/static/postIcon/评论.svg'
+import startIcon from '../../../assets/static/postIcon/星星.svg'
+import shareIcon from '../../../assets/static/postIcon/分享.svg'
+import addImgaIcon from '../../../assets/static/otherIcon/图片添加.svg'
+import addImgaPichIcon from '../../../assets/static/otherIconPitchUp/图片添加.svg'
+import addIcon from '../../../assets/static/MainMenuIcon/添加.svg'
+import addPichIcon from '../../../assets/static/MainMenuIconPitchUp/添加.svg'
 
 export default function Portal() {
     const [textareaData, settextareaData] = useState('');
@@ -71,14 +78,14 @@ export default function Portal() {
             this.path = process.env.PUBLIC_URL + path
         }
     }
-    const postIcon1 = new PostIcon('/static/postIcon/赞.svg')
-    const postIcon2 = new PostIcon('/static/postIcon/评论.svg')
-    const postIcon3 = new PostIcon('/static/postIcon/星星.svg')
-    const postIcon4 = new PostIcon('/static/postIcon/分享.svg')
-    const postIcon5 = new PostIcon('/static/otherIcon/图片添加.svg')
-    const postIcon55 = new PostIcon('/static/otherIconPitchUp/图片添加.svg')
-    const postIcon6 = new PostIcon('/static/MainMenuIcon/添加.svg')
-    const postIcon7 = new PostIcon('/static/MainMenuIconPitchUp/添加.svg')
+    const postIcon1 = new PostIcon(likeIcon)
+    const postIcon2 = new PostIcon(commentIcon)
+    const postIcon3 = new PostIcon(startIcon)
+    const postIcon4 = new PostIcon(shareIcon)
+    const postIcon5 = new PostIcon(addImgaIcon)
+    const postIcon55 = new PostIcon(addImgaPichIcon)
+    const postIcon6 = new PostIcon(addIcon)
+    const postIcon7 = new PostIcon(addPichIcon)
 
     return (
         <div className='flex flex-col w-full px-2 py-2 '>
