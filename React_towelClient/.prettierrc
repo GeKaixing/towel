@@ -1,9 +1,0 @@
-{
-    "semi": true,/* 强制分号 */
-    "singleQuote": true,    /* 使用单引号 */ */
-    "printWidth": 80,/* 每行的字符数 */
-    "tabWidth": 2,/* 缩进 */
-    "trailingComma": "es5",/* 多行时尽可能地放在最后一行的尾部 */
-    "bracketSpacing": true,/* 对象字面量中属性的引号 */
-    "arrowParens": "avoid"/* 在对象字面量属性或参数列表中括号 */
-  }
