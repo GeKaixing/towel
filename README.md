@@ -63,41 +63,41 @@
 web端目录结构
 ````
 src
-├── App.js  根组件
-├── assets  静态资源
-│   ├── json    测试数据
-│   │   └── post.json   测试数据
-│   └── static  静态资源
-│       ├── MainMenuIcon    菜单图标
+├── App.js                               根组件
+├── assets                               静态资源
+│   ├── json                             测试数据
+│   │   └── post.json                    测试数据
+│   └── static                           静态资源
+│       ├── MainMenuIcon                 菜单图标
 │       │   ├── 提示.svg
 │       │   ├── 添加.svg
 │       │   ├── 设置.svg
 │       │   ├── 评论.svg
 │       │   ├── 进入.svg
 │       │   └── 首页.svg
-│       ├── MainMenuIconPitchUp    菜单触发图标
+│       ├── MainMenuIconPitchUp          菜单触发图标
 │       │   ├── 提示.svg
 │       │   ├── 添加.svg
 │       │   ├── 设置.svg
 │       │   ├── 评论.svg
 │       │   ├── 进入.svg
 │       │   └── 首页.svg
-│       ├── otherIcon    其他图标
+│       ├── otherIcon                    其他图标
 │       │   ├── head-img.svg
 │       │   ├── 左_left.svg
 │       │   ├── 搜索.svg
 │       │   ├── 图片添加.svg
 │       │   ├── 预览关闭.svg
 │       │   └── 预览打开.svg
-│       ├── otherIconPitchUp    其他触发图标
+│       ├── otherIconPitchUp             其他触发图标
 │       │   ├── 搜索.svg
 │       │   └── 图片添加.svg
-│       ├── postIcon    帖子图标
+│       ├── postIcon                     帖子图标
 │       │   ├── 赞.svg
 │       │   ├── 分享.svg
 │       │   ├── 星星.svg
 │       │   └── 评论.svg
-│       └── postIconPitchUp     帖子触发图标
+│       └── postIconPitchUp              帖子触发图标
 │           ├── 赞.svg
 │           ├── 分享.svg
 │           ├── 星星.svg
