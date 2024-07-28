@@ -72,7 +72,7 @@ export default function H5header() {
                 <img onClick={searchDataApi} className='w-6 h-6'
                     onMouseEnter={() => setMouseOver(true)}
                     onMouseLeave={() => setMouseOver(false)}
-                    src={mouseOver ?sreachIcon :sreachPithIcon} alt="搜索" />
+                    src={mouseOver ?sreachPithIcon:sreachIcon } alt="搜索" />
             </div>
         </div>
     )
