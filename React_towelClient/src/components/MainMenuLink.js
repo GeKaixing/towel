@@ -3,7 +3,7 @@ import MainMenuTitle from './MainMenuTitle'
 import { Link } from 'react-router-dom'
 import { PropTypes } from 'prop-types'
 
-export default function MainMenuLink({ to, src, text, children, className }) {
+export default function MainMenuLink({ to, src, text, children }) {
 
     return (
         <Link to={to} className={'lg:flex lg:flex-row lg:items-center lg:mb-5' }>
@@ -20,5 +20,5 @@ MainMenuLink.propTypes = {
     to: PropTypes.string.isRequired,
     src: PropTypes.string,
     children: PropTypes.node,
-    className: PropTypes.string,
+    // className: PropTypes.string,
 }

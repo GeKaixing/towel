@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import propTypes from 'prop-types'
 import { getAllreply, getOnePost, postDelReply } from '../../../../services/post/post'
@@ -50,7 +50,7 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
 
     return (
         <div>
-            {responseData.map((item, index) => (
+            {responseData.map((item) => (
                 <div key={item._id} className='text-[--fontColor] flex justify-between pl-5 '>
                     {(item.replyToreplyUserId !== null) ?
                         <div className='font-bold'>
@@ -89,5 +89,5 @@ Replycontent.propTypes = {
     userReplyData: propTypes.array,
     setInputData: propTypes.func,
     reloadUserReply: propTypes.bool,
-   
+    setreloadUserReplys: propTypes.func
 }

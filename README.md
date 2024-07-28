@@ -62,65 +62,148 @@
 ### 1.1项目目录结构
 web端目录结构
 ````
-├── App.js    二级主入口
-├── components    组件 
-│   ├── MainMenu.js    导航栏
-│   ├── MainMenu.module.css
-│   └── mainMenuComponents    导航栏组件
-│       ├── About.js    关于
-│       ├── About.module.css
-│       ├── Add.js    添加
-│       ├── Message.js    消息
-│       ├── Post.js     文章
-│       ├── Post.module.css
-│       ├── Search.js     搜索
-│       ├── User.js    用户
-│       ├── User.module.css
-│       ├── addComponents  添加组件
-│       │   ├── AddContent.js    添加主页
-│       │   └── AddContent.module.css
-│       ├── messageComponents    消息组件
-│       │   ├── Message.module.css
-│       │   └── MessageConten.js    消息主页
-│       ├── postComponents    文章组件
-│       │   ├── Post.js    文章主页
-│       │   ├── Post.module.css
-│       │   ├── PostPage.js    文章数据
-│       │   └── postContent    进入文章/文章详细页
-│       │       ├── PostComment.js    文章回复
-│       │       ├── PostComment.module.css
-│       │       ├── PostCommentButton.js    文章回复按钮
-│       │       ├── PostCommentButton.module.css
-│       │       ├── PostContent.js    文章内容/入口
-│       │       ├── PostContent.module.css
-│       │       ├── PostInput.js    文章回复评论框
-│       │       ├── PostInput.module.css
-│       │       ├── PostReplyContent.js    回复内容/二级评论内容
-│       │       └── PostReplyContent.module.css
-│       └── userComponents    组件
-│           ├── Login.js    登录
-│           ├── Login.module.css
-│           ├── Signup.js    注册
-│           ├── Signup.module.css
-│           └── userHomePageComponts    用户管理组件
-│               ├── UserArticle.js    用户文章
-│               ├── UserComment.js    用户评论
-│               ├── UserHomePage.js    用户主页/入口
-│               ├── UserHomePage.module.css    
-│               └── UserReply.js    用户回复
-├── context
-│   ├── noReadNumbers.js    消息数量数据
-│   └── searchData.js    搜索数据
-├── index.css
-├── index.js    主入口
-├── router
-│   ├── Protected.js    路由守卫
-│   ├── Routers.js    路由入口
-│   └── Routers.module.css
-└── socket
-    └── socket.js
-
-
+src
+├── App.js                               根组件
+├── assets                               静态资源
+│   ├── json                             测试数据
+│   │   └── post.json                    测试数据
+│   └── static                           静态资源
+│       ├── MainMenuIcon                 菜单图标
+│       │   ├── 提示.svg
+│       │   ├── 添加.svg
+│       │   ├── 设置.svg
+│       │   ├── 评论.svg
+│       │   ├── 进入.svg
+│       │   └── 首页.svg
+│       ├── MainMenuIconPitchUp          菜单触发图标
+│       │   ├── 提示.svg
+│       │   ├── 添加.svg
+│       │   ├── 设置.svg
+│       │   ├── 评论.svg
+│       │   ├── 进入.svg
+│       │   └── 首页.svg
+│       ├── otherIcon                    其他图标
+│       │   ├── head-img.svg
+│       │   ├── 左_left.svg
+│       │   ├── 搜索.svg
+│       │   ├── 图片添加.svg
+│       │   ├── 预览关闭.svg
+│       │   └── 预览打开.svg
+│       ├── otherIconPitchUp             其他触发图标
+│       │   ├── 搜索.svg
+│       │   └── 图片添加.svg
+│       ├── postIcon                     帖子图标
+│       │   ├── 赞.svg
+│       │   ├── 分享.svg
+│       │   ├── 星星.svg
+│       │   └── 评论.svg
+│       └── postIconPitchUp              帖子触发图标
+│           ├── 赞.svg
+│           ├── 分享.svg
+│           ├── 星星.svg
+│           └── 评论.svg
+├── components                           复用组件
+│   ├── DeleteBox.js                     删除弹窗
+│   ├── H5header.js                      h5显示的头部
+│   ├── MainMenuLink.js                  菜单链接
+│   ├── MainMenuTitle.js                 菜单标题
+│   ├── NotRouter.js                     404路由
+│   ├── Portal.js                        模态弹窗
+│   └── Search.js                        搜索组件
+├── hooks                                自定义hooks  
+│   ├── useClickOutside.js               鼠标点击外部 hook
+│   └── useLocaStorage.js                获取locastorage数据 hook
+├── index.css                            全局样式
+├── index.js                             根组件
+├── router                               路由
+│   ├── Protected.js                     路由守卫
+│   ├── Routers.js                       路由入口
+│   └── Routers.module.css               路由样式
+├── services                             api
+│   ├── Signup                           注册 API
+│   │   └── signup.js
+│   ├── add                              添加 API
+│   │   └── add.js  
+│   ├── config.js                        配置 API
+│   ├── login                            登录 API
+│   │   └── login.js
+│   ├── message                          消息 API
+│   │   └── Message.js
+│   ├── nodemailerRegister               验证码 API
+│   │   └── nodemailerRegister.js
+│   ├── post                             发布 API
+│   │   └── post.js
+│   ├── setting                          设置 API
+│   │   └── setting.js
+│   └── user                             用户 API
+│       └── user.js
+├── socket                               socket API
+│   └── socket.js
+├── store                                状态管理
+│   ├── Context.js                       状态管理入口
+│   ├── MessageResponseData.js           消息页面状态
+│   ├── noReadNumbers.js                 未读消息状态
+│   ├── searchData.js                    搜索页面状态
+│   └── selectLightorDark.js             颜色背景状态
+└── view                                 页面
+    ├── body                             主体/页面中间的部分
+    │   ├── aboutComponents              关于组件
+    │   │   └── About.js                 关于页面
+    │   ├── addComponents                添加组件
+    │   │   ├── AddContent.js            添加页面
+    │   │   └── AddContent.module.css
+    │   ├── messageComponents            消息组件
+    │   │   ├── Message.module.css
+    │   │   └── MessageConten.js         消息页面
+    │   ├── postComponents               帖子
+    │   │   ├── Post.js                  帖子组件
+    │   │   ├── Post.module.css
+    │   │   ├── PostPage.js              帖子页面
+    │   │   └── postContent              帖子内容   
+    │   │       ├── PostComment.js       评论内容
+    │   │       ├── PostComment.module.css
+    │   │       ├── PostCommentButton.js评论按钮
+    │   │       ├── PostCommentButton.module.css
+    │   │       ├── PostContent.js       帖子内容
+    │   │       ├── PostContent.module.css
+    │   │       ├── PostInput.js         评论/回复输入框
+    │   │       ├── PostInput.module.css
+    │   │       ├── PostReplyContent.js  回复内容
+    │   │       └── PostReplyContent.module.css
+    │   ├── settingComponents            设置頁面
+    │   │   ├── SettingBackground.js     黑白设置
+    │   │   ├── SettingBackground.module.css
+    │   │   ├── SettingBackgroundPage    自定义背景/bing背景
+    │   │   │   ├── SettingBackgroundImg.js
+    │   │   │   └── SettingBackgroundImg.module.css
+    │   │   ├── SettingContent.js        设置页面
+    │   │   ├── SettingContent.module.css
+    │   │   ├── SettingUser.js           用户设置
+    │   │   ├── SettingUser.module.css
+    │   │   └── SettingUserPage          用户信息设置
+    │   │       ├── SettingAccount.js    账号信息设置
+    │   │       ├── SettingAccount.module.css
+    │   │       ├── SettingDeactivate.js 账号注销设置
+    │   │       ├── SettingDeactivate.module.css
+    │   │       ├── SettingUserForgetPage.js忘记密码设置
+    │   │       └── SettingUserForgetPage.module.css
+    │   └── userComponents               用户组件
+    │       ├── Login.js                 登录页面
+    │       ├── Login.module.css    
+    │       ├── Signup.js                注册页面
+    │       ├── Signup.module.css
+    │       └── userHomePageComponts     用户主页组件
+    │           ├── UserArticle.js       用户文章页面
+    │           ├── UserComment.js       用户评论页面
+    │           ├── UserContent.js       用户主页页面
+    │           ├── UserHomePage.module.css
+    │           └── UserReply.js         用户回复页面
+    ├── foot                             页脚/页面右侧
+    │   ├── User.js
+    │   └── User.module.css
+    └── head                             头部/页面左侧
+        ├── MainMenu.js                  导航栏            
+        └── MainMenu.module.css
 ````
 后端目录结构
 ````

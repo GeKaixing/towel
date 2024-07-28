@@ -24,6 +24,7 @@ export default function H5header() {
                 break;
             case 'homepage':
                 setcc('个人')
+                break;
             case 'login':
                 setcc('登录')
                 break;
@@ -64,7 +65,7 @@ export default function H5header() {
                 <div>{cc}</div>
             </div>
 
-
+            {/* global process*/}
             <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='w-10 h-10 self-center absolute left-1/2 -translate-x-1/2' onClick={() => window.scrollTo({ top: 0 })}></img>
 
             <div className='w-56 flex space-x-2 self-center justify-end mr-2 '>

@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import useLocalStorage from '../hooks/useLocaStorage'
 import Portal from './Portal'
+import { PropTypes } from 'prop-types'
 
 function DeleteBox({ postUserId, deleteHandler, reportHandler = () => { alert('举报成功') }, children }) {
     const [localStorageData] = useLocalStorage()
@@ -20,3 +21,10 @@ function DeleteBox({ postUserId, deleteHandler, reportHandler = () => { alert('�
     )
 }
 export default DeleteBox
+DeleteBox.propTypes = {
+    postUserId: PropTypes.string,
+    deleteHandler: PropTypes.func,
+    reportHandler: PropTypes.func,
+    children: PropTypes.node,
+    // className: PropTypes.string,
+}
