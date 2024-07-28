@@ -3,7 +3,8 @@
 <img src='https://github.com/GeKaixing/towel/raw/main/README_static/logo.png'/>
 </div>
 
-一个 web/android/ios/uniapp 小程序的论坛app，将````持续开源和维护````           
+一个 web/android/ios/uniapp 小程序的论坛app，将````持续开源和维护````    
+[towel静态部署,在线查看](https://gekaixing.github.io)       
 主题颜色:rgba(134, 196, 248, 1)             
 副颜色:rgba(248, 196, 134, 1)  
 [logo详细](https://www.figma.com/design/Dd4QJLyuB9t857qU0xDkuw/Untitled?node-id=0-1&t=gQPofkDQnzy9zHtf-1)
