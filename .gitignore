@@ -8,15 +8,16 @@ pnpm-debug.log*
 lerna-debug.log*
 # node_modules
 RN_towelClient/node_modules
-Web_towelClient/node_modules
+React_towelClient/node_modules
+Vue_towelClient/node_modules
 towelSever/node_modules
 uniapp_towelClient/node_modules
 RN_towelClient/.DS_Store
-Web_towelClient/.DS_Store
+React_towelClient/.DS_Store
 towelSever/.DS_Store
 uniapp_towelClient/.DS_Store
 RN_towelClient/dist
-Web_towelClient/dist
+React_towelClient/dist
 towelSever/dist
 uniapp_towelClient/dist
 .DS_Store
@@ -34,4 +35,4 @@ dist
 # env
 .env
 # build dist
-Web_towelClient/build
+React_towelClient/build
