@@ -1,5 +1,44 @@
 [
-{
-    
-}
-]
+    {
+        "_id": "666acc20ae4009dd2f0cba46",
+        "postUserId": "6620e7eb66984c681742e753",
+        "postText": "测试",
+        "postImages": "",
+        "postShare": 0,
+        "user": {
+            "username": "test",
+            "headimg": "http://127.0.0.1:4000/1eac4dd2-a292-4999-828d-ffa29c1fe1bc_test.png"
+        },
+        "postFavorite": 2,
+        "postLike": 2,
+        "postComment": 1
+    },
+    {
+        "_id": "666f8ed94d5f9ade61ee77e9",
+        "postUserId": "6620e7eb66984c681742e753",
+        "postText": "sdsfsdfdf",
+        "postImages": "",
+        "postShare": 0,
+        "user": {
+            "username": "test",
+            "headimg": "http://127.0.0.1:4000/1eac4dd2-a292-4999-828d-ffa29c1fe1bc_test.png"
+        },
+        "postFavorite": 1,
+        "postLike": 1,
+        "postComment": 0
+    },
+    {
+        "_id": "668c0820325abc1022f9690b",
+        "postUserId": "6682baae94a2250cc3480174",
+        "postText": "l",
+        "postImages": "http://127.0.0.1:4000/c0b0be11-18e8-4f07-9347-f8e5fd01d4e1_æªå±2024-06-30 17.46.52.png",
+        "postShare": 0,
+        "user": {
+            "username": "demo",
+            "headimg": "http://127.0.0.1:4000/19dc8d58-2f8e-4ed2-a1b5-22317d95597b_æªå±2024-06-30 17.46.52.png"
+        },
+        "postFavorite": 0,
+        "postLike": 0,
+        "postComment": 0
+    }
+ ]
