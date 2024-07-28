@@ -33,3 +33,5 @@ dist
 
 # env
 .env
+# build dist
+Web_towelClient/build
