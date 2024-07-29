@@ -69,8 +69,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                     <span className='flex justify-between mb-2'>
                         <div className='flex space-x-2 items-center'>
                             <img src={item.users[0].headimg} className='h-10 w-10 rounded-full' alt="user" />
-                            <div onClick={() => setInputData('@' + item.users[0].username + ':')}>{item.users[0].username}</div>
-
+                            <div onClick={() => setInputData('@' + item.users[0].username + ':')} className='font-bold'>{item.users[0].username}</div>
                         </div>
                         <div onClick={() => targetIDHandler(item._id)} className='relative' >...
                             {targetID === item._id &&

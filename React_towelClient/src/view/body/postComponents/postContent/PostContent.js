@@ -107,13 +107,12 @@ export default function PostContent() {
 
     return (
         <div className='flex flex-col p-2'>
-          
             <div className='flex flex-col '>
                 <div className=''>
                     <div className=''>
                         <div className='flex items-center f space-x-2 mb-2'>
                             <img src={contentdata.headimg} className='w-10 h-10 rounded-my-rounded-10px'></img>
-                            <Link className='font-blod' >{contentdata.name}</Link>
+                            <Link className='font-bold'>{contentdata.name}</Link>
                         </div>
                         <div className='flex flex-col justify-center items-center text-[--fontColor] font-bold' >
                             <div className='self-start'>

@@ -128,14 +128,13 @@ export default function Post(props) {
     const reportApi = () => {
         alert('举报成功')
     }
-
     return (
         <div className='flex flex-col text-[--fontColor] justify-center mb-6 border-[--boxColor] hover:border-[--boxHoverColor] border-solid border-2  rounded-my-rounded-10px  p-2' onClick={navgatehandle}>
             <div className='flex flex-col space-y-2 '>
                 <div className='flex flex-row justify-between items-center' onClick={e => e.stopPropagation()} style={{ justifyContent: 'space-between', fontWeight: 'bold' }}>
                     <div className='flex flex-row space-x-2 items-center object-fill'>
                         <img src={props.headimg} className='w-10 h-10 rounded-full '></img>
-                        <Link className='font-blod '>{props.name}</Link>
+                        <Link className='font-blod' to={`./userhomepage/${props.postUserId}`}>{props.name}</Link>
                     </div>
                     <div onClick={() => targetIDHandler(props.id)} className='relative'>...
                         {targetID === props.id ?

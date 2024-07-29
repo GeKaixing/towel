@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import UserArticle from './UserArticle'
 import UserComment from './UserComment'
 import UserReply from './UserReply'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getSocket } from '../../../../socket/socket'
 import useLocalStorage from '../../../../hooks/useLocaStorage'
 export default function UserHomePage() {
@@ -11,6 +11,7 @@ export default function UserHomePage() {
   // 选择组件 用于切换页面使用
   const [seletcpage, setseletcpage] = useState('')
   const Navigate = useNavigate()
+  const params = useParams()  
   // const [localStorageData, setLocalStorage] = useState({})
   // useEffect(() => {
   //   if (localStorage.getItem('loginData')) {
@@ -27,7 +28,7 @@ export default function UserHomePage() {
       default: return <UserArticle localStorageData={localStorageData}></UserArticle>
     }
   }
-  // 注销账号的函数
+  // 登出账号的函数
   const closeAnAccountHanlder = () => {
     localStorage.removeItem("loginData")
     Navigate("/", { replace: true })
@@ -46,7 +47,7 @@ export default function UserHomePage() {
         </div>
         <div className='flex space-x-2'>
           <div className='text-[--assistantColor]' onClick={() => Navigate("/setting")}>设置</div> 
-          <div className='text-[--fontColor]' onClick={closeAnAccountHanlder}>登出</div>
+          {localStorageData.userid===params.id&& <div className='text-[--fontColor]' onClick={closeAnAccountHanlder}>登出</div>}
         </div>
       </div>
       <div className='text-[fontColor] flex justify-between mt-2 mb-2'>
