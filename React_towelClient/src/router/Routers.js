@@ -21,6 +21,7 @@ import SettingAccount from '../view/body/settingComponents/SettingUserPage/Setti
 import NotRouter from '../components/NotRouter'
 // import useLocalStorage from '../hooks/useLocaStorage'
 import H5header from '../components/H5header'
+import PrivateChat from '../view/body/messageComponents/PrivateChat'
 export default function Routers() {
     return (
         <div className='flex '>
@@ -36,6 +37,7 @@ export default function Routers() {
                         <Route path='/Message' element={<Message />}></Route>
                         <Route path='/userhomepage/:id' element={<UserHomePage></UserHomePage>}></Route>
                         <Route path='/post' element={<Add></Add>}></Route>
+                        <Route path='/privatechat/:id' element={<PrivateChat/>}></Route>
                     </Route>
                     <Route path='/setting' element={<Setting />}>
                     </Route>
