@@ -33,6 +33,6 @@ dist
 *.sw?
 
 # env
-.env
+# .env
 # build dist
 React_towelClient/build

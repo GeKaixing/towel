@@ -3,7 +3,6 @@ import axios from "axios";
 // 从环境变量中获取 API 基础 URL
 /* global process */
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
 // 从 localStorage 中获取登录数据
 const localStorageData = JSON.parse(localStorage.getItem('loginData'));
 
@@ -20,7 +19,6 @@ const auth = axios.create({
 const open = axios.create({
     baseURL: REACT_APP_API_BASE_URL,
 });
-
 
 /* // 请求拦截器
 auth.interceptors.request.use(

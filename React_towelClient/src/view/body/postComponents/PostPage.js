@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Post from './Post'
 import propTypes from 'prop-types'
-import {getPost} from '../../../services/post/post'
+import { getPost } from '../../../services/post/post'
 import postJson from '../../../assets/json/post.json'
-export default function PostPage({ userarticles = [], reloadUserArticle=false, setreloadUserArticle}) {
+export default function PostPage({ userarticles = [], reloadUserArticle = false, setreloadUserArticle }) {
   const { pathname } = useLocation()
   const [articles, setarticles] = useState([])
   const [reload, setLoad] = useState(false)
   useEffect(() => {
-    getPost().then((response) => {
+    /*global process */
+    process.env.REACT_APP_TEST === 'TEST' ?
+      setarticles(postJson):
+      getPost().then((response) => {
         setarticles(response.data)
-      })
-      .catch(() => {
-        setarticles(postJson)
       })
   }, [reload])
   return (
