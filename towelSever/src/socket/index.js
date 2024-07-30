@@ -36,5 +36,11 @@ module.exports = (io) => {
             ]);
             io.emit(`${data.userid}`, { datas });
         })
+        socket.on('privatachat',(data)=>{
+            const userid=data.userid
+            socket.on(`privatachat${data.userid}`, (data)=>{
+                socket.emit(`privatachat${userid}`, { chatData:data.chatData,userid:data.userid});
+            });
+        })
     })
 };

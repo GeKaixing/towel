@@ -138,7 +138,7 @@ export default function Post(props) {
                     </div>
                     <div onClick={() => targetIDHandler(props.id)} className='relative'>...
                         {targetID === props.id ?
-                            <DeleteBox postUserId={props.postUserId} deleteHandler={deletePostApi} DeleteBox={postDeleteBox} reportHandler={reportApi}></DeleteBox>
+                            <DeleteBox postUserId={props.postUserId} headimg={props.headimg} userName={props.name} deleteHandler={deletePostApi} DeleteBox={postDeleteBox} reportHandler={reportApi}></DeleteBox>
                             : null}
                     </div>
                 </div>
