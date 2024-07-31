@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import style from './Message.module.css'
 import { useNavigate } from 'react-router';
+import { Link} from 'react-router-dom'
 import { noReadNumbers } from '../../../store/noReadNumbers';
 import { MessageResponseDataContext } from '../../../store/MessageResponseData'
 import { deleteNotifications, getNotifications, postReadnotifications } from '../../../services/message/Message';
 import { getOnePost } from '../../../services/post/post';
+import { privateChatContext } from '../../../store/privateChat';
 export default function Message() {
   const { MessageResponseData: responseData, setMessageResponseData: setResponseData } = useContext(MessageResponseDataContext)//responseData,setResponseData
   const navigate = useNavigate()
   const { setNoReadNumber } = useContext(noReadNumbers)
+  const {privateChatData}=useContext(privateChatContext)
+console.log(privateChatData)
   const [targetID, setTargetID] = useState('')
   const [reLoadnotifications, setReLoadNotifications] = useState(false)
   const MessageRef = useRef(null)
@@ -68,7 +72,17 @@ export default function Message() {
       .catch((error) => { console.log(error) })
   }
   return (
-    <div>
+    <div className='space-y-2'>
+      <div>私信</div>
+        {/* 与你private chata用户id */}
+        {
+          privateChatData.length!==0&&<Link to={`/privatechat/${privateChatData[0].sendid}`} state={{userName:privateChatData[0].userName, headimg:privateChatData[0].headimg}}>
+          <main className='space-x-2 flex flex-nowrap items-center'><img className='h-10 w-10 rounded-full'src={privateChatData[0].headimg}></img>
+          <span>{privateChatData[0].chatData}</span>
+          </main>
+        </Link>
+        }
+      <div>@我的</div>
       {responseData.length !== 0 ? responseData.map((item, index) => (
         <div className={style.message} key={index}>
           <div className={style.messageheadImgAndName}>

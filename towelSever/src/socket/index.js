@@ -1,8 +1,10 @@
-const { MENTIONS} = require('../DB/index');
+const { MENTIONS } = require('../DB/index');
 const ObjectID = require('mongodb').ObjectId;
+const userSocketMap = new Map(); 
 module.exports = (io) => {
     io.on('connection', async (socket) => {
-        const sendUserID = socket.handshake.query.userid
+        const UserID = socket.handshake.query.userid
+        userSocketMap.set(UserID,socket.id)
         socket.on(`newMessage`, async (data) => {
             const datas = await MENTIONS.aggregate([
                 {
@@ -36,11 +38,15 @@ module.exports = (io) => {
             ]);
             io.emit(`${data.userid}`, { datas });
         })
-        socket.on('privatachat',(data)=>{
-            const userid=data.userid
-            socket.on(`privatachat${data.userid}`, (data)=>{
-                socket.emit(`privatachat${userid}`, { chatData:data.chatData,userid:data.userid});
-            });
+        socket.on('privatachat', (data) => {
+            console.log(data)
+            const targetSocketId = userSocketMap.get(data.userid);
+            socket.to(targetSocketId).emit('sendMsg',data)
         })
+           // 处理用户断开连接
+        socket.on('disconnect', () => {
+            console.log(`User ${UserID} disconnected`);
+            userSocketMap.delete(UserID); // 从映射中删除该用户
+        });
     })
 };

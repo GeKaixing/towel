@@ -5,16 +5,21 @@ import { noReadNumbers } from './noReadNumbers'
 import { initSocket } from '../socket/socket'
 import { selectLightorDarkContext } from './selectLightorDark'
 import { MessageResponseDataContext } from './MessageResponseData'
-export default function Context({children}) {
+import { privateChatContext } from './privateChat'
+export default function Context({ children }) {
     const [searchData, setsearchData] = useState([]);
     const [noReadNumber, setNoReadNumber] = useState('')
     const [MessageResponseData, setMessageResponseData] = useState([])
+    const [privateChatData, setPrivateChatData] = useState([])
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
             const localStorageDatas = JSON.parse(localStorage.getItem('loginData'));
-            let socket = initSocket(localStorageDatas.userid)
+            let socket= initSocket(localStorageDatas.userid)
             socket.on(`${localStorageDatas.userid}`, (data) => {
                 setMessageResponseData(data.datas)
+            });
+            socket.on(`sendMsg`, (data) => {
+                setPrivateChatData(prevChatData => [...prevChatData, data]);
             });
         }
     }, [])
@@ -66,15 +71,16 @@ export default function Context({children}) {
 
     }, [colorModel, window])
     return (
-        <searchDatauseContext.Provider value={{ searchData, setsearchData }}>
-            <noReadNumbers.Provider value={{ noReadNumber, setNoReadNumber }}>
-                <MessageResponseDataContext.Provider value={{ MessageResponseData, setMessageResponseData }}>
-                    <selectLightorDarkContext.Provider value={{ colorModel, setColorModel }}>
-                        {children} 
-                    </selectLightorDarkContext.Provider>
-                </MessageResponseDataContext.Provider>
-            </noReadNumbers.Provider>
-        </searchDatauseContext.Provider>
-
+        <privateChatContext.Provider value={{ privateChatData,setPrivateChatData }}>
+            <searchDatauseContext.Provider value={{ searchData, setsearchData }}>
+                <noReadNumbers.Provider value={{ noReadNumber, setNoReadNumber }}>
+                    <MessageResponseDataContext.Provider value={{ MessageResponseData, setMessageResponseData }}>
+                        <selectLightorDarkContext.Provider value={{ colorModel, setColorModel }}>
+                            {children}
+                        </selectLightorDarkContext.Provider>
+                    </MessageResponseDataContext.Provider>
+                </noReadNumbers.Provider>
+            </searchDatauseContext.Provider>
+        </privateChatContext.Provider>
     )
 }
