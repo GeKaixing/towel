@@ -39,7 +39,6 @@ module.exports = (io) => {
             io.emit(`${data.userid}`, { datas });
         })
         socket.on('privatachat', (data) => {
-            console.log(data)
             const targetSocketId = userSocketMap.get(data.userid);
             socket.to(targetSocketId).emit('sendMsg',data)
         })
