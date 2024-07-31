@@ -12,7 +12,6 @@ export default function Message() {
   const navigate = useNavigate()
   const { setNoReadNumber } = useContext(noReadNumbers)
   const {privateChatData}=useContext(privateChatContext)
-console.log(privateChatData)
   const [targetID, setTargetID] = useState('')
   const [reLoadnotifications, setReLoadNotifications] = useState(false)
   const MessageRef = useRef(null)

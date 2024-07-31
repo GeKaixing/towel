@@ -143,6 +143,7 @@ src
 │   ├── Context.js                       状态管理入口
 │   ├── MessageResponseData.js           消息页面状态
 │   ├── noReadNumbers.js                 未读消息状态
+│   ├── privateChat.js                   私聊状态
 │   ├── searchData.js                    搜索页面状态
 │   └── selectLightorDark.js             颜色背景状态
 └── view                                 页面
@@ -153,6 +154,7 @@ src
     │   │   ├── AddContent.js            添加页面
     │   │   └── AddContent.module.css
     │   ├── messageComponents            消息组件
+    |   |   ├── PrivateChat.js           私信页面
     │   │   ├── Message.module.css
     │   │   └── MessageConten.js         消息页面
     │   ├── postComponents               帖子
