@@ -22,6 +22,7 @@ import NotRouter from '../components/NotRouter'
 // import useLocalStorage from '../hooks/useLocaStorage'
 import H5header from '../components/H5header'
 import PrivateChat from '../view/body/messageComponents/PrivateChat'
+import Ai from '../view/body/AiComponents/Ai'
 export default function Routers() {
     return (
         <div className='flex '>
@@ -46,6 +47,7 @@ export default function Routers() {
                     <Route path='/setting/deactivate' element={<SettingDeactivate />}> </Route>
                     <Route path='/setting/account' element={<SettingAccount />}> </Route>
                     <Route path='/search' element={<Search />}></Route>
+                    <Route path='/ai' element={<Ai/>}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/signup' element={<Signup />}></Route>
                     <Route path='/postcontent/:id' element={<PostContent ></PostContent>}></Route>

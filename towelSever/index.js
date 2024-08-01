@@ -41,6 +41,7 @@ const socketio = require('./src/socket/index');
 socketio(io)
 const authMiddleware = require('./src/auth/index')
 const commonRoute = require('./src/commonRoute/index')
+const AI = require('./src/Ai/Llama')
 const authRoute = require('./src/authRoute/index')
 const userRoute = require('./src/authRoute/userRoute/userRouter')
 // common API
@@ -64,10 +65,11 @@ app.get('/HPImageArchive', async (req, res) => {
         res.status(500).send('Error fetching data');
     }
 });
-
+//ai
+app.use(AI)
+//open api
 app.use(commonRoute)
 //auth API
-
 app.use(authMiddleware)
 ////auth API
 app.use(authRoute)

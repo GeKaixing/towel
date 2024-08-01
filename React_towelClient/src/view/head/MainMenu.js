@@ -78,6 +78,7 @@ export default function MainMenu() {
         <MainMenuLink to="/" src={icons[0].home().path} text='主页' />
         <MainMenuLink to="/about" src={icons[1].getIcon('/about').path} text='关于' />
         <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text='发帖' />
+        <MainMenuLink to="/ai" src={icons[2].getIcon('/ai').path} text='llama'/>
         <MainMenuLink to="/Message" src={icons[2].getIcon('/Message').path} text='消息'>
           <div>{noReadNumber}</div>
         </MainMenuLink>

@@ -56,7 +56,7 @@ export default function PrivateChat() {
                     <img className='w-10 h-10' src={addImgaIcon} alt='添加图片' />
                 </label>
                 <input type='file' id='send-file' className='hidden' />
-                <textarea value={textLength} onChange={(e) => setTextLength(e.target.value)} resize='none' maxLength="500" className='pt-10 resize-none w-full h-full border-[--fontColor] hover:border-[--fontColor] border-solid border-2 rounded-my-rounded-10px' />
+                <textarea value={textLength} onChange={(e) => setTextLength(e.target.value)}  maxLength="500" className='pt-10 resize-none w-full h-full border-[--fontColor] hover:border-[--fontColor] border-solid border-2 rounded-my-rounded-10px' />
                 <span className='absolute bottom-3 right-4 space-x-2'>
                     <span>
                         {textLength.length}/500
