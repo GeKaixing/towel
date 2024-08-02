@@ -124,6 +124,8 @@ src
 │   │   └── signup.js
 │   ├── add                              添加 API
 │   │   └── add.js  
+│   ├── ai                               ai API
+│   │   └── ai.js  
 │   ├── config.js                        配置 API
 │   ├── login                            登录 API
 │   │   └── login.js
@@ -153,6 +155,8 @@ src
     │   ├── addComponents                添加组件
     │   │   ├── AddContent.js            添加页面
     │   │   └── AddContent.module.css
+    │   ├── AiComponents                 AI组件
+    │   │   ├── AiContent.js             AI页面
     │   ├── messageComponents            消息组件
     |   |   ├── PrivateChat.js           私信页面
     │   │   ├── Message.module.css
