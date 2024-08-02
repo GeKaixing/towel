@@ -53,7 +53,6 @@ export default function Routers() {
                     <Route path='/postcontent/:id' element={<PostContent ></PostContent>}></Route>
                     <Route path="*" element={<NotRouter />}></Route>
                 </Routes>
-
             </div>
             <User></User>
         </div >

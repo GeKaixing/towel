@@ -34,7 +34,7 @@
     position: absolute;
     top: 78px;
     transform: translateX(-50%);
-    left: 222px;
+    right: 10%;
     z-index: 2;
     height: 24px;
     width: 24px;
@@ -47,7 +47,7 @@
     position: absolute;
     top: 112px;
     transform: translateX(-50%);
-    left: 222px;
+    right: 10%;
     z-index: 2;
     height: 24px;
     width: 24px;

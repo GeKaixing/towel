@@ -4,8 +4,9 @@ import style from './SettingUserForgetPage.module.css'
 import axios from 'axios'
 import eyeIconOpen from '../../../../assets/static/otherIcon/预览打开.svg'
 import eyeIconClose from '../../../../assets/static/otherIcon/预览关闭.svg'
+import { Form } from "antd";
 export default function SettingUserForgetPage() {
-    const [,setLocalStorageData] = useState({});
+    const [, setLocalStorageData] = useState({});
     const [inputData, setinputData] = useState({
         user: '',
         email: '',
@@ -65,7 +66,7 @@ export default function SettingUserForgetPage() {
         const password = inputData.password === inputData.password2
         if (password) {
             const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
-            if (inputData.user&&emailPattern.test(inputData.email)&&inputData.code&&inputData.password&&inputData.password2) {
+            if (inputData.user && emailPattern.test(inputData.email) && inputData.code && inputData.password && inputData.password2) {
                 axios({
                     url: 'http://127.0.0.1:4000/forgetpassword',
                     method: 'post',
@@ -82,7 +83,7 @@ export default function SettingUserForgetPage() {
                 }).catch(() => {
                     alert('用户名或邮箱或验证码错误')
                 })
-            }else{
+            } else {
                 alert('别空着')
             }
         } else {
@@ -110,6 +111,7 @@ export default function SettingUserForgetPage() {
                 <input type='submit' className={style.SettingUserForgetPageFormSendCode} value='发送验证码' onClick={sendCodeHandle}></input>
                 <input type='submit' className={style.SettingUserForgetPageFormSubmitBotton} onClick={submitHandler} ></input>
             </form>
+             
         </div>
     )
 }

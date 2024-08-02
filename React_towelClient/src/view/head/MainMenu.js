@@ -9,12 +9,14 @@ import demo2 from '../../assets/static/MainMenuIcon/评论.svg'
 import demo3 from '../../assets/static/MainMenuIcon/添加.svg'
 import demo4 from '../../assets/static/MainMenuIcon/设置.svg'
 import demo5 from '../../assets/static/MainMenuIcon/进入.svg'
+import demo6 from '../../assets/static/MainMenuIcon/大脑.svg'
 import demo00 from '../../assets/static/MainMenuIconPitchUp/首页.svg'
 import demo11 from '../../assets/static/MainMenuIconPitchUp/提示.svg'
 import demo22 from '../../assets/static/MainMenuIconPitchUp/评论.svg'
 import demo33 from '../../assets/static/MainMenuIconPitchUp/添加.svg'
 import demo44 from '../../assets/static/MainMenuIconPitchUp/设置.svg'
 import demo55 from '../../assets/static/MainMenuIconPitchUp/进入.svg'
+import demo66 from '../../assets/static/MainMenuIconPitchUp/大脑.svg'
 
 export default function MainMenu() {
   const [, setWidth] = useState(window.innerWidth);
@@ -61,6 +63,7 @@ export default function MainMenu() {
     new HowShowIcon(demo3, demo33),
     new HowShowIcon(demo4, demo44),
     new HowShowIcon(demo5, demo55),
+    new HowShowIcon(demo6, demo66),
   ];
   return (
     <>
@@ -78,7 +81,7 @@ export default function MainMenu() {
         <MainMenuLink to="/" src={icons[0].home().path} text='主页' />
         <MainMenuLink to="/about" src={icons[1].getIcon('/about').path} text='关于' />
         <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text='发帖' />
-        <MainMenuLink to="/ai" src={icons[2].getIcon('/ai').path} text='llama'/>
+        <MainMenuLink to="/ai" src={icons[6].getIcon('/ai').path} text='llama'/>
         <MainMenuLink to="/Message" src={icons[2].getIcon('/Message').path} text='消息'>
           <div>{noReadNumber}</div>
         </MainMenuLink>
