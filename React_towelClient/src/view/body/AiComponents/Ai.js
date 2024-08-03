@@ -6,11 +6,15 @@ export default function Ai() {
     const [inputData, setInputData] = useState('')
     const [resData, setResData] = useState([])
     const [localStorageData] = useLocalStorage()
+    const [loading, setLoading] = useState(false)
     const postAiHandler = (e) => {
         e.preventDefault()
-        setResData(item => item.concat({ content: inputData, sendid: localStorageData.userid, headimg:localStorageData.headimg }))
+        setLoading(true)
+        setResData(item => item.concat({ content: inputData, sendid: localStorageData.userid, headimg: localStorageData.headimg }))
         postAi(inputData).then((res) => {
+            setLoading(false)
             setResData(item => item.concat({ content: res.data.content, sendid: 'llama', headimg: 'https://ollama.com/public/ollama.png' }))
+            setInputData('')
         })
     }
     return (
@@ -24,6 +28,9 @@ export default function Ai() {
                         </span>
                     </div>
                 ))}
+                {loading ?
+                    <div> loadin...</div> : ''
+                }
             </div>
             <form onSubmit={postAiHandler} className=' fixed bottom-14 w-[40%] h-10 flex space-x-2 '>
                 <input className='w-full bg-[--boxColor] h-10 rounded-my-rounded-10px focus:border-[--assistantColor]' value={inputData} onChange={(e) => setInputData(e.target.value)} placeholder='评论'></input>
