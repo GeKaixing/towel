@@ -9,7 +9,7 @@ const loginData = ref({
 })
 const loginHandle = () => {
     loginData.value.password && loginData.value.username &&
-    postLogin({data:{username:loginData.value.username, password:loginData.value.password}}).then((res) => { setLocaStorageData(res.data) }) 
+    postLogin({data:{username:loginData.value.username, password:loginData.value.password}}).then((res) => {setLocaStorageData(res.data);window.location.href='/'}) 
 }
 </script>
 <template>

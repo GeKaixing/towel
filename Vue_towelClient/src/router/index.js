@@ -38,9 +38,9 @@ const router = createRouter({
       beforeEnter: beforeEnterRule
     },
     {
-      path: '/postcontent',
+      path: '/postcontent/:id',
       name: 'postcontent',
-      component: postcontent
+      component: postcontent,
     },
     {
       path: '/setting',

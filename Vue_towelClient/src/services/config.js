@@ -3,7 +3,7 @@ import axios from "axios";
 // 从环境变量中获取 API 基础 URL
 const VITE_APP_API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL;
 // 从 localStorage 中获取登录数据
-const localStorageData = JSON.parse(localStorage.getItem('loginData'));
+const localStorageData = JSON.parse(localStorage.getItem('userData'));
 
 // 创建带有身份验证的 Axios 实例
 const auth = axios.create({
