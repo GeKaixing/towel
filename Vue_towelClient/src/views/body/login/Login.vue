@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { login } from '@/services/Login'
+import { postLogin } from '../../../services/login/login'
 import useLocaStorage from '@/hook/useLocaStorage'
 const { setLocaStorageData } = useLocaStorage()
 const loginData = ref({
@@ -9,7 +9,7 @@ const loginData = ref({
 })
 const loginHandle = () => {
     loginData.value.password && loginData.value.username &&
-        login(loginData.value.username, loginData.value.password).then((res) => { setLocaStorageData(res.data) })
+    postLogin({data:{username:loginData.value.username, password:loginData.value.password}}).then((res) => { setLocaStorageData(res.data) }) 
 }
 </script>
 <template>

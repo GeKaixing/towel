@@ -1,4 +1,4 @@
-# 仿贴吧小程序
+# towel小程序
 > uniapp(vue3) 主框架  
 > pinia 状态管理  
 > nodemailer 邮件注册  

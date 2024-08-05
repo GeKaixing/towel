@@ -1,59 +1,81 @@
-import axios  from "axios";
-export const  http = axios.create({
-    baseURL: 'http://127.0.0.1:4000/',
-    timeout: 1000,
-  });
-  // 请求拦截器
-http.interceptors.request.use(
+import axios from "axios";
+
+// 从环境变量中获取 API 基础 URL
+const VITE_APP_API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL;
+// 从 localStorage 中获取登录数据
+const localStorageData = JSON.parse(localStorage.getItem('loginData'));
+
+// 创建带有身份验证的 Axios 实例
+const auth = axios.create({
+    baseURL: VITE_APP_API_BASE_URL,
+    method:'post',
+    headers: {
+        'Authorization': `Bearer ${localStorageData?.jwt}`,
+    }
+});
+
+// 创建不带身份验证的 Axios 实例
+const open = axios.create({
+    baseURL: VITE_APP_API_BASE_URL,
+});
+
+/* // 请求拦截器
+auth.interceptors.request.use(
   config => {
     // 在发送请求之前做些什么
-    // 比如：添加授权头部
-    // config.headers.Authorization = `Bearer ${token}`;
+    // 例如，可以在这里添加认证 token
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   error => {
     // 处理请求错误
     return Promise.reject(error);
   }
-);
+); */
+/* 
 // 响应拦截器
-http.interceptors.response.use(
+auth.interceptors.response.use(
   response => {
     // 对响应数据做些什么
     return response;
   },
   error => {
-    // 统一处理响应错误
+    // 处理响应错误
     if (error.response) {
-      // 服务器返回的响应状态码不是 2xx
+      // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
       switch (error.response.status) {
+        case 400:
+          console.error('Bad Request: ', error.response.data);
+          break;
         case 401:
-          // 处理未授权错误
-          console.error('未授权，请重新登录');
+          console.error('Unauthorized: ', error.response.data);
+          // 可以在这里做一些重新登录的操作
           break;
         case 403:
-          // 处理禁止访问错误
-          console.error('禁止访问');
+          console.error('Forbidden: ', error.response.data);
           break;
         case 404:
-          // 处理资源未找到错误
-          console.error('资源未找到');
+          console.error('Not Found: ', error.response.data);
           break;
         case 500:
-          // 处理服务器内部错误
-          console.error('服务器内部错误');
+          console.error('Internal Server Error: ', error.response.data);
           break;
         default:
-          // 处理其他错误
-          console.error(`错误: ${error.response.status}`);
+          console.error('Error: ', error.response.data);
       }
     } else if (error.request) {
-      // 请求已发出，但没有收到响应
-      console.error('网络错误，请稍后重试');
+      // 请求已经成功发起，但没有收到响应
+      console.error('No Response: ', error.request);
     } else {
-      // 处理其他错误
-      console.error('请求失败:', error.message);
+      // 发送请求时出了点问题
+      console.error('Error: ', error.message);
     }
     return Promise.reject(error);
   }
-);
+); */
+
+
+export { auth, open };
