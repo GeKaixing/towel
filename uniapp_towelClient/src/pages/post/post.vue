@@ -7,14 +7,14 @@
 			<view class="head">
 				<view class="headAndusername">
 					<image class="headPortrait" :src='item.user.headimg'></image>
-					<view>{{ item.user.username }}</view>
+					<view class="postname">{{ item.user.username }}</view>
 				</view>
-				<view @click.stop="userSelectHandler(item.user.username, item._id)">...</view>
+				<view class="postmore" @click.stop="userSelectHandler(item.user.username, item._id)">...</view>
 			</view>
 			<view class="content">
 				<span>{{ item.postText }}</span>
-				<view class="imagebox">
-					<image class="text" :src="item.postImages"></image>
+				<view class="imagebox" v-if="item.postImages">
+					<image  class="text" :src="item.postImages"></image>
 				</view>
 			</view>
 			<view class="foot">
@@ -141,7 +141,10 @@ const likehandler = (_id) => {
 }
 </script>
 
-<style>
+<style scoped>
+.postname,.postmore{
+	font-weight: bold;
+}
 .hint {
 	pointer-events: none;
 	background-color: red;
@@ -157,12 +160,12 @@ const likehandler = (_id) => {
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 20rpx;
-	height: 100rpx;
+	height: 300rpx;
+	width: 100%;
 }
 
 .text {
-	object-fit: cover;
-	width: 200rpx;
+	width: 100%;height: 100%;object-fit: fill;
 }
 
 .post {
@@ -175,13 +178,9 @@ view {
 	color: black;
 }
 
-image {
-	width: auto;
-	height: auto;
-}
 
 .box {
-	padding-top: 10rpx;
+	padding: 10rpx;
 	position: relative;
 	overflow: hidden;
 	border-radius: 16rpx;

@@ -7,8 +7,8 @@
 			</view>
 			<view class="content">
 				<span>{{ postText }}</span>
-				<view class="imagebox">
-					<image class="postContentImage" :src="postImages" ></image>
+				<view class="imagebox" >
+					<image class="postContentImage"  :src="postImages" ></image>
 				</view>
 			</view>
 		</view>

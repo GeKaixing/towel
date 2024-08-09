@@ -16,7 +16,7 @@
     {
         "_id": "666f8ed94d5f9ade61ee77e9",
         "postUserId": "6620e7eb66984c681742e753",
-        "postText": "sdsfsdfdf",
+        "postText": "静态网站",
         "postImages": "",
         "postShare": 0,
         "user": {
@@ -30,7 +30,7 @@
     {
         "_id": "668c0820325abc1022f9690b",
         "postUserId": "6682baae94a2250cc3480174",
-        "postText": "l",
+        "postText": "图片测试",
         "postImages": "https://github.com/GeKaixing/towel/blob/main/README_static/logo.png?raw=true",
         "postShare": 0,
         "user": {
