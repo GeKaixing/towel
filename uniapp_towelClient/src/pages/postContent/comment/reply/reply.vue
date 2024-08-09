@@ -29,7 +29,7 @@
 <script setup>
 import postUserSelect from '../../../post/postUserSelect/postUserSelect.vue';
 import { onMounted, ref, watch } from 'vue'
-import { useCommentReplyInputStore } from '../../../piniaStore/comment_reply_input'
+import { useCommentReplyInputStore } from '../../../../piniaStore/comment_reply_input'
 import { storeToRefs } from 'pinia';
 const props = defineProps(['commentID']);
 const store = useCommentReplyInputStore();

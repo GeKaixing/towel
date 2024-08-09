@@ -36,7 +36,7 @@
 			}
 		},
 		{
-			"path" : "pages/DetailPage/DetailPage",
+			"path" : "pages/postContent/postContent",
 			"style" : 
 			{
 				"navigationBarTitleText" : "",

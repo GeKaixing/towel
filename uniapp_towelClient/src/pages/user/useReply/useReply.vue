@@ -1,5 +1,5 @@
 <script setup>
-import reply from '../../DetailPage/comment/reply/reply.vue';
+import reply from '../../postContent/comment/reply/reply.vue';
 </script>
 <template>
     <reply></reply>

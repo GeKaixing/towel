@@ -4,7 +4,7 @@ export default function useLocaStorage() {
         let userData=JSON.parse(getLocaStorageData)
         return userData||{}
     }
-    const setLocaStorageData=(userData)=>{
+    const setLocaStorageData=(userData={})=>{
         const userDatas=JSON.stringify(userData)
        localStorage.setItem('userData',userDatas)
     }

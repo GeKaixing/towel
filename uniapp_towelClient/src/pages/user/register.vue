@@ -1,4 +1,5 @@
 <script setup>
+import { onReady } from '@dcloudio/uni-app';
 import { computed, ref, } from 'vue'
 const userName = ref(null);
 const userPassword = ref(null);
@@ -8,6 +9,9 @@ const reCode = ref(null);
 const isShow = ref(false);
 const isShowtime = ref(true);
 const time = ref(30);
+onReady(()=>{
+    uni.setNavigationBarTitle({title:'注册'})
+})
 /* const isShowSendCode=ref(false) */
 const isShowSendCode = computed(() => {
     return (userName.value && userPassword.value && email.value && isEmail.value)

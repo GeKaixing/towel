@@ -3,15 +3,18 @@
 微信小程序指只能一次只能上传一张图片。
 */
 import { computed, onMounted, ref,onBeforeMount, watch } from 'vue';
-import { usePostStore } from '../piniaStore/postStore';
-import { useloginStore } from '../piniaStore/loginStore';
+import { usePostStore } from '../../piniaStore/postStore';
+import { useloginStore } from '../../piniaStore/loginStore';
 import { storeToRefs } from 'pinia'
+import { onReady } from '@dcloudio/uni-app';
 const text = ref('');
 const image = ref('');
 const loginStore = useloginStore()
 const {loginState}=storeToRefs(loginStore)
 const postStore = usePostStore()
-console.log(loginState.value)
+onReady(()=>{
+    uni.setNavigationBarTitle({title:'添加'})
+})
 onBeforeMount(()=>{
     if(!loginState.value){
         loginState.value=uni.getStorageSync('jwt')

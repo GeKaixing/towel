@@ -25,9 +25,13 @@
 </template>
 
 <script setup>
-import { useSocketStore } from '../piniaStore/socketStore';
+import { onReady } from '@dcloudio/uni-app';
+import { useSocketStore } from '../../piniaStore/socketStore';
 import { storeToRefs } from 'pinia';
 const { sockeData } = storeToRefs(useSocketStore())
+onReady(()=>{
+    uni.setNavigationBarTitle({title:'消息'})
+})
 const toPushMessage = () => {
 	uni.navigateTo({
 		url: './pushMessage/pushMessage'

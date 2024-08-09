@@ -1,0 +1,44 @@
+[
+    {
+        "_id": "666acc20ae4009dd2f0cba46",
+        "postUserId": "6620e7eb66984c681742e753",
+        "postText": "测试",
+        "postImages": "",
+        "postShare": 0,
+        "user": {
+            "username": "test",
+            "headimg": "https://github.com/GeKaixing/towel/blob/main/README_static/logo.png?raw=true"
+        },
+        "postFavorite": 2,
+        "postLike": 2,
+        "postComment": 1
+    },
+    {
+        "_id": "666f8ed94d5f9ade61ee77e9",
+        "postUserId": "6620e7eb66984c681742e753",
+        "postText": "sdsfsdfdf",
+        "postImages": "",
+        "postShare": 0,
+        "user": {
+            "username": "test",
+            "headimg": "https://github.com/GeKaixing/towel/blob/main/README_static/logo.png?raw=true"
+        },
+        "postFavorite": 1,
+        "postLike": 1,
+        "postComment": 0
+    },
+    {
+        "_id": "668c0820325abc1022f9690b",
+        "postUserId": "6682baae94a2250cc3480174",
+        "postText": "l",
+        "postImages": "https://github.com/GeKaixing/towel/blob/main/README_static/logo.png?raw=true",
+        "postShare": 0,
+        "user": {
+            "username": "demo",
+            "headimg": "https://github.com/GeKaixing/towel/blob/main/README_static/logo.png?raw=true"
+        },
+        "postFavorite": 0,
+        "postLike": 0,
+        "postComment": 0
+    }
+]

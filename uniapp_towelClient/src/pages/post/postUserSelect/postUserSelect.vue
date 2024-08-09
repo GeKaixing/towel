@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from "vue";
-import { usePostStore } from '../../piniaStore/postStore.js'
-import roof from "../../roof/roof.vue";
-import {useCommentReplyInputStore} from '../../piniaStore/comment_reply_input.js'
+import { usePostStore } from '../../../piniaStore/postStore.js'
+import roof from "../../../components/roof/roof.vue";
+import {useCommentReplyInputStore} from '../../../piniaStore/comment_reply_input.js'
 const {postUniRequst}=usePostStore()
 const {userRequst}=useCommentReplyInputStore()
 const emit = defineEmits(['child-click','userReplyHandlers']);

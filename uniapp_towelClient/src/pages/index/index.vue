@@ -1,7 +1,7 @@
 <template>
-		<HeadVue ></HeadVue>
-		<PostVue ></PostVue>
-</template>	
+		<HeadVue></HeadVue>
+		<PostVue></PostVue>
+</template>
 <script setup>
 import HeadVue from "../head/head.vue"
 import PostVue from "../post/post.vue"

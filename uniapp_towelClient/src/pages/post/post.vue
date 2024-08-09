@@ -1,5 +1,6 @@
 <template>
-	<postUserSelect v-if="userSelect" @child-click='userSelectHandlerEmit' :saveUserDataProps="saveUserData" type='post'>
+	<postUserSelect v-if="userSelect" @child-click='userSelectHandlerEmit' :saveUserDataProps="saveUserData"
+		type='post'>
 	</postUserSelect>
 	<view v-for="(item, index) in fliterData" class="post" :key='index'>
 		<view class="box" @click="toDetailPage(item)">
@@ -13,7 +14,7 @@
 			<view class="content">
 				<span>{{ item.postText }}</span>
 				<view class="imagebox">
-					<image class="text" v-for=' items of item.postImages' :src="items.staticUrl"></image>
+					<image class="text" :src="item.postImages"></image>
 				</view>
 			</view>
 			<view class="foot">
@@ -36,15 +37,15 @@
 	<view class="hint" v-if="likeState">动作重复了</view>
 </template>
 <script setup>
-import { usePostStore } from '../piniaStore/postStore';
+import { usePostStore } from '../../piniaStore/postStore';
 import { ref, onMounted, computed, watch } from "vue";
-import { useHeadStore } from '../piniaStore/headStore.js'
+import { useHeadStore } from '../../piniaStore/headStore.js'
 import { storeToRefs } from 'pinia'
-import { useCommentReplyInputStore } from '../piniaStore/comment_reply_input.js'
+import { useCommentReplyInputStore } from '../../piniaStore/comment_reply_input.js'
 import postUserSelect from "./postUserSelect/postUserSelect.vue";
-import { useloginStore } from '../piniaStore/loginStore.js'
-import { onLoad, onShow } from '@dcloudio/uni-app';
-import { useSocketStore } from '../piniaStore/socketStore'
+import { useloginStore } from '../../piniaStore/loginStore.js'
+import { onShow } from '@dcloudio/uni-app';
+import { useSocketStore } from '../../piniaStore/socketStore'
 const headStore = useHeadStore()
 const loginStore = useloginStore()
 const postStore = usePostStore()
@@ -107,7 +108,7 @@ const toDetailPage = (values) => {
 	ResponseCommentData.value = true;
 	ResponseReplyData.value = true;
 	uni.navigateTo({
-		url: `/pages/DetailPage/DetailPage?data=${data}`
+		url: `/pages/postContent/postContent?data=${data}`
 	})
 }
 const likehandler = (_id) => {
@@ -156,12 +157,12 @@ const likehandler = (_id) => {
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 20rpx;
+	height: 100rpx;
 }
 
 .text {
 	object-fit: cover;
 	width: 200rpx;
-	height: 300rpx;
 }
 
 .post {
