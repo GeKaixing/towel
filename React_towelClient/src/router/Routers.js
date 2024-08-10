@@ -23,7 +23,7 @@ import NotRouter from '../components/NotRouter'
 import H5header from '../components/H5header'
 import PrivateChat from '../view/body/messageComponents/PrivateChat'
 import Ai from '../view/body/AiComponents/Ai'
-import Blog from '../view/body/blogComponents/Blog'
+import Blog from '../view/body/blogComponents/BlogContent'
 export default function Routers() {
     return (
         <div className='flex '>
