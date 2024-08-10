@@ -70,6 +70,7 @@ src
 ├── assets                               静态资源
 │   ├── json                             测试数据
 │   │   └── post.json                    测试数据
+|   ├── markdown                         博客数据
 │   └── static                           静态资源
 │       ├── MainMenuIcon                 菜单图标
 │       │   ├── 提示.svg
@@ -160,6 +161,9 @@ src
     │   │   └── AddContent.module.css
     │   ├── AiComponents                 AI组件
     │   │   ├── AiContent.js             AI页面
+    │   ├── blogComponents               博客组件
+    │   │   ├── BlogContent.js           博客页面
+    |   |   ├── Blog.module.css          博客样式
     │   ├── messageComponents            消息组件
     |   |   ├── PrivateChat.js           私信页面
     │   │   ├── Message.module.css
