@@ -9,7 +9,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia'
-import { useHeadStore } from "../piniaStore/headStore"
+import { useHeadStore } from "../../piniaStore/headStore"
 const store = useHeadStore()
 const { inputState } = storeToRefs(store)
 const fliterData = ref(null)

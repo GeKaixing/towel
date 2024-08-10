@@ -7,8 +7,8 @@
 			</view>
 			<view class="content">
 				<span>{{ postText }}</span>
-				<view class="imagebox">
-					<image v-for="(image, index) in postImages" :key="index" class="contentImage" :src="image.staticUrl" ></image>
+				<view class="imagebox" >
+					<image class="postContentImage"  :src="postImages" ></image>
 				</view>
 			</view>
 		</view>
@@ -16,7 +16,7 @@
 	<commentVue :postID="postID"></commentVue>
 </template>
 <script setup>
-import commentVue from "../DetailPage/comment/comment.vue"
+import commentVue from "../postContent/comment/comment.vue"
 import {onLoad} from "@dcloudio/uni-app"
 import { ref } from 'vue'
 const postID = ref(null)
@@ -68,7 +68,10 @@ page {
 .contentImage {
 	width: 100%;
 }
-
+.postContentImage{
+	object-fit: fill;
+	width: 100%;
+}
 .imagebox {
 	display: flex;
 	flex-direction: column;

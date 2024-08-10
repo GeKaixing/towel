@@ -26,8 +26,6 @@
 		<button type="submit" class="inputsubmit" @click="loginHandelr">登录</button>
 		<button class='register' @click="navigateTo">注册</button>
 		<view v-if="login">账号或者密码错误</view>
-	</view>
-	<view class="loginTips" v-if="!loginState">
 		<span>登录后，体验更多精彩功能</span>
 	</view>
 </template>
@@ -36,13 +34,18 @@
 import { ref, onMounted, } from 'vue';
 import usePost from './usePost/usePost.vue'
 import UseComment from './useComment/useComment.vue';
-import { useCommentReplyInputStore } from '../piniaStore/comment_reply_input';
+import { useCommentReplyInputStore } from '../../piniaStore/comment_reply_input';
 import useReply from './useReply/useReply.vue';
 import { storeToRefs } from 'pinia'
-import {useloginStore} from '../piniaStore/loginStore'
+import {useloginStore} from '../../piniaStore/loginStore'
+import { onReady } from '@dcloudio/uni-app';
+import loginJSON from '../../static/json/login.json'
+onReady(()=>{
+    uni.setNavigationBarTitle({title:'我的'})
+})
 const login = ref(null)
-	, loginName = ref(null)
-	, loginPassword = ref(null)
+	, loginName = ref('text')
+	, loginPassword = ref("text")
 	, jwt = ref(null)
 	, username = ref(null)
 	, headimg = ref(uni.getStorageSync('headimg'))
@@ -56,7 +59,6 @@ const login = ref(null)
 	,useloginStores=useloginStore()
 	,{loginState}=storeToRefs(useloginStores)
 const chooseUserMassageBar = (e) => {
-	console.log(e.target.id)
 	switch (e.target.id) {
 		case 'userReply':
 			chooseUserMassageBarState.value.userReply = 1,
@@ -105,6 +107,10 @@ const loginStateHandler = (targer = false) => {
 	});
 }
 const loginHandelr = () => {
+	
+	uni.setStorageSync('testdata',loginJSON)
+	uni.getStorageSync('testdata')
+	/* 
 	uni.request({
 		url: 'http://127.0.0.1:4000/login',
 		method: 'POST',
@@ -131,17 +137,16 @@ const loginHandelr = () => {
 					key: 'userid',
 					data: `${res.data.userid}`,
 				})
-				uni.getStorage({
-					key: 'username',
-					success: function (res) {
-						console.log(res.data)
-						username.value = res.data
-					}
-				});
 				uni.setStorage({
 					key: 'headimg',
 					data: `${res.data.headimg}`,
 				})
+				uni.getStorage({
+					key: 'username',
+					success: function (res) {
+						username.value = res.data
+					}
+				});
 				headimg.value = res.data.headimg
 				jwt.value = res.data.jwt
 				loginName.value = ''
@@ -163,7 +168,7 @@ const loginHandelr = () => {
 		fail: function (res) {
 			console.log(res)
 		}
-	})
+	}) */
 
 }
 const outLoginHandler = () => {

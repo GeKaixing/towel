@@ -55,7 +55,7 @@ import { onMounted, ref, watch, computed } from 'vue';
 import replyVue from './reply/reply.vue'
 import { storeToRefs } from 'pinia'
 import { onShow } from '@dcloudio/uni-app';
-import { useCommentReplyInputStore } from '../../piniaStore/comment_reply_input'
+import { useCommentReplyInputStore } from '../../../piniaStore/comment_reply_input'
 const store = useCommentReplyInputStore()
 	, { atName, commentInput, isShow,ResponseCommentData,commentData} = storeToRefs(store)
 	, props = defineProps(['postID'])

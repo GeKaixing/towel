@@ -32,7 +32,7 @@ const router = createRouter({
       component: post
     },
     {
-      path: '/user',
+      path: '/user/:id',
       name: 'user',
       component: user,
       beforeEnter: beforeEnterRule

@@ -16,7 +16,7 @@
 */
 import { ref, onMounted } from 'vue';
 //import { getSocketInstance } from '../../piniaStore/socket';
-import { useSocketStore } from '../../piniaStore/socketStore';
+import { useSocketStore } from '../../../piniaStore/socketStore';
 import { storeToRefs } from 'pinia';
 const {sockeData}=storeToRefs(useSocketStore())
 const inPostHandler = (postId) => {

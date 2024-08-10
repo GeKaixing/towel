@@ -58,6 +58,9 @@
 
     Set-ExecutionPolicy RemoteSigned
 
+安装Llama 3.1 本地部署
+
+    https://llama.meta.com/docs/overview
 
 ### 1.1项目目录结构
 web端目录结构
@@ -214,26 +217,28 @@ src
 后端目录结构
 ````
 src
-├── DB 数据库模块
-│   ├── commentModule.js 评论
-│   ├── favoriftModule.js 收藏
-│   ├── index.js 数据库模块主入口
-│   ├── likeModule.js 喜欢
-│   ├── mentionModule.js 提醒消息
-│   ├── postModule.js 帖子
-│   ├── replyModule.js 评论
-│   ├── staticdataModule.js 静态地址
-│   ├── userModule.js 用户
-│   └── verificationcodeModule.js 验证码
-├── auth
-│   └── index.js 权鉴
-├── authRoute 权鉴过路由
+├── DB                                   数据库模块
+│   ├── commentModule.js                 评论表
+│   ├── favoriftModule.js                收藏表
+│   ├── index.js                         数据库模块入口
+│   ├── likeModule.js                    喜欢表
+│   ├── mentionModule.js                 提醒消息表
+│   ├── postModule.js                    帖子表
+│   ├── replyModule.js                   评论表
+│   ├── staticdataModule.js              静态资源地址表
+│   ├── userModule.js                    用户表
+│   └── verificationcodeModule.js        验证码表
+├── Ai                                   Ai路由
+│   └── Llama.js  
+├── auth                                 权鉴模块    
+│   └── index.js                         
+├── authRoute                            权鉴路由
 │   └── index.js 
-├── commonRoute 公开路由
+├── commonRoute                          公开路由
 │   └── index.js
-└── socket 消息通知
+└── socket                               消息通知
    └── index.js 
-├── index.js 主入口
+├── index.js                             主入口
 ````
 ## 2. 项目使用的技术栈，npm i安装了对应不同技术栈，编写时间2024/06/15
 web端使用技术栈react/react-router/axios/socket
@@ -278,6 +283,7 @@ towel 是一个三端同步的项目，在基于expess框架下编写后端项�
 * 注册验证（nodemailer的实践）
 * 文件上传（multer的实践）
 * 消息推送 (socket的实践)
+* AI Llama3.1 8b 模型 （Llama3.1的实践）
 react/Rn 使用同一技术栈react，小程序使用uniapp/vue
 * RN使用expo 开发环境，快速开发
 * 小程序和RN和web使用同一个ui/ux，ui统一，icon统一使用[iconpark](https://iconpark.oceanengine.com/home)
@@ -295,12 +301,12 @@ react/Rn 使用同一技术栈react，小程序使用uniapp/vue
 * 未做性能优化
 * 未使用reids去做缓存
 ### 3.2 后续将完成的功能
-* 使用redis进行后端的性能优化，实现排行榜功能，数据缓存等，首页文章推送算法
-* 使用socket.io私聊功能
-* 后端并没有去模块化，目录不清晰，1117行代码在同一个文件中，后续将进行模块化
-* 工程化较弱目前仅使用git做项目提交和版本管理，
-* 将添加广告模块
-* 完善web的响应式布局
+* 使用redis进行后端的性能优化，实现排行榜功能，数据缓存等，首页文章推送算法 （太难了）
+* 使用socket.io私聊功能（已完成）
+* 后端并没有去模块化，目录不清晰，1117行代码在同一个文件中，后续将进行模块化 （进行中）
+* 工程化较弱目前仅使用git做项目提交和版本管理，（目前添加eslint）
+* 将添加广告模块 
+* 完善web的响应式布局 （已完成）
 ## 4 项目整体架构
 <img src="https://github.com/GeKaixing/towel/raw/main/README_static/Frame%201.png" alt="架构" width="400" height="450"  />
 
