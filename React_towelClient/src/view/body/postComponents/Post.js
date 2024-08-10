@@ -131,7 +131,9 @@ export default function Post(props) {
         alert('举报成功')
     }
     return (
-        <div className='flex flex-col text-[--fontColor] justify-center mb-6 border-[--boxColor] hover:border-[--boxHoverColor] border-solid border-2  rounded-my-rounded-10px  p-2' onClick={navgatehandle}>
+        <div className='flex flex-col text-[--fontColor] justify-center mb-6
+         border-[--boxColor] hover:border-[--boxHoverColor] border-solid border-2  
+         rounded-my-rounded-10px  p-2' onClick={navgatehandle}>
             <div className='flex flex-col space-y-2 '>
                 <div className='flex flex-row justify-between items-center' onClick={e => e.stopPropagation()} style={{ justifyContent: 'space-between', fontWeight: 'bold' }}>
                     <div className='flex flex-row space-x-2 items-center object-fill'>
@@ -144,8 +146,8 @@ export default function Post(props) {
                             : null}
                     </div>
                 </div>
-                <div className='felx flex-col space-y-2'>
-                    {props.content}
+                <div className='felx flex-col space-y-2 '>
+                    <div className='md:max-w-[39rem] lg:w-full'>{props.content}</div>
                     {(props.postImages.length === 0 || props.postImages === '') &&
                         <div className='flex justify-between flex-wrap gap-2'>
                             {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}

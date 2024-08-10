@@ -30,9 +30,6 @@ export default function Blog() {
         <div className='p-2'>  
              {
             entries.map(([key,value]) => (
-         /*    <div key={key}>
-                 <div dangerouslySetInnerHTML={{ __html: marked(value) }} />
-            </div> */
             <Post 
             key={key}
             id={localStorageData.userid||"0"}

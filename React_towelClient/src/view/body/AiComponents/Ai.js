@@ -32,9 +32,9 @@ export default function Ai() {
                     <div> loadin...</div> : ''
                 }
             </div>
-            <form onSubmit={postAiHandler} className=' fixed bottom-14 w-[40%] max-lg:w-full h-10 flex space-x-2  '>
-                <input className='lg:w-full  bg-[--boxColor] h-10 rounded-my-rounded-10px focus:border-[--assistantColor]' value={inputData} onChange={(e) => setInputData(e.target.value)} placeholder='评论'></input>
-                <button type='submit' className='h-10 p-2 w-fit text-nowrap rounded-my-rounded-10px bg-[--boxColor] hover:bg-[--assistantColor] hover:text-[--hostColor] ' onClick={postAiHandler}>发表</button>
+            <form onSubmit={postAiHandler} className=' fixed  bottom-14 w-full md:w-[90%] lg:w-[40%] h-10 flex space-x-2 justify-center items-center '>
+                <input className='lg:w-full basis-1/2   bg-[--boxColor] h-10 rounded-my-rounded-10px focus:border-[--assistantColor]' value={inputData} onChange={(e) => setInputData(e.target.value)} placeholder='评论'></input>
+                <button type='submit' className='h-10 basis-1/4    p-2 w-fit text-nowrap rounded-my-rounded-10px bg-[--boxColor] hover:bg-[--assistantColor] hover:text-[--hostColor] ' onClick={postAiHandler}>发表</button>
             </form>
         </div>
     )

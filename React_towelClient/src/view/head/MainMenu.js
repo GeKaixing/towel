@@ -84,7 +84,7 @@ export default function MainMenu() {
         </div>
         <MainMenuLink to="/" src={icons[0].home().path} text='主页' />
         <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' />
-        <MainMenuLink to="/ai" src={icons[6].getIcon('/ai').path} text='llama'/>
+        <MainMenuLink className="-tracking-widest" to="/ai" src={icons[6].getIcon('/ai').path} text='llama'/>
         <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text='发帖' />
         <MainMenuLink to="/Message" src={icons[2].getIcon('/Message').path} text='消息'>
           <div>{noReadNumber}</div>
