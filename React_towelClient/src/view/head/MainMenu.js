@@ -74,6 +74,7 @@ export default function MainMenu() {
         lg:w-[20%] lg:ml-[10%]
         px-2 fixed md:left-0 max-md:bottom-2  
         justify-around w-full items-center rounded-my-rounded-10px
+        bg-white
        '>
         <div className='hidden md:block md:w-10 md:h-10
           lg:w-20 lg:h-20
@@ -82,14 +83,14 @@ export default function MainMenu() {
           <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='' />
         </div>
         <MainMenuLink to="/" src={icons[0].home().path} text='主页' />
-        <MainMenuLink to="/about" src={icons[1].getIcon('/about').path} text='关于' />
-        <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text='发帖' />
+        <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' />
         <MainMenuLink to="/ai" src={icons[6].getIcon('/ai').path} text='llama'/>
+        <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text='发帖' />
         <MainMenuLink to="/Message" src={icons[2].getIcon('/Message').path} text='消息'>
           <div>{noReadNumber}</div>
         </MainMenuLink>
         <MainMenuLink to="/blog" src={icons[7].getIcon('/blog').path} text='博客'/>
-        <MainMenuLink to="/setting" src={icons[4].getIcon('/setting').path} text='设置' />
+        <MainMenuLink className='hidden md:block' to="/setting" src={icons[4].getIcon('/setting').path} text='设置' />
         {localStorageData.jwt &&
           <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center '}>
             <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover lg:mr-10'>

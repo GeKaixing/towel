@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import style from './Login.module.css'
 import { postLogin } from '../../../services/login/login'
 import eyeIconOpen from '../../../assets/static/otherIcon/预览打开.svg'
@@ -11,7 +11,7 @@ export default function Login() {
     const [valuepassword, setValuepassword] = useState('')
     // 是否显示密码
     const [showpassword, setshowpassword] = useState(false)
-    // uselonginMutation Api
+
     const LoginApi = async () => {
         try {
             const reponseData = await postLogin({
@@ -40,7 +40,7 @@ export default function Login() {
             <form className='flex flex-col items-center space-y-2' onClick={(e)=> e.preventDefault()}>
                 <input className={style.name} type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder='名字' />
                 <div className={style.tip}>
-                    <input className={style.password} type={showpassword ? 'text' : 'password'} value={valuepassword} onChange={(e) => { setValuepassword(e.target.value) }} placeholder='密码'></input>
+                    <input className={style.password} type={showpassword ? 'text' : 'password'} autoComplete='off' value={valuepassword} onChange={(e) => { setValuepassword(e.target.value) }} placeholder='密码'></input>
                     {/* 显示密码的图标 */}
                     {showpassword ?
                         <img className={style.EyeOutlined} onClick={() => setshowpassword(!showpassword)} src={eyeIconOpen} alt="预览打开" />
@@ -52,6 +52,7 @@ export default function Login() {
                     登录
                 </button>
                 <Link className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-center' to={"/signup"}>注册</Link>
+                <Link className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-center' to={"/setting"}>设置</Link>
             </form>
 
         </div>

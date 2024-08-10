@@ -224,4 +224,5 @@ Post.propTypes = {
     }),
     reloadUserArticle: PropTypes.bool,
     setreloadUserArticle: PropTypes.func,
+    blog:PropTypes.bool
 };

@@ -27,7 +27,7 @@ export default function Blog() {
           loadTheme()
     },[localStorage])
     return (
-        <div>  
+        <div className='p-2'>  
              {
             entries.map(([key,value]) => (
          /*    <div key={key}>
@@ -35,7 +35,7 @@ export default function Blog() {
             </div> */
             <Post 
             key={key}
-            id={localStorageData.userid||0}
+            id={localStorageData.userid||"0"}
             name={localStorageData.username||"towel"}
             headimg={localStorageData.headimg||'https://github.com/GeKaixing/towel/blob/main/README_static/logo.png?raw=true'}
             content={ <div className={`${style.markdownbody} markdown-body`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(value)) }} />}
@@ -43,7 +43,7 @@ export default function Blog() {
             likes={0}
             favorites={0}
             postImages={""}
-            postUserId={localStorageData.userid||0}
+            postUserId={localStorageData.userid||'0'}
             blog={true}
           >
           </Post>

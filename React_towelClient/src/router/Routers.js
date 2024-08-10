@@ -29,7 +29,7 @@ export default function Routers() {
         <div className='flex '>
             <MainMenu></MainMenu>
             {/* 先不动，到了一点的宽度再动 */}
-            <div className='max-lg:w-full lg:w-[40%] lg:ml-[30%] md:ml-20'>
+            <div className='max-lg:w-full lg:w-[40%] lg:ml-[30%] md:ml-24'>
                 {/* h5Header  */}
                 <H5header></H5header>
                 <Routes>
