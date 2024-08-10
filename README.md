@@ -6,10 +6,10 @@
 一个 web/android/ios/uniapp 小程序的论坛app，将````持续开源和维护````    
 [towel静态部署,在线查看](https://gekaixing.top/)    
 [微信小程序搜索==>towel毛巾,或者微信扫码在线查看]     
-[]()
+[微信小程序分享二维码](https://raw.githubusercontent.com/GeKaixing/towel/main/README_static/wexinapp.jpg)
 主题颜色:rgba(134, 196, 248, 1)             
 副颜色:rgba(248, 196, 134, 1)  
-[logo详细](https://www.figma.com/design/Dd4QJLyuB9t857qU0xDkuw/Untitled?node-id=0-1&t=gQPofkDQnzy9zHtf-1)
+[logo详细](https://github.com/GeKaixing/towel/raw/main/README_static/wexinapp.jpg)
 ## 1. 项目启动
 开发环境：macOS monterey 12.4
 安装[node](https://nodejs.org/en)和[git](https://git-scm.com/downloads)     
