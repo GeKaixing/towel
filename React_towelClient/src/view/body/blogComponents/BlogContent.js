@@ -5,10 +5,11 @@ import useLocalStorage from "../../../hooks/useLocaStorage"
 import style from "./Blog.module.css"
 
 import DOMPurify from 'dompurify';
+/* global require */
 const markdownContext = require.context('../../../assets/markdown', false, /\.md$/);
 const markdownFiles = markdownContext.keys().reduce((acc, file) => {
     const fileName = file.replace('./', '').replace('.md', '');
-    // console.log(`Loading file: ${file}`); // 打印文件路径
+     console.log(`Loading file: ${file}`); // 打印文件路径
     acc[fileName] = markdownContext(file); 
     return acc;
 }, {});
