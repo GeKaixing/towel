@@ -78,7 +78,7 @@ export default function PostInput({ postId }) {
                     Object.keys(inputReplyData).length !== 0 ?
                         <div className='flex items-center space-x-2'>
                             <div className='bg-[--boxColor] rounded-my-rounded-10px grow'>{inputReplyData.targetName}</div>
-                            <div className=' w-6 h-6 rounded-full bg-[--boxColor] hover:bg-[--assistantColor] flex items-center justify-center' onClick={() => setInputReplyData('')}>X</div>
+                            <div className=' w-6 h-6 rounded-full bg-[--boxColor] hover:bg-[--assistantColor] flex items-center justify-center cursor-pointer' onClick={() => setInputReplyData('')}>X</div>
                         </div> : null
                 }
                 <input className='w-[15rem] bg-[--boxColor] rounded-my-rounded-10px focus:border-[--assistantColor]' value={inputData} onChange={(e) => setInputData(e.target.value)} placeholder='评论'></input>

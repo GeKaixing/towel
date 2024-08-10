@@ -3,7 +3,7 @@ import { Routes, Route, } from 'react-router-dom'
 // import style from "./Routers.module.css"
 import MainMenu from '../view/head/MainMenu'
 import About from '../view/body/aboutComponents/About'
-import Post from '../view/body/postComponents/PostPage'
+import Post from '../view/body/postComponents/PostContent'
 import Login from '../view/body/userComponents/Login'
 import Signup from '../view/body/userComponents/Signup'
 import UserHomePage from '../view/body/userComponents/userHomePageComponts/UserContent'

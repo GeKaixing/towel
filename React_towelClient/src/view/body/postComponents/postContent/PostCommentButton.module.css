@@ -9,10 +9,12 @@
 .replynumbe {
     margin-left: 10px;
     color: var(--fontColor);
+    cursor: default;
 }
 
 .replyText {
     color: var(--fontColor);
+    cursor: default;
 }
 
 .replyText:hover,

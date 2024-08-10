@@ -55,12 +55,13 @@ export default function User() {
             <div className='flex flex-col items-center w-full'>
                 <div>推荐关注</div>
                 <div className='flex  flex-col px-2 justify-between w-full space-y-2'>
-                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8  flex-shrink-0 flex-nowrap rounded-full border-none object-cover'><img src={headimgIcon}></img></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div>关注</div></div>
-                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap bg-black rounded-full border-none overflow-hidden'></div><Link to={`/userhomepage/${localStorageData.userid}`} className="text-[--fontColor] ">{localStorageData.username}</Link><div>关注</div></div>
-                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap bg-black rounded-full border-none overflow-hidden'></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div>关注</div></div>
-                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap bg-black rounded-full border-none overflow-hidden'></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div>关注</div></div>
+                    {/* global process */}
+                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap rounded-full border-none object-cover'><img src={headimgIcon}></img></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div className='cursor-pointer'>关注</div></div>
+                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap rounded-full border-none overflow-cover'><img src={process.env.PUBLIC_URL + '/logo.png'} ></img></div><Link to={`/userhomepage/${localStorageData.userid}`} className="text-[--fontColor] ">{localStorageData.username}</Link><div className='cursor-pointer'>关注</div></div>
+                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap rounded-full border-none overflow-cover'><img src={process.env.PUBLIC_URL + '/logo.png'}></img></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div className='cursor-pointer'>关注</div></div>
+                    <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap rounded-full border-none overflow-cover'><img src={process.env.PUBLIC_URL + '/logo.png'}></img></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div className='cursor-pointer'>关注</div></div>
                 </div>
-                <div>更多...</div>
+                <div className='cursor-pointer'>更多...</div>
             </div>
         </div>
 

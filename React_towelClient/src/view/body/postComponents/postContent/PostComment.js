@@ -71,7 +71,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                             <img src={item.users[0].headimg} className='h-10 w-10 rounded-full' alt="user" />
                             <div onClick={() => setInputData('@' + item.users[0].username + ':')} className='font-bold'>{item.users[0].username}</div>
                         </div>
-                        <div onClick={() => targetIDHandler(item._id)} className='relative' >...
+                        <div onClick={() => targetIDHandler(item._id)} className='relative cursor-pointer' >...
                             {targetID === item._id &&
                                 <DeleteBox postUserId={item.users[0]._id} deleteHandler={() => deleteHandler(item._id)}>
                                     {useRoutes.pathname.split('/')[1] !== 'homepage' ? (
@@ -79,7 +79,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                                             进入文章
                                         </span>
                                     ) : null}
-                                    <span className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => setInputData({ targetName: '@' + item.users[0].username, commentid: item._id })}>
+                                    <span className=' cursor-pointer w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => setInputData({ targetName: '@' + item.users[0].username, commentid: item._id })}>
                                         回复{item.users[0].username}
                                     </span>
                                 </DeleteBox>
@@ -111,7 +111,11 @@ PostComment.propTypes = {
     postId: propTypes.string,
     setInputData: propTypes.func,
     reLoad: propTypes.bool,
-    userCommentData: propTypes.object,
+    userCommentData:propTypes.oneOfType([
+        propTypes.object,
+        propTypes.array
+    ]),
+    
     setreloadUserlikes: propTypes.func,
     reloadUserlikes: propTypes.bool,
 }

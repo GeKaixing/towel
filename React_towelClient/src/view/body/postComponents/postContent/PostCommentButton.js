@@ -52,7 +52,7 @@ export default function PostCommentButton({ likes, commentid, setInputData, comm
                     }
                     {likes}</div>
                 <div onClick={() => setInputData({ targetName: '@' + commentName, commentid: commentid })} className={style.replyText}>回复</div>
-                <div className={style.replynumbe} onClick={() => isreplyshow(!replyshow)} >显示回复</div>
+                <div className={style.replynumbe}  onClick={() => isreplyshow(!replyshow)} >显示回复</div>
             </div>
             {/* 这是回复 */}
             {replyshow ?
@@ -66,9 +66,9 @@ export default function PostCommentButton({ likes, commentid, setInputData, comm
 PostCommentButton.propTypes = {
     likes: propTypes.number,
     commentid: propTypes.string.isRequired,
-    setInputData: propTypes.func.isRequired,
+    setInputData: propTypes.func,
     commentName: propTypes.string.isRequired,
-    reLoad: propTypes.bool.isRequired,
+    reLoad: propTypes.bool,
     reloadPostComment: propTypes.bool.isRequired,
     seReLoadPostComment: propTypes.func.isRequired,
 }

@@ -95,7 +95,7 @@ export default function Portal() {
                     {/* headImg userName */}
                     <div className='flex flex-row  items-center space-x-2 '>
                         <img src={loginDataParse.headimg} className='h-10 w-10 rounded-full' alt="user" />
-                        <div className='font-bold text=[--fontColor]'>{loginDataParse.username}</div>
+                        <div className='font-bold text=[--fontColor] cursor-pointer'>{loginDataParse.username}</div>
                     </div>
                     {/* textContent */}
                   

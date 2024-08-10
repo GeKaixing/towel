@@ -140,7 +140,7 @@ export default function Post(props) {
                         <img src={props.headimg} className='w-10 h-10 rounded-full '></img>
                         <Link className='font-blod' to={`./userhomepage/${props.postUserId}`}>{props.name}</Link>
                     </div>
-                    <div onClick={() => targetIDHandler(props.id)} className='relative'>...
+                    <div onClick={() => targetIDHandler(props.id)} className='relative cursor-pointer'>...
                         {targetID === props.id ?
                             <DeleteBox postUserId={props.postUserId} headimg={props.headimg} userName={props.name} deleteHandler={deletePostApi} DeleteBox={postDeleteBox} reportHandler={reportApi}></DeleteBox>
                             : null}

@@ -43,17 +43,17 @@ export default function UserHomePage() {
           <div className='w-10  h-10 rounded-full'>
             <img src={localStorageData.headimg} className='w-10  h-10 rounded-full' alt="头像"></img>
           </div>
-          <p className='text-[--fontColor] font-bold '> {localStorageData.username}</p>
+          <p className='text-[--fontColor] font-bold cursor-pointer'> {localStorageData.username}</p>
         </div>
         <div className='flex space-x-2'>
-          <div className='text-[--assistantColor]' onClick={() => Navigate("/setting")}>设置</div> 
-          {localStorageData.userid===params.id&& <div className='text-[--fontColor]' onClick={closeAnAccountHanlder}>登出</div>}
+          <div className='text-[--assistantColor] cursor-pointer' onClick={() => Navigate("/setting")}>设置</div> 
+          {localStorageData.userid===params.id&& <div className='text-[--fontColor] cursor-pointer' onClick={closeAnAccountHanlder}>登出</div>}
         </div>
       </div>
       <div className='text-[fontColor] flex justify-between mt-2 mb-2'>
-        <div className='hover:text-[--assistantColor]' onClick={() => { setseletcpage('UserArticle') }}>文章</div>
-        <div className='hover:text-[--assistantColor]' onClick={() => { setseletcpage('UserComment') }}>评论</div>
-        <div className='hover:text-[--assistantColor]' onClick={() => { setseletcpage('UserReply') }}>回复</div>
+        <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserArticle') }}>文章</div>
+        <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserComment') }}>评论</div>
+        <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserReply') }}>回复</div>
       </div >
       {rendercompents()}
     </div>

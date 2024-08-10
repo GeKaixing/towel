@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Post from '../../postComponents/PostPage'
+import Post from '../../postComponents/PostContent'
 import PropTypes from 'prop-types'
 import { getUsePost } from '../../../../services/user/user'
 

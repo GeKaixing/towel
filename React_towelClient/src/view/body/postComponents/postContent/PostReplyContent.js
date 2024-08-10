@@ -10,17 +10,16 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
     const useRoutes = useLocation()
     const navigate = useNavigate()
     const [targetID, setTargetID] = useState('');
-
     useEffect(() => {
-        if (useRoutes.pathname.split('/')[1] === 'postcontent') {
+        if(userReplyData){ setResponseData(userReplyData)}
+        else if (useRoutes.pathname.split('/')[1] === 'postcontent'||useRoutes.pathname.split('/')[1] ==="userhomepage") {
             getAllreply(commentid).then((response) => {
                 setResponseData(response.data)
             }).catch((error) => {
                 console.log(error)
             })
-        } else {
-            setResponseData(userReplyData)
-        }
+        }  
+      
     }, [userReplyData, useRoutes, reLoadPostReply, reLoad])
 
     const deletReplyHandler = (replyId) => {
@@ -66,7 +65,7 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
                         </div>}
                     <div
                         onClick={() => toggleOptions(item._id)}
-                        className='relative'
+                        className='relative cursor-pointer'
                      >
                         ...
                         {targetID === item._id &&
@@ -84,8 +83,8 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
 }
 
 Replycontent.propTypes = {
-    reLoad: propTypes.bool.isRequired,
-    commentid: propTypes.string.isRequired,
+    reLoad: propTypes.bool,
+    commentid: propTypes.string,
     userReplyData: propTypes.array,
     setInputData: propTypes.func,
     reloadUserReply: propTypes.bool,
