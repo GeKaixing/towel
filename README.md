@@ -4,7 +4,9 @@
 </div>
 
 一个 web/android/ios/uniapp 小程序的论坛app，将````持续开源和维护````    
-[towel静态部署,在线查看](https://gekaixing.github.io)       
+[towel静态部署,在线查看](https://gekaixing.top/)    
+[微信小程序搜索==>towel毛巾,或者微信扫码在线查看]     
+[]()
 主题颜色:rgba(134, 196, 248, 1)             
 副颜色:rgba(248, 196, 134, 1)  
 [logo详细](https://www.figma.com/design/Dd4QJLyuB9t857qU0xDkuw/Untitled?node-id=0-1&t=gQPofkDQnzy9zHtf-1)
@@ -287,8 +289,8 @@ towel 是一个三端同步的项目，在基于expess框架下编写后端项�
 * 注册验证（nodemailer的实践）
 * 文件上传（multer的实践）
 * 消息推送 (socket的实践)
-* AI Llama3.1 8b 模型 （Llama3.1的实践）
-react/Rn 使用同一技术栈react，小程序使用uniapp/vue
+* AI Llama3.1 8b 模型 （Llama3.1的实践）  
+* react/Rn 使用同一技术栈react，小程序使用uniapp/vue
 * RN使用expo 开发环境，快速开发
 * 小程序和RN和web使用同一个ui/ux，ui统一，icon统一使用[iconpark](https://iconpark.oceanengine.com/home)
 * 均使用socket.io进行消息推送，axios进行数据请求
