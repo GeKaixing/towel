@@ -10,6 +10,7 @@ import demo3 from '../../assets/static/MainMenuIcon/添加.svg'
 import demo4 from '../../assets/static/MainMenuIcon/设置.svg'
 import demo5 from '../../assets/static/MainMenuIcon/进入.svg'
 import demo6 from '../../assets/static/MainMenuIcon/大脑.svg'
+import demo7 from '../../assets/static/MainMenuIcon/笔记本.svg'
 import demo00 from '../../assets/static/MainMenuIconPitchUp/首页.svg'
 import demo11 from '../../assets/static/MainMenuIconPitchUp/提示.svg'
 import demo22 from '../../assets/static/MainMenuIconPitchUp/评论.svg'
@@ -17,6 +18,7 @@ import demo33 from '../../assets/static/MainMenuIconPitchUp/添加.svg'
 import demo44 from '../../assets/static/MainMenuIconPitchUp/设置.svg'
 import demo55 from '../../assets/static/MainMenuIconPitchUp/进入.svg'
 import demo66 from '../../assets/static/MainMenuIconPitchUp/大脑.svg'
+import demo77 from '../../assets/static/MainMenuIconPitchUp/笔记本.svg'
 
 export default function MainMenu() {
   const [, setWidth] = useState(window.innerWidth);
@@ -64,6 +66,7 @@ export default function MainMenu() {
     new HowShowIcon(demo4, demo44),
     new HowShowIcon(demo5, demo55),
     new HowShowIcon(demo6, demo66),
+    new HowShowIcon(demo7, demo77),
   ];
   return (
     <>
@@ -85,6 +88,7 @@ export default function MainMenu() {
         <MainMenuLink to="/Message" src={icons[2].getIcon('/Message').path} text='消息'>
           <div>{noReadNumber}</div>
         </MainMenuLink>
+        <MainMenuLink to="/blog" src={icons[7].getIcon('/blog').path} text='博客'/>
         <MainMenuLink to="/setting" src={icons[4].getIcon('/setting').path} text='设置' />
         {localStorageData.jwt &&
           <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center '}>

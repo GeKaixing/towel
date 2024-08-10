@@ -1,0 +1,10 @@
+/* styles.css */
+.markdownbody {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5; /* 限制显示的行数 */
+    text-overflow: ellipsis; /* 仅在单行中有效 */
+  }

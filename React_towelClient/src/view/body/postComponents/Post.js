@@ -14,6 +14,7 @@ import startPichIcon from '../../../assets/static/postIconPitchUp/星星.svg'
 import sharePichIcon from '../../../assets/static/postIconPitchUp/分享.svg'
 /* props $ */
 export default function Post(props) {
+    // console.log(props.content.props.dangerouslySetInnerHTML.__html)
     /*          根目录的文章           */
     const navigate = useNavigate();
     const [localStorageData] = useLocalStorage();
@@ -77,7 +78,8 @@ export default function Post(props) {
     // 跳转到指点的路由的函数
     const navgatehandle = (e) => {
         e.stopPropagation()
-        const data = JSON.stringify(props)
+        const changeData = props.blog ? { ...props, content: props.content.props.dangerouslySetInnerHTML.__html } : props
+        const data = JSON.stringify(changeData)
         /*在ulr加/斜杠和不加是有区别的，加入会把路径替换，不加这是在路径后面加上这个路径  */
         navigate(`/postcontent/${props.id}`, { state: data });
     };
@@ -144,11 +146,14 @@ export default function Post(props) {
                 </div>
                 <div className='felx flex-col space-y-2'>
                     {props.content}
-                    <div className='flex justify-between flex-wrap gap-2'>
-                        {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
-                        {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
-                        {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
-                    </div>
+                    {(props.postImages.length === 0 || props.postImages === '') &&
+                        <div className='flex justify-between flex-wrap gap-2'>
+                            {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
+                            {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
+                            {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
+                        </div>
+                    }
+
                 </div>
                 <div className='flex flex-row justify-around h-5 text-[--fontColor]' >
                     <div className='flex flex-row items-center hover:text-[host]' onClick={likehandle}
@@ -179,7 +184,6 @@ export default function Post(props) {
                                 <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon33.path} alt='收藏'></img>
                                 :
                                 <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon3.path} alt='收藏'></img>
-
                         }
                         {props.favorites}
                     </div>
@@ -202,7 +206,10 @@ Post.propTypes = {
     id: PropTypes.string.isRequired,
     headimg: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    content: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.PropTypes.object,
+    ]),
     postImages: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.arrayOf(PropTypes.string),

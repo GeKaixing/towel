@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 import { Routes, Route, } from 'react-router-dom'
 // import style from "./Routers.module.css"
 import MainMenu from '../view/head/MainMenu'
@@ -23,6 +23,7 @@ import NotRouter from '../components/NotRouter'
 import H5header from '../components/H5header'
 import PrivateChat from '../view/body/messageComponents/PrivateChat'
 import Ai from '../view/body/AiComponents/Ai'
+import Blog from '../view/body/blogComponents/Blog'
 export default function Routers() {
     return (
         <div className='flex '>
@@ -30,7 +31,7 @@ export default function Routers() {
             {/* 先不动，到了一点的宽度再动 */}
             <div className='max-lg:w-full lg:w-[40%] lg:ml-[30%] md:ml-20'>
                 {/* h5Header  */}
-               <H5header></H5header>
+                <H5header></H5header>
                 <Routes>
                     <Route path='/' element={<Post></Post>}></Route>
                     <Route element={<Protected />}>
@@ -38,16 +39,16 @@ export default function Routers() {
                         <Route path='/Message' element={<Message />}></Route>
                         <Route path='/userhomepage/:id' element={<UserHomePage></UserHomePage>}></Route>
                         <Route path='/post' element={<Add></Add>}></Route>
-                        <Route path='/privatechat/:id' element={<PrivateChat/>}></Route>
+                        <Route path='/privatechat/:id' element={<PrivateChat />}></Route>
                     </Route>
-                    <Route path='/setting' element={<Setting />}>
-                    </Route>
+                    <Route path='/setting' element={<Setting />}></Route>
                     <Route path='/setting/backgroundimg' element={<SettingBackgroundImg />}> </Route>
                     <Route path='/setting/forget' element={<SettingUserForgetPage />}> </Route>
                     <Route path='/setting/deactivate' element={<SettingDeactivate />}> </Route>
                     <Route path='/setting/account' element={<SettingAccount />}> </Route>
                     <Route path='/search' element={<Search />}></Route>
-                    <Route path='/ai' element={<Ai/>}></Route>
+                    <Route path='/ai' element={<Ai />}></Route>
+                    <Route path='/blog' element={<Blog></Blog>}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/signup' element={<Signup />}></Route>
                     <Route path='/postcontent/:id' element={<PostContent ></PostContent>}></Route>

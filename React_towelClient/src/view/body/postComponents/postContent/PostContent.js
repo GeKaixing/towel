@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import PostInput from './PostInput';
 // import style from './PostContent.module.css'
 // import axios from 'axios';
+import 'github-markdown-css/github-markdown.css'; 
 import { postPostfavorite, postPostLike } from '../../../../services/post/post';
 import useLocalStorage from '../../../../hooks/useLocaStorage';
 import likeIcon from '../../../../assets/static/postIcon/赞.svg'
@@ -116,7 +117,7 @@ export default function PostContent() {
                         </div>
                         <div className='flex flex-col justify-center items-center text-[--fontColor] font-bold' >
                             <div className='self-start'>
-                                {contentdata.content}
+                                { contentdata.blog?<div className='markdown-body' dangerouslySetInnerHTML={{ __html: contentdata.content }} />:contentdata.content}
                             </div>
                             {(contentdata.postImages?.length === 0 || contentdata.postImages === '') ? null : (<img src={contentdata.postImages} className=''></img>)}
                         </div>
