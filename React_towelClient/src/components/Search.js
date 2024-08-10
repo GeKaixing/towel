@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router'
-import Post from '../view/body/postComponents/Post'
+import Post from './Post'
 
 export default function Search() {
     const { state } = useLocation()

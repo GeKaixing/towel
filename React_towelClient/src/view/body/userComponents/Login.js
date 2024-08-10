@@ -37,10 +37,11 @@ export default function Login() {
             <div className='w-10 h-10 '>
                 <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
             </div>
-            <form className='flex flex-col items-center space-y-2' onClick={(e)=> e.preventDefault()}>
-                <input className={style.name} type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder='名字' />
+            <form className='flex flex-col items-center space-y-2' onSubmit={(e)=> {e.preventDefault();LoginApi()}} >
+                <input className={style.name} type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder='名字' required />
                 <div className={style.tip}>
-                    <input className={style.password} type={showpassword ? 'text' : 'password'} autoComplete='off' value={valuepassword} onChange={(e) => { setValuepassword(e.target.value) }} placeholder='密码'></input>
+                    <input  className={style.password} type={showpassword ? 'text' : 'password'} autoComplete='off' 
+                    value={valuepassword} onChange={(e) => { setValuepassword(e.target.value) }} placeholder='密码' required></input>
                     {/* 显示密码的图标 */}
                     {showpassword ?
                         <img className={style.EyeOutlined} onClick={() => setshowpassword(!showpassword)} src={eyeIconOpen} alt="预览打开" />
@@ -48,7 +49,7 @@ export default function Login() {
                         <img className={style.EyeInvisibleOutlined} onClick={() => setshowpassword(!showpassword)} src={eyeIconClose} alt="预览关闭" />
                     }
                 </div>
-                <button className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor]' onClick={LoginApi}>
+                <button className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor]' type='submit'>
                     登录
                 </button>
                 <Link className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-center' to={"/signup"}>注册</Link>

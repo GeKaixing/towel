@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { postPostLike, deletePost, postPostfavorite } from '../../../services/post/post'
-import useLocalStorage from '../../../hooks/useLocaStorage';
-import DeleteBox from '../../../components/DeleteBox';
-import likeIcon from '../../../assets/static/postIcon/赞.svg'
-import commentIcon from '../../../assets/static/postIcon/评论.svg'
-import startIcon from '../../../assets/static/postIcon/星星.svg'
-import shareIcon from '../../../assets/static/postIcon/分享.svg'
-import likeIPichcon from '../../../assets/static/postIconPitchUp/赞.svg'
-import commentPichIcon from '../../../assets/static/postIconPitchUp/评论.svg'
-import startPichIcon from '../../../assets/static/postIconPitchUp/星星.svg'
-import sharePichIcon from '../../../assets/static/postIconPitchUp/分享.svg'
+import { postPostLike, deletePost, postPostfavorite } from '../services/post/post'
+import useLocalStorage from '../hooks/useLocaStorage';
+import DeleteBox from './DeleteBox';
+import likeIcon from '../assets/static/postIcon/赞.svg'
+import commentIcon from '../assets/static/postIcon/评论.svg'
+import startIcon from '../assets/static/postIcon/星星.svg'
+import shareIcon from '../assets/static/postIcon/分享.svg'
+import likeIPichcon from '../assets/static/postIconPitchUp/赞.svg'
+import commentPichIcon from '../assets/static/postIconPitchUp/评论.svg'
+import startPichIcon from '../assets/static/postIconPitchUp/星星.svg'
+import sharePichIcon from '../assets/static/postIconPitchUp/分享.svg'
 /* props $ */
 export default function Post(props) {
     // console.log(props.content.props.dangerouslySetInnerHTML.__html)

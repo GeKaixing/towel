@@ -19,6 +19,7 @@ html {
 }
 body[color-model='dark'] {
     background-color: black;
+    --backgroundcolor:black;
     --fontColor: white;
     --boxColor: #101010;
     --boxShadow: 0;
@@ -27,6 +28,7 @@ body[color-model='dark'] {
 
 body[color-model='light'] {
     background-color: white;
+    --backgroundcolor:white;
     --fontColor: black;
     --boxColor: #f6f6f6;
     --boxHoverColor: #d8d8d8;
@@ -35,6 +37,7 @@ body[color-model='light'] {
 
 body[color-model='bing'] {
     background-color: white;
+    --backgroundcolor:white;
     --fontColor: black;
     --boxShadow: 0 2px 4px 1px rgba(0, 0, 0, .09);
     --boxColor: rgb(255 250 250 / 70%);

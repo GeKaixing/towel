@@ -29,9 +29,7 @@ export default function Signup() {
           }
         })
         .catch((error) => console.log(error))
-    } else {
-      alert('别空着')
-    }
+    } 
   }
   function validateEmail(e) {
     e.preventDefault();
@@ -40,7 +38,7 @@ export default function Signup() {
     setEmail(() => emailPattern.test(inputEmailData))
   }
   const sendEmailRegister = () => {
-    if (isEmail && valuename_signup && valuepassword_signup) {
+    if (valuename_signup && valuepassword_signup && inputEmailData) {
       getNodemailerRegister({
         data: {
           username: valuename_signup,
@@ -52,10 +50,10 @@ export default function Signup() {
           alert('验证码已发送')
         }
       }).catch((error) => {
-        console.log(error)
+        alert(error.response.data.meassge)
       })
     } else {
-      alert('别空着')
+      return;
     }
   }
   return (
@@ -65,28 +63,31 @@ export default function Signup() {
         {/* global process*/}
         <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
       </div>
-      <input className={style.name} type='text' value={valuename_signup} onChange={(e) => { e.preventDefault(); setValuename_signup(e.target.value) }} placeholder='账号'>
-      </input>
-      <input type='password' className={style.password} value={valuepassword_signup} onChange={(e) => { e.preventDefault(); setValuepassword_signup(e.target.value) }} placeholder='密码'>
-      </input>
-      <input type='email' className={style.password} value={inputEmailData} onChange={validateEmail} placeholder='电子邮件发送验证码'>
-      </input>
-      {isEmail ?
-        <>
-          <input type='text' className={style.password} value={verificationcode} onChange={(e) => { e.preventDefault(); setVerificationCode(e.target.value) }} placeholder='验证码'>
-          </input>
-          <button className={style.button} onClick={sendEmailRegister}>
-            发送验证码
-          </button>
-        </>
-        : null}
-      <button onClick={signupApi} className={style.button}>
-        注册
-      </button>
-      <Link  to={'/login'} className={[style.button,'text-center']} >
-        登录
-      </Link>
-      {signupstate ? null : <div>账号重复</div>}
+      <form className='flex flex-col justify-center items-center ' onSubmit={(e) => {e.preventDefault();}}>
+        <input required className={style.name} type='text' value={valuename_signup} onChange={(e) => { e.preventDefault(); setValuename_signup(e.target.value) }} placeholder='账号' >
+        </input>
+        <input required type='password' className={style.password} value={valuepassword_signup} onChange={(e) => { e.preventDefault(); setValuepassword_signup(e.target.value) }} placeholder='密码'>
+        </input>
+        <input required type='email' className={style.password} value={inputEmailData} onChange={validateEmail} placeholder='电子邮件发送验证码'>
+        </input>
+        {isEmail ?
+          <>
+            <input required type='text' minLength={6} maxLength={6} className={style.password} value={verificationcode} onChange={(e) => { e.preventDefault(); setVerificationCode(e.target.value) }} placeholder='验证码'>
+            </input>
+            <button className={style.button} onClick={e => { e.preventDefault; sendEmailRegister() }}>
+              发送验证码
+            </button>
+          </>
+          : null}
+        <button type='submit' className={style.button} onClick={e => { e.preventDefault; signupApi() }}>
+          注册
+        </button>
+        <Link to={'/login'} className={[style.button, 'text-center']} >
+          登录
+        </Link>
+        {signupstate ? null : <div>账号重复</div>}
+      </form >
     </div >
+
   )
 }

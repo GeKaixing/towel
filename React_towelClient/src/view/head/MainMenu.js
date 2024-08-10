@@ -74,7 +74,7 @@ export default function MainMenu() {
         lg:w-[20%] lg:ml-[10%]
         px-2 fixed md:left-0 max-md:bottom-2  
         justify-around w-full items-center rounded-my-rounded-10px
-        bg-white
+        bg-[--backgroundcolor]
        '>
         <div className='hidden md:block md:w-10 md:h-10
           lg:w-20 lg:h-20
@@ -84,7 +84,7 @@ export default function MainMenu() {
         </div>
         <MainMenuLink to="/" src={icons[0].home().path} text='主页' />
         <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' />
-        <MainMenuLink className="-tracking-widest" to="/ai" src={icons[6].getIcon('/ai').path} text='llama'/>
+        <MainMenuLink className="tracking-widest" to="/ai" src={icons[6].getIcon('/ai').path} text='llama'/>
         <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text='发帖' />
         <MainMenuLink to="/Message" src={icons[2].getIcon('/Message').path} text='消息'>
           <div>{noReadNumber}</div>

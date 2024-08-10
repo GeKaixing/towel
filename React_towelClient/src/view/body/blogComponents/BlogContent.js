@@ -1,6 +1,6 @@
 import { marked } from 'marked';
 import React, { useEffect } from 'react'
-import Post from '../postComponents/Post';
+import Post from '../../../components/Post';
 import useLocalStorage from "../../../hooks/useLocaStorage"
 import style from "./Blog.module.css"
 
@@ -9,7 +9,7 @@ import DOMPurify from 'dompurify';
 const markdownContext = require.context('../../../assets/markdown', false, /\.md$/);
 const markdownFiles = markdownContext.keys().reduce((acc, file) => {
     const fileName = file.replace('./', '').replace('.md', '');
-     console.log(`Loading file: ${file}`); // 打印文件路径
+    //  console.log(`Loading file: ${file}`); // 打印文件路径
     acc[fileName] = markdownContext(file); 
     return acc;
 }, {});
