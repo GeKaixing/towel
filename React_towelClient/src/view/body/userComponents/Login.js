@@ -49,11 +49,11 @@ export default function Login() {
                         <img className={style.EyeInvisibleOutlined} onClick={() => setshowpassword(!showpassword)} src={eyeIconClose} alt="预览关闭" />
                     }
                 </div>
-                <button className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor]' type='submit'>
+                <button className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-[--fontColor]' type='submit'>
                     登录
                 </button>
-                <Link className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-center' to={"/signup"}>注册</Link>
-                <Link className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-center' to={"/setting"}>设置</Link>
+                <Link className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-center text-[--fontColor]' to={"/signup"}>注册</Link>
+                <Link className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-center text-[--fontColor]' to={"/setting"}>设置</Link>
             </form>
 
         </div>

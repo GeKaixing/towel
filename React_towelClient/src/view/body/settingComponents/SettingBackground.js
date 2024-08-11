@@ -12,16 +12,21 @@ export default function SettingBackground() {
         localStorage.clear('backgroundimg')
         localStorage.setItem('color-model', 'system')
         setColorModel(!colorModel)
+        location.reload()
     }
     const selectLightHandler = () => {
+        if(localStorage.getItem('color-model')==='bing'){ location.reload()}
         localStorage.clear('backgroundimg')
         localStorage.setItem('color-model', 'light')
         setColorModel(!colorModel)
+        
     }
     const selectDarkHandler = () => {
+        if(localStorage.getItem('color-model')==='bing'){ location.reload()}
         localStorage.clear('backgroundimg')
         localStorage.setItem('color-model', 'dark')
         setColorModel(!colorModel)
+    
     }
     const backgroundimgHandler = () => {
         navigate('/setting/backgroundimg', { replace: true })

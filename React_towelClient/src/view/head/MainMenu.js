@@ -74,7 +74,8 @@ export default function MainMenu() {
         lg:w-[20%] lg:ml-[10%]
         px-2 fixed md:left-0 max-md:bottom-2  
         justify-around w-full items-center rounded-my-rounded-10px
-        bg-[--backgroundcolor]
+        bg-[--boxColor]
+        lg:bg-transparent
        '>
         <div className='hidden md:block md:w-10 md:h-10
           lg:w-20 lg:h-20

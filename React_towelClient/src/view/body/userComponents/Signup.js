@@ -29,7 +29,7 @@ export default function Signup() {
           }
         })
         .catch((error) => console.log(error))
-    } 
+    }
   }
   function validateEmail(e) {
     e.preventDefault();
@@ -63,7 +63,7 @@ export default function Signup() {
         {/* global process*/}
         <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
       </div>
-      <form className='flex flex-col justify-center items-center ' onSubmit={(e) => {e.preventDefault();}}>
+      <form className='flex flex-col justify-center items-center ' onSubmit={(e) => { e.preventDefault(); }}>
         <input required className={style.name} type='text' value={valuename_signup} onChange={(e) => { e.preventDefault(); setValuename_signup(e.target.value) }} placeholder='账号' >
         </input>
         <input required type='password' className={style.password} value={valuepassword_signup} onChange={(e) => { e.preventDefault(); setValuepassword_signup(e.target.value) }} placeholder='密码'>
@@ -82,8 +82,10 @@ export default function Signup() {
         <button type='submit' className={style.button} onClick={e => { e.preventDefault; signupApi() }}>
           注册
         </button>
-        <Link to={'/login'} className={[style.button, 'text-center']} >
-          登录
+        <Link to={'/login'} className={[style.button, 'text-center',]} >
+          <p className='text-[--fontColor]'>
+            登录
+          </p>
         </Link>
         {signupstate ? null : <div>账号重复</div>}
       </form >

@@ -35,12 +35,12 @@ export default function Routers() {
                 <Routes>
                     <Route path='/' element={<Post></Post>}></Route>
                     <Route element={<Protected />}>
-                        <Route path="/about" element={<About />}></Route>
                         <Route path='/Message' element={<Message />}></Route>
                         <Route path='/userhomepage/:id' element={<UserHomePage></UserHomePage>}></Route>
                         <Route path='/post' element={<Add></Add>}></Route>
                         <Route path='/privatechat/:id' element={<PrivateChat />}></Route>
                     </Route>
+                    <Route path="/about" element={<About />}></Route>
                     <Route path='/setting' element={<Setting />}></Route>
                     <Route path='/setting/backgroundimg' element={<SettingBackgroundImg />}> </Route>
                     <Route path='/setting/forget' element={<SettingUserForgetPage />}> </Route>

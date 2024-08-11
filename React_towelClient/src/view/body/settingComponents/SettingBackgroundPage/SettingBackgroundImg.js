@@ -30,6 +30,7 @@ export default function SettingBackgroundImg() {
             localStorage.setItem('color-model', 'bing')
             localStorage.setItem('background-model', 'bing')
             setColorModel(!colorModel)
+            location.reload()
         })
             .catch((error) => { console.log(error) })
     }
@@ -38,8 +39,8 @@ export default function SettingBackgroundImg() {
         bgi.style.backgroundImage = `url(${localStorage.getItem('backgroundimg')})`
         bgi.style.backgroundSize = 'cover';
         bgi.style.backgroundPosition = 'center';
+        bgi.style.position = 'fixed'; // 固定背景图片
         bgi.style.zIndex = '-1';
-        bgi.style.position = 'absolute';
         bgi.style.top = '0';
         bgi.style.left = '0';
         bgi.style.height = '100vh';
@@ -48,12 +49,12 @@ export default function SettingBackgroundImg() {
     }, [imgData, colorModel])
     return (
         <div className='flex flex-col justify-center items-center space-y-2'>
-            <div onClick={SettingBackgroundBingImgHandler} className=' flex items-center text-[--fontColor] font-bold'>使用bing每日壁纸
+            <div onClick={SettingBackgroundBingImgHandler} className=' flex items-center text-[--fontColor] font-bold cursor-pointer'>使用bing每日壁纸
                 {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'bing' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
             </div>
             <form onSubmit={(e) => e.preventDefault()} className='flex flex-col  items-center '> 
                 <input className='hidden' htmlFor='upload' type='file' onChange={SettingBackgroundImgHandler} accept="image/*"></input>
-                <label id='upload' className='w-12 h-12 bg-[--boxColor] flex justify-center items-center'>上传</label>
+                <label id='upload' className='w-12 h-12 bg-[--boxColor] flex justify-center items-center my-rounded-10px'>上传</label>
                 {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'diy' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
             </form>
         </div>

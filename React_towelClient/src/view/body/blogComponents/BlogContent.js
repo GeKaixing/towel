@@ -18,7 +18,7 @@ export default function Blog() {
     const [localStorageData]=useLocalStorage()
     useEffect(()=>{
         const loadTheme = async () => {
-            if (localStorage.getItem('color-model')==='light') {
+            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
               await import ('github-markdown-css/github-markdown-light.css')
             } else {
               await import('github-markdown-css/github-markdown-dark.css');
