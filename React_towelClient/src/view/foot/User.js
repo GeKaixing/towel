@@ -47,7 +47,6 @@ export default function User() {
                         src={mouseOver ? sreachPitchIcon : sreachIcon} alt="搜索" />
                 </form>
             </section>
-
             {localStorageData.jwt ?
                 <div className='w-full flex bg-[--boxColor] rounded-my-rounded-10px p-2 items-center space-x-2'>
                     <div className='  '>
