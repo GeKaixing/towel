@@ -102,7 +102,7 @@ export default function Post(props) {
     // 分享按钮设置，点击然后分享url
     const sharehandler = (e) => {
         e.stopPropagation()
-        const pathname = `http://localhost:3000/postcontent/${props.id}`
+        const pathname = `${process.env.REACT_APP_DOMAIN}/postcontent/${props.id}`
         navigator.clipboard.writeText(pathname).then(() => {
             console.log("复制成功");
         }, (error) => {

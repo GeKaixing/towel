@@ -118,10 +118,10 @@ export default function PostContent() {
             })
     }
     // 分享按钮
-    const sharehandler = () => {
-        const at_present_pathname = `http://localhost:3000${pathname}`
+    const sharehandler = (event) => {
+        event.stopPropagation() 
+        const at_present_pathname = `${process.env.REACT_APP_DOMAIN}${pathname}`
         navigator.clipboard.writeText(at_present_pathname).then(() => {
-            console.log("复制成功");
         }, (error) => {
             console.log("复制失败：", error);
         });
