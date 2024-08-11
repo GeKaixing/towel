@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import style from './Login.module.css'
 import { postLogin } from '../../../services/login/login'
 import eyeIconOpen from '../../../assets/static/otherIcon/预览打开.svg'
@@ -37,11 +37,11 @@ export default function Login() {
             <div className='w-10 h-10 '>
                 <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
             </div>
-            <form className='flex flex-col items-center space-y-2' onSubmit={(e)=> {e.preventDefault();LoginApi()}} >
+            <form className='flex flex-col items-center space-y-2' onSubmit={(e) => { e.preventDefault(); LoginApi() }} >
                 <input className={style.name} type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder='名字' required />
                 <div className={style.tip}>
-                    <input  className={style.password} type={showpassword ? 'text' : 'password'} autoComplete='off' 
-                    value={valuepassword} onChange={(e) => { setValuepassword(e.target.value) }} placeholder='密码' required></input>
+                    <input className={style.password} type={showpassword ? 'text' : 'password'} autoComplete='off'
+                        value={valuepassword} onChange={(e) => { setValuepassword(e.target.value) }} placeholder='密码' required></input>
                     {/* 显示密码的图标 */}
                     {showpassword ?
                         <img className={style.EyeOutlined} onClick={() => setshowpassword(!showpassword)} src={eyeIconOpen} alt="预览打开" />
