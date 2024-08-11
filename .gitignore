@@ -36,3 +36,5 @@ dist
 # .env
 # build dist
 React_towelClient/build
+*/build
+*/dist

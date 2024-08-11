@@ -27,7 +27,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "commit": "cz"
   },
   "browserslist": {
     "production": [
@@ -47,6 +48,7 @@
     "autoprefixer": "^10.4.19",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^7.2.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.35.0",
     "globals": "^15.8.0",
@@ -63,7 +65,7 @@
   ],
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "./node_modules/cz-customizable"
     }
   }
 }
