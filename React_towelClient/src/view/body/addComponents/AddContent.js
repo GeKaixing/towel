@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // import style from './AddContent.module.css';
 import useLocalStorage from '../../../hooks/useLocaStorage';
 import { postAddPost, postUpLoad } from '../../../services/add/add';
@@ -10,7 +10,8 @@ import addImgaIcon from '../../../assets/static/otherIcon/图片添加.svg'
 import addImgaPichIcon from '../../../assets/static/otherIconPitchUp/图片添加.svg'
 import addIcon from '../../../assets/static/MainMenuIcon/添加.svg'
 import addPichIcon from '../../../assets/static/MainMenuIconPitchUp/添加.svg'
-
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 export default function Portal() {
     const [textareaData, settextareaData] = useState('');
     const [localStorageData] = useLocalStorage()
@@ -19,6 +20,30 @@ export default function Portal() {
     const [responseImageData, setResponseImageData] = useState('')
     const [isHovered, setIsHovered] = useState(false);
     const [isHoveredImage, setIsHoveredImage] = useState(false);
+    const [isMarkdown, setIsMarkdown] = useState(false);
+    const textareaRef = useRef(null);
+
+    useEffect(()=>{
+        const loadTheme = async () => {
+            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
+              await import ('github-markdown-css/github-markdown-light.css')
+            } else {
+              await import('github-markdown-css/github-markdown-dark.css');
+            }
+          };
+          loadTheme()
+    },[localStorage])
+
+    useEffect(() => {
+        const textarea = textareaRef.current;
+        if (textarea) {
+            // 重置高度为 auto，以便在内容减少时能缩小
+            textarea.style.height = 'auto';
+            // 设置高度为 scrollHeight，以便内容增加时自动扩展
+            textarea.style.height = `${textarea.scrollHeight}px`;
+        }
+    }, [textareaData]); // 当 textareaData 改变时执行
+
     const upImageApi = async (e) => {
         e.preventDefault();
         try {
@@ -96,19 +121,21 @@ export default function Portal() {
                     <div className='flex flex-row  items-center space-x-2 '>
                         <img src={loginDataParse.headimg} className='h-10 w-10 rounded-full' alt="user" />
                         <div className='font-bold text=[--fontColor] cursor-pointer'>{loginDataParse.username}</div>
+                        <div className='flex items-center space-x-2' onClick={()=>setIsMarkdown(!isMarkdown)}><p className={isMarkdown ? 'font-bold' : ''}>markdown</p>{isMarkdown&&<div className='w-2 h-2 rounded-full bg-[--hostColor]'></div>}</div>
                     </div>
                     {/* textContent */}
-                  
                         <textarea
+                            ref={textareaRef}
                             value={textareaData}
                             onChange={(e) => settextareaData(e.target.value)}
-                            className='w-full bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor]'
-                            
-                            placeholder="请输入内容"
+                            className='w-full h-auto bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor]'
+                            placeholder="请输入您要发布的内容"
                             rows={1}
-                            maxLength={1000}
+                            maxLength={10000}
                             style={{ resize: "vertical", backgroundColor: 'var(--boxColor)', color: 'var(--fontColor)' }}
                         ></textarea>
+                       { textareaData.length>=1000&&<p className="text-red-500">最多10000字哦</p>}
+                        {isMarkdown&&<div  className='markdown-body' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(textareaData)) }}></div>}
                     {/* boxBottom */}
                     <div className='flex justify-around h-5 w-full'>
                         <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path}></img>

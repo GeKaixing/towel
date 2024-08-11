@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import PostInput from './PostInput';
 // import style from './PostContent.module.css'
 // import axios from 'axios';
-import 'github-markdown-css/github-markdown.css'; 
-import { postPostfavorite, postPostLike } from '../../../../services/post/post';
+import 'github-markdown-css/github-markdown.css';
+import { getOnePost, postPostfavorite, postPostLike } from '../../../../services/post/post';
 import useLocalStorage from '../../../../hooks/useLocaStorage';
 import likeIcon from '../../../../assets/static/postIcon/赞.svg'
 import startIcon from '../../../../assets/static/postIcon/星星.svg'
@@ -12,20 +12,39 @@ import shareIcon from '../../../../assets/static/postIcon/分享.svg'
 import likeIPichcon from '../../../../assets/static/postIconPitchUp/赞.svg'
 import startPichIcon from '../../../../assets/static/postIconPitchUp/星星.svg'
 import sharePichIcon from '../../../../assets/static/postIconPitchUp/分享.svg'
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
+import { selectLightorDarkContext } from '../../../../store/selectLightorDark';
 export default function PostContent() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
     const [localStorageData] = useLocalStorage()
+    const{colorModel}= useContext(selectLightorDarkContext)
     // const navigate = useNavigate()
     //获取当前路由
     const { pathname, state } = useLocation()
+    const params = useParams()
     const [mouseOver, setMouseOver] = useState({
         share: false,
         star: false,
         like: false,
     });
+    const detectMarkdown = (text) => {
+        // 简单的正则表达式检测 Markdown 标题、列表和粗体
+        const markdownRegex = /^(# |- \s|\*\*|\*|`|>\s)/;
+        return markdownRegex.test(text);
+    };
+    useEffect(()=>{
+        const loadTheme = async () => {
+            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
+              await import ('github-markdown-css/github-markdown-light.css')
+            } else {
+              await import('github-markdown-css/github-markdown-dark.css');
+            }
+          };
+          loadTheme()
+    },[colorModel])
     useEffect(() => {
-
         if (state) {
             const data = JSON.parse(state)
             if (data.from) {
@@ -43,6 +62,21 @@ export default function PostContent() {
             } else {
                 setcontent(data)
             }
+        }else{
+            getOnePost(params.id).then((response)=>{
+                const datas = {
+                    comments: response.data[0].postComment,
+                    content:  detectMarkdown(response.data[0].postText)?DOMPurify.sanitize(marked(response.data[0].postText)):response.data[0].postText,
+                    headimg: response.data[0].user.headimg,
+                    id: response.data[0]._id,
+                    likes: response.data[0].postLike,
+                    name: response.data[0].user.username,
+                    postImages: response.data[0].postImages,
+                    postUserId: response.data[0].postUserId,
+                    markdown:detectMarkdown(response.data[0].postText)
+                }
+                setcontent(datas)
+                }).catch(error=>console.log(error))
         }
     }, [state, pathname])
     // 点赞按钮
@@ -117,7 +151,10 @@ export default function PostContent() {
                         </div>
                         <div className='flex flex-col justify-center items-center text-[--fontColor] font-bold' >
                             <div className='self-start'>
-                                { contentdata.blog?<div className='markdown-body' dangerouslySetInnerHTML={{ __html: contentdata.content }} />:contentdata.content}
+                                {contentdata.blog ? <div className='markdown-body' dangerouslySetInnerHTML={{ __html: contentdata.content }} /> :
+                                    contentdata.markdown ? <div className='markdown-body' dangerouslySetInnerHTML={{ __html: contentdata.content }}></div> :
+                                        <div>{contentdata.content}</div>
+                                }
                             </div>
                             {(contentdata.postImages?.length === 0 || contentdata.postImages === '') ? null : (<img src={contentdata.postImages} className=''></img>)}
                         </div>

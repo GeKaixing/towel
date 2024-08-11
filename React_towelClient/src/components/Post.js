@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { postPostLike, deletePost, postPostfavorite } from '../services/post/post'
@@ -12,10 +12,14 @@ import likeIPichcon from '../assets/static/postIconPitchUp/赞.svg'
 import commentPichIcon from '../assets/static/postIconPitchUp/评论.svg'
 import startPichIcon from '../assets/static/postIconPitchUp/星星.svg'
 import sharePichIcon from '../assets/static/postIconPitchUp/分享.svg'
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
+import { selectLightorDarkContext } from '../store/selectLightorDark';
 /* props $ */
 export default function Post(props) {
     // console.log(props.content.props.dangerouslySetInnerHTML.__html)
     /*          根目录的文章           */
+    const{colorModel}= useContext(selectLightorDarkContext)
     const navigate = useNavigate();
     const [localStorageData] = useLocalStorage();
     const postDeleteBox = useRef();
@@ -37,6 +41,17 @@ export default function Post(props) {
             window.removeEventListener('click', handleClick);
         }
     }, [localStorage])
+
+    useEffect(()=>{
+        const loadTheme = async () => {
+            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
+              await import ('github-markdown-css/github-markdown-light.css')
+            } else {
+              await import('github-markdown-css/github-markdown-dark.css');
+            }
+          };
+          loadTheme()
+    },[colorModel])
     // 点赞按钮
     const likehandle = (event) => {
         event.stopPropagation()
@@ -78,7 +93,8 @@ export default function Post(props) {
     // 跳转到指点的路由的函数
     const navgatehandle = (e) => {
         e.stopPropagation()
-        const changeData = props.blog ? { ...props, content: props.content.props.dangerouslySetInnerHTML.__html } : props
+        const propsData= detectMarkdown(props.content)?{ ...props, content: DOMPurify.sanitize(marked(props.content)),markdown:true }:props
+        const changeData = props.blog ? { ...props, content: props.content.props.dangerouslySetInnerHTML.__html } : propsData
         const data = JSON.stringify(changeData)
         /*在ulr加/斜杠和不加是有区别的，加入会把路径替换，不加这是在路径后面加上这个路径  */
         navigate(`/postcontent/${props.id}`, { state: data });
@@ -112,6 +128,11 @@ export default function Post(props) {
             setTargetID(id)
         }
     }
+    const detectMarkdown = (text) => {
+        // 简单的正则表达式检测 Markdown 标题、列表和粗体
+        const markdownRegex = /^(# |- \s|\*\*|\*|`|>\s)/;
+        return markdownRegex.test(text);
+    };
     class PostIcon {
         constructor(path) {
             {/* global process*/ }
@@ -147,7 +168,7 @@ export default function Post(props) {
                     </div>
                 </div>
                 <div className='felx flex-col space-y-2 '>
-                    <div className='md:max-w-[39rem] lg:w-full'>{props.content}</div>
+                    <div className='md:max-w-[39rem] lg:w-full'>{ detectMarkdown(props.content)? <div className='markdown-body' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(props.content)) }}/>:<div>{props.content}</div>}</div>
                     {(props.postImages.length === 0 || props.postImages === '') &&
                         <div className='flex justify-between flex-wrap gap-2'>
                             {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
@@ -155,7 +176,6 @@ export default function Post(props) {
                             {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
                         </div>
                     }
-
                 </div>
                 <div className='flex flex-row justify-around h-5 text-[--fontColor]' >
                     <div className='flex flex-row items-center hover:text-[host]' onClick={likehandle}
@@ -226,5 +246,5 @@ Post.propTypes = {
     }),
     reloadUserArticle: PropTypes.bool,
     setreloadUserArticle: PropTypes.func,
-    blog:PropTypes.bool
+    blog: PropTypes.bool
 };

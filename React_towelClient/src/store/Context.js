@@ -11,6 +11,18 @@ export default function Context({ children }) {
     const [noReadNumber, setNoReadNumber] = useState('')
     const [MessageResponseData, setMessageResponseData] = useState([])
     const [privateChatData, setPrivateChatData] = useState([])
+
+    useEffect(()=>{
+        const loadTheme = async () => {
+            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
+              await import ('github-markdown-css/github-markdown-light.css')
+            } else {
+              await import('github-markdown-css/github-markdown-dark.css');
+            }
+          };
+          loadTheme()
+    },[localStorage])
+
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
             const localStorageDatas = JSON.parse(localStorage.getItem('loginData'));
@@ -52,7 +64,7 @@ export default function Context({ children }) {
                     bgi.style.backgroundSize = 'cover';
                     bgi.style.backgroundPosition = 'center';
                     bgi.style.zIndex = '-1';
-                    bgi.style.position = 'absolute';
+                    bgi.style.position = 'fixed';
                     bgi.style.top = '0';
                     bgi.style.left = '0';
                     bgi.style.height = '100vh';
@@ -68,8 +80,17 @@ export default function Context({ children }) {
                     break;
             }
         }
-
     }, [colorModel, window])
+    useEffect(()=>{
+        const loadTheme = async () => {
+            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
+              await import ('github-markdown-css/github-markdown-light.css')
+            } else {
+              await import('github-markdown-css/github-markdown-dark.css');
+            }
+          };
+          loadTheme()
+    },[colorModel])
     return (
         <privateChatContext.Provider value={{ privateChatData,setPrivateChatData }}>
             <searchDatauseContext.Provider value={{ searchData, setsearchData }}>
