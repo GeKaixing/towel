@@ -327,6 +327,12 @@ UI/UX原型图
 
 web项目截图
 ![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web_towel.png)
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/home.png)
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/about.png)
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/add.png)
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/blog.png)
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/user.png)
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/setting.png)
 
 小程序项目/N项目截图截图
 <div>
