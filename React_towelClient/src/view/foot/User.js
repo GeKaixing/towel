@@ -5,12 +5,16 @@ import axios from 'axios';
 import sreachIcon from '../../assets/static/otherIcon/搜索.svg'
 import sreachPitchIcon from '../../assets/static/otherIconPitchUp/搜索.svg'
 import headimgIcon from '../../assets/static/otherIcon/head-img.svg'
+import githubIcon from '../../assets/static/otherIcon/github.svg'
+import weixinminiappIcon from '../../assets/static/otherIcon/weixin-mini-app.svg'
+import wexinapp from '../../assets/static/otherIcon/wexinapp.png'
 export default function User() {
     // 解构login的state
     const [localStorageData, setLocalStorage] = useState({})
     const [searchData, setSearechData] = useState('')
     const navigate = useNavigate()
     const [mouseOver, setMouseOver] = useState(false);
+    const [isWeixinminiappIcon,setIsWeixinminiappIcon]=useState(false);
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
             setLocalStorage(JSON.parse(localStorage.getItem('loginData')))
@@ -37,10 +41,10 @@ export default function User() {
             <section className='sticky top-2 mb-4'>
                 <form className={style.search} onSubmit={(e) => { e.preventDefault() }} >
                     <input className='w-full bg-[--boxColor] border-none rounded-my-rounded-10px' type='text' placeholder='search more' value={searchData} onChange={(e) => { e.preventDefault(); setSearechData(e.target.value) }}></input>
-                    <img  onClick={searchDataApi} className={style.SearchOutlined}
+                    <img onClick={searchDataApi} className={style.SearchOutlined}
                         onMouseEnter={() => setMouseOver(true)}
                         onMouseLeave={() => setMouseOver(false)}
-                        src={mouseOver ? sreachPitchIcon:sreachIcon} alt="搜索" />
+                        src={mouseOver ? sreachPitchIcon : sreachIcon} alt="搜索" />
                 </form>
             </section>
 
@@ -62,6 +66,20 @@ export default function User() {
                     <div className='flex flex-row justify-between w-full'> <div className='w-8 h-8 flex-shrink-0 flex-nowrap rounded-full border-none overflow-cover'><img src={process.env.PUBLIC_URL + '/logo.png'}></img></div><Link to={`/userhomepage/${localStorageData.userid}`} className='text-[--fontColor] '>{localStorageData.username}</Link><div className='cursor-pointer'>关注</div></div>
                 </div>
                 <div className='cursor-pointer'>更多...</div>
+            </div>
+            <div className='flex  space-x-2 bg-[--boxColor] w-full rounded-my-rounded-10px p-2'>
+                <a className='w-8 h-8 hidden md:block' href="https://github.com/GeKaixing/towel" target="_blank" rel="noopener noreferrer">
+                    <img className='w-8 h-8' src={githubIcon} alt="GitHub"></img>
+                </a>
+                <div className="w-8 h-8 hidden md:block relative"  target="_blank" rel="noopener noreferrer" onMouseEnter={()=>setIsWeixinminiappIcon(!isWeixinminiappIcon)} onMouseLeave={()=>setIsWeixinminiappIcon(!isWeixinminiappIcon)}>
+                    <img className='w-8 h-8' src={weixinminiappIcon} alt="GitHub"></img>
+                  { isWeixinminiappIcon&&
+                  <div className='w-40 h-40 absolute flex flex-col items-center'>
+                            <img className='w-40 h-40 object-cover' src={wexinapp} alt='微信小程序二维码'></img>
+                            <p>微信扫码</p>
+                  </div>
+                  }
+                </div>
             </div>
         </div>
 

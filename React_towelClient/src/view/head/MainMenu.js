@@ -19,7 +19,6 @@ import demo44 from '../../assets/static/MainMenuIconPitchUp/设置.svg'
 import demo55 from '../../assets/static/MainMenuIconPitchUp/进入.svg'
 import demo66 from '../../assets/static/MainMenuIconPitchUp/大脑.svg'
 import demo77 from '../../assets/static/MainMenuIconPitchUp/笔记本.svg'
-import githubIcon from '../../assets/static/otherIcon/github.svg'
 
 export default function MainMenu() {
   const [, setWidth] = useState(window.innerWidth);
@@ -101,9 +100,6 @@ export default function MainMenu() {
           </Link>
         }
         {!localStorageData.jwt && <MainMenuLink to="/login" src={icons[5].getIcon('/login').path} text='登录' />}
-        <a className='w-8 h-8 hidden md:block' href="https://github.com/GeKaixing/towel" target="_blank" rel="noopener noreferrer">
-          <img className='w-8 h-8' src={githubIcon} alt="GitHub"></img>
-        </a>
       </div>
     
   );
