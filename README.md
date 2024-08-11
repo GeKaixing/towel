@@ -326,9 +326,9 @@ UI/UX原型图
 * [web端](https://www.figma.com/design/e13QKKoeeCC2t0cufq3cUp/towel?m=auto&t=w9M5U50Kbn8FrIIS-6)
 
 web项目截图
-![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web_towel.png)
 ![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/home.png)
 ![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/about.png)
+![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/llama.png)
 ![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/add.png)
 ![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/blog.png)
 ![项目截图](https://github.com/GeKaixing/towel/raw/main/README_static/web/user.png)
