@@ -8,7 +8,9 @@ export default {
       }
     }
   },
-
-  plugins: [],
+/* global require*/
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
 

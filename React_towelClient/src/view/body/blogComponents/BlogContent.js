@@ -1,10 +1,9 @@
 import { marked } from 'marked';
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import Post from '../../../components/Post';
 import useLocalStorage from "../../../hooks/useLocaStorage"
 import style from "./Blog.module.css"
 import DOMPurify from 'dompurify';
-import { selectLightorDarkContext } from '../../../store/selectLightorDark';
 /* global require */
 const markdownContext = require.context('../../../assets/markdown', false, /\.md$/);
 const markdownFiles = markdownContext.keys().reduce((acc, file) => {
@@ -15,18 +14,7 @@ const markdownFiles = markdownContext.keys().reduce((acc, file) => {
 }, {});
 export default function Blog() {
     const entries = Object.entries(markdownFiles)
-    const{colorModel}= useContext(selectLightorDarkContext)
     const [localStorageData]=useLocalStorage()
-    useEffect(()=>{
-        const loadTheme = async () => {
-            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
-              await import ('github-markdown-css/github-markdown-light.css')
-            } else {
-              await import('github-markdown-css/github-markdown-dark.css');
-            }
-          };
-          loadTheme()
-    },[colorModel])
     return (
         <div className='p-2'>  
              {
@@ -36,7 +24,7 @@ export default function Blog() {
             id={localStorageData.userid||"0"}
             name={localStorageData.username||"towel"}
             headimg={localStorageData.headimg||'https://github.com/GeKaixing/towel/blob/main/README_static/logo.png?raw=true'}
-            content={ <div className={`${style.markdownbody} markdown-body`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(value)) }} />}
+            content={ <div className={`${style.markdownbody} prose lg:prose-xl`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(value)) }} />}
             comments={0}
             likes={0}
             favorites={0}

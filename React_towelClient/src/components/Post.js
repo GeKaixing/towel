@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { postPostLike, deletePost, postPostfavorite } from '../services/post/post'
@@ -14,12 +14,10 @@ import startPichIcon from '../assets/static/postIconPitchUp/星星.svg'
 import sharePichIcon from '../assets/static/postIconPitchUp/分享.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
-import { selectLightorDarkContext } from '../store/selectLightorDark';
 /* props $ */
 export default function Post(props) {
     // console.log(props.content.props.dangerouslySetInnerHTML.__html)
     /*          根目录的文章           */
-    const{colorModel}= useContext(selectLightorDarkContext)
     const navigate = useNavigate();
     const [localStorageData] = useLocalStorage();
     const postDeleteBox = useRef();
@@ -42,16 +40,6 @@ export default function Post(props) {
         }
     }, [localStorage])
 
-    useEffect(()=>{
-        const loadTheme = async () => {
-            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
-              await import ('github-markdown-css/github-markdown-light.css')
-            } else {
-              await import('github-markdown-css/github-markdown-dark.css');
-            }
-          };
-          loadTheme()
-    },[colorModel])
     // 点赞按钮
     const likehandle = (event) => {
         event.stopPropagation()
@@ -168,7 +156,7 @@ export default function Post(props) {
                     </div>
                 </div>
                 <div className='felx flex-col space-y-2 '>
-                    <div className='md:max-w-[39rem] lg:w-full'>{ detectMarkdown(props.content)? <div className='markdown-body' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(props.content)) }}/>:<div>{props.content}</div>}</div>
+                    <div className='md:max-w-[39rem] lg:w-full'>{ detectMarkdown(props.content)? <div className="prose lg:prose-xl" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(props.content)) }}/>:<div>{props.content}</div>}</div>
                     {(props.postImages.length === 0 || props.postImages === '') &&
                         <div className='flex justify-between flex-wrap gap-2'>
                             {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}

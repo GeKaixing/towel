@@ -11,7 +11,6 @@
     "axios": "^1.4.0",
     "dompurify": "^3.1.6",
     "dotenv": "^16.4.5",
-    "github-markdown-css": "^5.6.1",
     "marked": "^14.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -45,6 +44,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@eslint/js": "^9.8.0",
+    "@tailwindcss/typography": "^0.5.14",
     "autoprefixer": "^10.4.19",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",

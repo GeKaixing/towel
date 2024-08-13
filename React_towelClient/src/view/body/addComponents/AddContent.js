@@ -23,16 +23,6 @@ export default function Portal() {
     const [isMarkdown, setIsMarkdown] = useState(false);
     const textareaRef = useRef(null);
 
-    useEffect(()=>{
-        const loadTheme = async () => {
-            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
-              await import ('github-markdown-css/github-markdown-light.css')
-            } else {
-              await import('github-markdown-css/github-markdown-dark.css');
-            }
-          };
-          loadTheme()
-    },[localStorage])
 
     useEffect(() => {
         const textarea = textareaRef.current;
@@ -135,7 +125,7 @@ export default function Portal() {
                             style={{ resize: "vertical", backgroundColor: 'var(--boxColor)', color: 'var(--fontColor)' }}
                         ></textarea>
                        { textareaData.length>=1000&&<p className="text-red-500">最多10000字哦</p>}
-                        {isMarkdown&&<div  className='markdown-body' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(textareaData)) }}></div>}
+                        {isMarkdown&&<div  className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(textareaData)) }}></div>}
                     {/* boxBottom */}
                     <div className='flex justify-around h-5 w-full'>
                         <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path}></img>

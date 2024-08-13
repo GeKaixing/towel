@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import PostInput from './PostInput';
 // import style from './PostContent.module.css'
 // import axios from 'axios';
-import 'github-markdown-css/github-markdown.css';
 import { getOnePost, postPostfavorite, postPostLike } from '../../../../services/post/post';
 import useLocalStorage from '../../../../hooks/useLocaStorage';
 import likeIcon from '../../../../assets/static/postIcon/赞.svg'
@@ -14,12 +13,10 @@ import startPichIcon from '../../../../assets/static/postIconPitchUp/星星.svg'
 import sharePichIcon from '../../../../assets/static/postIconPitchUp/分享.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
-import { selectLightorDarkContext } from '../../../../store/selectLightorDark';
 export default function PostContent() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
     const [localStorageData] = useLocalStorage()
-    const{colorModel}= useContext(selectLightorDarkContext)
     // const navigate = useNavigate()
     //获取当前路由
     const { pathname, state } = useLocation()
@@ -34,16 +31,6 @@ export default function PostContent() {
         const markdownRegex = /^(# |- \s|\*\*|\*|`|>\s)/;
         return markdownRegex.test(text);
     };
-    useEffect(()=>{
-        const loadTheme = async () => {
-            if (localStorage.getItem('color-model')==='light'||localStorage.getItem('color-model')==='bing') {
-              await import ('github-markdown-css/github-markdown-light.css')
-            } else {
-              await import('github-markdown-css/github-markdown-dark.css');
-            }
-          };
-          loadTheme()
-    },[colorModel])
     useEffect(() => {
         if (state) {
             const data = JSON.parse(state)
@@ -151,8 +138,8 @@ export default function PostContent() {
                         </div>
                         <div className='flex flex-col justify-center items-center text-[--fontColor] font-bold' >
                             <div className='self-start'>
-                                {contentdata.blog ? <div className='markdown-body' dangerouslySetInnerHTML={{ __html: contentdata.content }} /> :
-                                    contentdata.markdown ? <div className='markdown-body' dangerouslySetInnerHTML={{ __html: contentdata.content }}></div> :
+                                {contentdata.blog ? <div className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: contentdata.content }} /> :
+                                    contentdata.markdown ? <div className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: contentdata.content }}></div> :
                                         <div>{contentdata.content}</div>
                                 }
                             </div>
