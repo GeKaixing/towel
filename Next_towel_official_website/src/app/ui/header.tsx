@@ -3,9 +3,7 @@ import React from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 export default function Header() {
-
     const pathname = usePathname()
-    console.log(pathname)
     return (
         <header className="p-2 lg:flex lg:justify-center">
             <nav className="flex justify-between items-center lg:w-1/2">
