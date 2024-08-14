@@ -137,9 +137,9 @@ export default function PostContent() {
                             <Link className='font-bold'>{contentdata.name}</Link>
                         </div>
                         <div className='flex flex-col justify-center items-center text-[--fontColor] font-bold' >
-                            <div className='self-start'>
-                                {contentdata.blog ? <div className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: contentdata.content }} /> :
-                                    contentdata.markdown ? <div className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: contentdata.content }}></div> :
+                            <div className='self-start w-full'>
+                                {contentdata.blog ? <div className='prose lg:prose-xl max-w-none ' dangerouslySetInnerHTML={{ __html: contentdata.content }} /> :
+                                    contentdata.markdown ? <div className='prose lg:prose-xl max-w-none' dangerouslySetInnerHTML={{ __html: contentdata.content }}></div> :
                                         <div>{contentdata.content}</div>
                                 }
                             </div>

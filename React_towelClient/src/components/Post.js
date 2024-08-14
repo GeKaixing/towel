@@ -81,7 +81,7 @@ export default function Post(props) {
     // 跳转到指点的路由的函数
     const navgatehandle = (e) => {
         e.stopPropagation()
-        const propsData= detectMarkdown(props.content)?{ ...props, content: DOMPurify.sanitize(marked(props.content)),markdown:true }:props
+        const propsData = detectMarkdown(props.content) ? { ...props, content: DOMPurify.sanitize(marked(props.content)), markdown: true } : props
         const changeData = props.blog ? { ...props, content: props.content.props.dangerouslySetInnerHTML.__html } : propsData
         const data = JSON.stringify(changeData)
         /*在ulr加/斜杠和不加是有区别的，加入会把路径替换，不加这是在路径后面加上这个路径  */
@@ -156,7 +156,9 @@ export default function Post(props) {
                     </div>
                 </div>
                 <div className='felx flex-col space-y-2 '>
-                    <div className='md:max-w-[39rem] lg:w-full'>{ detectMarkdown(props.content)? <div className="prose lg:prose-xl" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(props.content)) }}/>:<div>{props.content}</div>}</div>
+                    <div className='md:max-w-[39rem] lg:w-full '>{detectMarkdown(props.content) ?
+                     <div className="prose lg:prose-xl max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(props.content)) }} /> 
+                    : <div>{props.content}</div>}</div>
                     {(props.postImages.length === 0 || props.postImages === '') &&
                         <div className='flex justify-between flex-wrap gap-2'>
                             {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}

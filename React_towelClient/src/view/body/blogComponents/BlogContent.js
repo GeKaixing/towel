@@ -24,7 +24,7 @@ export default function Blog() {
             id={localStorageData.userid||"0"}
             name={localStorageData.username||"towel"}
             headimg={localStorageData.headimg||'https://github.com/GeKaixing/towel/blob/main/README_static/logo.png?raw=true'}
-            content={ <div className={`${style.markdownbody} prose lg:prose-xl`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(value)) }} />}
+            content={ <div className={`${style.markdownbody} prose lg:prose-xl max-w-none`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(value)) }} />}
             comments={0}
             likes={0}
             favorites={0}
