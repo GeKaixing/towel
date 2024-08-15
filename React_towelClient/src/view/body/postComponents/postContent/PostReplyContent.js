@@ -40,6 +40,9 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
     }
     const getOnePostApi = (POSEID) => {
         getOnePost(POSEID).then((response) => {
+            if(       response.data.length===0){
+                return alert('文章已删除')
+            }
             const data = JSON.stringify({ ...response.data, from: 'user' })
             navigate(`/postcontent/${POSEID}`, { state: data });
         }).catch((error) => {
