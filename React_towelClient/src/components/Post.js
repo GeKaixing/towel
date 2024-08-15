@@ -159,11 +159,9 @@ export default function Post(props) {
                     <div className='md:max-w-[39rem] lg:w-full '>{detectMarkdown(props.content) ?
                      <div className="prose lg:prose-xl max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(props.content)) }} /> 
                     : <div>{props.content}</div>}</div>
-                    {(props.postImages.length === 0 || props.postImages === '') &&
+                    {(props.postImages.length !== 0 ) &&
                         <div className='flex justify-between flex-wrap gap-2'>
-                            {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
-                            {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
-                            {(props.postImages.length === 0 || props.postImages === '') ? null : (<img src={props.postImages} className='w-[30%]'></img>)}
+                         <img src={props.postImages} className='w-[30%]'></img>
                         </div>
                     }
                 </div>

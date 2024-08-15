@@ -134,7 +134,7 @@ export default function PostContent() {
                     <div className=''>
                         <div className='flex items-center f space-x-2 mb-2'>
                             <img src={contentdata.headimg} className='w-10 h-10 rounded-my-rounded-10px'></img>
-                            <Link className='font-bold'>{contentdata.name}</Link>
+                            <Link className='font-bold text-[--fontColor] '>{contentdata.name}</Link>
                         </div>
                         <div className='flex flex-col justify-center items-center text-[--fontColor] font-bold' >
                             <div className='self-start w-full'>
@@ -146,7 +146,7 @@ export default function PostContent() {
                             {(contentdata.postImages?.length === 0 || contentdata.postImages === '') ? null : (<img src={contentdata.postImages} className=''></img>)}
                         </div>
                         <div className='flex w-full flex-row justify-around h-5 ' onClick={likehandle}>
-                            <div className='flex '
+                            <div className='flex text-[--fontColor] '
                                 onMouseEnter={() => setMouseOver({ ...mouseOver, like: true })}
                                 onMouseLeave={() => setMouseOver({ ...mouseOver, like: false })}
                             >
@@ -156,7 +156,7 @@ export default function PostContent() {
                                     <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>}
                                 {contentdata.likes}
                             </div>
-                            <div className='flex ' onClick={favoritehandler}
+                            <div className='flex text-[--fontColor] ' onClick={favoritehandler}
                                 onMouseEnter={() => setMouseOver({ ...mouseOver, star: true })}
                                 onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
                                 {
@@ -167,7 +167,7 @@ export default function PostContent() {
 
                                 }{contentdata.favorites}
                             </div>
-                            <div className='flex ' onClick={sharehandler}
+                            <div className='flex text-[--fontColor] ' onClick={sharehandler}
                                 onMouseEnter={() => setMouseOver({ ...mouseOver, share: true })}
                                 onMouseLeave={() => setMouseOver({ ...mouseOver, share: false })}>
                                 {mouseOver.share ?

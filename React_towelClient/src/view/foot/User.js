@@ -54,7 +54,6 @@ export default function User() {
                     </div>
                     <Link className='font-bold' to={`/userhomepage/${localStorageData.userid}`}>{localStorageData.username}</Link>
                 </div> : null}
-
             <div className='flex flex-col items-center w-full'>
                 <div className='text-[--fontColor] '>推荐关注</div>
                 <div className='flex  flex-col px-2 justify-between w-full space-y-2'>

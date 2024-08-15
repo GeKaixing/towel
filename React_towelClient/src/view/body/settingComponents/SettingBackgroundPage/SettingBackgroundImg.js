@@ -49,14 +49,16 @@ export default function SettingBackgroundImg() {
     }, [imgData, colorModel])
     return (
         <div className='flex flex-col justify-center items-center space-y-2'>
-            <div onClick={SettingBackgroundBingImgHandler} className=' flex items-center text-[--fontColor] font-bold cursor-pointer'>使用bing每日壁纸
-                {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'bing' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
+            <div className='absolute top-1/2 '>
+                <div onClick={SettingBackgroundBingImgHandler} className=' flex  items-center text-[--fontColor] font-bold cursor-pointer'>使用bing每日壁纸
+                    {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'bing' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
+                </div>
+                <form onSubmit={(e) => e.preventDefault()} className='flex flex-col  items-center '>
+                    <input className='hidden' htmlFor='upload' type='file' onChange={SettingBackgroundImgHandler} accept="image/*"></input>
+                    <label id='upload' className='w-12 h-12 bg-[--boxColor] flex justify-center items-center my-rounded-10px text-[--fontColor] '>上传</label>
+                    {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'diy' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
+                </form>
             </div>
-            <form onSubmit={(e) => e.preventDefault()} className='flex flex-col  items-center '> 
-                <input className='hidden' htmlFor='upload' type='file' onChange={SettingBackgroundImgHandler} accept="image/*"></input>
-                <label id='upload' className='w-12 h-12 bg-[--boxColor] flex justify-center items-center my-rounded-10px'>上传</label>
-                {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'diy' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
-            </form>
         </div>
     )
 }
