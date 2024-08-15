@@ -46,7 +46,7 @@ export default function Message() {
   const getOnePostApi = (POSEID, id, read) => {
     getOnePost(POSEID).then((response) => {
       const data = JSON.stringify({ ...response.data, from: 'user' })
-      navigate(`/homepage/${POSEID}`, { state: data });
+      navigate(`/postcontent/${POSEID}`, { state: data });
       if (!read) { readnotificationsApi(id) }
     })
       .catch((error) => { console.log(error) })
@@ -89,7 +89,8 @@ export default function Message() {
             <div>{item.mentionedUserId[0].username}</div>
           </div>
           <div>{item.targetText}</div>
-          <div onClick={() => setTargetIDHandler(item._id)} style={{ position: 'relative' }} className='MessageRef' ref={MessageRef}>{item.read ? null : "未读"}...
+          <div onClick={() => setTargetIDHandler(item._id)} style={{ position: 'relative',display:'flex', alignItems:'center' }} className='MessageRef' ref={MessageRef}>{item.read ? null :
+          <div className='mr-2 font-bold text-[--assistantColor]'>未读</div>}...
             {targetID === item._id ?
               <div className={style.MessageDeleteBox} onClick={e => e.stopPropagation()}>
                 <span className={style.MessageDeleteBoxButton} onClick={() => deletReplyHandler(item._id)}>删除</span>

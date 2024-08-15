@@ -61,7 +61,6 @@ export default function PostInput({ postId }) {
         }).then(() => {
             const socket = getSocket()
             if (inputReplyData.replyToreplyUserId) {
-                console.log(inputReplyData.replyToreplyUserId)
                 //发送对方的id
                 socket.emit(`newMessage`, { newMessage: true, userid: inputReplyData.replyToreplyUserId })
             }

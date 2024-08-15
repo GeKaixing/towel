@@ -46,14 +46,18 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
             console.log(error)
         })
     }
-
     return (
         <div>
             {responseData.map((item) => (
                 <div key={item._id} className='text-[--fontColor] flex justify-between pl-5 '>
                     {(item.replyToreplyUserId !== null) ?
-                        <div className='font-bold'>
-                            {item.replyUser.username}@{item.replyToreplyUser.username}:{item.replyText}
+                        <div className='flex'>
+                            <div className='font-bold'> 
+                            {item.replyUser.username}@{item.replyToreplyUser.username}:
+                            </div>
+                            <span>
+                            {item.replyText}
+                            </span>
                         </div> :
                         <div className='flex space-x-2' >
                             <div className='font-bold '>

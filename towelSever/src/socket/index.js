@@ -5,7 +5,8 @@ module.exports = (io) => {
     io.on('connection', async (socket) => {
         const UserID = socket.handshake.query.userid
         userSocketMap.set(UserID,socket.id)
-        socket.on(`newMessage`, async (data) => {
+        socket.on('newMessage', async (data) => {
+            console.log(data.newMessage)
             const datas = await MENTIONS.aggregate([
                 {
                     $match: {

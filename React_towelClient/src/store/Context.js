@@ -17,6 +17,8 @@ export default function Context({ children }) {
             let socket = initSocket(localStorageDatas.userid)
             socket.on(`${localStorageDatas.userid}`, (data) => {
                 setMessageResponseData(data.datas)
+               const filterData= data.datas.filter(a => a.read === false)
+               setNoReadNumber(filterData.length)
             });
             socket.on(`sendMsg`, (data) => {
                 setPrivateChatData(prevChatData => [...prevChatData, data]);
