@@ -93,7 +93,8 @@ export default function Message() {
           </div>
           <div>{item.targetText}</div>
           <div onClick={() => setTargetIDHandler(item._id)} style={{ position: 'relative', display: 'flex', alignItems: 'center' }} className='MessageRef' ref={MessageRef}>{item.read ? null :
-            <div className='mr-2 font-bold text-[--assistantColor]'>未读</div>}...
+            <div className='mr-2 font-bold text-[--assistantColor]'>未读</div>}<div className='cursor-pointer' onClick={() => setTargetIDHandler(item._id)}>
+              ...</div>
             {targetID === item._id ?
               <div className={style.MessageDeleteBox} onClick={e => e.stopPropagation()}>
                 <span className={style.MessageDeleteBoxButton} onClick={() => deletReplyHandler(item._id)}>删除</span>

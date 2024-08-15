@@ -97,17 +97,17 @@ export default function SettingUserForgetPage() {
                 <input type='email' placeholder='电子邮件' value={inputData.email} onChange={emailHandle}></input>
                 {isShowCode ? <input type='code' placeholder='电子邮件验证码' value={inputData.code} onChange={codeHandle}></input> : null}
                 <input type={showpassword ? 'text' : 'password'} placeholder='新密码' value={inputData.password} onChange={passwordHandle}></input>
-                {showpassword ?
+          {/*       {showpassword ?
                     <img className={style.EyeOutlined} onClick={() => setshowpassword(!showpassword)} src={eyeIconOpen} alt="预览打开" />
                     :
                     <img className={style.EyeInvisibleOutlined} onClick={() => setshowpassword(!showpassword)} src={eyeIconClose} alt="预览关闭" />
-                }
+                } */}
                 <input type={showpassword2 ? 'text' : 'password'} placeholder='确认密码密码' value={inputData.password2} onChange={password2Handle}></input>
-                {showpassword2 ?
-                    <img className={style.EyeOutlined2} onClick={() => setshowpassword2(!showpassword2)} src={eyeIconOpen} alt="预览打开" />
+             {/*    {showpassword2 ?
+                    <img className='absolute w-6 h-6  ' onClick={() => setshowpassword2(!showpassword2)} src={eyeIconOpen} alt="预览打开" />
                     :
                     <img className={style.EyeInvisibleOutlined2} onClick={() => setshowpassword2(!showpassword2)} src={eyeIconClose} alt="预览关闭" />
-                }
+                } */}
                 <input type='submit' className={style.SettingUserForgetPageFormSendCode} value='发送验证码' onClick={sendCodeHandle}></input>
                 <input type='submit' className={style.SettingUserForgetPageFormSubmitBotton} onClick={submitHandler} ></input>
             </form>

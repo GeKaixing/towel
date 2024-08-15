@@ -8,6 +8,7 @@ import headimgIcon from '../../assets/static/otherIcon/head-img.svg'
 import githubIcon from '../../assets/static/otherIcon/github.svg'
 import weixinminiappIcon from '../../assets/static/otherIcon/weixin-mini-app.svg'
 import wexinapp from '../../assets/static/otherIcon/wexinapp.png'
+import bilibili from '../../assets/static/otherIcon/bilibili.svg'
 export default function User() {
     // 解构login的state
     const [localStorageData, setLocalStorage] = useState({})
@@ -78,6 +79,9 @@ export default function User() {
                   </div>
                   }
                 </div>
+                <a className='w-8 h-8 hidden md:block' href="https://www.bilibili.com/video/BV1hMYdeDES3/?spm_id_from=333.999.0.0&vd_source=a8f09f82a41fd6a96572d0cd8e6d5e77" target="_blank" rel="noopener noreferrer">
+                <img className='w-8 h-8' src={bilibili} alt="Bilibili"></img>
+                </a>
             </div>
         </div>
 
