@@ -54,8 +54,8 @@ export default function SettingBackgroundImg() {
                     {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'bing' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
                 </div>
                 <form onSubmit={(e) => e.preventDefault()} className='flex flex-col  items-center '>
-                    <input className='hidden' htmlFor='upload' type='file' onChange={SettingBackgroundImgHandler} accept="image/*"></input>
-                    <label id='upload' className='w-12 h-12 bg-[--boxColor] flex justify-center items-center my-rounded-10px text-[--fontColor] '>上传</label>
+                    <label htmlFor='upload' className='w-12 h-12 bg-[--boxColor] flex justify-center items-center my-rounded-10px text-[--fontColor] '>上传</label>
+                    <input className='hidden' id='upload' type='file' onChange={SettingBackgroundImgHandler} accept="image/*"></input>
                     {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'diy' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
                 </form>
             </div>

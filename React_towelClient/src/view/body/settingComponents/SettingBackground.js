@@ -9,22 +9,23 @@ export default function SettingBackground() {
     const [colorModeldata, setColorModeldata] = useState(null)
     const navigate = useNavigate()
     const autoColorHandler = () => {
-        localStorage.clear('backgroundimg')
+        if(localStorage.getItem('color-model')==='bing'){ location.reload()}
+        localStorage.setItem('backgroundimg','')
         localStorage.setItem('color-model', 'system')
         setColorModel(!colorModel)
-        location.reload()
     }
     const selectLightHandler = () => {
         if(localStorage.getItem('color-model')==='bing'){ location.reload()}
-        localStorage.clear('backgroundimg')
-        localStorage.setItem('color-model', 'light')
-        setColorModel(!colorModel)
+            localStorage.setItem('backgroundimg','')
+            localStorage.setItem('color-model', 'light')
+            setColorModel(!colorModel)
+            console.log(localStorage.getItem('loginData'))
     }
     const selectDarkHandler = () => {
-        if(localStorage.getItem('color-model')==='bing'){ location.reload()}
-        localStorage.clear('backgroundimg')
-        localStorage.setItem('color-model', 'dark')
-        setColorModel(!colorModel)   
+        if(localStorage.getItem('color-model')==='bing'){ location.reload()}  
+            localStorage.setItem('backgroundimg','')
+            localStorage.setItem('color-model', 'dark')
+            setColorModel(!colorModel)
     }
     const backgroundimgHandler = () => {
         navigate('/setting/backgroundimg', { replace: true })
