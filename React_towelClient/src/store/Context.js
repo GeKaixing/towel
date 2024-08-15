@@ -31,11 +31,24 @@ export default function Context({ children }) {
             const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
             colorSchemeQuery.addEventListener('change', (event) => {
                 if (event.matches) {
+                    console.log(9856)
                     body.setAttribute('color-model', 'dark');
+               
                 } else {
+                    console.log(784512)
                     body.setAttribute('color-model', 'light');
+                 
                 }
             })
+                    if (colorSchemeQuery.matches) {
+                    console.log(9856)
+                    body.setAttribute('color-model', 'dark');
+               
+                } else {
+                    console.log(784512)
+                    body.setAttribute('color-model', 'light');
+                 
+                }
 
         } else {
             switch (colorModeldata) {

@@ -9,10 +9,10 @@ export default function SettingBackground() {
     const [colorModeldata, setColorModeldata] = useState(null)
     const navigate = useNavigate()
     const autoColorHandler = () => {
-        if(localStorage.getItem('color-model')==='bing'){ location.reload()}
         localStorage.setItem('backgroundimg','')
         localStorage.setItem('color-model', 'system')
         setColorModel(!colorModel)
+       
     }
     const selectLightHandler = () => {
         if(localStorage.getItem('color-model')==='bing'){ location.reload()}
