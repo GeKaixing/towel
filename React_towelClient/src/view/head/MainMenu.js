@@ -97,7 +97,7 @@ export default function MainMenu() {
             <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover lg:mr-10'>
               <img className='w-10 h-10 rounded-full' src={localStorageData.headimg} ></img>
             </div>
-            <div className='max-lg:hidden lg:block text-lg font-bold'>{localStorageData.username}</div>
+            <div className='max-lg:hidden lg:block text-lg font-bold text-[--fontColor]'>{localStorageData.username}</div>
           </Link>
         }
         {!localStorageData.jwt && <MainMenuLink to="/login" src={icons[5].getIcon('/login').path} text='登录' />}
