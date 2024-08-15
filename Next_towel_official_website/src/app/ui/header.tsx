@@ -8,8 +8,9 @@ export default function Header() {
         <header className="p-2 lg:flex lg:justify-center">
             <nav className="flex justify-between items-center lg:w-1/2">
                 <div className="flex items-center space-x-2">
-                    <Link href='/'>
+                    <Link href='/' className='flex items-center mr-2'>
                         <img src='https://raw.githubusercontent.com/GeKaixing/towel/main/README_static/logo.png' className="w-10 h-10 object-cover"></img>
+                        <p>towel</p>
                     </Link>
                     <Link href='/' className='text-sm'>主页
                         {

@@ -38,7 +38,7 @@ body[color-model='light'] {
 body[color-model='bing'] {
     background-color: white;
     --backgroundcolor:white;
-    --fontColor: black;
+    --fontColor: white;
     --boxShadow: 0 2px 4px 1px rgba(0, 0, 0, .09);
     --boxColor: transparent;
     --boxHoverColor: #d8d8d8;
