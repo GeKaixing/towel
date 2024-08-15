@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import style from './Message.module.css'
 import { useNavigate } from 'react-router';
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { noReadNumbers } from '../../../store/noReadNumbers';
 import { MessageResponseDataContext } from '../../../store/MessageResponseData'
 import { deleteNotifications, getNotifications, postReadnotifications } from '../../../services/message/Message';
@@ -11,7 +11,7 @@ export default function Message() {
   const { MessageResponseData: responseData, setMessageResponseData: setResponseData } = useContext(MessageResponseDataContext)//responseData,setResponseData
   const navigate = useNavigate()
   const { setNoReadNumber } = useContext(noReadNumbers)
-  const {privateChatData}=useContext(privateChatContext)
+  const { privateChatData } = useContext(privateChatContext)
   const [targetID, setTargetID] = useState('')
   const [reLoadnotifications, setReLoadNotifications] = useState(false)
   const MessageRef = useRef(null)
@@ -45,6 +45,9 @@ export default function Message() {
   }, []);
   const getOnePostApi = (POSEID, id, read) => {
     getOnePost(POSEID).then((response) => {
+      if (response.data.length === 0) {
+        return alert('文章已删除')
+      }
       const data = JSON.stringify({ ...response.data, from: 'user' })
       navigate(`/postcontent/${POSEID}`, { state: data });
       if (!read) { readnotificationsApi(id) }
@@ -65,22 +68,22 @@ export default function Message() {
     }
   }
   const deletReplyHandler = (Id) => {
-    deleteNotifications(Id) .then(() => {
-        setReLoadNotifications(!reLoadnotifications)
-      })
+    deleteNotifications(Id).then(() => {
+      setReLoadNotifications(!reLoadnotifications)
+    })
       .catch((error) => { console.log(error) })
   }
   return (
     <div className='space-y-2'>
       <div>私信</div>
-        {/* 与你private chata用户id */}
-        {
-          privateChatData.length!==0&&<Link to={`/privatechat/${privateChatData[0].sendid}`} state={{userName:privateChatData[0].userName, headimg:privateChatData[0].headimg}}>
-          <main className='space-x-2 flex flex-nowrap items-center'><img className='h-10 w-10 rounded-full'src={privateChatData[0].headimg}></img>
-          <span>{privateChatData[0].chatData}</span>
+      {/* 与你private chata用户id */}
+      {
+        privateChatData.length !== 0 && <Link to={`/privatechat/${privateChatData[0].sendid}`} state={{ userName: privateChatData[0].userName, headimg: privateChatData[0].headimg }}>
+          <main className='space-x-2 flex flex-nowrap items-center'><img className='h-10 w-10 rounded-full' src={privateChatData[0].headimg}></img>
+            <span>{privateChatData[0].chatData}</span>
           </main>
         </Link>
-        }
+      }
       <div>@我的</div>
       {responseData.length !== 0 ? responseData.map((item, index) => (
         <div className={style.message} key={index}>
@@ -89,8 +92,8 @@ export default function Message() {
             <div>{item.mentionedUserId[0].username}</div>
           </div>
           <div>{item.targetText}</div>
-          <div onClick={() => setTargetIDHandler(item._id)} style={{ position: 'relative',display:'flex', alignItems:'center' }} className='MessageRef' ref={MessageRef}>{item.read ? null :
-          <div className='mr-2 font-bold text-[--assistantColor]'>未读</div>}...
+          <div onClick={() => setTargetIDHandler(item._id)} style={{ position: 'relative', display: 'flex', alignItems: 'center' }} className='MessageRef' ref={MessageRef}>{item.read ? null :
+            <div className='mr-2 font-bold text-[--assistantColor]'>未读</div>}...
             {targetID === item._id ?
               <div className={style.MessageDeleteBox} onClick={e => e.stopPropagation()}>
                 <span className={style.MessageDeleteBoxButton} onClick={() => deletReplyHandler(item._id)}>删除</span>
