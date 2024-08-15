@@ -19,7 +19,6 @@ export default function SettingBackground() {
             localStorage.setItem('backgroundimg','')
             localStorage.setItem('color-model', 'light')
             setColorModel(!colorModel)
-            console.log(localStorage.getItem('loginData'))
     }
     const selectDarkHandler = () => {
         if(localStorage.getItem('color-model')==='bing'){ location.reload()}  

@@ -255,14 +255,14 @@ router.get('/findonepost/:id', async (req, res) => {
                     as: 'comments'
                 }
             },
-            {
+           /*  {
                 $lookup: {
                     from: 'staticdatas',
                     localField: '_id',
                     foreignField: 'targetId',
                     as: 'postImages'
                 }
-            },
+            }, */
             {
                 $project: {
                     _id: 1,
@@ -271,9 +271,10 @@ router.get('/findonepost/:id', async (req, res) => {
                     postText: 1,
                     postUserId: 1,
                     postShare: 1,
+                    postImages:1,
                     postLike: { $size: '$likes' },
                     postComment: { $size: '$comments' },
-                    'postImages.staticUrl': 1,
+                  /*   'postImages.staticUrl': 1, */
                     'user.username': 1,
                     'user.headimg': 1
                 }

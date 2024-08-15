@@ -51,6 +51,7 @@ export default function PostContent() {
             }
         }else{
             getOnePost(params.id).then((response)=>{
+                console.log(response.data)
                 const datas = {
                     comments: response.data[0].postComment,
                     content:  detectMarkdown(response.data[0].postText)?DOMPurify.sanitize(marked(response.data[0].postText)):response.data[0].postText,

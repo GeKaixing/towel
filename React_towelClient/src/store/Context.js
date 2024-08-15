@@ -14,7 +14,7 @@ export default function Context({ children }) {
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
             const localStorageDatas = JSON.parse(localStorage.getItem('loginData'));
-            let socket= initSocket(localStorageDatas.userid)
+            let socket = initSocket(localStorageDatas.userid)
             socket.on(`${localStorageDatas.userid}`, (data) => {
                 setMessageResponseData(data.datas)
             });
@@ -31,25 +31,17 @@ export default function Context({ children }) {
             const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
             colorSchemeQuery.addEventListener('change', (event) => {
                 if (event.matches) {
-                    console.log(9856)
                     body.setAttribute('color-model', 'dark');
-               
                 } else {
-                    console.log(784512)
                     body.setAttribute('color-model', 'light');
-                 
                 }
             })
-                    if (colorSchemeQuery.matches) {
-                    console.log(9856)
-                    body.setAttribute('color-model', 'dark');
-               
-                } else {
-                    console.log(784512)
-                    body.setAttribute('color-model', 'light');
-                 
-                }
+            if (colorSchemeQuery.matches) {
+                body.setAttribute('color-model', 'dark');
 
+            } else {
+                body.setAttribute('color-model', 'light');
+            }   
         } else {
             switch (colorModeldata) {
                 case 'light':
@@ -83,7 +75,7 @@ export default function Context({ children }) {
         }
     }, [colorModel, window])
     return (
-        <privateChatContext.Provider value={{ privateChatData,setPrivateChatData }}>
+        <privateChatContext.Provider value={{ privateChatData, setPrivateChatData }}>
             <searchDatauseContext.Provider value={{ searchData, setsearchData }}>
                 <noReadNumbers.Provider value={{ noReadNumber, setNoReadNumber }}>
                     <MessageResponseDataContext.Provider value={{ MessageResponseData, setMessageResponseData }}>
