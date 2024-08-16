@@ -16,6 +16,7 @@ import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 /* props $ */
 export default function Post(props) {
+    // console.log(props.setreloadUserArticle)
     // console.log(props.content.props.dangerouslySetInnerHTML.__html)
     /*          根目录的文章           */
     const navigate = useNavigate();
@@ -159,11 +160,14 @@ export default function Post(props) {
                     <div className='md:max-w-[39rem] lg:w-full '>{detectMarkdown(props.content) ?
                      <div className="prose lg:prose-xl max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(props.content)) }} /> 
                     : <div>{props.content}</div>}</div>
-                    {(props.postImages.length !== 0 ) &&
+                    {(props.postImages?.length !== 0 ) &&
                         <div className='flex justify-between flex-wrap gap-2'>
                          <img src={props.postImages} className='w-[30%]'></img>
                         </div>
                     }
+                   { props.postVideos&&<video className='w-full h-auto' controls>
+                    <source src={props.postVideos} type="video/mp4" />
+                   </video>}
                 </div>
                 <div className='flex flex-row justify-around h-5 text-[--fontColor]' >
                     <div className='flex flex-row items-center hover:text-[host]' onClick={likehandle}
@@ -213,6 +217,7 @@ export default function Post(props) {
     )
 }
 Post.propTypes = {
+    postVideos: PropTypes.string,
     id: PropTypes.string.isRequired,
     headimg: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

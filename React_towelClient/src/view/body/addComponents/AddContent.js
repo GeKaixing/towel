@@ -1,30 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react';
 // import style from './AddContent.module.css';
 import useLocalStorage from '../../../hooks/useLocaStorage';
-import { postAddPost, postUpLoad } from '../../../services/add/add';
+import { postAddPost } from '../../../services/add/add';
 import likeIcon from '../../../assets/static/postIcon/赞.svg'
 import commentIcon from '../../../assets/static/postIcon/评论.svg'
 import startIcon from '../../../assets/static/postIcon/星星.svg'
 import shareIcon from '../../../assets/static/postIcon/分享.svg'
-import addImgaIcon from '../../../assets/static/otherIcon/图片添加.svg'
-import addImgaPichIcon from '../../../assets/static/otherIconPitchUp/图片添加.svg'
 import addIcon from '../../../assets/static/MainMenuIcon/添加.svg'
 import addPichIcon from '../../../assets/static/MainMenuIconPitchUp/添加.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import Addvideo from './addvideo/Addvideo';
+import AddImge from './addimge/AddImge';
+import { postUpLoad } from '../../../services/add/add';
+import axios from 'axios';
 export default function Portal() {
     const [textareaData, settextareaData] = useState('');
     const [localStorageData] = useLocalStorage()
     const loginDataParse = localStorageData
-    const [showImageData, setShowImageData] = useState('');
-    const [responseImageData, setResponseImageData] = useState('')
+    // const [responseImageData, setResponseImageData] = useState('')
+    // const [responseVideoData, setResponseVideoData] = useState('')
     const [isHovered, setIsHovered] = useState(false);
-    const [isHoveredImage, setIsHoveredImage] = useState(false);
     const [isMarkdown, setIsMarkdown] = useState(false);
     const textareaRef = useRef(null);
-    const [videoData,setVideoData]=useState('')
-
+    //存储图片信息
+    const [showImageData, setShowImageData] = useState('');
+    const [ImageData, setImageData] = useState('')
+    //存储视频信息
+    const [showVideo, setShowVideo] = useState('');
+    const [videoData, setVideoData] = useState('')
     useEffect(() => {
         const textarea = textareaRef.current;
         if (textarea) {
@@ -34,46 +38,64 @@ export default function Portal() {
             textarea.style.height = `${textarea.scrollHeight}px`;
         }
     }, [textareaData]); // 当 textareaData 改变时执行
-
-    const upImageApi = async (e) => {
-        e.preventDefault();
-        try {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                setShowImageData(event.target.result);
-            };
-            reader.readAsDataURL(file);
-            await upLoadApi(file);
-        } catch (error) { console.log(error) }
-
-    };
-    const upLoadApi = async (file) => {
+    const upLoadApi = async () => {
         try {
             const formData = new FormData();
-            formData.append('file', file);
-            formData.append('targetId', loginDataParse.userid);
+            formData.append('file', ImageData);
+            formData.append('targetId', localStorageData.userid);
             formData.append('staticType', 'add');
-            const response = await postUpLoad(loginDataParse.userid, formData, {
+            const response = await postUpLoad(localStorageData.userid, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 }
             })
-            setResponseImageData(response.data.staticUrl);
+            return response.data.staticUrl
+            // return response.data.staticUrl
+            // setResponseImageData(()=>console.log(1));
+               
+            
+         
+            // console.log(response.data)
         } catch (error) {
             console.log(error);
         }
     };
+    const uploadvideo = async () => {
+        const formData = new FormData();
+        formData.append('video', videoData);
+        formData.append('targetId', localStorageData.userid);
+        formData.append('staticType', 'add');
+        /* global process */
+        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}uploadvideo/${localStorageData.userid}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${localStorageData?.jwt}`
+            }
+        })
+        return response.data.staticUrl;
+        // setResponseVideoData(()=>console.log(2));
+    }
     const sendPostApi = async () => {
         try {
-            if (textareaData) {
+            let imgurl;
+            let videourl;
+            // 如果有图片数据，则上传图片
+            if (showImageData) {
+                imgurl= await upLoadApi(); // 等待图片上传完成
+            }
+
+            // 如果有视频数据，则上传视频
+            if (videoData) {
+                videourl= await uploadvideo(); // 等待视频上传完成
+            }
+            if (textareaData || showImageData || videoData) {
                 const loginDataParse = JSON.parse(localStorage.getItem('loginData'));
                 await postAddPost({
                     data: {
                         UserId: loginDataParse.userid,
                         Text: textareaData,
-                        Image: responseImageData,
+                        Image: imgurl,
+                        Video: videourl,
                         Share: 0,
                         Like: 0,
                         Comment: 0
@@ -81,16 +103,17 @@ export default function Portal() {
                 })
                 settextareaData('')
                 setShowImageData('')
+                setShowVideo('')
+                setVideoData('')
             } else {
                 alert('不要空哦')
             }
 
         } catch (error) { console.log(error) }
     }
-
     class PostIcon {
         constructor(path) {
-            {/* global process*/ }
+
             this.path = process.env.PUBLIC_URL + path
         }
     }
@@ -98,8 +121,6 @@ export default function Portal() {
     const postIcon2 = new PostIcon(commentIcon)
     const postIcon3 = new PostIcon(startIcon)
     const postIcon4 = new PostIcon(shareIcon)
-    const postIcon5 = new PostIcon(addImgaIcon)
-    const postIcon55 = new PostIcon(addImgaPichIcon)
     const postIcon6 = new PostIcon(addIcon)
     const postIcon7 = new PostIcon(addPichIcon)
 
@@ -138,20 +159,8 @@ export default function Portal() {
             </div>
             {/* 功能 */}
             <div className='flex flex-col justify-center items-center mt-2'>
-                {showImageData && (
-                    <>
-                        <img src={showImageData} alt="preview" style={{ width: '50px', height: '50px', borderRadius: '10px' }} />
-                        <div className='w-12 h-12' onClick={() => setShowImageData('')}>删除图片</div>
-                    </>
-                )}
-                <label htmlFor='inputfile' className='w-12 h-12' title='添加图片'
-                    onMouseEnter={() => setIsHoveredImage(true)}
-                    onMouseLeave={() => setIsHoveredImage(false)}
-                >
-                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={isHoveredImage ? postIcon55.path : postIcon5.path} alt='添加图片'></img>
-                </label>
-                <input type="file" id='inputfile' style={{ display: 'none' }} onChange={upImageApi} />
-                <Addvideo setVideoData={setVideoData}></Addvideo>
+                <AddImge setImageData={setImageData} showImageData={showImageData} setShowImageData={setShowImageData}></AddImge>
+                <Addvideo setVideoData={setVideoData} showVideo={showVideo} setShowVideo={setShowVideo}></Addvideo>
                 <div className='w-12 h-12' onClick={sendPostApi}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}>

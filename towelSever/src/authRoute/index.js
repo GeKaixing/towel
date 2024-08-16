@@ -289,7 +289,7 @@ router.get('/findonepost/:id', async (req, res) => {
 //this is addition the post API
 router.post('/addpost', async (req, res) => {
     // const { UserImage, UserName, Image, Text, Share, Like, Comment } = req.body.data
-    const { UserId, Image, Text, Share, Like, Comment } = req.body.data
+    const { UserId, Image, Text, Share, Like, Comment,Video } = req.body.data
     console.log(Image)
     const data = new POSTS({
         // postUserImage: UserImage,
@@ -297,6 +297,7 @@ router.post('/addpost', async (req, res) => {
         postUserId: UserId,
         postText: Text,
         postImages: Image,
+        postVideos: Video,
         postShare: Share,
         postLike: Like,
         postComment: Comment,

@@ -10,13 +10,14 @@ export default function Search() {
                 state.map((item) => <Post
                     key={item._id}
                     id={item._id}
-                    name={item.user[0].username}
-                    headimg={item.user[0].headimg}
+                    name={item.user[0]?.username}
+                    headimg={item.user[0]?.headimg}
                     content={item.postText}
                     comments={item.postComment}
                     likes={item.postLike}
                     favorites={item.favorites}
                     postImages={item.postImages}
+                    postVideos={item.postVideos}
                     postUserId={item.postUserId}
                 />) : <div>没有数据</div>
             }

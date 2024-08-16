@@ -10,15 +10,18 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer = require('multer')
 const upload = multer({ dest: 'upload' }).single('file', 'text')
+const uploadVideo = multer({ dest: 'uploadvideo' }).single('video', 'text')
 const fs = require('fs');
 const { Server } = require('socket.io');
 const nodemailer = require('nodemailer');
 const server = http.createServer(app);
-app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5173']}))
+app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5173'] }))
 const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('upload'))
+app.use(express.static('uploadvideo'))
+app.use(express.static('uploadheadimg'))
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }))
 app.use(bodyParser.json())
 const PORT = 4000;
@@ -97,15 +100,33 @@ app.post('/upload/:id', upload, async (req, res) => {
         res.status(500).json({ massage: error.massage })
     }
 })
+app.post('/uploadvideo/:id', uploadVideo, async (req, res) => {
+    try {
+        const { targetId, staticType } = Object.assign({}, req.body)
+        const userid = req.params.id
+        const uuid = crypto.randomUUID()
+        const filepath = uuid + "_" + (req.file.originalname)
+        fs.renameSync(req.file.path, `uploadvideo/${filepath}`);
+        const data = new STATICDATAS({
+            staticType: staticType,
+            targetId: new mongoose.Types.ObjectId(targetId),
+            staticUrl: `http://127.0.0.1:4000/${filepath}`,
+            userId: new mongoose.Types.ObjectId(userid)
+        }
+        )
+        const datatosave = await data.save();
+        res.status(200).send(datatosave)
+    } catch (error) {
+        res.status(500).json({ massage: error.massage })
+    }
+})
 //上传用户头像
 app.post('/uploadHeadImg/:id', upload, async (req, res) => {
     try {
         const { targetId, staticType } = Object.assign({}, req.body)
         const userid = req.params.id
-       
         const userAndemail = await USERS.findOne({ _id: userid });//false
         if (!userAndemail) { return res.status(400).json({ meassge: '找不到账号', status: false }) }
-
         const uuid = crypto.randomUUID()
         const filepath = uuid + "_" + (req.file.originalname)
         fs.renameSync(req.file.path, `upload/${filepath}`);

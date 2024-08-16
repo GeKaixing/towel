@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import AddvideoIcon from '../../../../assets/static/otherIcon/添加视频.svg';
 import AddvideoIconPtch from '../../../../assets/static/otherIconPitchUp/添加视频.svg';
 import PropTypes from 'prop-types';
-export default function Addvideo({setVideoData}) {
-    const [showVideo, setShowVideo] = useState('');
-    const [isHoveredVideo, setIsHoveredVideo] = useState(false);
+// import useLocalStorage from '../../../../hooks/useLocaStorage';
+// import axios from 'axios';
 
+export default function Addvideo({setVideoData,showVideo, setShowVideo}) {
+ 
+    const [isHoveredVideo, setIsHoveredVideo] = useState(false);
+    // const [localStorageData] = useLocalStorage()
     const upVideoApi = (e) => {
         const file = e.target.files[0];
         if (file) {
             const videoURL = URL.createObjectURL(file);
             setShowVideo(videoURL);
-            const formData = new FormData();
-            formData.append('video', file);
-            setVideoData(formData)
+            setVideoData(file)
         }
     };
 
@@ -56,9 +57,12 @@ export default function Addvideo({setVideoData}) {
                 style={{ display: 'none' }}
                 onChange={upVideoApi}
                 accept="video/*"
+                name='video'
             />
         </>
     );
 }
 Addvideo.propTypes = {
-    setVideoData: PropTypes.func,}
+    setVideoData: PropTypes.func,
+    showVideo:PropTypes.string,
+    setShowVideo: PropTypes.func,}

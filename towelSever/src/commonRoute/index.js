@@ -233,6 +233,7 @@ router.get('/post', async (req, res) => {
                     /* postUserImage: 1,
                     postUserName: 1, */
                     postImages: 1,
+                    postVideos: 1,
                     postText: 1,
                     postShare: 1,
                     postFavorite: { $size: '$favorites' },
@@ -321,6 +322,7 @@ router.post('/fliterpsot', async (req, res) => {
                     /* postUserImage: 1,
                     postUserName: 1, */
                     postText: 1,
+                    postVideos: 1,
                     postUserId: 1,
                     postFavorite: { $size: '$favorites' },
                     postShare: 1,

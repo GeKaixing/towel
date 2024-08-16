@@ -9,6 +9,7 @@ const POST = new mongoose.Schema({
     },
     postText: String,
     postImages: String,
+    postVideos: String,
     postShare: Number,
     postLike: Number,
     postComment: Number,

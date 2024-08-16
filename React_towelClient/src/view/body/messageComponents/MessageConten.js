@@ -88,8 +88,8 @@ export default function Message() {
       {responseData.length !== 0 ? responseData.map((item, index) => (
         <div className={style.message} key={index}>
           <div className={style.messageheadImgAndName}>
-            <img src={item.mentionedUserId[0].headimg} className={style.messageHeadImg} alt="headimg"></img>
-            <div>{item.mentionedUserId[0].username}</div>
+            <img src={item.mentionedUserId[0]?.headimg} className={style.messageHeadImg} alt="headimg"></img>
+            <div>{item.mentionedUserId[0]?.username}</div>
           </div>
           <div>{item.targetText}</div>
           <div onClick={() => setTargetIDHandler(item._id)} style={{ position: 'relative', display: 'flex', alignItems: 'center' }} className='MessageRef' ref={MessageRef}>{item.read ? null :

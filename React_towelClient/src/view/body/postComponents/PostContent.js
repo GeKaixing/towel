@@ -28,6 +28,7 @@ export default function PostPage() {
             likes={item.postLike}
             favorites={item.postFavorite}
             postImages={item.postImages}
+            postVideos={item.postVideos}
             postUserId={item.postUserId}
             reload={{ reload, setLoad }}
           >

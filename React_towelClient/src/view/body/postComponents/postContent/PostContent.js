@@ -43,28 +43,30 @@ export default function PostContent() {
                     likes: data[0].postLike,
                     name: data[0].user.username,
                     postImages: data[0].postImages,
+                    postVideos: data[0].postVideos,
                     postUserId: data[0].postUserId,
                 }
                 setcontent(datas)
             } else {
                 setcontent(data)
             }
-        }else{
-            getOnePost(params.id).then((response)=>{
+        } else {
+            getOnePost(params.id).then((response) => {
                 console.log(response.data)
                 const datas = {
                     comments: response.data[0].postComment,
-                    content:  detectMarkdown(response.data[0].postText)?DOMPurify.sanitize(marked(response.data[0].postText)):response.data[0].postText,
+                    content: detectMarkdown(response.data[0].postText) ? DOMPurify.sanitize(marked(response.data[0].postText)) : response.data[0].postText,
                     headimg: response.data[0].user.headimg,
                     id: response.data[0]._id,
                     likes: response.data[0].postLike,
                     name: response.data[0].user.username,
                     postImages: response.data[0].postImages,
+                    postVideos: response.data[0].postVideos,
                     postUserId: response.data[0].postUserId,
-                    markdown:detectMarkdown(response.data[0].postText)
+                    markdown: detectMarkdown(response.data[0].postText)
                 }
                 setcontent(datas)
-                }).catch(error=>console.log(error))
+            }).catch(error => console.log(error))
         }
     }, [state, pathname])
     // 点赞按钮
@@ -107,7 +109,7 @@ export default function PostContent() {
     }
     // 分享按钮
     const sharehandler = (event) => {
-        event.stopPropagation() 
+        event.stopPropagation()
         const at_present_pathname = `${process.env.REACT_APP_DOMAIN}${pathname}`
         navigator.clipboard.writeText(at_present_pathname).then(() => {
         }, (error) => {
@@ -145,6 +147,9 @@ export default function PostContent() {
                                 }
                             </div>
                             {(contentdata.postImages?.length === 0 || contentdata.postImages === '') ? null : (<img src={contentdata.postImages} className=''></img>)}
+                            {contentdata.postVideos && <video className='w-full h-auto' controls>
+                                <source src={contentdata.postVideos} type="video/mp4" />
+                            </video>}
                         </div>
                         <div className='flex w-full flex-row justify-around h-5 ' onClick={likehandle}>
                             <div className='flex text-[--fontColor] '
