@@ -42,6 +42,7 @@ socketio(io)
 const authMiddleware = require('./src/auth/index')
 const commonRoute = require('./src/commonRoute/index')
 const AI = require('./src/Ai/Llama')
+const toutiaoHot = require('./src/toutiaoHot/index')
 const authRoute = require('./src/authRoute/index')
 const userRoute = require('./src/authRoute/userRoute/userRouter')
 // common API
@@ -67,6 +68,8 @@ app.get('/HPImageArchive', async (req, res) => {
 });
 //ai
 app.use(AI)
+//toutiaoHot
+app.use(toutiaoHot)
 //open api
 app.use(commonRoute)
 //auth API

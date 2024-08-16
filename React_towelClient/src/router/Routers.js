@@ -8,7 +8,6 @@ import Login from '../view/body/userComponents/Login'
 import Signup from '../view/body/userComponents/Signup'
 import UserHomePage from '../view/body/userComponents/userHomePageComponts/UserContent'
 import Message from '../view/body/messageComponents/MessageConten'
-import User from '../view/foot/User'
 import Protected from './Protected'
 import PostContent from '../view/body/postComponents/postContent/PostContent'
 import Add from '../view/body/addComponents/AddContent'
@@ -24,6 +23,7 @@ import H5header from '../components/H5header'
 import PrivateChat from '../view/body/messageComponents/PrivateChat'
 import Ai from '../view/body/AiComponents/Ai'
 import Blog from '../view/body/blogComponents/BlogContent'
+import Foot from '../view/foot/Foot'
 export default function Routers() {
     return (
         <div className='flex '>
@@ -55,7 +55,7 @@ export default function Routers() {
                     <Route path="*" element={<NotRouter />}></Route>
                 </Routes>
             </div>
-            <User></User>
+            <Foot></Foot>
         </div >
 
     )
