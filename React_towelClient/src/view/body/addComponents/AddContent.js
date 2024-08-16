@@ -12,6 +12,7 @@ import addIcon from '../../../assets/static/MainMenuIcon/添加.svg'
 import addPichIcon from '../../../assets/static/MainMenuIconPitchUp/添加.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
+import Addvideo from './addvideo/Addvideo';
 export default function Portal() {
     const [textareaData, settextareaData] = useState('');
     const [localStorageData] = useLocalStorage()
@@ -22,7 +23,7 @@ export default function Portal() {
     const [isHoveredImage, setIsHoveredImage] = useState(false);
     const [isMarkdown, setIsMarkdown] = useState(false);
     const textareaRef = useRef(null);
-
+    const [videoData,setVideoData]=useState('')
 
     useEffect(() => {
         const textarea = textareaRef.current;
@@ -111,21 +112,21 @@ export default function Portal() {
                     <div className='flex flex-row  items-center space-x-2 '>
                         <img src={loginDataParse.headimg} className='h-10 w-10 rounded-full' alt="user" />
                         <div className='font-bold text=[--fontColor] cursor-pointer'>{loginDataParse.username}</div>
-                        <div className='flex items-center space-x-2' onClick={()=>setIsMarkdown(!isMarkdown)}><p className={isMarkdown ? 'font-bold' : ''}>markdown</p>{isMarkdown&&<div className='w-2 h-2 rounded-full bg-[--hostColor]'></div>}</div>
+                        <div className='flex items-center space-x-2' onClick={() => setIsMarkdown(!isMarkdown)}><p className={isMarkdown ? 'font-bold' : ''}>markdown</p>{isMarkdown && <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div>}</div>
                     </div>
                     {/* textContent */}
-                        <textarea
-                            ref={textareaRef}
-                            value={textareaData}
-                            onChange={(e) => settextareaData(e.target.value)}
-                            className='w-full h-auto bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor]'
-                            placeholder="请输入您要发布的内容"
-                            rows={1}
-                            maxLength={10000}
-                            style={{ resize: "vertical", backgroundColor: 'var(--boxColor)', color: 'var(--fontColor)' }}
-                        ></textarea>
-                       { textareaData.length>=1000&&<p className="text-red-500">最多10000字哦</p>}
-                        {isMarkdown&&<div  className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(textareaData)) }}></div>}
+                    <textarea
+                        ref={textareaRef}
+                        value={textareaData}
+                        onChange={(e) => settextareaData(e.target.value)}
+                        className='w-full h-auto bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor]'
+                        placeholder="请输入您要发布的内容"
+                        rows={1}
+                        maxLength={10000}
+                        style={{ resize: "vertical", backgroundColor: 'var(--boxColor)', color: 'var(--fontColor)' }}
+                    ></textarea>
+                    {textareaData.length >= 1000 && <p className="text-red-500">最多10000字哦</p>}
+                    {isMarkdown && <div className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(textareaData)) }}></div>}
                     {/* boxBottom */}
                     <div className='flex justify-around h-5 w-full'>
                         <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path}></img>
@@ -147,22 +148,14 @@ export default function Portal() {
                     onMouseEnter={() => setIsHoveredImage(true)}
                     onMouseLeave={() => setIsHoveredImage(false)}
                 >
-                    {isHoveredImage ?
-                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon55.path} alt='添加图片'></img>
-                        :
-                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon5.path} alt='添加图片'></img>
-                    }
+                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={isHoveredImage ? postIcon55.path : postIcon5.path} alt='添加图片'></img>
                 </label>
                 <input type="file" id='inputfile' style={{ display: 'none' }} onChange={upImageApi} />
+                <Addvideo setVideoData={setVideoData}></Addvideo>
                 <div className='w-12 h-12' onClick={sendPostApi}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}>
-                    {
-                        isHovered ?
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon7.path} alt='发布'></img>
-                            :
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon6.path} alt='发布'></img>
-                    }
+                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={isHovered ? postIcon7.path : postIcon6.path} alt='发布'></img>
                 </div>
             </div>
         </div>
