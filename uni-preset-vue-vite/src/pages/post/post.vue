@@ -1,15 +1,22 @@
 <script setup>
 import pageLayout from '../../style/pagelayout.vue'
-import { onMounted ,ref} from "vue"
-const resData=ref([])
-onMounted(()=>{
+import search from './search/search.vue'
+import post from '../../components/post.vue'
+import { onMounted, ref ,computed} from "vue"
+const resData = ref([])
+const searchData=ref('')
+const searchDataHandler=(value,inputData)=>{
+    searchData.value=inputData
+    resData.value=value
+}
+onMounted(() => {
     uni.request({
         url: 'http://127.0.0.1:4000/post',
         header: {
             'content-type': 'application/json' // 设置请求头
         },
         success: function (res) {
-            resData.value=res.data
+            resData.value = res.data
         },
         fail: function (res) {
             console.log(res)
@@ -19,38 +26,24 @@ onMounted(()=>{
 </script>
 <template>
     <pageLayout>
-        <view class="post" v-for="(item,index) in  resData" :key="index">
-            <view class="post-head">
-                <view class="post-image-name">
-                    <image :src="item.user.headimg"
-                        class="post-image"></image>
-                    <view class="post-name">{{ item.user.username }}</view>
-                </view>
-                <view class="post-head-button">...</view>
-            </view>
-            <view class="post-context">{{item.postText}}</view>
-            <view v-if="item?.postImages">{{ item.postImages }}</view>
-            <view class="post-button">
-                <view class="post-button-icon">
-                    <image src="../../static/postIcon/赞.svg" mode="scaleToFill"></image>
-                    <view>{{item.postLike}}</view>
-                </view>
-                <view  class="post-button-icon">
-                    <image src="../../static/postIcon/评论.svg" mode="scaleToFill"></image>
-                    <view>{{item.postComment}}</view>
-                </view>
-                <view  class="post-button-icon">
-                    <image src="../../static/postIcon/星星.svg" mode="scaleToFill"></image>
-                    <view>{{item.postFavorite}}</view>
-                </view>
-                <view  class="post-button-icon">
-                    <image src="../../static/postIcon/分享.svg" mode="scaleToFill"></image>
-                </view>
-            </view>
-        </view>
+        <search @searchDataHandler="searchDataHandler"></search>
+        <post v-for="(post,index ) in resData"
+        :key="index"
+        :id="post._id" 
+        :user="post.user" 
+        :postText="post.postText" 
+        :postImages="post.postImages " 
+        :postLike="post.postLike"
+        :postComment="post.postComment"
+        :postFavorite="post.postFavorite"
+        ></post>
     </pageLayout>
 </template>
 <style scoped>
+.post-context-image {
+    margin: auto;
+}
+
 .post {
     width: 100%;
     display: flex;
@@ -59,7 +52,7 @@ onMounted(()=>{
     border-radius: 10rpx;
     padding: 10rpx;
     border: 4rpx solid #f6f6f6;
-
+    margin-bottom: 10rpx;
 }
 
 .post-head {
@@ -102,7 +95,8 @@ onMounted(()=>{
     border-radius: 100%;
     object-fit: cover;
 }
-.post-button-icon{
+
+.post-button-icon {
     display: flex;
     align-items: center;
 }
