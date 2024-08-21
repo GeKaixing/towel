@@ -50,12 +50,6 @@ export default function Portal() {
                 }
             })
             return response.data.staticUrl
-            // return response.data.staticUrl
-            // setResponseImageData(()=>console.log(1));
-               
-            
-         
-            // console.log(response.data)
         } catch (error) {
             console.log(error);
         }
@@ -82,6 +76,7 @@ export default function Portal() {
             // 如果有图片数据，则上传图片
             if (showImageData) {
                 imgurl= await upLoadApi(); // 等待图片上传完成
+                console.log(imgurl)
             }
 
             // 如果有视频数据，则上传视频

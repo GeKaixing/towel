@@ -92,7 +92,7 @@ export default function SettingAccount() {
     const ModifyingaUpLoadNewHeadImg = async (file) => {
         try {
             const formData = new FormData();
-            formData.append('file', file);
+            formData.append('headimg', file);
             formData.append('targetId', localStorageData.userid);
             formData.append('staticType', 'add');
             const data = await postUpLoad(localStorageData.userid,  formData )
