@@ -124,7 +124,6 @@ app.post('/uploadvideo/:id', uploadVideo, async (req, res) => {
 //上传用户头像
 app.post('/uploadheadimg/:id', uploadHeadImg, async (req, res) => {
     try {
-        console.log(req.file)
         const { targetId, staticType } = Object.assign({}, req.body)
         const userid = req.params.id
         const userAndemail = await USERS.findOne({ _id: userid });//false
