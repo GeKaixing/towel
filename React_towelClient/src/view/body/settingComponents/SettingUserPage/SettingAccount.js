@@ -95,7 +95,7 @@ export default function SettingAccount() {
             formData.append('file', file);
             formData.append('targetId', localStorageData.userid);
             formData.append('staticType', 'add');
-            const data = await postUpLoad(localStorageData.userid, { formData })
+            const data = await postUpLoad(localStorageData.userid,  formData )
             if (data.data) {
                 const oldData = JSON.parse(localStorage.getItem('loginData'));
                 oldData.headimg = data.data;
@@ -111,7 +111,7 @@ export default function SettingAccount() {
         }
     }
     return (
-        <div className='flex flex-col justify-center items-center text-[--fontColor]' style={{ position: "relative" }}>
+        <div className='flex flex-col  items-start text-[--fontColor] absolute left-1/2 -translate-x-1/2' >
             <p style={{ display: 'flex', alignItems: "center" }}>
                 <img src={responseData.headimg} className={style.headimg}></img>
                 <label className={style.uploadNewHeadImg} htmlFor='uploadNewHeadImg' title='修改' >
@@ -119,7 +119,6 @@ export default function SettingAccount() {
                 </label>
                 <input type='file' id='uploadNewHeadImg' onChange={upImageApi} style={{ display: "none" }}></input>
             </p>
-
             <p><strong>id</strong></p>
             <p>{responseData._id}</p>
             <p><strong>用户名</strong><button onClick={ModifyingaUserName}>修改</button></p>

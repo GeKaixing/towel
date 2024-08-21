@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer')
 const upload = multer({ dest: 'upload' }).single('file', 'text')
 const uploadVideo = multer({ dest: 'uploadvideo' }).single('video', 'text')
+const uploadHeadImg = multer({ dest: 'uploadheadimg' }).single('file', 'text')
 const fs = require('fs');
 const { Server } = require('socket.io');
 const nodemailer = require('nodemailer');
@@ -121,7 +122,7 @@ app.post('/uploadvideo/:id', uploadVideo, async (req, res) => {
     }
 })
 //上传用户头像
-app.post('/uploadHeadImg/:id', upload, async (req, res) => {
+app.post('/uploadheadimg/:id', uploadHeadImg, async (req, res) => {
     try {
         const { targetId, staticType } = Object.assign({}, req.body)
         const userid = req.params.id
@@ -129,7 +130,7 @@ app.post('/uploadHeadImg/:id', upload, async (req, res) => {
         if (!userAndemail) { return res.status(400).json({ meassge: '找不到账号', status: false }) }
         const uuid = crypto.randomUUID()
         const filepath = uuid + "_" + (req.file.originalname)
-        fs.renameSync(req.file.path, `upload/${filepath}`);
+        fs.renameSync(req.file.path, `uploadheadimg/${filepath}`);
         const data = new STATICDATAS({
             staticType: staticType,
             targetId: new mongoose.Types.ObjectId(targetId),

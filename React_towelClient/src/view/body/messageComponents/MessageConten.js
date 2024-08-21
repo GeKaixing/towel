@@ -7,6 +7,7 @@ import { MessageResponseDataContext } from '../../../store/MessageResponseData'
 import { deleteNotifications, getNotifications, postReadnotifications } from '../../../services/message/Message';
 import { getOnePost } from '../../../services/post/post';
 import { privateChatContext } from '../../../store/privateChat';
+
 export default function Message() {
   const { MessageResponseData: responseData, setMessageResponseData: setResponseData } = useContext(MessageResponseDataContext)//responseData,setResponseData
   const navigate = useNavigate()
@@ -15,6 +16,7 @@ export default function Message() {
   const [targetID, setTargetID] = useState('')
   const [reLoadnotifications, setReLoadNotifications] = useState(false)
   const MessageRef = useRef(null)
+
   useEffect(() => {
     let localStorageDatas;
     if (localStorage.getItem('loginData')) {
@@ -30,12 +32,12 @@ export default function Message() {
       })
     }
   }, [reLoadnotifications])
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (MessageRef.current) {
-        if (!(event.target.className === MessageRef.current.className)) {
-          setTargetID('')
-        }
+      // Ensure the clicked target is not part of the message dropdown
+      if (MessageRef.current && !MessageRef.current.contains(event.target)) {
+        setTargetID(''); // Close the dropdown
       }
     };
     window.addEventListener('click', handleClickOutside);
@@ -43,6 +45,7 @@ export default function Message() {
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
   const getOnePostApi = (POSEID, id, read) => {
     getOnePost(POSEID).then((response) => {
       if (response.data.length === 0) {
@@ -54,56 +57,68 @@ export default function Message() {
     })
       .catch((error) => { console.log(error) })
   }
+
   const readnotificationsApi = (id) => {
     postReadnotifications(id).then(() => {
     }).catch((error) => {
       console.log(error)
     })
   }
+
   const setTargetIDHandler = (id) => {
-    if (targetID) {
-      setTargetID('')
+    if (targetID === id) {
+      setTargetID('');
     } else {
-      setTargetID(id)
+      setTargetID(id);
     }
   }
+
   const deletReplyHandler = (Id) => {
     deleteNotifications(Id).then(() => {
       setReLoadNotifications(!reLoadnotifications)
     })
       .catch((error) => { console.log(error) })
   }
+
   return (
     <div className='space-y-2'>
       <div>私信</div>
       {/* 与你private chata用户id */}
-      {
-        privateChatData.length !== 0 && <Link to={`/privatechat/${privateChatData[0].sendid}`} state={{ userName: privateChatData[0].userName, headimg: privateChatData[0].headimg }}>
-          <main className='space-x-2 flex flex-nowrap items-center'><img className='h-10 w-10 rounded-full' src={privateChatData[0].headimg}></img>
+      {privateChatData.length !== 0 && (
+        <Link to={`/privatechat/${privateChatData[0].sendid}`} state={{ userName: privateChatData[0].userName, headimg: privateChatData[0].headimg }}>
+          <main className='space-x-2 flex flex-nowrap items-center'>
+            <img className='h-10 w-10 rounded-full' src={privateChatData[0].headimg}></img>
             <span>{privateChatData[0].chatData}</span>
           </main>
         </Link>
-      }
+      )}
       <div>@我的</div>
-      {responseData.length !== 0 ? responseData.map((item, index) => (
-        <div className={style.message} key={index}>
-          <div className={style.messageheadImgAndName}>
-            <img src={item.mentionedUserId[0]?.headimg} className={style.messageHeadImg} alt="headimg"></img>
-            <div>{item.mentionedUserId[0]?.username}</div>
+      {responseData.length !== 0 ? (
+        responseData.map((item, index) => (
+          <div className={style.message} key={index}>
+            <div className={style.messageheadImgAndName}>
+              <img src={item.mentionedUserId[0]?.headimg} className={style.messageHeadImg} alt="headimg"></img>
+              <div>{item.mentionedUserId[0]?.username}</div>
+            </div>
+            <div>{item.targetText}</div>
+            <div onClick={() => setTargetIDHandler(item._id)} style={{ position: 'relative', display: 'flex', alignItems: 'center' }} ref={MessageRef}>
+              {!item.read && <div className='mr-2 font-bold text-[--assistantColor]'>未读</div>}
+              <div className='cursor-pointer'>
+                ...
+              </div>
+              {targetID === item._id && (
+                <div className={style.MessageDeleteBox} onClick={e => e.stopPropagation()}>
+                  <span className={style.MessageDeleteBoxButton} onClick={() => deletReplyHandler(item._id)}>删除</span>
+                  <span className={style.MessageDeleteBoxButton} onClick={() => getOnePostApi(item.postId, item._id, item.read)}>进入文章</span>
+                  <span className={style.MessageDeleteBoxButton}>举报</span>
+                </div>
+              )}
+            </div>
           </div>
-          <div>{item.targetText}</div>
-          <div onClick={() => setTargetIDHandler(item._id)} style={{ position: 'relative', display: 'flex', alignItems: 'center' }} className='MessageRef' ref={MessageRef}>{item.read ? null :
-            <div className='mr-2 font-bold text-[--assistantColor]'>未读</div>}<div className='cursor-pointer' onClick={() => setTargetIDHandler(item._id)}>
-              ...</div>
-            {targetID === item._id ?
-              <div className={style.MessageDeleteBox} onClick={e => e.stopPropagation()}>
-                <span className={style.MessageDeleteBoxButton} onClick={() => deletReplyHandler(item._id)}>删除</span>
-                <span className={style.MessageDeleteBoxButton} onClick={() => getOnePostApi(item.postId, item._id, item.read)}>进入文章</span>
-                <span className={style.MessageDeleteBoxButton}>举报</span>
-              </div> : null}
-          </div>
-        </div>
-      )) : <div className='p-2'>暂无回复</div>}
+        ))
+      ) : (
+        <div className='p-2'>暂无回复</div>
+      )}
     </div>
   )
 }
