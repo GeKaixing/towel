@@ -5,7 +5,7 @@
 		<view class="comment" v-for="item in commentData">
 			<view class="userComment">
 				<view class="userImage">
-					<image :src="item.users[0].headimg"></image>
+					<image :src="item.users[0].headimg||'../../../static/logo.png'" @error="errorImage"></image>
 					<view @click="store.atHandler(item,item.users[0].username)">{{ item.users[0].username }}</view>
 				</view>
 				<view class="commentLike">
@@ -66,7 +66,11 @@ const store = useCommentReplyInputStore()
 	, showSelect=ref(false)
 	, saveUserData=ref({userName:'',Id:''});
 	
-/* 
+
+	const errorImage=(e)=>{
+		console.log(e)
+	}
+	/* 
 * 控制是否显示用户选择框的现实的函数
 */
 const showSelectHandler=(userName,commentId)=>{

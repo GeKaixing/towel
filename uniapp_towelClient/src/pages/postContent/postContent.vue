@@ -7,8 +7,8 @@
 			</view>
 			<view class="content">
 				<span>{{ postText }}</span>
-				<view class="imagebox" >
-					<image class="postContentImage"  :src="postImages" ></image>
+				<view class="imagebox" v-if="postImages" >
+					<image class="postContentImage"  :src="postImages"></image>
 				</view>
 			</view>
 		</view>
@@ -48,6 +48,7 @@ page {
 	width: 90%;
 	margin: auto;
 	margin-bottom: 16rpx;
+	padding: 2rpx;
 }
 
 .head {

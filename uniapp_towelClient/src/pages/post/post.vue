@@ -17,11 +17,7 @@
 					<image  class="text" :src="item.postImages"></image>
 				</view>
 			</view>
-			<view class="foot">
-				<view>
-					<image class="comment" src="../../static/Images/分享.svg"></image>
-					<span class='shateNumber'>{{ item.postShare }}</span>
-				</view>
+			<view class="foot">			
 				<view>
 					<image class="comment" src="../../static/Images/评论.svg"></image>
 					<span class='commentNumber'>{{ item.postComment }}</span>
@@ -30,6 +26,10 @@
 				<view @click.stop="likehandler(item._id)">
 					<image class="like" src="../../static/Images/赞.svg"></image>
 					<span class='likeNumber'>{{ item.postLike }}</span>
+				</view>
+				<view>
+					<image class="comment" src="../../static/Images/分享.svg"></image>
+					<span class='shateNumber'>{{ item.postShare }}</span>
 				</view>
 			</view>
 		</view>

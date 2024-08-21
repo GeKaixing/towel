@@ -108,9 +108,9 @@ const loginStateHandler = (targer = false) => {
 }
 const loginHandelr = () => {
 	
-	uni.setStorageSync('testdata',loginJSON)
-	uni.getStorageSync('testdata')
-	/* 
+/* 	uni.setStorageSync('testdata',loginJSON)
+	uni.getStorageSync('testdata') */
+	 
 	uni.request({
 		url: 'http://127.0.0.1:4000/login',
 		method: 'POST',
@@ -168,7 +168,7 @@ const loginHandelr = () => {
 		fail: function (res) {
 			console.log(res)
 		}
-	}) */
+	}) 
 
 }
 const outLoginHandler = () => {
