@@ -10,8 +10,8 @@ export default function Search() {
                 state.map((item) => <Post
                     key={item._id}
                     id={item._id}
-                    name={item.user[0]?.username}
-                    headimg={item.user[0]?.headimg}
+                    name={item.user.username}
+                    headimg={item.user.headimg}
                     content={item.postText}
                     comments={item.postComment}
                     likes={item.postLike}
