@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer')
 const upload = multer({ dest: 'upload' }).single('file', 'text')
 const uploadVideo = multer({ dest: 'uploadvideo' }).single('video', 'text')
-const uploadHeadImg = multer({ dest: 'uploadheadimg' }).single('file', 'text')
+const uploadHeadImg = multer({ dest: 'uploadheadimg' }).single('headimg', 'text')
 const fs = require('fs');
 const { Server } = require('socket.io');
 const nodemailer = require('nodemailer');
@@ -82,7 +82,7 @@ app.use(authMiddleware)
 app.use(authRoute)
 app.use(userRoute)
 app.post('/upload/:id', upload, async (req, res) => {
-    try {
+  try {
         const { targetId, staticType } = Object.assign({}, req.body)
         const userid = req.params.id
         const uuid = crypto.randomUUID()
@@ -99,7 +99,7 @@ app.post('/upload/:id', upload, async (req, res) => {
         res.status(200).send(datatosave)
     } catch (error) {
         res.status(500).json({ massage: error.massage })
-    }
+    } 
 })
 app.post('/uploadvideo/:id', uploadVideo, async (req, res) => {
     try {

@@ -3,7 +3,7 @@ import { auth } from '../config';
 //上传图片
 export const postUpLoadheadimg = (id, data) => {
     return auth({
-        url: `upload/${id}`,
+        url: `uploadheadimg/${id}`,
         data,
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -13,7 +13,7 @@ export const postUpLoadheadimg = (id, data) => {
 //上传图片
 export const postUpLoad = (id, data) => {
     return auth({
-        url: `uploadheadimg/${id}`,
+        url: `upload/${id}`,
         data,
         headers: {
             'Content-Type': 'multipart/form-data',

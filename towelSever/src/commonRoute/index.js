@@ -285,6 +285,11 @@ router.post('/fliterpsot', async (req, res) => {
                 }
             },
             {
+                $unwind: {
+                    path: '$user',
+                }
+            },
+            {
                 $lookup: {
                     from: 'favorites',//这里要填mongoose compass的集合的名字
                     localField: '_id',
