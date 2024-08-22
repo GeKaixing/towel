@@ -1,40 +1,25 @@
 <script setup>
-const item=defineProps( ['id','user','postText','postImages','postLike','postComment','postFavorite'])
+const item=defineProps( ['id','user','postText','postLike',])
 
-const navigatorHandler=()=>{
-    uni.navigateTo({
-        url:`postContent/postContent?data=${JSON.stringify(item)}`
-    })
-}
 </script>
 <template>
         <view class="post" @click="navigatorHandler">
             <view class="post-head">
                 <view class="post-image-name">
-                    <image :src="item.user.headimg"
+                    <image :src="item.user[0].headimg"
                         class="post-image"></image>
-                    <view class="post-name">{{ item.user.username }}</view>
+                    <view class="post-name">{{ item.user[0].username }}</view>
                 </view>
                 <view class="post-head-button">...</view>
             </view>
             <view class="post-context">{{item.postText}}</view>
-            <image class="post-context-image" v-if="item?.postImages" :src="item.postImages"></image>
             <view class="post-button">
-                <view class="post-button-icon">
-                    <image src="../static/postIcon/赞.svg" mode="scaleToFill"></image>
+                    <view class="post-icon">
+                        <image class="iconlike" src="../../../static/postIcon/赞.svg" mode="scaleToFill"></image>
                     <view>{{item.postLike}}</view>
-                </view>
-                <view  class="post-button-icon">
-                    <image src="../static/postIcon/评论.svg" mode="scaleToFill"></image>
-                    <view>{{item.postComment}}</view>
-                </view>
-                <view  class="post-button-icon">
-                    <image src="../static/postIcon/星星.svg" mode="scaleToFill"></image>
-                    <view>{{item.postFavorite}}</view>
-                </view>
-                <view  class="post-button-icon">
-                    <image src="../static/postIcon/分享.svg" mode="scaleToFill"></image>
-                </view>
+                    </view>
+                    <view>回复</view>
+                    <view>显示回复</view>
             </view>
         </view> 
 </template>
@@ -51,6 +36,7 @@ const navigatorHandler=()=>{
     padding: 10rpx;
     border: 4rpx solid #f6f6f6;
     margin-bottom: 10rpx;
+    margin-top: 10rpx;
 }
 
 .post-head {
@@ -86,15 +72,17 @@ const navigatorHandler=()=>{
     flex-direction: row;
     justify-content: space-around;
 }
-
-.post-button>view>image {
+.post-icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.iconlike {
     width: 40rpx;
     height: 40rpx;
     border-radius: 100%;
     object-fit: cover;
+
 }
-.post-button-icon{
-    display: flex;
-    align-items: center;
-}
+
 </style>

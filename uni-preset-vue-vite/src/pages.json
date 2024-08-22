@@ -17,6 +17,12 @@
 			"style": {
 				"navigationBarTitleText": "注册"
 			}
+		},
+		{
+			"path": "pages/post/postContent/postContent",
+			"style": {
+				"navigationBarTitleText": "主页"
+			}
 		}
 	],
 	"globalStyle": {
@@ -30,14 +36,15 @@
 		"selectedColor": "red",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"list": [{
-			"pagePath": "pages/post/post",
-			"text": "首页"
-		},
-		{
-			"pagePath": "pages/user/login",
-			"text": "登录"
-		}
-	]
+		"list": [
+			{
+				"pagePath": "pages/post/post",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/user/login",
+				"text": "登录"
+			}
+		]
 	}
 }

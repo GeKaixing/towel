@@ -2,7 +2,7 @@
 import pageLayout from '../../style/pagelayout.vue'
 import search from './search/search.vue'
 import post from '../../components/post.vue'
-import { onMounted, ref ,computed} from "vue"
+import { onMounted, ref } from "vue"
 const resData = ref([])
 const searchData=ref('')
 const searchDataHandler=(value,inputData)=>{

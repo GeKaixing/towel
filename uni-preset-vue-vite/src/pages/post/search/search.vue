@@ -33,6 +33,7 @@ const searcHandler = () => {
     display: flex;
     justify-content: space-between;
     gap: 10rpx;
+    align-items: center;
 }
 
 .input-search {
@@ -40,10 +41,12 @@ const searcHandler = () => {
     background-color: #f6f6f6;
     margin-bottom: 10rpx;
     flex-grow: 30;
+    height: 50rpx;
 }
 
 .input-button {
     flex-grow: 1;
     font-weight: bold;
+    height: 50rpx;
 }
 </style>
