@@ -50,7 +50,6 @@ const navigatorHandler=()=>{
     border-radius: 10rpx;
     padding: 10rpx;
     border: 4rpx solid #f6f6f6;
-    margin-bottom: 10rpx;
 }
 
 .post-head {

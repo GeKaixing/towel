@@ -1,6 +1,12 @@
 <script setup>
 const item=defineProps( ['id','user','postText','postLike',])
-
+const emit=defineEmits(['commentidHandler'])
+const replyHandler=(id,userData)=>{
+    const data={
+        commentid:id,
+        _id:userData[0]._id, username: userData[0].username, headimg:userData[0].headimg
+    }
+    emit('commentidHandler',data)}
 </script>
 <template>
         <view class="post" @click="navigatorHandler">
@@ -18,7 +24,7 @@ const item=defineProps( ['id','user','postText','postLike',])
                         <image class="iconlike" src="../../../static/postIcon/赞.svg" mode="scaleToFill"></image>
                     <view>{{item.postLike}}</view>
                     </view>
-                    <view>回复</view>
+                    <view @click='replyHandler(item.id,item.user)'>回复</view>
                     <view>显示回复</view>
             </view>
         </view> 

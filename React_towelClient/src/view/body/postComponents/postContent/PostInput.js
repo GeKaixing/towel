@@ -11,7 +11,6 @@ import useLocalStorage from '../../../../hooks/useLocaStorage'
 export default function PostInput({ postId }) {
     const navigate = useNavigate()
     const [localStorageData] = useLocalStorage()
-   
 
     const [inputData, setInputData] = useState('')//get the input value
     const [inputReplyData, setInputReplyData] = useState({}) //get thie input valur that who is @ value
