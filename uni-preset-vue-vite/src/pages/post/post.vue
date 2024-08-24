@@ -2,7 +2,8 @@
 import pageLayout from '../../style/pagelayout.vue'
 import search from './search/search.vue'
 import post from '../../components/post.vue'
-import { onMounted, ref } from "vue"
+import { onMounted, ref, watch } from "vue"
+import {postStore}from "../../store/postStore"
 const resData = ref([])
 const searchData=ref('')
 const searchDataHandler=(value,inputData)=>{
@@ -10,6 +11,20 @@ const searchDataHandler=(value,inputData)=>{
     resData.value=value
 }
 onMounted(() => {
+    uni.request({
+        url: 'http://127.0.0.1:4000/post',
+        header: {
+            'content-type': 'application/json' // 设置请求头
+        },
+        success: function (res) {
+            resData.value = res.data
+        },
+        fail: function (res) {
+            console.log(res)
+        }
+    })
+})
+watch(()=>postStore.reload,()=>{
     uni.request({
         url: 'http://127.0.0.1:4000/post',
         header: {

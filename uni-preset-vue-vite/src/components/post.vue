@@ -1,6 +1,5 @@
 <script setup>
 const item=defineProps( ['id','user','postText','postImages','postLike','postComment','postFavorite'])
-
 const navigatorHandler=()=>{
     uni.navigateTo({
         url:`postContent/postContent?data=${JSON.stringify(item)}`
@@ -18,7 +17,7 @@ const navigatorHandler=()=>{
                 <view class="post-head-button">...</view>
             </view>
             <view class="post-context">{{item.postText}}</view>
-            <image class="post-context-image" v-if="item?.postImages" :src="item.postImages"></image>
+            <image v-if="item.postImages.length>0" class="post-context-image"  :src="item.postImages"></image>
             <view class="post-button">
                 <view class="post-button-icon">
                     <image src="../static/postIcon/赞.svg" mode="scaleToFill"></image>
