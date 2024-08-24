@@ -3,13 +3,6 @@ import { computed } from "vue";
 import { ref, watch } from "vue"
 const inputData = ref(null)
 const post = defineProps(['id', 'commentid'])
-console.log(
-    post.commentid
-)
-/* const commentid = ref(null)
-watch(post, () => {
-    commentid.value = post.commentid
-}) */
 const emit = defineEmits(['reloadHandler'])
 const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
 const sendInputData = () => {

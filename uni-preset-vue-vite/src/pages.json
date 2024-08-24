@@ -23,6 +23,12 @@
 			"style": {
 				"navigationBarTitleText": "主页"
 			}
+		},
+		{
+			"path": "pages/add/add",
+			"style": {
+				"navigationBarTitleText": "添加"
+			}
 		}
 	],
 	"globalStyle": {
@@ -40,6 +46,10 @@
 			{
 				"pagePath": "pages/post/post",
 				"text": "首页"
+			},
+			{
+				"pagePath": "pages/add/add",
+				"text": "添加"
 			},
 			{
 				"pagePath": "pages/user/login",

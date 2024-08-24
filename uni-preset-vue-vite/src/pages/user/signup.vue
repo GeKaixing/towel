@@ -14,7 +14,7 @@ const navigateTo=()=>{
 <template>
     <pageLayout>
         <view class="layout">
-        <image class="logo" src="https://raw.githubusercontent.com/GeKaixing/towel/main/README_static/logo.png"></image>
+        <image class="logo" src="../../static/logo.png"></image>
         <view action="" class="login">
             <input type="text" class="login-account" placeholder="account">
             <input type="poassword" class="login-password" placeholder="password">

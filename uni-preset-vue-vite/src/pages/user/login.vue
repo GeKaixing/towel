@@ -35,7 +35,7 @@ const loginHandelr = () => {
 <template>
     <pageLayout>
         <view class="layout">
-            <image class="logo" src="https://raw.githubusercontent.com/GeKaixing/towel/main/README_static/logo.png"></image>
+            <image class="logo" src="../../static/logo.png"></image>
             <view action="" class="login">
                 <input type="text" class="login-account" placeholder="账号" v-model="name" >
                 <input type="poassword" class="login-password" placeholder="密码" v-model="password">
