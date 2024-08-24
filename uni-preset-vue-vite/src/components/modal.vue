@@ -3,7 +3,6 @@ import { ref } from 'vue';
 
 const modalState = ref(true)
 const emit = defineEmits(['deleteHandler'])
-
 const deleteHandler = () => {
     emit('deleteHandler')
     closeHandler()
@@ -11,12 +10,19 @@ const deleteHandler = () => {
 const closeHandler = () => {
     modalState.value = false
 }
+const reportHandler=()=>{
+uni.showModal({
+    content: '举报成功',
+    showCancel: false
+})
+}
 </script>
 <template>
     <Teleport to="body">
         <view v-if="modalState" class="modal">
             <view class="modal-content">
-                <view @click="deleteHandler">删除帖子</view>
+                <view @click="deleteHandler">删除</view>
+                <view @click="reportHandler">举报</view>
                 <view @click="closeHandler" id="modal-close" >关闭</view>
             </view>
         </view>

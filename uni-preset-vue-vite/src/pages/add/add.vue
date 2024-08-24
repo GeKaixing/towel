@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import {postStore}from "../../store/postStore.js"
-
 const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
 const inputData = ref('')
 const imageErrorRef = ref(null)
@@ -102,8 +101,8 @@ const addHandler = async () => {
             <image :src="imageData"></image>
             <view @click="deleteImageHandler">删除图片</view>
         </view>
-        <image @click="chooseImageHandler" class="post-upimage" src="#"></image>
-        <image @click="addHandler" class="post-add-button" src="#"></image>
+        <image @click="chooseImageHandler" class="post-upimage" src='../../static/addIcon/图片添加.svg'></image>
+        <image @click="addHandler" class="post-add-button" src='../../static/addIcon/添加.svg'></image>
     </view>
 </template>
 <style scoped>
@@ -120,18 +119,10 @@ const addHandler = async () => {
     align-items: center;
 }
 
-.post-upimage {
+.post-upimage ,.post-add-button{
     width: 100rpx;
     height: 100rpx;
-    background-color: black;
 }
-
-.post-add-button {
-    width: 100rpx;
-    height: 100rpx;
-    background-color: black;
-}
-
 .post-input {
     background-color: #f6f6f6;
     width: 100%;
