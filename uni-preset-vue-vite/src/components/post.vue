@@ -1,9 +1,37 @@
 <script setup>
+import { ref } from 'vue';
+import Modal from './modal.vue';
+import {postStore}from "../store/postStore"
+
+const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
+const emit = defineEmits(['deleteHanlder'])
+const isModal=ref(false)
+const isModalHandler=()=>{
+    isModal.value=!isModal.value
+}
 const item=defineProps( ['id','user','postText','postImages','postLike','postComment','postFavorite'])
 const navigatorHandler=()=>{
     uni.navigateTo({
         url:`postContent/postContent?data=${JSON.stringify(item)}`
     })
+}
+
+const deleteHandler=()=>{
+    uni.request({
+        url: `http://127.0.0.1:4000/delpost/${item.id}`,
+        method:'DELETE',
+        header: {
+            'content-type': 'application/json', // 设置请求头
+            'Authorization': `Bearer ${localStorageData?.jwt}`, // 设置jwt
+        },
+        success: function () {
+            postStore.startReload()
+        },
+        fail: function (res) {
+            console.log(res)
+        }
+    }
+    )
 }
 </script>
 <template>
@@ -14,7 +42,8 @@ const navigatorHandler=()=>{
                         class="post-image"></image>
                     <view class="post-name">{{ item.user.username }}</view>
                 </view>
-                <view class="post-head-button">...</view>
+                <view class="post-head-button" @click.stop="isModalHandler" >...</view>
+                <Modal v-if="isModal" @deleteHandler='deleteHandler' ></Modal>
             </view>
             <view class="post-context">{{item.postText}}</view>
             <image v-if="item.postImages.length>0" class="post-context-image"  :src="item.postImages"></image>
