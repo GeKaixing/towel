@@ -54,6 +54,7 @@ const replyApi=()=>{
         },
         success: function () {
             emit('reloadHandler')
+            postStore.setReloadReply()
             inputData.value = ''
             deleteHandler()
         },
