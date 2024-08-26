@@ -3,7 +3,8 @@ import { ref } from 'vue';
 import Modal from "@/components/modal.vue"
 import PostReply from './postReply.vue';
 const item=defineProps( ['id','user','postText','postLike',])
-const emit=defineEmits(['commentidHandler'])
+const emit=defineEmits(['commentidHandler','reloadHandler'])
+const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
 const isModal=ref(false)
 const isshowReply=ref(false)
 const isModalHandler=()=>isModal.value=!isModal.value
@@ -18,6 +19,23 @@ const replyHandler=(id,userData)=>{
 const isshowReplyHandler=()=>{
     isshowReply.value=!isshowReply.value
 }
+const deleteHandler=(id)=>{
+    uni.request({
+        url: `http://127.0.0.1:4000/delcomment/${id}`,
+        method: 'DELETE',
+        header: {
+            'content-type': 'application/json',// 设置请求头
+            'Authorization': `Bearer ${localStorageData?.jwt}`, // 设置jwt
+        },
+        success: function (res) {
+            emit('reloadHandler')
+            console.log(res)
+        },
+        fail: function (res) {
+            console.log(res)
+        }
+    }) 
+}
 </script>
 <template>
         <view class="post">
@@ -28,7 +46,7 @@ const isshowReplyHandler=()=>{
                     <view class="post-name">{{ item.user[0].username }}</view>
                 </view>
                 <view class="post-head-button" @click.stop='isModalHandler'>...</view>
-                <Modal v-if="isModal" @deleteHandler="deleteHandler" :postUserId='item.user[0]._id'></Modal>
+                <Modal v-if="isModal" @deleteHandler="deleteHandler(item.id)" :postUserId='item.user[0]._id'></Modal>
             </view>
             <view class="post-context">{{item.postText}}</view>
             <view class="post-button">

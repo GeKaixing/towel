@@ -5,8 +5,6 @@ const modalState = ref(true)
 const emit = defineEmits(['deleteHandler'])
 const props=defineProps(['postUserId'])
 const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
-
-
 const deleteHandler = () => {
     emit('deleteHandler')
     closeHandler()

@@ -12,9 +12,11 @@ const commentid = ref(null);
 const reloadHandler = () => {
   reload.value = !reload.value;
 };
+/* 状态提升 */
 const commentidHandler = (id) => {
   commentid.value = id;
 };
+/* 状态提升 */
 const deleteCommentid = () => {
   commentid.value = null;
 };
@@ -68,6 +70,7 @@ onMounted(() => {
       :postText="post.commentText"
       :postImages="post.commentImages"
       :postLike="post.commentLike"
+      @reloadHandler="reloadHandler"
       @commentidHandler="commentidHandler"
     ></postComment>
   </pageLayout>

@@ -4,10 +4,13 @@ import pageLayout from "../../style/pagelayout.vue";
 import login from "./login.vue";
 import post from "../../components/post.vue";
 import postComment from "../../pages/post/postContent/postComment.vue";
+import userReply from "../../components/userReply.vue";
 const postData = ref(null);
 const commentData=ref(null)
 const replyData=ref(null)
+const reloadReply=ref(false)
 const index = ref(0);
+const reloadReplyHandler=()=>reloadReply.value=!reloadReply.value;
 const getusepost=()=>{
     uni.request({
     url: `http://127.0.0.1:4000/getusepost/${localStorageData.userid}`,
@@ -78,6 +81,7 @@ const clearHandler = () => {
 onMounted(() => {
     getusepost()
 });
+watch(reloadReply,()=>{getuseReply()})
 </script>
 <template>
   <pageLayout>
@@ -120,9 +124,15 @@ onMounted(() => {
         :postText="post.commentText"
         :postImages="post.commentImages"
         :postLike="post.commentLike"
-        @commentidHandler="commentidHandler"
       ></postComment>
-      <view v-if='index === 2'>loading</view>
+      <userReply 
+      v-if='index === 2'
+        v-for="(post, index) in replyData"
+        :key="index"
+        :post="post"
+        @reloadReplyHandler="reloadReplyHandler"
+        >
+      </userReply>
     </view>
     <login v-else></login>
   </pageLayout>
