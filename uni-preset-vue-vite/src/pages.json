@@ -29,6 +29,12 @@
 			"style": {
 				"navigationBarTitleText": "添加"
 			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
 		}
 	],
 	"globalStyle": {
@@ -52,8 +58,8 @@
 				"text": "添加"
 			},
 			{
-				"pagePath": "pages/user/login",
-				"text": "登录"
+				"pagePath": "pages/user/user",
+				"text": "我的"
 			}
 		]
 	}

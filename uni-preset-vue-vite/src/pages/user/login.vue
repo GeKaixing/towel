@@ -25,6 +25,7 @@ const loginHandelr = () => {
                 key: 'logindata',
                 data: `${JSON.stringify(res.data)}`,
             })
+            uni.reLaunch({  url: '/pages/user/user'})
         },
         fail: function (res) {
             console.log(res)

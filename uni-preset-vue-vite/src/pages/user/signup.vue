@@ -8,7 +8,7 @@ const idShowHandler=()=>{
     isShow.value=true
 }
 const navigateTo=()=>{
-    uni.navigateTo({url:"pages/user/login"})
+    uni.navigateTo({url:"/pages/user/login"})
 }
 </script>
 <template>
@@ -16,9 +16,9 @@ const navigateTo=()=>{
         <view class="layout">
         <image class="logo" src="../../static/logo.png"></image>
         <view action="" class="login">
-            <input type="text" class="login-account" placeholder="account">
-            <input type="poassword" class="login-password" placeholder="password">
-            <input type="email" v-model="emailData" class="login-password" placeholder="email">
+            <input type="text" class="login-account" placeholder="账户">
+            <input type="poassword" class="login-password" placeholder="密码">
+            <input type="email" v-model="emailData" class="login-password" placeholder="电子邮件">
             <input type="text" v-if="isShow" class="login-password" maxlength="6" placeholder="验证码">
             <view v-if="emailData" class="login-submit" @click="idShowHandler">发送验证码</view>
             <view class="login-submit"> 注册</view>

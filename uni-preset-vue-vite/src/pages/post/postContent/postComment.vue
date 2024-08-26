@@ -1,22 +1,34 @@
 <script setup>
+import { ref } from 'vue';
+import Modal from "@/components/modal.vue"
+import PostReply from './postReply.vue';
 const item=defineProps( ['id','user','postText','postLike',])
 const emit=defineEmits(['commentidHandler'])
+const isModal=ref(false)
+const isshowReply=ref(false)
+const isModalHandler=()=>isModal.value=!isModal.value
 const replyHandler=(id,userData)=>{
     const data={
         commentid:id,
         _id:userData[0]._id, username: userData[0].username, headimg:userData[0].headimg
     }
-    emit('commentidHandler',data)}
+    emit('commentidHandler',data)
+    console.log(data)
+}
+const isshowReplyHandler=()=>{
+    isshowReply.value=!isshowReply.value
+}
 </script>
 <template>
-        <view class="post" @click="navigatorHandler">
+        <view class="post">
             <view class="post-head">
                 <view class="post-image-name">
                     <image :src="item.user[0].headimg"
                         class="post-image"></image>
                     <view class="post-name">{{ item.user[0].username }}</view>
                 </view>
-                <view class="post-head-button">...</view>
+                <view class="post-head-button" @click.stop='isModalHandler'>...</view>
+                <Modal v-if="isModal" @deleteHandler="deleteHandler" :postUserId='item.user[0]._id'></Modal>
             </view>
             <view class="post-context">{{item.postText}}</view>
             <view class="post-button">
@@ -25,8 +37,9 @@ const replyHandler=(id,userData)=>{
                     <view>{{item.postLike}}</view>
                     </view>
                     <view @click='replyHandler(item.id,item.user)'>回复</view>
-                    <view>显示回复</view>
+                    <view @click='isshowReplyHandler'>显示回复</view>
             </view>
+            <PostReply v-if='isshowReply' :commentid='item.id'></PostReply>
         </view> 
 </template>
 <style scoped>

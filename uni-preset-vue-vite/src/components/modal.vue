@@ -3,6 +3,10 @@ import { ref } from 'vue';
 
 const modalState = ref(true)
 const emit = defineEmits(['deleteHandler'])
+const props=defineProps(['postUserId'])
+const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
+
+
 const deleteHandler = () => {
     emit('deleteHandler')
     closeHandler()
@@ -21,7 +25,8 @@ uni.showModal({
     <Teleport to="body">
         <view v-if="modalState" class="modal">
             <view class="modal-content">
-                <view @click="deleteHandler">删除</view>
+                <slot></slot> 
+                <view v-if='props.postUserId===localStorageData.userid' @click="deleteHandler">删除</view>
                 <view @click="reportHandler">举报</view>
                 <view @click="closeHandler" id="modal-close" >关闭</view>
             </view>

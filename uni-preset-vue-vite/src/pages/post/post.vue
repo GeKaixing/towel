@@ -51,6 +51,7 @@ watch(()=>postStore.reload,()=>{
         :postLike="post.postLike"
         :postComment="post.postComment"
         :postFavorite="post.postFavorite"
+        :postUserId="post.postUserId"
         ></post>
     </pageLayout>
 </template>
