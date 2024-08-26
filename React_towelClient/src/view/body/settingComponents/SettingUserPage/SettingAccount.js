@@ -3,7 +3,7 @@ import style from './SettingAccount.module.css'
 import { DatePicker, Space } from 'antd';
 import { getUserinfo, postModifyingausername, postModifyingbirthday, postModifyingiphoneNumber } from '../../../../services/setting/setting';
 import useLocalStorage from '../../../../hooks/useLocaStorage';
-import { postUpLoad } from '../../../../services/add/add';
+import { postUpLoadheadimg } from '../../../../services/add/add';
 export default function SettingAccount() {
     const [responseData, setResponseData] = useState({})
     const [localStorageData, setLocalStorageData] = useLocalStorage();
@@ -95,7 +95,7 @@ export default function SettingAccount() {
             formData.append('headimg', file);
             formData.append('targetId', localStorageData.userid);
             formData.append('staticType', 'add');
-            const data = await postUpLoad(localStorageData.userid,  formData )
+            const data = await postUpLoadheadimg(localStorageData.userid,  formData )
             if (data.data) {
                 const oldData = JSON.parse(localStorage.getItem('loginData'));
                 oldData.headimg = data.data;

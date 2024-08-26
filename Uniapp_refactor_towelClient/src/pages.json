@@ -35,6 +35,12 @@
 			"style": {
 				"navigationBarTitleText": "我的"
 			}
+		},
+		{
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": "消息"
+			}
 		}
 	],
 	"globalStyle": {
@@ -60,6 +66,12 @@
 				"iconPath": "static/tarBar/添加.png",
 				"selectedIconPath": "static/tarBar/添加2.png",
 				"text": "添加"
+			},
+			{
+				"pagePath": "pages/message/message",
+				"iconPath": "static/tarBar/评论.png",
+				"selectedIconPath": "static/tarBar/评论2.png",
+				"text": "消息"
 			},
 			{
 				"pagePath": "pages/user/user",

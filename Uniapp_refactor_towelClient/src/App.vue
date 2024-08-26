@@ -1,17 +1,24 @@
 <script>
-import {sockeConnect}from './socket/socket.js'
+import { sockeConnect, socketInstance } from "./socket/socket.js";
+import{ messageStore} from './store/messageStore.js/'
+const localStorageData =
+  uni.getStorageSync("logindata") &&
+  JSON.parse(uni.getStorageSync("logindata"));
 export default {
   onLaunch: function () {
-    sockeConnect()
-    console.log('App Launch')
+    sockeConnect();
+    socketInstance.on(`${localStorageData.userid}`, (data) => {
+      messageStore.setmessage(data.datas)
+    });
+    console.log("App Launch");
   },
   onShow: function () {
-    console.log('App Show')
+    console.log("App Show");
   },
   onHide: function () {
-    console.log('App Hide')
+    console.log("App Hide");
   },
-}
+};
 </script>
 
 <style>
