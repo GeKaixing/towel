@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue"
 import {postStore} from '@/store/postStore.js'
+import {socketInstance}from '../../../socket/socket.js'
 
 const inputData = ref(null)
 const post = defineProps(['id', 'commentid'])
@@ -46,7 +47,7 @@ const replyApi=()=>{
                 commentId: post?.commentid?.commentid||postStore.replytoreply.commentId,
                 replyUserId: localStorageData.userid,
                 replyText: inputData.value,
-                replyToreplyUserId:postStore.replytoreply.userid|| null,
+                replyToreplyUserId:postStore.replytoreply?.userid|| null,
                 replyImages: null,
                 replyLike: 0,
                 replyComment: null
@@ -54,6 +55,7 @@ const replyApi=()=>{
         },
         success: function () {
             emit('reloadHandler')
+            if(postStore.replytoreply?.userid)socketInstance.emit(`newMessage`, { newMessage: true, userid: postStore.replytoreply.userid })
             postStore.setReloadReply()
             inputData.value = ''
             deleteHandler()

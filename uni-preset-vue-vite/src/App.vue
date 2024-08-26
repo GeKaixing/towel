@@ -1,6 +1,8 @@
 <script>
+import {sockeConnect}from './socket/socket.js'
 export default {
   onLaunch: function () {
+    sockeConnect()
     console.log('App Launch')
   },
   onShow: function () {

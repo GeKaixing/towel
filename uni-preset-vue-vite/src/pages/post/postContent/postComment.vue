@@ -29,7 +29,6 @@ const deleteHandler=(id)=>{
         },
         success: function (res) {
             emit('reloadHandler')
-            console.log(res)
         },
         fail: function (res) {
             console.log(res)

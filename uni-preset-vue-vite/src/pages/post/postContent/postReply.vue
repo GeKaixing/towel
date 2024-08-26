@@ -71,7 +71,7 @@ const deleteHandler = (id) => {
     </view>
     <view class="reply-button" @click.stop='isModalHandler(item._id)'>...</view>
     <Modal v-if="isModal===item._id" @deleteHandler="deleteHandler(item._id)" :postUserId="item.replyUserId">
-      <view class='slot' @click="setreplytoreply(item.replyUser, item.replyToreplyUserId, item.commentId)">
+      <view class='slot' @click="setreplytoreply(item.replyUser, item.replyUserId, item.commentId)">
         @{{ item.replyUser.username }}</view>
     </Modal>
   </view>
