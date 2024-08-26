@@ -20,7 +20,7 @@ uni.showModal({
 }
 </script>
 <template>
-    <Teleport to="body">
+    <div to="body">
         <view v-if="modalState" class="modal">
             <view class="modal-content">
                 <slot></slot> 
@@ -29,7 +29,7 @@ uni.showModal({
                 <view @click="closeHandler" id="modal-close" >关闭</view>
             </view>
         </view>
-    </Teleport>
+    </div>
 </template>
 <style scoped>
 .modal {

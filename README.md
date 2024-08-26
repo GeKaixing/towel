@@ -339,3 +339,78 @@ web项目截图
 <img src="https://github.com/GeKaixing/towel/raw/main/README_static/uni_towel.png" width="200" height="400" />
 <img src="https://github.com/GeKaixing/towel/raw/main/README_static/RN_towel.png" width="200" height="400" />
 </div>
+### 其他
+
+* uniapp 目录结构               
+
+````
+
+│  App.vue                               app入口
+│  main.js                               main入口
+│  manifest.json
+│  pages.json                            页面文件  
+│  shime-uni.d.ts
+│  uni.scss
+│
+├─components                             公共组件
+│      modal.vue                         模态窗口
+│      post.vue                          post组件
+│      userReply.vue                     用户回复组件
+│
+├─pages                                  页面
+│  ├─add        
+│  │      add.vue                        添加页面
+│  │    
+│  ├─post                                主页/帖子页面
+│  │  │  post.vue
+│  │  │
+│  │  ├─postContent                      帖子二级页面
+│  │  │      postComment.vue             评论组件
+│  │  │      postContent.vue             二级页面入口
+│  │  │      postInput.vue               输入组件
+│  │  │      postReply.vue               回复组件
+│  │  │
+│  │  └─search                           主页搜索组件
+│  │          search.vue                 搜索组件
+│  │
+│  └─user                                个人页面
+│          login.vue                     登录页面
+│          signup.vue                    注册页面
+│          user.vue                      个人页面入口
+│
+├─socket                                    
+│      socket.js                         socket组件
+│
+├─static                                 静态资源
+│  │  logo.png                           logo
+│  │
+│  ├─addIcon                             添加页面icon
+│  │      图片添加.svg
+│  │      添加.svg
+│  │
+│  ├─postIcon                            帖子页面icon
+│  │      分享.svg
+│  │      星星.svg
+│  │      评论.svg
+│  │      赞.svg
+│  │
+│  └─tarBar                              导航栏icon
+│          头像_avatar.png
+│          头像_avatar2.png
+│          添加.png
+│          添加2.png
+│          评论.png
+│          评论2.png
+│          首页.png
+│          首页2.png
+│
+├─store                                   状态管理
+│      postStore.js
+│
+└─style                                   公共样式
+        pageLayoutStyle.vue
+````
+重构微信小程序  
+技术栈 uniapp socket  
+取消使用pinia状态管理使用状态提升和使用响应式api reactive()进行简单的状态管理  
+简化代码结构

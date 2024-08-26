@@ -2,7 +2,7 @@
 import { onMounted, ref, watch } from "vue";
 import Modal from "@/components/modal.vue"
 import { postStore } from '@/store/postStore.js'
-const localStorageData = JSON.parse(uni.getStorageSync("logindata"));
+const localStorageData = uni.getStorageSync('logindata')&&JSON.parse(uni.getStorageSync('logindata'));
 const props = defineProps(["commentid"]);
 const resData = ref(null);
 const isModal = ref(null);
@@ -61,7 +61,7 @@ const deleteHandler = (id) => {
 
 </script>
 <template>
-  <view v-if='resData' class="reply" v-for="(item, index) in resData" :key="index">
+  <view class="reply" v-for="(item, index) in resData" :key="index">
     <view class="reply-content">
       <view class="reply-name">{{ item.replyUser.username }}
         <view v-if='item.replyToreplyUser?.username'>@{{ item.replyToreplyUser.username }}</view>
@@ -79,7 +79,6 @@ const deleteHandler = (id) => {
 </template>
 <style scoped>
 .slot {
-
   background-color: #f6f6f6;
   width: 400rpx;
   height: 100rpx;

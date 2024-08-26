@@ -1,13 +1,19 @@
 <script setup>
 import { ref } from 'vue';
 import {postStore}from "../../store/postStore.js"
-const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
+import pageLayoutStyle from "../../style/pageLayoutStyle.vue";
+import { onLoad } from '@dcloudio/uni-app';
+const localStorageData = uni.getStorageSync('logindata')&&JSON.parse(uni.getStorageSync('logindata'))
+
 const inputData = ref('')
 const imageErrorRef = ref(null)
 const imageData = ref('')
 const deleteInputDataHandler=()=>  inputData.value = '';
 const deleteImageHandler = () =>     imageData.value = '';
-
+onLoad(()=>{
+if(!localStorageData){   
+    uni.reLaunch({  url: '/pages/user/login'})}
+})
 const chooseImageHandler = () => {
     uni.chooseImage({
         success: (chooseImageRes) => {
@@ -69,6 +75,7 @@ const addHandler = async () => {
 }
 </script>
 <template>
+    <pageLayoutStyle>
     <view class="add">
         <view class="post">
             <view class="post-head">
@@ -104,6 +111,7 @@ const addHandler = async () => {
         <image @click="chooseImageHandler" class="post-upimage" src='../../static/addIcon/图片添加.svg'></image>
         <image @click="addHandler" class="post-add-button" src='../../static/addIcon/添加.svg'></image>
     </view>
+</pageLayoutStyle>
 </template>
 <style scoped>
 .post-choose-image {
@@ -117,6 +125,7 @@ const addHandler = async () => {
     flex-direction: column;
     gap: 10rpx;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .post-upimage ,.post-add-button{

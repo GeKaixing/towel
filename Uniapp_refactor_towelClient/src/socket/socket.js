@@ -1,6 +1,7 @@
 import io from '@hyoga/uni-socket.io';
 export let socketInstance;
-const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
+
+const localStorageData =  uni.getStorageSync('logindata')&&JSON.parse(uni.getStorageSync('logindata'))
 export const socke=()=>{
      socketInstance= io('http://127.0.0.1:4000', {
         query: {

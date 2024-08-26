@@ -1,16 +1,21 @@
 <script setup>
 import { onMounted, watch, ref } from "vue";
-import pageLayout from "../../style/pagelayout.vue";
+import pageLayoutStyle from "../../style/pageLayoutStyle.vue";
 import login from "./login.vue";
 import post from "../../components/post.vue";
 import postComment from "../../pages/post/postContent/postComment.vue";
 import userReply from "../../components/userReply.vue";
+import { onLoad } from "@dcloudio/uni-app";
 const postData = ref(null);
 const commentData=ref(null)
 const replyData=ref(null)
 const reloadReply=ref(false)
 const index = ref(0);
 const reloadReplyHandler=()=>reloadReply.value=!reloadReply.value;
+onLoad(()=>{
+if(!localStorageData){   
+    uni.reLaunch({  url: '/pages/user/login'})}
+})
 const getusepost=()=>{
     uni.request({
     url: `http://127.0.0.1:4000/getusepost/${localStorageData.userid}`,
@@ -84,15 +89,14 @@ onMounted(() => {
 watch(reloadReply,()=>{getuseReply()})
 </script>
 <template>
-  <pageLayout>
-    <view v-if="localStorageData">
+  <pageLayoutStyle>
+    <view >
       <view class="user">
         <view class="user-info">
           <image :src="localStorageData.headimg"></image>
           <view>{{ localStorageData.username }}</view>
         </view>
         <view class="user-setting-logout">
-          <view class="user-setting">设置</view>
           <view class="user-logout" @click="clearHandler">登出</view>
         </view>
       </view>
@@ -134,8 +138,7 @@ watch(reloadReply,()=>{getuseReply()})
         >
       </userReply>
     </view>
-    <login v-else></login>
-  </pageLayout>
+  </pageLayoutStyle>
 </template>
 <style scoped>
 .user {

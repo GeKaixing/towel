@@ -1,5 +1,5 @@
 <script setup>
-import pageLayout from '../../style/pagelayout.vue'
+import pageLayoutStyle from '@/style/pageLayoutStyle.vue'
 import search from './search/search.vue'
 import post from '../../components/post.vue'
 import { onMounted, ref, watch } from "vue"
@@ -40,7 +40,7 @@ watch(()=>postStore.reload,()=>{
 })
 </script>
 <template>
-    <pageLayout>
+    <pageLayoutStyle>
         <search @searchDataHandler="searchDataHandler"></search>
         <post v-for="(post,index ) in resData"
         :key="index"
@@ -53,7 +53,7 @@ watch(()=>postStore.reload,()=>{
         :postFavorite="post.postFavorite"
         :postUserId="post.postUserId"
         ></post>
-    </pageLayout>
+    </pageLayoutStyle>
 </template>
 <style scoped>
 .post-context-image {

@@ -1,5 +1,5 @@
 <script setup>
-import pageLayout from '../../style/pagelayout.vue'
+import pageLayoutStyle from '../../style/pageLayoutStyle.vue'
 import {ref} from 'vue'
 const emailData=ref('')
 const isShow=ref(false)
@@ -12,7 +12,7 @@ const navigateTo=()=>{
 }
 </script>
 <template>
-    <pageLayout>
+    <pageLayoutStyle>
         <view class="layout">
         <image class="logo" src="../../static/logo.png"></image>
         <view action="" class="login">
@@ -25,7 +25,7 @@ const navigateTo=()=>{
             <view class="login-submit-login"  @click="navigateTo">登录</view>
         </view>
     </view>
-    </pageLayout>
+    </pageLayoutStyle>
 </template>
 <style scoped>
 .layout {

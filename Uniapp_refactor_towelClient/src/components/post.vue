@@ -3,7 +3,7 @@ import { ref } from "vue";
 import Modal from "./modal.vue";
 import { postStore } from "../store/postStore";
 
-const localStorageData = JSON.parse(uni.getStorageSync("logindata"));
+const localStorageData = uni.getStorageSync("logindata")&&JSON.parse(uni.getStorageSync("logindata"));
 const emit = defineEmits(["deleteHanlder"]);
 const isModal = ref(false);
 const isModalHandler = () => {
@@ -21,7 +21,7 @@ const item = defineProps([
 ]);
 const navigatorHandler = () => {
   uni.navigateTo({
-    url: `/pages/post/postContent/postContent?data=${JSON.stringify(item)}`,
+    url: `/pages/post/postContent/postContent?data=${ encodeURIComponent(JSON.stringify(item))}`,
   });
 };
 
@@ -89,6 +89,7 @@ const deleteHandler = () => {
   border-radius: 10rpx;
   padding: 10rpx;
   border: 4rpx solid #f6f6f6;
+  box-sizing: border-box;
 }
 
 .post-head {

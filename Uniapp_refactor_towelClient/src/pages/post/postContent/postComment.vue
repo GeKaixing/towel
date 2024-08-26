@@ -4,7 +4,7 @@ import Modal from "@/components/modal.vue"
 import PostReply from './postReply.vue';
 const item=defineProps( ['id','user','postText','postLike',])
 const emit=defineEmits(['commentidHandler','reloadHandler'])
-const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
+const localStorageData = uni.getStorageSync('logindata')&&JSON.parse(uni.getStorageSync('logindata'))
 const isModal=ref(false)
 const isshowReply=ref(false)
 const isModalHandler=()=>isModal.value=!isModal.value
@@ -73,6 +73,7 @@ const deleteHandler=(id)=>{
     border: 4rpx solid #f6f6f6;
     margin-bottom: 10rpx;
     margin-top: 10rpx;
+    box-sizing: border-box;
 }
 
 .post-head {

@@ -6,7 +6,7 @@ import {socketInstance}from '../../../socket/socket.js'
 const inputData = ref(null)
 const post = defineProps(['id', 'commentid'])
 const emit = defineEmits(['reloadHandler','deleteCommentid'])
-const localStorageData = JSON.parse(uni.getStorageSync('logindata'))
+const localStorageData = uni.getStorageSync('logindata')&&JSON.parse(uni.getStorageSync('logindata'))
 const commentApi=()=>{
     uni.request({
             url: `http://127.0.0.1:4000/addcomment/${post.id}`,

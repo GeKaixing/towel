@@ -51,14 +51,20 @@
 		"list": [
 			{
 				"pagePath": "pages/post/post",
+				"iconPath": "static/tarBar/首页.png",
+				"selectedIconPath": "static/tarBar/首页2.png",
 				"text": "首页"
 			},
 			{
 				"pagePath": "pages/add/add",
+				"iconPath": "static/tarBar/添加.png",
+				"selectedIconPath": "static/tarBar/添加2.png",
 				"text": "添加"
 			},
 			{
 				"pagePath": "pages/user/user",
+				"iconPath": "static/tarBar/头像_avatar.png",
+				"selectedIconPath": "static/tarBar/头像_avatar2.png",
 				"text": "我的"
 			}
 		]

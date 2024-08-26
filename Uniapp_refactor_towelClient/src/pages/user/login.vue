@@ -1,5 +1,5 @@
 <script setup>
-import pageLayout from '../../style/pagelayout.vue'
+import pageLayoutStyle from '../../style/pageLayoutStyle.vue'
 import { ref } from "vue"
 const name = ref('')
 const password = ref('')
@@ -20,7 +20,6 @@ const loginHandelr = () => {
             'content-type': 'application/json' // 设置请求头
         },
         success: function (res) {
-            console.log(res)
             uni.setStorage({
                 key: 'logindata',
                 data: `${JSON.stringify(res.data)}`,
@@ -34,7 +33,7 @@ const loginHandelr = () => {
 }
 </script>
 <template>
-    <pageLayout>
+    <pageLayoutStyle>
         <view class="layout">
             <image class="logo" src="../../static/logo.png"></image>
             <view action="" class="login">
@@ -46,7 +45,7 @@ const loginHandelr = () => {
             </view>
         </view>
 
-    </pageLayout>
+    </pageLayoutStyle>
 </template>
 <style scoped>
 .layout {

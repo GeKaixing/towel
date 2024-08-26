@@ -2,7 +2,7 @@
 import postVue from "../../../components/post.vue";
 import postInput from "./postInput.vue";
 import postComment from "./postComment.vue";
-import pageLayout from "../../../style/pageLayout.vue";
+import pageLayoutStyle from "../../../style/pageLayoutStyle.vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { onMounted, ref, watch } from "vue";
 const post = ref(null);
@@ -54,7 +54,7 @@ onMounted(() => {
     :postComment="post.postComment"
     :postFavorite="post.postFavorite"
   ></postVue>
-  <pageLayout>
+  <pageLayoutStyle>
     <postInput
       :id="post.id"
       :commentid="commentid"
@@ -73,6 +73,6 @@ onMounted(() => {
       @reloadHandler="reloadHandler"
       @commentidHandler="commentidHandler"
     ></postComment>
-  </pageLayout>
+  </pageLayoutStyle>
 </template>
 <style></style>
