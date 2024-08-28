@@ -3,11 +3,16 @@ import { onMounted, ref } from "vue";
 import { socketInstance } from "../../socket/socket.js";
 import { messageStore } from "../../store/messageStore.js";
 import PageLayoutStyle from "../../style/pageLayoutStyle.vue";
+import { onLoad } from "@dcloudio/uni-app";
 const localStorageData =
   uni.getStorageSync("logindata") &&
   JSON.parse(uni.getStorageSync("logindata"));
 console.log(messageStore.message);
 const resData = ref(null);
+onLoad(()=>{
+if(!localStorageData){   
+    uni.reLaunch({  url: '/pages/user/login'})}
+})
 onMounted(() => {
   uni.request({
     url: `http://127.0.0.1:4000/notifications/${localStorageData.userid}`,
