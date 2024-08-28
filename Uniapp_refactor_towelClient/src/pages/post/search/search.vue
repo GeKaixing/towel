@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from "vue"
-const inputData = ref('')
+const model=defineModel()
 const emit=defineEmits(['searchDataHandler'])
 const searcHandler = () => {
+    console.log(model.value)
     uni.request({
         url: 'http://127.0.0.1:4000/fliterpsot',
         header: {
@@ -11,10 +11,10 @@ const searcHandler = () => {
         method: 'POST',
         data: {
             data: {
-                postText: inputData.value
+                postText: model.value
             }
         }, success: function (res) {
-            emit('searchDataHandler',res.data,inputData) 
+            emit('searchDataHandler',res.data) 
         },
         fail: function (res) {
             console.log(res)
@@ -24,7 +24,7 @@ const searcHandler = () => {
 </script>
 <template>
     <view class='search'>
-        <input class="input-search" v-model='inputData'>
+        <input class="input-search" v-model='model'>
         <view class="input-button" @click="searcHandler">搜索</view>
     </view>
 </template>

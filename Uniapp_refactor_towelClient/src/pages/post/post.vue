@@ -2,14 +2,19 @@
 import pageLayoutStyle from '@/style/pageLayoutStyle.vue'
 import search from './search/search.vue'
 import post from '../../components/post.vue'
-import { onMounted, ref, watch } from "vue"
+import { computed, onMounted, ref, watch } from "vue"
 import {postStore}from "../../store/postStore"
 const resData = ref([])
-const searchData=ref('')
-const searchDataHandler=(value,inputData)=>{
-    searchData.value=inputData
-    resData.value=value
+const inputData=ref('')
+
+const searchData=ref([])
+/* 搜索数据处理 /search 状态管理*/
+const searchDataHandler=(value)=>{
+    searchData.value=value
 }
+const dispose =computed(()=>{
+    return inputData.value?searchData.value:resData.value;
+})
 onMounted(() => {
     uni.request({
         url: 'http://127.0.0.1:4000/post',
@@ -41,8 +46,10 @@ watch(()=>postStore.reload,()=>{
 </script>
 <template>
     <pageLayoutStyle>
-        <search @searchDataHandler="searchDataHandler"></search>
-        <post v-for="(post,index ) in resData"
+        <search @searchDataHandler="searchDataHandler" 
+        v-model="inputData" 
+        ></search>
+        <post v-for="(post,index ) in dispose"
         :key="index"
         :id="post._id" 
         :user="post.user" 
