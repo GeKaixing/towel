@@ -11,7 +11,7 @@ const USER = new mongoose.Schema({
     },
     headimg: {
         type: String,
-        default: 'http://127.0.0.1:4000/1eac4dd2-a292-4999-828d-ffa29c1fe1bc_test.png'
+        default: 'http://127.0.0.1:4000/defaultheadimg.png'
     },
     email: {
         type: String,
