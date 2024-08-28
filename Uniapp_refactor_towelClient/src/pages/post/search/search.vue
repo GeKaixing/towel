@@ -2,7 +2,6 @@
 const model=defineModel()
 const emit=defineEmits(['searchDataHandler'])
 const searcHandler = () => {
-    console.log(model.value)
     uni.request({
         url: 'http://127.0.0.1:4000/fliterpsot',
         header: {

@@ -6,7 +6,6 @@ import { computed, onMounted, ref, watch } from "vue"
 import {postStore}from "../../store/postStore"
 const resData = ref([])
 const inputData=ref('')
-
 const searchData=ref([])
 /* 搜索数据处理 /search 状态管理*/
 const searchDataHandler=(value)=>{
