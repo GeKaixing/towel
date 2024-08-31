@@ -6,7 +6,7 @@ onMounted(() => {
   const myChart = echarts.init(echartsDom.value)
   myChart.setOption({
     title: {
-      text: 'ECharts 入门示例'
+      text: 'towel 文章'
     },
     tooltip: {},
     xAxis: {
@@ -15,7 +15,7 @@ onMounted(() => {
     yAxis: {},
     series: [
       {
-        name: '销量',
+        name: "数量",
         type: 'bar',
         data: [5, 20, 36, 10, 10, 20]
       }
