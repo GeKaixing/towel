@@ -46,6 +46,7 @@ socketio(io)
 const authMiddleware = require('./src/auth/index')
 const commonRoute = require('./src/commonRoute/index')
 const AI = require('./src/Ai/Llama')
+const admin=require('./src/admin/index')
 const toutiaoHot = require('./src/toutiaoHot/index')
 const authRoute = require('./src/authRoute/index')
 const userRoute = require('./src/authRoute/userRoute/userRouter')
@@ -70,6 +71,8 @@ app.get('/HPImageArchive', async (req, res) => {
         res.status(500).send('Error fetching data');
     }
 });
+//admin
+app.use(admin)
 //ai
 app.use(AI)
 //toutiaoHot

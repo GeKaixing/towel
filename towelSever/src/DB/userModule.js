@@ -26,5 +26,17 @@ const USER = new mongoose.Schema({
         type: String,
         default: '无'
     },
+    auth:{
+        type: String,
+        default: '无'
+    },
+    ban:{
+        type:Boolean,
+        default: false
+    },
+    sealing:{
+        type:Boolean,
+        default: false
+    }
 })
 module.exports = USER;
