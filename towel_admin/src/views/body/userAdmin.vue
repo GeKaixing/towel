@@ -1,24 +1,6 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
-
-const dataSource = [
-  {
-    key: '1',
-    name: '胡彦斌',
-    age: 32,
-    email: '2890901420@qq.com',
-    auth: '正常'
-  },
-  {
-    key: '2',
-    name: '胡彦祖',
-    age: 42,
-    email: '2890901420@qq.com',
-    auth: '正常'
-  },
-
-]
 const columns = [
   {
     title: '姓名',
