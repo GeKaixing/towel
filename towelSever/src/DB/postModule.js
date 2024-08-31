@@ -13,6 +13,10 @@ const POST = new mongoose.Schema({
     postShare: Number,
     postLike: Number,
     postComment: Number,
+    postTitle: {
+        type: String,
+        default: ''
+    },
     postFavorite: {
         type: Number,
         default: 0

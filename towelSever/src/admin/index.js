@@ -60,6 +60,16 @@ router.delete('/deleteuser/:id', async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 })
+router.get('/allpostadmin', async (req, res) => {
+    try {
+        const data = await POSTS.find()
+        res.status(201).send(data)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+
+})
+
 router.delete('/delpostadmin/:id', async (req, res) => {
     try {
         const postId = req.params.id
@@ -76,7 +86,7 @@ router.post('/updatatitlepostadmin/:id', async (req, res) => {
         const title=req.body.data.title
         const delPost = await POSTS.findOneAndUpdate(
             { _id: postId },
-            { title:title},
+            { posttitle:title},
             { new: true, useFindAndModify: false } // 确保返回更新后的文档，并使用新的 findOneAndUpdate 行为)
         )
         res.status(200).send(delPost)
@@ -88,10 +98,10 @@ router.post('/updatatitlepostadmin/:id', async (req, res) => {
 router.post('/updatacontextpostadmin/:id', async (req, res) => {
     try {
         const postId = req.params.id
-        const context=req.body.data.context
+        const text=req.body.data.text
         const delPost = await POSTS.findOneAndUpdate(
             { _id: postId },
-            { context:context},
+            { postText:text},
             { new: true, useFindAndModify: false } // 确保返回更新后的文档，并使用新的 findOneAndUpdate 行为)
         )
         res.status(200).send(delPost)
