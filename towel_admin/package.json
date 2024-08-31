@@ -11,6 +11,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "^4.2.3",
+    "echarts": "^5.5.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
@@ -25,6 +28,7 @@
     "postcss": "^8.4.41",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.10",
+    "unplugin-vue-components": "^0.27.4",
     "vite": "^5.3.1",
     "vite-plugin-vue-devtools": "^7.3.1"
   }

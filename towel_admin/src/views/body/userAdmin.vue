@@ -1,50 +1,65 @@
-<script setup></script>
+<script setup>
+const dataSource=[
+          {
+            key: '1',
+            name: '胡彦斌',
+            age: 32,
+            email: '2890901420@qq.com',
+             auth:'正常'
+          },
+          {
+            key: '2',
+            name: '胡彦祖',
+            age: 42,
+            email: '2890901420@qq.com',
+            auth:'正常'
+          },
+          
+        ]
+const  columns=[
+          {
+            title: '姓名',
+            dataIndex: 'name',
+            key: 'name',
+          },
+          {
+            title: '年龄',
+            dataIndex: 'age',
+            key: 'age',
+          },
+          {
+            title: '邮件',
+            dataIndex: 'email',
+            key: 'email',
+          },
+          {
+            title: '权限',
+            dataIndex: 'auth',
+            key: 'auth',
+          },
+          {
+    title: 'Action',
+    key: 'action',
+    slots: { customRender: 'action' },
+  },
+        ]
+</script>
 <template>
-    <div>
-        
-        <table>
-            <thead>
-                <th>头像</th>
-                <th>名字</th>
-                <th>邮件</th>
-                <th>生日</th>
-                <th>权限</th>
-                <th colspan="2">操作</th>
-            </thead>
-            <tr>
-                <td>
-                    <img src="@/assets/logo.png" class="rounded-full w-10 h-10">
-                </td>
-                <td> 
-                    <div>test</div>
-                </td>
-                <td> 
-                    <div>2890901420@qq.com</div>
-                </td>
-                <td> 
-                    <div>-</div>
-                </td>
-                <td> 
-                    <div>用户</div>
-                </td>
-                <td> 
-                    <div class="cursor-pointer">封禁</div>
-                </td>
-                <td> 
-                    <div class="cursor-pointer">删除</div>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <a-table :dataSource="dataSource" :columns="columns"
+    :pagination="{ pageSize: 50 }"
+    :scroll="{ y: 240 }" >
+        <template #action="{  }">
+            <span>
+              <a-divider type="vertical" />
+              <a>禁言</a>
+              <a-divider type="vertical" />
+              <a class="ant-dropdown-link">
+                封禁
+                <down-outlined />
+              </a>
+            </span>
+          </template>
+    </a-table>
 </template>
 <style scoped>
-table,td,th{
-    border: 1px solid black;
-    text-align: center;
-}
-
-    th{
-
-        width: 100px;
-    }
 </style>

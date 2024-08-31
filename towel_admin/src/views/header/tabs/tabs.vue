@@ -1,9 +1,33 @@
-<script setup></script>
+<script setup>
+import { UserOutlined, BarChartOutlined, FileOutlined } from '@ant-design/icons-vue'
+</script>
 <template>
-  <nav class="flex flex-col gap-10 w-60 h-full fixed left-0 items-center" >
-    <a class="bg-[#f6f6f6] w-40 h-20 font-bold flex justify-center items-center rounded-[10px]">用户管理</a>
-    <a class="bg-[#f6f6f6] w-40 h-20 font-bold flex justify-center items-center rounded-[10px]">文章管理</a>
-    <a class="bg-[#f6f6f6] w-40 h-20 font-bold flex justify-center items-center rounded-[10px]">数据统计</a>
+  <nav class="flex flex-col gap-10 w-60 h-full fixed left-0 items-center">
+    <div>
+      <img src='@/assets/logo.png'>
+    </div>
+    <router-link
+      to="/"
+      class="bg-[#f6f6f6] w-40 h-20 font-bold flex justify-center items-center rounded-[10px] space-x-2"
+      href=""
+    >
+      <UserOutlined />
+      <span> 用户管理 </span>
+    </router-link>
+    <router-link
+      to="/postadmin"
+      class="bg-[#f6f6f6] w-40 h-20 font-bold flex justify-center items-center rounded-[10px] space-x-2"
+    >
+      <bar-chart-outlined />
+      <span> 文章管理 </span>
+    </router-link>
+    <router-link
+      to="/echartsadmin"
+      class="bg-[#f6f6f6] w-40 h-20 font-bold flex justify-center items-center rounded-[10px] space-x-2"
+    >
+      <file-outlined />
+      <span> 数据统计 </span>
+    </router-link>
   </nav>
 </template>
 <style></style>
