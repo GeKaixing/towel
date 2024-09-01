@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PostComment from '../../postComponents/postContent/PostComment'
 import PropTypes from 'prop-types'
 import { getUseComment } from '../../../../services/user/user'
-
+import NullDat from '../../../../components/NullData'
 export default function Userlikes({ localStorageData }) {
   /*        用户点赞的文章      */
   // 获取登录用户发布的文章
@@ -17,7 +17,10 @@ export default function Userlikes({ localStorageData }) {
       .catch((error) => { console.log(error) })
   }, [localStorageData, reloadUserlikes])
   return (
-    <PostComment userCommentData={userCommentData} reloadUserlikes={reloadUserlikes} setreloadUserlikes={setreloadUserlikes}></PostComment>
+      userCommentData.length===0? 
+          <NullDat></NullDat>  
+      :
+      <PostComment userCommentData={userCommentData} reloadUserlikes={reloadUserlikes} setreloadUserlikes={setreloadUserlikes}></PostComment>
   )
 }
 Userlikes.propTypes = {

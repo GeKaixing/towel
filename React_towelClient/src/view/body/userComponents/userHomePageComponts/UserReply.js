@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PostReplyContent from '../../postComponents/postContent/PostReplyContent'
 import propTypes from 'prop-types'
 import { getUseReply } from '../../../../services/user/user';
+import NullDat from '../../../../components/NullData'
 function UserReply({ localStorageData }) {
     const [userReplyData, setUserReplyData] = useState([]);
     const [reloadUserReply, setreloadUserReplys] = useState(false)
@@ -17,7 +18,12 @@ function UserReply({ localStorageData }) {
         }
     }, [localStorageData, reloadUserReply])
     return (
-        <PostReplyContent userReplyData={userReplyData} reloadUserReply={reloadUserReply} setreloadUserReplys={setreloadUserReplys}></PostReplyContent>
+      
+      userReplyData.length===0? 
+          <NullDat></NullDat>  
+      :
+      <PostReplyContent userReplyData={userReplyData} reloadUserReply={reloadUserReply} setreloadUserReplys={setreloadUserReplys}></PostReplyContent>
+   
     )
 }
 UserReply.propTypes = {

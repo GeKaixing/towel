@@ -10,7 +10,7 @@ export default {
   },
 /* global require*/
   plugins: [
-    require('@tailwindcss/typography'),
+    import('@tailwindcss/typography'),
   ],
 }
 
