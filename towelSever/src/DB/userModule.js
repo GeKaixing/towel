@@ -30,6 +30,10 @@ const USER = new mongoose.Schema({
         type: String,
         default: '无'
     },
+    delete:{
+        type:Boolean,
+        default:false
+    },
     ban:{
         type:Boolean,
         default: false

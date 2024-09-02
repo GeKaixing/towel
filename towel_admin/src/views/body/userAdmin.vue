@@ -1,78 +1,79 @@
 <script setup>
 import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref,watch } from 'vue';
 const columns = [
   {
     title: '姓名',
     dataIndex: 'username',
-    key: 'username',
   },
   {
     title: '生日',
     dataIndex: 'birthday',
-    key: 'birthday',
   },
   {
     title: '邮件',
     dataIndex: 'email',
-    key: 'email',
   },
   {
     title: '电话',
     dataIndex: 'phoneNumber',
-    key: 'phoneNumber',
   },
   {
     title: '权限',
     dataIndex: 'auth',
-    key: 'auth',
   },
   {
-    title: 'Action',
-    key: 'action',
-    slots: { customRender: 'action' },
+    title: 'action',
+    dataIndex:'action',
   },
 ]
-
-const deleteHandler = (dd) => {
-  axios.delete(`http://127.0.0.1:4000/deleteuser/${dd.value._id}`)
-  .then(res => { console.log(res)})
-  .catch(error => console.log(error))
-
+const resData=ref(null)
+const reload=ref(false)
+const reloadHandler=()=>{
+  reload.value=!reload.value
 }
+/* const deleteHandler = (dd) => {
+  axios.delete(`http://127.0.0.1:4000/deleteuser/${dd._id}`)
+  .then(res => { reloadHandler()})
+  .catch(error => console.log(error))
+} */
 const banHandler = (dd) => {
-  axios.post(`http://127.0.0.1:4000/banuser/${dd.value._id}`)
-  .then(res => { console.log(res)})
+  axios.post(`http://127.0.0.1:4000/banuser/${dd._id}`)
+  .then(res => { reloadHandler()})
   .catch(error => console.log(error))
 
 }
 const sealingHandler = (dd) => {
-  axios.post(`http://127.0.0.1:4000/sealinguser/${dd.value._id}`)
-  .then(res => { console.log(res)})
+  axios.post(`http://127.0.0.1:4000/sealinguser/${dd._id}`)
+  .then(res => { reloadHandler()})
   .catch(error => console.log(error))
 
 }
-const resData=ref(null)
-onMounted(() => {
+const getResDataApi=()=>{
   axios.get('http://127.0.0.1:4000/alluser')
   .then(res => { resData.value=res.data})
   .catch(error => console.log(error))
+}
+onMounted(() => {
+  getResDataApi()
+})
+watch(resData,()=>{
+  getResDataApi()
 })
 </script>
 <template>
   <a-table :dataSource="resData" :columns="columns" :pagination="{ pageSize: 50 }" :scroll="{ y: 240 }">
-    <template #action="Props">
+    <template #bodyCell="{column, text, record }">
+    <template v-if="column.dataIndex === 'action'">
       <span>
-        <a-divider type="vertical" />
-        <a @click="deleteHandler(Props)">删除</a>
-        <a-divider type="vertical" />
-        <a @click="banHandler(Props)">禁言</a>
-        <a-divider type="vertical" />
-        <a  @click="sealingHandler(Props)" class="ant-dropdown-link">
+        <!-- <a @click="deleteHandler(record)">删除</a> -->
+        <a @click="banHandler(record)">禁言</a>
+        <a  @click="sealingHandler(record)" class="ant-dropdown-link">
           封禁
           <down-outlined />
         </a>
       </span>
+    </template>
     </template>
   </a-table>
 </template>

@@ -235,6 +235,8 @@ router.get('/post', async (req, res) => {
                     postImages: 1,
                     postVideos: 1,
                     postText: 1,
+                    postDelete:1,
+                    postTitle: 1,
                     postShare: 1,
                     postFavorite: { $size: '$favorites' },
                     postLike: { $size: '$likes' },
@@ -245,7 +247,7 @@ router.get('/post', async (req, res) => {
                     'user.headimg': 1
                 }
             }
-        ])
+        ])/* 
         const data = await POSTS.find()
         // random array algo
         function shuffleArray(data) {
@@ -255,8 +257,9 @@ router.get('/post', async (req, res) => {
             }
             return data
         }
-        const randomData = shuffleArray(allPost);
-        res.status(200).send(randomData)
+        const randomData = shuffleArray(allPost); */
+        console.log(allPost)
+        res.status(200).send(allPost)
     }
     catch (error) {
         res.status(500).json({ message: error.message })
