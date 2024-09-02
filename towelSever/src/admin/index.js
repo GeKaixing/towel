@@ -35,12 +35,40 @@ router.post('/banuser/:id', async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 })
+router.post('/offbanuser/:id', async (req, res) => {
+    try {
+        const userid = req.params.id
+        const data = await USERS.findOneAndUpdate(
+            { _id: userid },
+            { ban: false },
+            { new: true, useFindAndModify: false } // 确保返回更新后的文档，并使用新的 findOneAndUpdate 行为
+        );
+        console.log(data)
+        res.status(201).send(data)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
 router.post('/sealinguser/:id', async (req, res) => {
     try {
         const userid = req.params.id
         const data = await USERS.findOneAndUpdate(
             { _id: userid },
             { sealing: true },
+            { new: true, useFindAndModify: false } // 确保返回更新后的文档，并使用新的 findOneAndUpdate 行为
+        );
+        console.log(data)
+        res.status(201).send(data)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+router.post('/offsealinguser/:id', async (req, res) => {
+    try {
+        const userid = req.params.id
+        const data = await USERS.findOneAndUpdate(
+            { _id: userid },
+            { sealing: false },
             { new: true, useFindAndModify: false } // 确保返回更新后的文档，并使用新的 findOneAndUpdate 行为
         );
         console.log(data)

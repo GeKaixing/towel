@@ -258,7 +258,6 @@ router.get('/post', async (req, res) => {
             return data
         }
         const randomData = shuffleArray(allPost); */
-        console.log(allPost)
         res.status(200).send(allPost)
     }
     catch (error) {
