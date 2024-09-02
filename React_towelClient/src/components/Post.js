@@ -157,6 +157,7 @@ export default function Post(props) {
                     </div>
                 </div>
                 <div className='felx flex-col space-y-2 '>
+                    <div className='text-2xl font-bold'>{props.postTitle}</div>
                     <div className='md:max-w-[39rem] lg:w-full '>{detectMarkdown(props.content) ?
                      <div className="prose lg:prose-xl max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(props.content)) }} /> 
                     : <div>{props.content}</div>}</div>

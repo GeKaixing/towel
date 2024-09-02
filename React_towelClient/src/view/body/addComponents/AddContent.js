@@ -29,6 +29,8 @@ export default function Portal() {
     //存储视频信息
     const [showVideo, setShowVideo] = useState('');
     const [videoData, setVideoData] = useState('')
+    //存储标题信息
+    const [postTitle,setPostTitle]=useState('');
     useEffect(() => {
         const textarea = textareaRef.current;
         if (textarea) {
@@ -93,13 +95,15 @@ export default function Portal() {
                         Video: videourl,
                         Share: 0,
                         Like: 0,
-                        Comment: 0
+                        Comment: 0,
+                        Title:postTitle
                     }
                 })
                 settextareaData('')
                 setShowImageData('')
                 setShowVideo('')
                 setVideoData('')
+                setPostTitle('')
             } else {
                 alert('不要空哦')
             }
@@ -130,6 +134,8 @@ export default function Portal() {
                         <div className='font-bold text=[--fontColor] cursor-pointer'>{loginDataParse.username}</div>
                         <div className='flex items-center space-x-2' onClick={() => setIsMarkdown(!isMarkdown)}><p className={isMarkdown ? 'font-bold' : ''}>markdown</p>{isMarkdown && <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div>}</div>
                     </div>
+                    {/* postTitle */}
+                    <input className='mb-2 mt-2 w-full bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor] my-rounded-10px' placeholder='标题,最多30字哦' onChange={(e)=>{setPostTitle(e.target.value)}} value={postTitle} maxLength={30}></input>
                     {/* textContent */}
                     <textarea
                         ref={textareaRef}

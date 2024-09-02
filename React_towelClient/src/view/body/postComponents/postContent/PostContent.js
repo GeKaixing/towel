@@ -45,11 +45,13 @@ export default function PostContent() {
                     postImages: data[0].postImages,
                     postVideos: data[0].postVideos,
                     postUserId: data[0].postUserId,
+                    postTitle:data[0].postTitle,
                 }
                 setcontent(datas)
             } else {
                 setcontent(data)
             }
+            
         } else {
             getOnePost(params.id).then((response) => {
                 console.log(response.data)
@@ -140,6 +142,7 @@ export default function PostContent() {
                             <Link className='font-bold text-[--fontColor] '>{contentdata.name}</Link>
                         </div>
                         <div className='flex flex-col justify-center items-center text-[--fontColor] font-bold' >
+                            <div className='text-2xl self-start'>{contentdata.postTitle}</div>
                             <div className='self-start w-full'>
                                 {contentdata.blog ? <div className='prose lg:prose-xl max-w-none ' dangerouslySetInnerHTML={{ __html: contentdata.content }} /> :
                                     contentdata.markdown ? <div className='prose lg:prose-xl max-w-none' dangerouslySetInnerHTML={{ __html: contentdata.content }}></div> :

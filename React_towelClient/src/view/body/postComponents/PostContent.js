@@ -33,6 +33,7 @@ export default function PostPage() {
                 postImages={item.postImages}
                 postVideos={item.postVideos}
                 postUserId={item.postUserId}
+                postTitle={item.postTitle}
                 reload={{ reload, setLoad }}
               >
               </Post>
