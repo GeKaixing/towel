@@ -25,7 +25,8 @@ const changeBgcolorHandler=(parameter)=>{
       class="bg-[#f6f6f6] w-40 h-20 font-bold flex justify-center items-center rounded-[10px] space-x-2"
        :class="changeBgcolorHandler('/postadmin')"
     >
-      <bar-chart-outlined />
+      
+      <file-outlined />
       <span> 文章管理 </span>
     </router-link>
 
@@ -52,7 +53,7 @@ const changeBgcolorHandler=(parameter)=>{
       class="bg-[#f6f6f6] w-40 h-20 font-bold flex justify-center items-center rounded-[10px] space-x-2"
        :class="changeBgcolorHandler('/echartsadmin')"
     >
-      <file-outlined />
+    <bar-chart-outlined />
       <span> 数据统计 </span>
     </router-link>
   </nav>
