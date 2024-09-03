@@ -85,7 +85,7 @@ const start = () => {
 
 <template>
 
-<a-button type="primary" :disabled="!hasSelected"  :loading="state.loading" @click="start">清除选择</a-button>
+<a-button type="primary" :disabled="!hasSelected"  :loading="state.loading" @click="start" class="mb-2">清除选择</a-button>
   <a-table
     :dataSource="resData"
     :columns="columns"

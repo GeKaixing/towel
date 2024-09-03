@@ -65,7 +65,7 @@ const start = () => {
 };
 </script>
 <template>
-  <a-button type="primary" :disabled="!hasSelected"  :loading="state.loading" @click="start">清除选择</a-button>
+  <a-button type="primary" :disabled="!hasSelected"  :loading="state.loading" @click="start" class="mb-2">清除选择</a-button>
   <a-table
     :dataSource="resData"
     :columns="columns"
@@ -83,7 +83,10 @@ const start = () => {
       }
       }"
   >
-    <template #bodyCell="{column, record }">
+    <template #bodyCell="{column, text,record }">
+      <template v-if="column.dataIndex === 'postText'">
+           <div class="text-ellipsis overflow-hidden text-nowrap w-48">{{text}}</div>
+      </template>
       <template v-if="column.dataIndex === 'action'">
            <a @click="deleteHandler(record)">删除</a>
       </template>
