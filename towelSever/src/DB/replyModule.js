@@ -15,5 +15,6 @@ const REPLY = new mongoose.Schema({
     replyImages: String,
     replyLike: Number,
     replyComment: Number,
+    replyDelete: { type: Boolean, default: false },
 })
 module.exports=REPLY;

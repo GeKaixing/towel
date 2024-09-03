@@ -10,5 +10,6 @@ const COMMENT = new mongoose.Schema({
     commentImages: String,
     commentLike: Number,
     commentComment: Number,
+    commentDelete: { type: Boolean, default: false },
 })
 module.exports = COMMENT;

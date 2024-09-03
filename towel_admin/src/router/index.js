@@ -1,6 +1,8 @@
 import Login from '@/components/Login.vue'
+import CommentAdmin from '@/views/body/CommentAdmin.vue'
 import EchartsAdmin from '@/views/body/EchartsAdmin.vue'
 import PostAdmin from '@/views/body/PostAdmin.vue'
+import ReplyAdmin from '@/views/body/ReplyAdmin.vue'
 import UserAdmin from '@/views/body/UserAdmin.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 // const ISLOGIN=false
@@ -16,6 +18,16 @@ const router = createRouter({
       path: '/postadmin',
       name: 'postadmin',
       component:()=> PostAdmin
+    },
+    {
+      path: '/commentadmin',
+      name: 'commentadmin',
+      component:()=> CommentAdmin
+    },
+    {
+      path: '/replyadmin',
+      name: 'replyadmin',
+      component:()=> ReplyAdmin
     },
     {
       path: '/echartsadmin',
