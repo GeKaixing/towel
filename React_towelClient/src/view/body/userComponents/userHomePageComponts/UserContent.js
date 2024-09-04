@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 // import style from './UserHomePage.module.css'
-import UserArticle from './UserArticle'
+import UsePost from './UsePost'
 import UserComment from './UserComment'
 import UserReply from './UserReply'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -22,10 +22,10 @@ export default function UserHomePage() {
   // 切换组件函数 用switch实现
   const rendercompents = () => {
     switch (seletcpage) {
-      case "UserArticle": return <UserArticle localStorageData={localStorageData}></UserArticle>
+      case "UserArticle": return <UsePost localStorageData={localStorageData}></UsePost>
       case "UserComment": return <UserComment localStorageData={localStorageData}></UserComment>
       case "UserReply": return <UserReply localStorageData={localStorageData}></UserReply>
-      default: return <UserArticle localStorageData={localStorageData}></UserArticle>
+      default: return <UsePost localStorageData={localStorageData}></UsePost>
     }
   }
   // 登出账号的函数

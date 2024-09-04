@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Post from '../../postComponents/PostContent'
+import Post from '../../../../components/Post'
 import PropTypes from 'prop-types'
 import { getUsePost } from '../../../../services/user/user'
 
@@ -18,7 +18,25 @@ export default function UserArticle({localStorageData }) {
     }
   }, [localStorageData,reloadUserArticle])
   return (
-    <Post userarticles={userarticles} reloadUserArticle={reloadUserArticle} setreloadUserArticle={setreloadUserArticle}></Post>
+    <>
+    { userarticles.map((item)=><Post
+      key={item._id}
+      id={item._id}
+      name={item.user.username}
+      headimg={item.user.headimg}
+      content={item.postText}
+      comments={item.postComment}
+      likes={item.postLike}
+      favorites={item.postFavorite}
+      postImages={item.postImages}
+      postVideos={item.postVideos}
+      postUserId={item.postUserId}
+      postTitle={item.postTitle}
+      userarticles={userarticles} 
+      reloadUserArticle={reloadUserArticle}
+       setreloadUserArticle={setreloadUserArticle}></Post>)}
+    </>
+    
   )
 }
 UserArticle.propTypes = {

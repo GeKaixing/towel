@@ -61,26 +61,6 @@ router.get('/getusepost/:id', async (req, res) => {
                 }
             },
             {
-                $lookup: {
-                    from: 'staticdatas',
-                    let: { targetIdVar: "$_id" },
-                    pipeline: [
-                        {
-                            $match: {
-                                $expr: {
-                                    $and: [
-                                        { $eq: ["$targetId", "$$targetIdVar"] }, // 通过 _id 进行关联
-                                        { $eq: ["$staticType", "post"] }, // 价格低于100的产品
-
-                                    ],
-                                }
-                            }
-                        }
-                    ],
-                    as: 'postImages'
-                }
-            },
-            {
                 $project: {
                     _id: 1,
                     /* postUserImage: 1,
@@ -91,12 +71,14 @@ router.get('/getusepost/:id', async (req, res) => {
                     postFavorite: { $size: '$favorites' },
                     postLike: { $size: '$likes' },
                     postComment: { $size: '$comments' },
-                    'postImages.staticUrl': 1,
+                    postImages:1,
+                    // 'postImages.staticUrl': 1,
                     'user.username': 1,
                     'user.headimg': 1
                 }
             }
         ])
+        console.log(useByPost)
         res.status(200).send(useByPost)
     } catch (error) {
         res.status(500).json({ message: error.message })
