@@ -92,9 +92,71 @@ router.delete("/deleteuser/:id", async (req, res) => {
 });
 router.get("/allpostadmin", async (req, res) => {
   try {
-    const data = await POSTS.find({
-      postDetele: false,
-    });
+    const data = await POSTS.aggregate([
+      {
+        $match: {
+          postDetele: false,
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "postUserId",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $unwind: "$user",
+      },
+      {
+        $addFields: {
+          user: "$user",
+        },
+      },
+      {
+        $lookup: {
+          from: "favorites", //这里要填mongoose compass的集合的名字
+          localField: "_id",
+          foreignField: "targetId",
+          as: "favorites",
+        },
+      },
+      {
+        $lookup: {
+          from: "likes", //这里要填mongoose compass的集合的名字
+          localField: "_id",
+          foreignField: "targetId",
+          as: "likes",
+        },
+      },
+      {
+        $lookup: {
+          from: "comments",
+          localField: "_id",
+          foreignField: "postId",
+          as: "comments",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          postImages: 1,
+          postVideos: 1,
+          postText: 1,
+          postDelete: 1,
+          postTitle: 1,
+          postShare: 1,
+          postFavorite: { $size: "$favorites" },
+          postLike: { $size: "$likes" },
+          postComment: { $size: "$comments" },
+          /* 'postImages.staticUrl': 1, */
+          postUserId: 1,
+          postUserName:"$user.username"
+        },
+      },
+    ]);
+
     res.status(201).send(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -223,35 +285,35 @@ router.get("/allreplyadmin", async (req, res) => {
       },
       {
         $lookup: {
-            from: 'users',
-            let: { replyToId: '$replyToreplyUserId' },
-            pipeline: [
-                {
-                    $match: {
-                        $expr: {
-                            $and: [
-                                { $ne: ['$$replyToId', null] },
-                                { $ne: ['$$replyToId', ''] },
-                                { $eq: ['$_id', '$$replyToId'] }
-                            ]
-                        }
-                    }
-                }
-            ],
-            as: 'replyToreplyUser'
-        }
-    },
-    {
+          from: "users",
+          let: { replyToId: "$replyToreplyUserId" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $ne: ["$$replyToId", null] },
+                    { $ne: ["$$replyToId", ""] },
+                    { $eq: ["$_id", "$$replyToId"] },
+                  ],
+                },
+              },
+            },
+          ],
+          as: "replyToreplyUser",
+        },
+      },
+      {
         $addFields: {
-            replyToreplyUser: {
-                $cond: {
-                    if: { $eq: [{ $size: '$replyToreplyUser' }, 0] },
-                    then: [{}],
-                    else: { $arrayElemAt: ['$replyToreplyUser', 0] }
-                }
-            }
-        }
-    },
+          replyToreplyUser: {
+            $cond: {
+              if: { $eq: [{ $size: "$replyToreplyUser" }, 0] },
+              then: [{}],
+              else: { $arrayElemAt: ["$replyToreplyUser", 0] },
+            },
+          },
+        },
+      },
       {
         $unwind: "$replyToreplyUser",
       },
@@ -281,8 +343,8 @@ router.get("/allreplyadmin", async (req, res) => {
           replyDelete: 1,
           username: "$user.username",
           userId: "$user._id",
-          replyToreplyUserName:'$replyToreplyUser.username',
-          replyToreplyUserId:'$replyToreplyUser._id'
+          replyToreplyUserName: "$replyToreplyUser.username",
+          replyToreplyUserId: "$replyToreplyUser._id",
         },
       },
     ]);
@@ -293,17 +355,17 @@ router.get("/allreplyadmin", async (req, res) => {
 });
 
 router.delete("/delreplyadmin/:id", async (req, res) => {
-    try {
-      const replyId = req.params.id;
-      console.log(replyId)
-      const data = await REPLYS.findOneAndUpdate(
-        { _id: replyId },
-        { replyDelete: true },
-        { new: true, useFindAndModify: false }
-      );
-      res.status(200).send(data);
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  });
+  try {
+    const replyId = req.params.id;
+    console.log(replyId);
+    const data = await REPLYS.findOneAndUpdate(
+      { _id: replyId },
+      { replyDelete: true },
+      { new: true, useFindAndModify: false }
+    );
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 module.exports = router;

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 :root{
-    --hostColor: rgba(134, 196, 248,1);
+    --hostColor:#86c4f8;
     --hostTransparencyColor: rgba(134, 196, 248,0.4);
     --assistantColor:rgba(248, 196, 134, 1)
 }
