@@ -54,7 +54,7 @@ const deleteHandler = () => {
     </view>
     <view class="post-context">{{ item.postText }}</view>
     <image
-      v-if="item.postImages.length > 0"
+      v-if="item?.postImages"
       class="post-context-image"
       :src="item.postImages"
     ></image>
