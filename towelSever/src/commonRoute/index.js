@@ -375,6 +375,14 @@ router.get('/comment/:id', async (req, res) => {
                 }
             },
             {
+                $lookup: {
+                  from: "replys",
+                  localField: "_id",
+                  foreignField: "commentId",
+                  as: "reply",
+                },
+              },
+            {
                 $project: {
                     _id: 1,
                     commentText: 1,
@@ -385,7 +393,8 @@ router.get('/comment/:id', async (req, res) => {
                     'users.username': 1,
                     'users.headimg': 1,
                     'users._id': 1,
-                    commentCreateDate:1
+                    commentCreateDate:1,
+                    reply: { $size: "$reply" },
                 }
             }
         ])

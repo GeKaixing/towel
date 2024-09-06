@@ -6,7 +6,7 @@ import useLocalStorage from '../../../../hooks/useLocaStorage'
 import { postCommentsLike } from '../../../../services/post/post'
 import likeIcon from '../../../../assets/static/postIcon/赞.svg'
 import likePithIcon from '../../../../assets/static/postIconPitchUp/赞.svg'
-export default function PostCommentButton({ likes, commentid, setInputData, commentName, reLoad, reloadPostComment, seReLoadPostComment }) {
+export default function PostCommentButton({replycount, likes, commentid, setInputData, commentName, reLoad, reloadPostComment, seReLoadPostComment }) {
     /*        回复评论组件        */
     // 控制回复预览的显示
     const [replyshow, isreplyshow] = useState(false)
@@ -52,7 +52,7 @@ export default function PostCommentButton({ likes, commentid, setInputData, comm
                     }
                     {likes}</div>
                 <div onClick={() => setInputData({ targetName: '@' + commentName, commentid: commentid })} className={style.replyText}>回复</div>
-                <div className={style.replynumbe}  onClick={() => isreplyshow(!replyshow)} >显示回复</div>
+                <div className={style.replynumbe}  onClick={() => isreplyshow(!replyshow)} >显示回复{replycount}</div>
             </div>
             {/* 这是回复 */}
             {replyshow ?
@@ -71,4 +71,5 @@ PostCommentButton.propTypes = {
     reLoad: propTypes.bool,
     reloadPostComment: propTypes.bool.isRequired,
     seReLoadPostComment: propTypes.func.isRequired,
+    replycount:propTypes.number.isRequired,
 }

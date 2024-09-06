@@ -95,6 +95,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                     <div className=''>
                         <div className=''>
                             <PostCommentButton
+                                replycount={item.reply}
                                 reLoad={reLoad}
                                 setInputData={setInputData}
                                 commentName={item.users[0].username}
