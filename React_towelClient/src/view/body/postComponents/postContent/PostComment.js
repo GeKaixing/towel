@@ -68,7 +68,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
 
     return (
         <div>
-            {commentdata.map((item) => (
+            {commentdata.length!==0?commentdata.map((item) => (
                 <li key={item._id} className='flex flex-col p-2 border-2 rounded-my-rounded-10px mb-2 border-[--boxColor] hover:border-[--boxHoverColor]'>
                     <span className='flex justify-between mb-2'>
                         <div className='flex space-x-2 items-center'>
@@ -109,7 +109,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                         </div>
                     </div>
                 </li>
-            ))}
+            )):<div className='flex items-center justify-center font-bold'>暂无评论</div>}
         </div>
     );
 }
