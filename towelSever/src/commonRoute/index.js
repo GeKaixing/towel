@@ -162,7 +162,7 @@ router.post('/forgetpassword', async (req, res) => {
 
 router.post('/register', async (req, res) => {
     try {
-        const { username, password, email, code } = req.body.data
+        const { username, password, email, code,CreateDate } = req.body.data
         const userAndemail = await USERS.findOne({ $or: [{ username }, { email }] });//false
         const user = await verificationCodes.findOne({ verificationCode: code });//true
         if (!(userAndemail || user)) {
@@ -174,6 +174,7 @@ router.post('/register', async (req, res) => {
             username,
             password: hashpassword,
             email,
+            CreateDate:CreateDate,
         })
         await userdata.save()
         res.status(201).json({ status: true })

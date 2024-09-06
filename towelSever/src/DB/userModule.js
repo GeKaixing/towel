@@ -41,6 +41,10 @@ const USER = new mongoose.Schema({
     sealing:{
         type:Boolean,
         default: false
+    },
+    createDate:{
+        type: String,
+        required: true,
     }
 })
 module.exports = USER;

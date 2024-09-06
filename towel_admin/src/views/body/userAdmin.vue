@@ -1,4 +1,5 @@
 <script setup>
+import useDateFormat from '@/hooks/useDateFormat';
 import axios from 'axios'
 import { computed, onMounted, reactive, ref } from 'vue'
 
@@ -9,6 +10,7 @@ const columns = [
   { title: '电话', dataIndex: 'phoneNumber' },
   { title: '权限', dataIndex: 'auth' },
   { title: '状态', dataIndex: 'state' },
+  { title: '创建时间', dataIndex: 'CreateDate' },
   { title: '操作', dataIndex: 'action' }
 ]
 
@@ -103,7 +105,7 @@ const start = () => {
       }
     }"
   >
-    <template #bodyCell="{ column, record }">
+    <template #bodyCell="{ column,text, record }">
       <template v-if="column.dataIndex === 'state'">
         <div class="flex space-x-2">
           <div v-if="record.ban">禁言</div>
@@ -111,7 +113,9 @@ const start = () => {
           <div v-if="record.sealing">封禁</div>
         </div>
       </template>
-
+    <template v-if="column.dataIndex === 'CreateDate'">
+      {{ useDateFormat(text)}}
+    </template>
       <template v-if="column.dataIndex === 'action'">
         <div class="flex space-x-2">
           <a v-if="!record.ban" @click="banHandler(record)">禁言</a>

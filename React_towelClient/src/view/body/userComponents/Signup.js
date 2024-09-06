@@ -3,6 +3,7 @@ import style from './Signup.module.css'
 import { postRegister } from '../../../services/Signup/signup'
 import { getNodemailerRegister } from '../../../services/nodemailerRegister/nodemailerRegister'
 import { Link } from 'react-router-dom'
+import dayjs from 'dayjs'
 export default function Signup() {
   const [valuename_signup, setValuename_signup] = useState('') // 获取账号
   const [valuepassword_signup, setValuepassword_signup] = useState('')  // 获取密码
@@ -18,7 +19,8 @@ export default function Signup() {
           username: valuename_signup,
           password: valuepassword_signup,
           email: inputEmailData,
-          code: verificationcode
+          code: verificationcode,
+          createDate: dayjs().format()
         }
       })
         .then((response) => {

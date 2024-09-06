@@ -4,6 +4,7 @@ import { DatePicker, Space } from 'antd';
 import { getUserinfo, postModifyingausername, postModifyingbirthday, postModifyingiphoneNumber } from '../../../../services/setting/setting';
 import useLocalStorage from '../../../../hooks/useLocaStorage';
 import { postUpLoadheadimg } from '../../../../services/add/add';
+import dayjs from 'dayjs';
 export default function SettingAccount() {
     const [responseData, setResponseData] = useState({})
     const [localStorageData, setLocalStorageData] = useLocalStorage();
@@ -111,7 +112,7 @@ export default function SettingAccount() {
         }
     }
     return (
-        <div className='flex flex-col  items-start text-[--fontColor] absolute left-1/2 -translate-x-1/2' >
+        <div className='flex flex-col  items-start text-[--fontColor] absolute left-1/2 -translate-x-1/2 mt-2' >
             <p style={{ display: 'flex', alignItems: "center" }}>
                 <img src={responseData.headimg} className={style.headimg}></img>
                 <label className={style.uploadNewHeadImg} htmlFor='uploadNewHeadImg' title='修改' >
@@ -128,6 +129,8 @@ export default function SettingAccount() {
             <p><strong>电话号码</strong><button onClick={ModifyingiIphoneNumber}>修改</button></p>
             <p>{responseData.phoneNumber === undefined ? '无' : responseData.phoneNumber}</p>
             <p><strong>生日</strong><button onClick={ModifyingiBirthday}>修改</button></p>
+            <p><strong>创建日期</strong>
+            <div className='text-sm text-[--boxHoverColor] font-bold'>{ dayjs(responseData.CreateDate).format('YYYY-MM-DD HH:mm:ss') }</div></p>
             <p>{Birthday ? Birthday : responseData.birthday === undefined ? '无' : responseData.birthday}</p>
             {isShowBirthday ? <div style={{ position: 'absolute' }}>
                 <Space direction="vertical" locale='zh-CN' placement="topLeft" >
@@ -135,6 +138,7 @@ export default function SettingAccount() {
                 </Space>
                 <br />
                 <button onClick={ModifyingiSendBirthday}>确认</button> </div> : null}
+                
         </div>
     )
 }
