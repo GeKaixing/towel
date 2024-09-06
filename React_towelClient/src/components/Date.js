@@ -5,12 +5,12 @@
   function Date({children, className}) {
     const date=useDateFormat(children)
     return (
-        <div className={`text-sm text-[--boxHoverColor] ${className}`}>{date}</div>
+        <div className={`text-sm text-[--boxHoverColor] flex flex-nowrap ${className}`}>{date}</div>
     )
   }
   Date.propTypes = {
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
   }
   
   export default Date

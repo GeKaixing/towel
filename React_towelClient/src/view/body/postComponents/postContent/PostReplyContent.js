@@ -55,7 +55,7 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
             {responseData.map((item) => (
                 <div key={item._id} className='text-[--fontColor] flex justify-between pl-5 '>
                     {(item.replyToreplyUserId !== null) ?
-                        <div className='flex space-x-2'>
+                        <div className='w-full'>
                             <div className='font-bold flex space-x-2 items-center'> 
                                 <span>
                                 {item.replyUser.username}@{item.replyToreplyUser.username}
@@ -63,23 +63,24 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
                             <Date>
                                 {item.replyCreateDate}
                             </Date>
-                            <div>:</div>
+                            <div>:
                             </div>
-                            <span>
+                            </div>
+                            <div className='whitespace-normal break-words text-[--fontColor] box-border'>
                             {item.replyText}
-                            </span>
+                            </div>
                         </div> :
-                        <div className='flex space-x-2' >
+                        <div className=' w-full' >
                             <div className='font-bold flex space-x-2 items-center'>
                                 <div>
                                 {item.replyUser.username}
                                 </div>
-                                <Date>
+                                <Date className='text-nowrap'>
                                 {item.replyCreateDate}
-                            </Date>
+                                 </Date>
                             <div>:</div>
                             </div>
-                            <div>
+                            <div className='whitespace-normal break-words text-[--fontColor] box-border'>
                                 {item.replyText}
                             </div>
                         </div>}

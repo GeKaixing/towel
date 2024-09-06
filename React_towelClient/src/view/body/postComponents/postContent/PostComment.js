@@ -91,7 +91,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                             }
                         </div>
                     </span>
-                    <span className='ml-5 text-[--fontColor]'>{item.commentText}</span>
+                    <span className='whitespace-normal break-words text-[--fontColor] box-border'>{item.commentText}dangerouslySetInnerHTMLdangerouslySetInnerHTMLdangerouslySetInnerHTMLdangerouslySetInnerHTMLdangerouslySetInnerHTMLdangerouslySetInnerHTML</span>
                     <div className=''>
                         <div className=''>
                             <PostCommentButton
