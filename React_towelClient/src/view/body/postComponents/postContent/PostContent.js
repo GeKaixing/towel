@@ -13,6 +13,8 @@ import startPichIcon from '../../../../assets/static/postIconPitchUp/星星.svg'
 import sharePichIcon from '../../../../assets/static/postIconPitchUp/分享.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
+import useDateFormat from '../../../../hooks/useDateFormat';
+import Date from '../../../../components/Date';
 export default function PostContent() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
@@ -31,6 +33,7 @@ export default function PostContent() {
         const markdownRegex = /^(# |- \s|\*\*|\*|`|>\s)/;
         return markdownRegex.test(text);
     };
+    const date=useDateFormat(contentdata.postCreateDate)
     useEffect(() => {
         if (state) {
             const data = JSON.parse(state)
@@ -141,6 +144,7 @@ export default function PostContent() {
                         <div className='flex items-center f space-x-2 mb-2'>
                             <img src={contentdata.headimg} className='w-10 h-10 rounded-my-rounded-10px'></img>
                             <Link className='font-bold text-[--fontColor] '>{contentdata.name}</Link>
+                            <Date>{date}</Date>
                         </div>
                         <div className='flex flex-col justify-center items-center text-[--fontColor] font-bold' >
                             <div className='text-2xl self-start'>{contentdata.postTitle}</div>

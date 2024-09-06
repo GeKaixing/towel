@@ -15,6 +15,7 @@ import sharePichIcon from '../assets/static/postIconPitchUp/分享.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import useDateFormat from '../hooks/useDateFormat';
+import Date from './Date';
 /* props $ */
 export default function Post(props) {
     // console.log(props.setreloadUserArticle)
@@ -151,7 +152,7 @@ export default function Post(props) {
                     <div className='flex flex-row space-x-2 items-center object-fill'>
                         <img src={props.headimg} className='w-10 h-10 rounded-full '></img>
                         <Link className='font-blod' to={`./userhomepage/${props.postUserId}`}>{props.name}</Link>
-                        <div className='text-sm text-[--boxHoverColor]'>{date}</div>
+                        <Date>{date}</Date>
                     </div>
                     <div onClick={() => targetIDHandler(props.id)} className='relative cursor-pointer'>
                     ...
