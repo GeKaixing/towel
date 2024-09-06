@@ -46,6 +46,7 @@ export default function PostContent() {
                     postVideos: data[0].postVideos,
                     postUserId: data[0].postUserId,
                     postTitle:data[0].postTitle,
+                    postCreateDate:data[0].postCreateDate,
                 }
                 setcontent(datas)
             } else {

@@ -14,7 +14,7 @@ import startPichIcon from '../assets/static/postIconPitchUp/星星.svg'
 import sharePichIcon from '../assets/static/postIconPitchUp/分享.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
-import dayjs from 'dayjs';
+import useDateFormat from '../hooks/useDateFormat';
 /* props $ */
 export default function Post(props) {
     // console.log(props.setreloadUserArticle)
@@ -24,19 +24,13 @@ export default function Post(props) {
     const [localStorageData] = useLocalStorage();
     const postDeleteBox = useRef();
     const [targetID, setTargetID] = useState('');
-    const [date,setDate]=useState('')
     const [mouseOver, setMouseOver] = useState({
         share: false,
         comments: false,
         star: false,
         like: false,
     });
-    const formatDateHandler=()=>{
-        setDate(dayjs(props.postCreateDate).format('HH:mm'))
-    }
-    useEffect(() => {
-        formatDateHandler()
-    }, [props.postCreateDate])
+    const date =useDateFormat(props.postCreateDate)
     useEffect(() => {
         const handleClick = (e) => {
             if (!(e.target === postDeleteBox.current)) {
@@ -157,16 +151,13 @@ export default function Post(props) {
                     <div className='flex flex-row space-x-2 items-center object-fill'>
                         <img src={props.headimg} className='w-10 h-10 rounded-full '></img>
                         <Link className='font-blod' to={`./userhomepage/${props.postUserId}`}>{props.name}</Link>
+                        <div className='text-sm text-[--boxHoverColor]'>{date}</div>
                     </div>
-                    <div className='flex items-center space-x-2 '>
-                    <div className='text-sm text-[--boxHoverColor]'>{
-                                        date     }</div>
                     <div onClick={() => targetIDHandler(props.id)} className='relative cursor-pointer'>
                     ...
                         {targetID === props.id ?    
                             <DeleteBox postUserId={props.postUserId} headimg={props.headimg} userName={props.name} deleteHandler={deletePostApi} DeleteBox={postDeleteBox} reportHandler={reportApi}></DeleteBox>
                             : null}
-                    </div>
                     </div>
                 </div>
                 <div className='felx flex-col space-y-2 '>
