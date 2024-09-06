@@ -10,7 +10,7 @@ import { useState,useEffect } from "react";
 export default function useDateFormat(dates) {
     const [date,setDate]=useState('')
     useEffect(()=>{
-        setDate(dayjs(dates).format('HH:mm'))
+        setDate(dayjs(dates).format('MM-DD HH:mm'))
     })
     return date;
     
