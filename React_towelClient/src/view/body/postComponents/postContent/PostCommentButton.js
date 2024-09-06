@@ -55,11 +55,14 @@ export default function PostCommentButton({replycount, likes, commentid, setInpu
                 <div className={style.replynumbe}  onClick={() => isreplyshow(!replyshow)} >显示回复{replycount}</div>
             </div>
             {/* 这是回复 */}
-            {replyshow ?
+            {replyshow &&
                 <div>
-                    <Replycontent reLoad={reLoad} commentid={commentid} setInputData={setInputData} ></Replycontent>
-                </div>
-                : null}
+                    {
+                        replycount?
+                        <Replycontent reLoad={reLoad} commentid={commentid} setInputData={setInputData} ></Replycontent>
+                        : <div className='text-[--fontColor] flex justify-between pl-5 font-bold'>展示没有回复哦</div>
+                    }
+                </div> }
         </>
     )
 }
