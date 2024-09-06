@@ -189,6 +189,11 @@ router.get('/post', async (req, res) => {
         //
         const allPost = await POSTS.aggregate([
             {
+                $match: {
+                  postDetele: false,
+                },
+              },
+            {
                 $lookup: {
                     from: 'users',
                     localField: 'postUserId',
@@ -222,12 +227,23 @@ router.get('/post', async (req, res) => {
             },
             {
                 $lookup: {
-                    from: 'comments',
-                    localField: '_id',
-                    foreignField: 'postId',
-                    as: 'comments'
+                  from: "comments",
+                  let: { postId: "$_id" },
+                  pipeline: [
+                    {
+                      $match: {
+                        $expr: {
+                          $and: [
+                            { $eq: ["$postId", "$$postId"] }, // 匹配 postId
+                            { $ne: ["$commentDelete", true] } // 过滤掉 delete 为 true 的评论
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  as: "comments"
                 }
-            },
+              },
             {
                 $project: {
                     _id: 1,
@@ -274,6 +290,11 @@ router.post('/fliterpsot', async (req, res) => {
         const result = await POSTS.aggregate([
             {
                 $match: {
+                  postDetele: false,
+                },
+              },
+            {
+                $match: {
                     postText: {
                         $regex: filtertarget,
                         $options: 'i'
@@ -311,12 +332,23 @@ router.post('/fliterpsot', async (req, res) => {
             },
             {
                 $lookup: {
-                    from: 'comments',
-                    localField: '_id',
-                    foreignField: 'postId',
-                    as: 'comments'
+                  from: "comments",
+                  let: { postId: "$_id" },
+                  pipeline: [
+                    {
+                      $match: {
+                        $expr: {
+                          $and: [
+                            { $eq: ["$postId", "$$postId"] }, // 匹配 postId
+                            { $ne: ["$commentDelete", true] } // 过滤掉 delete 为 true 的评论
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  as: "comments"
                 }
-            },
+              },
             {
                 $lookup: {
                     from: 'staticdatas',
@@ -354,6 +386,11 @@ router.get('/comment/:id', async (req, res) => {
     try {
         const _id = req.params.id
         const data = await COMMENTS.aggregate([
+              {
+        $match: {
+          commentDelete: false,
+        },
+      },
             {
                 $match: {
                     postId: new ObjectID(`${_id}`)
@@ -378,10 +415,21 @@ router.get('/comment/:id', async (req, res) => {
             {
                 $lookup: {
                   from: "replys",
-                  localField: "_id",
-                  foreignField: "commentId",
-                  as: "reply",
-                },
+                  let: { commentId: "$_id" },
+                  pipeline: [
+                    {
+                      $match: {
+                        $expr: {
+                          $and: [
+                            { $eq: ["$commentId", "$$commentId"] }, // 匹配 commentId
+                            { $ne: ["$replyDelete", true] } // 过滤掉 delete 为 true 的回复
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  as: "reply"
+                }
               },
             {
                 $project: {
@@ -424,6 +472,11 @@ router.get('/allreply/:id', async (req, res) => {
         }
 
         const finddata = await REPLYS.aggregate([
+            {
+                $match: {
+                  replyDelete: false,
+                },
+              },
             {
                 $match: {
                     commentId: objectId

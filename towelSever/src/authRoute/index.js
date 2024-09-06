@@ -14,7 +14,12 @@ const {
 router.get('/getusepost/:id', async (req, res) => {
     try {
         const useId = req.params.id;
-        const useByPost = await POSTS.aggregate([
+        const useByPost = await POSTS.aggregate([  
+            {
+                $match: {
+                  postDetele: false,
+                },
+              },
             {
                 $match: {
                     postUserId: new ObjectID(`${useId}`)
@@ -54,12 +59,23 @@ router.get('/getusepost/:id', async (req, res) => {
             },
             {
                 $lookup: {
-                    from: 'comments',
-                    localField: '_id',
-                    foreignField: 'postId',
-                    as: 'comments'
+                  from: "comments",
+                  let: { postId: "$_id" },
+                  pipeline: [
+                    {
+                      $match: {
+                        $expr: {
+                          $and: [
+                            { $eq: ["$postId", "$$postId"] }, // 匹配 postId
+                            { $ne: ["$commentDelete", true] } // 过滤掉 delete 为 true 的评论
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  as: "comments"
                 }
-            },
+              },
             {
                 $project: {
                     _id: 1,
@@ -89,6 +105,11 @@ router.get('/getusecomment/:id', async (req, res) => {
     try {
         const _id = req.params.id
         const data = await COMMENTS.aggregate([
+            {
+                $match: {
+                  commentDelete: false,
+                },
+              },
             {
                 $match: {
                     commentUserId: new ObjectID(`${_id}`)
@@ -135,6 +156,12 @@ router.get('/getusereply/:id', async (req, res) => {
         const userId = req.params.id
         /*         { 'commentId': { $eq: new ObjectID(`${commentId}`) } } */
         const finddata = await REPLYS.aggregate(
+
+            {
+                $match: {
+                  replyDelete: false,
+                },
+              },
             [
                 {
                     $match: {
@@ -200,6 +227,11 @@ router.get('/findonepost/:id', async (req, res) => {
     try {
         const _id = req.params.id
         const data = await POSTS.aggregate([
+            {
+                $match: {
+                  postDelete: false,
+                },
+              },
             {
                 $match: {
                     _id: new ObjectID(`${_id}`)
@@ -503,6 +535,11 @@ router.get('/notifications/:userid', async (req, res) => {
         const userid = req.params.userid
         /* 被提及的才是自己的id */
         const data = await MENTIONS.aggregate([
+            {
+                $match: {
+                  replyDelete: false,
+                },
+              },
             {
                 $match: {
                     targetType: 'reply',

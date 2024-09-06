@@ -133,10 +133,21 @@ router.get("/allpostadmin", async (req, res) => {
       {
         $lookup: {
           from: "comments",
-          localField: "_id",
-          foreignField: "postId",
-          as: "comments",
-        },
+          let: { postId: "$_id" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ["$postId", "$$postId"] }, // 匹配 postId
+                    { $ne: ["$commentDelete", true] } // 过滤掉 delete 为 true 的评论
+                  ]
+                }
+              }
+            }
+          ],
+          as: "comments"
+        }
       },
       {
         $project: {
@@ -228,12 +239,22 @@ router.get("/allcommentadmin", async (req, res) => {
       {
         $lookup: {
           from: "replys",
-          localField: "_id",
-          foreignField: "commentId",
-          as: "reply",
-        },
+          let: { commentId: "$_id" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ["$commentId", "$$commentId"] }, // 匹配 commentId
+                    { $ne: ["$replyDelete", true] } // 过滤掉 delete 为 true 的回复
+                  ]
+                }
+              }
+            }
+          ],
+          as: "reply"
+        }
       },
-
       {
         $project: {
           _id: 1,
