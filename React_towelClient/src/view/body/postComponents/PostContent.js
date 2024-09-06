@@ -34,6 +34,7 @@ export default function PostPage() {
                 postVideos={item.postVideos}
                 postUserId={item.postUserId}
                 postTitle={item.postTitle}
+                postCreateDate={item.postCreateDate}
                 reload={{ reload, setLoad }}
               >
               </Post>

@@ -270,7 +270,7 @@ router.get('/findonepost/:id', async (req, res) => {
 })
 //this is addition the post API
 router.post('/addpost', async (req, res) => {
-    const { UserId, Image, Text, Share, Like, Comment,Video,Title } = req.body.data
+    const { UserId, Image, Text, Share, Like, Comment,Video,Title,createDate } = req.body.data
     const data = new POSTS({
         postUserId: UserId,
         postText: Text,
@@ -279,7 +279,8 @@ router.post('/addpost', async (req, res) => {
         postShare: Share,
         postLike: Like,
         postComment: Comment,
-        postTitle:Title
+        postTitle:Title,
+        postCreateDate:createDate,
     })
     try {
         const datatosave = await data.save()

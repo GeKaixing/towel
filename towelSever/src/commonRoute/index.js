@@ -244,8 +244,9 @@ router.get('/post', async (req, res) => {
                     /* 'postImages.staticUrl': 1, */
                     postUserId: 1,
                     'user.username': 1,
-                    'user.headimg': 1
-                }
+                    'user.headimg': 1,
+                    postCreateDate:1,
+                }   
             }
         ])/* 
         const data = await POSTS.find()

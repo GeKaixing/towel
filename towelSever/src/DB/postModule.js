@@ -12,7 +12,11 @@ const POST = new mongoose.Schema({
     postVideos: String,
     postShare: Number,
     postLike: Number,
-    postComment: Number,
+    postComment: Number,   
+    postCreateDate:{
+        type:String,
+        required: true,
+    },
     postDetele: {
         type: Boolean,
         default: false

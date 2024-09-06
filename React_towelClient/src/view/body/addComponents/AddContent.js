@@ -14,7 +14,9 @@ import Addvideo from './addvideo/Addvideo';
 import AddImge from './addimge/AddImge';
 import { postUpLoad } from '../../../services/add/add';
 import axios from 'axios';
+import dayjs from 'dayjs'
 export default function Portal() {
+
     const [textareaData, settextareaData] = useState('');
     const [localStorageData] = useLocalStorage()
     const loginDataParse = localStorageData
@@ -96,7 +98,8 @@ export default function Portal() {
                         Share: 0,
                         Like: 0,
                         Comment: 0,
-                        Title:postTitle
+                        Title:postTitle,
+                        createDate:dayjs().format(),
                     }
                 })
                 settextareaData('')
