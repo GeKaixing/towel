@@ -16,5 +16,9 @@ const REPLY = new mongoose.Schema({
     replyLike: Number,
     replyComment: Number,
     replyDelete: { type: Boolean, default: false },
+    replyCreateDate:{
+        type:String,
+        required: true,
+    },
 })
 module.exports=REPLY;

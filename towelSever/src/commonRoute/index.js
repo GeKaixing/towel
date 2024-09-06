@@ -338,7 +338,8 @@ router.post('/fliterpsot', async (req, res) => {
                     postComment: { $size: '$comments' },
                     'postImages.staticUrl': 1,
                     'user.username': 1,
-                    'user.headimg': 1
+                    'user.headimg': 1,
+                    postCreateDate:1
                 }
             }
         ])
@@ -383,8 +384,8 @@ router.get('/comment/:id', async (req, res) => {
                     /* 'postImages.staticUrl': 1, */
                     'users.username': 1,
                     'users.headimg': 1,
-                    'users._id': 1
-
+                    'users._id': 1,
+                    commentCreateDate:1
                 }
             }
         ])

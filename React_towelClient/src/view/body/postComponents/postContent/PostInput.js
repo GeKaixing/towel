@@ -7,6 +7,7 @@ import { getSocket } from '../../../../socket/socket'
 import propTypes from 'prop-types'
 import { postAddPostComment, postAddPostReply } from '../../../../services/post/post'
 import useLocalStorage from '../../../../hooks/useLocaStorage'
+import dayjs from 'dayjs'
 
 export default function PostInput({ postId }) {
     const navigate = useNavigate()
@@ -22,7 +23,8 @@ export default function PostInput({ postId }) {
                 commentUserId: localStorageData.userid,
                 Text: inputData,
                 Image: null,
-                Like: 0
+                Like: 0,
+                CreateDate:dayjs().format(),
             }
         }).then(() => {
             setInputData('')
@@ -55,7 +57,8 @@ export default function PostInput({ postId }) {
                 replyToreplyUserId: inputReplyData.replyToreplyUserId || null,
                 replyImages: null,
                 replyLike: 0,
-                replyComment: null
+                replyComment: null,
+                CreateDate:dayjs().format(),
             }
         }).then(() => {
             const socket = getSocket()

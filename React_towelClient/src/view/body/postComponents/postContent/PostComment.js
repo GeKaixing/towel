@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router';
 import propTypes from 'prop-types'
 import { getComment, getOnePost, postDelComment } from '../../../../services/post/post';
 import DeleteBox from '../../../../components/DeleteBox';
+import Date from '../../../../components/Date';
 export default function PostComment({ postId, setInputData, reLoad, userCommentData, setreloadUserlikes, reloadUserlikes }) {
     const [commentdata, setCommentData] = useState([]);
     // const [localStorageData] = useLocalStorage();
@@ -73,6 +74,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                         <div className='flex space-x-2 items-center'>
                             <img src={item.users[0].headimg} className='h-10 w-10 rounded-full' alt="user" />
                             <div onClick={() => setInputData('@' + item.users[0].username + ':')} className='font-bold text-[--fontColor]'>{item.users[0].username}</div>
+                            <Date>{item.commentCreateDate}</Date>
                         </div>
                         <div onClick={() => targetIDHandler(item._id)} className='relative cursor-pointer' >...
                             {targetID === item._id &&

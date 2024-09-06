@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router'
 import propTypes from 'prop-types'
 import { getAllreply, getOnePost, postDelReply } from '../../../../services/post/post'
 import DeleteBox from '../../../../components/DeleteBox'
+import Date from '../../../../components/Date'
 
 export default function Replycontent({ reLoad, commentid, userReplyData, setInputData, reloadUserReply, setreloadUserReplys }) {
     const [responseData, setResponseData] = useState([])
@@ -54,17 +55,29 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
             {responseData.map((item) => (
                 <div key={item._id} className='text-[--fontColor] flex justify-between pl-5 '>
                     {(item.replyToreplyUserId !== null) ?
-                        <div className='flex'>
-                            <div className='font-bold'> 
-                            {item.replyUser.username}@{item.replyToreplyUser.username}:
+                        <div className='flex space-x-2'>
+                            <div className='font-bold flex space-x-2 items-center'> 
+                                <span>
+                                {item.replyUser.username}@{item.replyToreplyUser.username}
+                                </span>
+                            <Date>
+                                {item.replyCreateDate}
+                            </Date>
+                            <div>:</div>
                             </div>
                             <span>
                             {item.replyText}
                             </span>
                         </div> :
                         <div className='flex space-x-2' >
-                            <div className='font-bold '>
-                                {item.replyUser.username}:
+                            <div className='font-bold flex space-x-2 items-center'>
+                                <div>
+                                {item.replyUser.username}
+                                </div>
+                                <Date>
+                                {item.replyCreateDate}
+                            </Date>
+                            <div>:</div>
                             </div>
                             <div>
                                 {item.replyText}

@@ -11,5 +11,9 @@ const COMMENT = new mongoose.Schema({
     commentLike: Number,
     commentComment: Number,
     commentDelete: { type: Boolean, default: false },
+    commentCreateDate:{
+        type:String,
+        required: true,
+    },
 })
 module.exports = COMMENT;

@@ -1,13 +1,15 @@
 
   import React from 'react'
   import PropTypes from 'prop-types'
-  
-  function Date({children}) {
+  import useDateFormat from '../hooks/useDateFormat'
+  function Date({children, className}) {
+    const date=useDateFormat(children)
     return (
-        <div className='text-sm text-[--boxHoverColor]'>{children}</div>
+        <div className={`text-sm text-[--boxHoverColor] ${className}`}>{date}</div>
     )
   }
   Date.propTypes = {
+    className: PropTypes.string,
     children: PropTypes.node.isRequired,
   }
   

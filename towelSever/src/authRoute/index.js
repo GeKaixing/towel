@@ -328,13 +328,14 @@ router.patch('/uppost/:id', async (req, res) => {
 router.post('/addcomment/:id', async (req, res) => {
     const _id = req.params.id
     try {
-        const { commentUserId, Text, Image, Like } = req.body.data
+        const { commentUserId, Text, Image, Like,CreateDate } = req.body.data
         const data = new COMMENTS({
             postId: new ObjectID(`${_id}`),
             commentUserId: commentUserId,
             commentText: Text,
             commentImages: Image,
             commentLike: Like,
+            commentCreateDate:CreateDate
         })
         const datatosave = await data.save()
         res.status(200).send(datatosave)
@@ -369,7 +370,8 @@ router.post('/addreply', async (req, res) => {
             replyText,
             replyImages,
             replyLike,
-            replyComment
+            replyComment,
+            CreateDate
         } = req.body.data
         const data = new REPLYS({
             postId: new ObjectID(`${postId}`),
@@ -379,7 +381,8 @@ router.post('/addreply', async (req, res) => {
             replyText: replyText,
             replyImages: replyImages,
             replyLike: replyLike,
-            replyComment: replyComment
+            replyComment: replyComment,
+            replyCreateDate:CreateDate
         })
         const datatosave = await data.save()
         // 保存数据做消息推送
