@@ -1,4 +1,5 @@
 <script setup>
+import useDateFormat from '@/hooks/useDateFormat';
 import axios from 'axios'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 
@@ -26,6 +27,10 @@ const columns = [
    {
     title: '发布者',
     dataIndex: 'postUserName'
+  },
+   {
+    title: '发布时间',
+    dataIndex: 'postCreateDate'
   },
   {
     title: '操作',
@@ -126,6 +131,11 @@ const setVisible = (value) => {
             :src="record.postImages"
           />
         </div>
+      </template>
+      <template v-if="column.dataIndex === 'postCreateDate'">
+        {{  
+          useDateFormat(text)
+         }}
       </template>
       <template v-if="column.dataIndex === 'action'">
         <a @click="deleteHandler(record)">删除</a>

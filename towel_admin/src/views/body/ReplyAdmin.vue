@@ -1,4 +1,5 @@
 <script setup>
+import useDateFormat from '@/hooks/useDateFormat';
 import axios from 'axios';
 import { computed, onMounted, reactive, ref,watch} from 'vue';
 
@@ -19,6 +20,10 @@ const columns = [
   {
     title: '回复者',
     dataIndex: 'username',
+  },
+  {
+    title: '发布时间',
+    dataIndex: 'replyCreateDate'
   },
   {
     title: '操作',
@@ -82,6 +87,11 @@ const start = () => {
     <template #bodyCell="{column, text,record }">
       <template v-if="column.dataIndex ==='replyText'">
            <div class="text-ellipsis overflow-hidden text-nowrap w-48">{{text}}</div>
+      </template>
+      <template v-if="column.dataIndex === 'replyCreateDate'">
+        {{  
+          useDateFormat(text)
+         }}
       </template>
       <template v-if="column.dataIndex === 'action'">
            <a @click="deleteHandler(record)">删除</a>

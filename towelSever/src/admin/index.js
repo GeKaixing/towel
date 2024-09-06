@@ -152,7 +152,8 @@ router.get("/allpostadmin", async (req, res) => {
           postComment: { $size: "$comments" },
           /* 'postImages.staticUrl': 1, */
           postUserId: 1,
-          postUserName:"$user.username"
+          postUserName:"$user.username",
+          postCreateDate:1
         },
       },
     ]);
@@ -244,6 +245,7 @@ router.get("/allcommentadmin", async (req, res) => {
           reply: { $size: "$reply" },
           username: "$user.username",
           userId: "$user._id",
+          commentCreateDate: 1
         },
       },
     ]);
@@ -345,6 +347,7 @@ router.get("/allreplyadmin", async (req, res) => {
           userId: "$user._id",
           replyToreplyUserName: "$replyToreplyUser.username",
           replyToreplyUserId: "$replyToreplyUser._id",
+          replyCreateDate: 1
         },
       },
     ]);
