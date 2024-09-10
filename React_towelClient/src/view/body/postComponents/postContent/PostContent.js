@@ -14,6 +14,7 @@ import sharePichIcon from '../../../../assets/static/postIconPitchUp/分享.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import Date from '../../../../components/Date';
+import leftIcon from '../../../../assets/static/otherIcon/左_left.svg'
 export default function PostContent() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState({})
@@ -136,10 +137,16 @@ export default function PostContent() {
 
     return (
         <div className='flex flex-col p-2'>
+           <div className='flex w-full items-center space-x-2  max-md:hidden mb-2 sticky top-0 bg-[--backgroundcolor]'> 
+                <button className='w-10 h-10 bg-[--boxColor] hover:bg-[--boxHoverColor]  rounded-full  flex justify-center items-center' onClick={() => window.history.back()}>
+                    <img src={leftIcon}></img>
+                </button>
+                <div className='font-bold text-xl text-[--fontColor]'> 帖子</div>
+            </div>
             <div className='flex flex-col '>
                 <div className=''>
                     <div className=''>
-                        <div className='flex items-center f space-x-2 mb-2'>
+                        <div className='flex items-center  space-x-2 mb-2'>
                             <img src={contentdata.headimg} className='w-10 h-10 rounded-my-rounded-10px'></img>
                             <Link className='font-bold text-[--fontColor] '>{contentdata.name}</Link>
                             <Date>{contentdata.postCreateDate}</Date>
