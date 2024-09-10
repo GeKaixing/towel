@@ -19,7 +19,7 @@ export default function ToutiaoHot() {
                 resData.success &&
                 sliceData.map((item, index) => (
                     <Link to={item.url} key={index} target="_blank" rel="noopener noreferrer">
-                        <div className='font-semibold text-nowrap text-ellipsis overflow-hidden'>
+                        <div className='font-semibold text-nowrap text-ellipsis overflow-hidden hover:bg-[--boxHoverColor] hover:rounded-[10px]'>
                             {item.title}
                         </div>
                         <div className='text-gray-500'>
