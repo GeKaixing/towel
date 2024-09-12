@@ -7,10 +7,12 @@ export default function ToutiaoHot() {
     const [sliceData,setSliceData]=useState([])
     
     useEffect(() => {
-        getToutiaoHot().then(res => {
-            setResData(res.data)
-            setSliceData( res.data.data.slice(1,5))
-        }).catch(e => { console.log(e) })
+        if (window.innerWidth >= 1024) {
+            getToutiaoHot().then(res => {
+                setResData(res.data)
+                setSliceData(res.data.data.slice(1, 5))
+            }).catch(e => { console.log(e) })
+        }
     }, [])
     return (
         <div className='flex flex-col space-x-2 bg-[--boxColor] w-full rounded-my-rounded-10px p-2'>
