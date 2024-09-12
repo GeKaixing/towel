@@ -79,6 +79,7 @@ export default function MainMenu() {
        '>
         <div className='hidden md:block md:w-10 md:h-10
           lg:w-20 lg:h-20
+          mb-2
         '>
           {/* global process */}
           <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='' />
