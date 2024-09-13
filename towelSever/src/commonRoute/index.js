@@ -186,6 +186,9 @@ router.post('/register', async (req, res) => {
 //this is get the post API
 router.get('/post', async (req, res) => {
     try {
+        const page = parseInt(req.query.page) || 1;   // 当前页码
+        const limit = parseInt(req.query.limit) || 10; // 每页数据量
+        const skip = (page - 1) * limit;               // 跳过的条目数
         //
         const allPost = await POSTS.aggregate([
             {
@@ -193,6 +196,9 @@ router.get('/post', async (req, res) => {
                   postDetele: false,
                 },
               },
+              { $sort: { _id: 1 } }, // 按照 _id 升序排列
+              { $skip: skip },       // 跳过前面的数据
+              { $limit: limit },    // 取出指定数量的数据
             {
                 $lookup: {
                     from: 'users',
