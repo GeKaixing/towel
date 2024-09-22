@@ -5,6 +5,7 @@ import { getUserinfo, postModifyingausername, postModifyingbirthday, postModifyi
 import useLocalStorage from '../../../../hooks/useLocaStorage';
 import { postUpLoadheadimg } from '../../../../services/add/add';
 import dayjs from 'dayjs';
+import Backtab from '../../../../components/Backtab';
 export default function SettingAccount() {
     const [responseData, setResponseData] = useState({})
     const [localStorageData, setLocalStorageData] = useLocalStorage();
@@ -112,6 +113,8 @@ export default function SettingAccount() {
         }
     }
     return (
+        <>
+        <Backtab text='设置' href='/setting'></Backtab>
         <div className='flex flex-col  items-start text-[--fontColor] absolute left-1/2 -translate-x-1/2 mt-2' >
             <p style={{ display: 'flex', alignItems: "center" }}>
                 <img src={responseData.headimg} className={style.headimg}></img>
@@ -138,7 +141,7 @@ export default function SettingAccount() {
                 </Space>
                 <br />
                 <button onClick={ModifyingiSendBirthday}>确认</button> </div> : null}
-                
         </div>
+        </>
     )
 }

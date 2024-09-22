@@ -5,6 +5,7 @@ import axios from 'axios'
 import eyeIconOpen from '../../../../assets/static/otherIcon/预览打开.svg'
 import eyeIconClose from '../../../../assets/static/otherIcon/预览关闭.svg'
 import { Form } from "antd";
+import Backtab from '../../../../components/Backtab'
 export default function SettingUserForgetPage() {
     const [, setLocalStorageData] = useState({});
     const [inputData, setinputData] = useState({
@@ -91,6 +92,8 @@ export default function SettingUserForgetPage() {
         }
     }
     return (
+        <>
+           <Backtab text='设置' href='/setting'></Backtab>
         <div className={style.SettingUserForgetPage}>
             <form className={style.SettingUserForgetPageForm} onSubmit={(e) => { e.preventDefault() }}>
                 <input type='text' placeholder='您的账户名' className={style.SettingUserForgetPageName} value={inputData.user} onChange={userNameHandle}></input>
@@ -113,5 +116,6 @@ export default function SettingUserForgetPage() {
             </form>
              
         </div>
+        </>
     )
 }
