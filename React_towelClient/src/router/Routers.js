@@ -24,6 +24,7 @@ import PrivateChat from '../view/body/messageComponents/PrivateChat'
 import Ai from '../view/body/AiComponents/Ai'
 import Blog from '../view/body/blogComponents/BlogContent'
 import Foot from '../view/foot/Foot'
+import SettingAuth from '../view/body/settingComponents/SettingUserPage/SettingAuth'
 export default function Routers() {
     return (
         <div className='flex '>
@@ -43,6 +44,7 @@ export default function Routers() {
                     <Route path="/about" element={<About />}></Route>
                     <Route path='/setting' element={<Setting />}></Route>
                     <Route path='/setting/backgroundimg' element={<SettingBackgroundImg />}> </Route>
+                    <Route path='/setting/auth' element={<SettingAuth/>}> </Route>
                     <Route path='/setting/forget' element={<SettingUserForgetPage />}> </Route>
                     <Route path='/setting/deactivate' element={<SettingDeactivate />}> </Route>
                     <Route path='/setting/account' element={<SettingAccount />}> </Route>

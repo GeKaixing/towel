@@ -92,7 +92,6 @@ export default function SettingDeactivate() {
     return (
         <>
             <Backtab text='设置' href='/setting'></Backtab>
-     
         <div className={style.SettingDeactivate}>
             <form className={style.SettingDeactivateForm} onSubmit={(e) => { e.preventDefault() }}>
                 <input type='text' placeholder='您的账户名' className={style.SettingUserForgetPageName} value={inputData.user} onChange={userNameHandle}></input>
