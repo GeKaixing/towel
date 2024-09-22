@@ -3,7 +3,7 @@ import Post from '../../../components/Post'
 import propTypes from 'prop-types'
 import { getPost } from '../../../services/post/post'
 import postJson from '../../../assets/json/post.json'
-import NullDat from '../../../components/NullData'
+// import NullDat from '../../../components/NullData'
 export default function PostPage() {
   const [articles, setarticles] = useState([]) // 存储加载的数据
   const [reload, setLoad] = useState(false)
@@ -15,10 +15,7 @@ export default function PostPage() {
     setLoading(true);
     const response = await getPost(`post?page=${page}&limit=5`); // 根据页码获取数据
     const newData = await response.data
-    // getPost(`post?page=${page}&limit=1`).then((response) => {
-    //   setarticles(response.data)
-    // })
-     //判断是否有更多数据
+      //判断是否有更多数据
      if (newData.length === 0) {
        setHasMore(false);
      } else {
@@ -58,15 +55,21 @@ export default function PostPage() {
     process.env.REACT_APP_TEST === 'TEST' ?
       setarticles(postJson) :
       getPostApi(page);
-  }, [reload,page])
+  }, [page])
+
+  useEffect(() => {
+    getPost().then((res)=>{
+      setarticles(res.data);
+    })
+  }, [reload]);
   return (
     <>
-      {articles.length !== 0 ?
+      {
         <div className='p-2'>
-          {articles.map(function (item) {
+          {articles.map(function (item,index) {
             return (
               <Post
-                key={item._id}
+                key={`${item._id}-${index}`}
                 id={item._id}
                 name={item.user.username}
                 headimg={item.user.headimg}
@@ -87,8 +90,7 @@ export default function PostPage() {
 
           }
         </div >
-        :
-        <NullDat></NullDat>}
+        }
       {loading && <p>加载中...</p>}
       {/* {!hasMore && <p>没有更多数据了</p>} */}
       <div ref={loaderRef}></div>  {/* 用于触发加载下一页 */}

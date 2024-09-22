@@ -1,7 +1,6 @@
 import { open, auth } from '../config';
 //获取 文章
-export const getPost = (url) => {
-   console.log(url)
+export const getPost = (url='post') => {
    return open({ url:url })}
 // 点赞文章
 export const postPostLike = (id, data) => {
