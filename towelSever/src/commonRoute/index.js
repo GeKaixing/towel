@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ meassge: '账号或者密码错误' })
         }
         const token = jwt.sign({ userid: user._id }, 'hello world', { expiresIn: '30d' })
-        res.status(200).json({ jwt: token, userid: user._id, username: username, headimg: user.headimg })
+        res.status(200).json({ jwt: token, userid: user._id, username: username, headimg: user.headimg ,premium:user.premium})
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

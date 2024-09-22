@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import style from './SettingDeactivate.module.css'
 import axios from 'axios';
+import Backtab from '../../../../components/Backtab';
 export default function SettingDeactivate() {
     const [localStorageData, setLocalStorageData] = useState({});
     const [inputData, setinputData] = useState({
@@ -91,7 +92,7 @@ export default function SettingDeactivate() {
     }
     return (
         <>
-            <Backtab text='设置' href='/setting'></Backtab>
+         <Backtab text='设置' href='/setting'></Backtab>
         <div className={style.SettingDeactivate}>
             <form className={style.SettingDeactivateForm} onSubmit={(e) => { e.preventDefault() }}>
                 <input type='text' placeholder='您的账户名' className={style.SettingUserForgetPageName} value={inputData.user} onChange={userNameHandle}></input>

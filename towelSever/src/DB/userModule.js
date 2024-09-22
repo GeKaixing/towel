@@ -42,6 +42,11 @@ const USER = new mongoose.Schema({
         type:Boolean,
         default: false
     },
+    premium:{
+        type:Boolean ,
+        required: true,
+        default: false
+    },
     createDate:{
         type: String,
         required: true,
