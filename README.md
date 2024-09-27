@@ -415,3 +415,21 @@ web项目截图
 技术栈 uniapp socket  
 取消使用pinia状态管理使用状态提升和使用响应式api reactive()进行简单的状态管理  
 简化代码结构
+
+github towel 目录结构
+
+````
+├─.vscode                       vscode配置文件
+├─Next_towel_official_website   towel门户网站
+├─React_towelClient             towel网站
+├─README_static                 readme静态资源
+├─RN_towelClient                towel移动端
+├─towel_admin                   towel后台管理
+├─towel_Server                  towel服务器
+├─Uniapp_refactor_towelClient   towel小程序重构
+├─uniapp_towelClient            towel小程序
+├─Vue_towelClient               towel网站vue3版本
+├─.gitignore                    git忽略文件
+├─LICENSE                       开源协议
+├─README.md                     readme
+````
