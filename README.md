@@ -315,7 +315,8 @@ towel 是一个三端同步的项目，在基于expess框架下编写后端项�
 * 后端并没有去模块化，目录不清晰，1117行代码在同一个文件中，后续将进行模块化 （进行中）
 * 工程化较弱目前仅使用git做项目提交和版本管理，（目前添加eslint）
 * 将添加广告模块 
-* 完善web的响应式布局 （已完成）
+* 完善web的响应式布局  
+* 权限设计
 ## 4 项目整体架构
 <img src="https://github.com/GeKaixing/towel/raw/main/README_static/Frame%201.png" alt="架构" width="400" height="450"  />
 
