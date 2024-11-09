@@ -256,6 +256,7 @@ web端使用技术栈react/react-router/axios/socket/ts
 [![reactRouter](https://img.shields.io/badge/reactRouter-6.13.0-brightgreen 'react')](https://reactrouter.com/en/main 'reactRouter')
 [![axios](https://img.shields.io/badge/axios-1.4.0-blue 'axios')](https://axios-http.com/docs/intro 'axios')
 [![socket](https://img.shields.io/badge/socket.io-4.6.2-yellow 'socket')](https://socket.io/ 'socket')
+[![Typescript](https://img.shields.io/badge/typescripe-5.6.3-red 'typescript')](https://www.typescriptlang.org/ 'Typescript')
 
 移动端技术栈 react-native/expo/axios/reactnative-navigation/socket
 
