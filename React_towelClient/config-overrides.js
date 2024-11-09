@@ -6,6 +6,7 @@ module.exports = function override(config) {
     test: /\.md$/,
     type: 'asset/source',
   });
-
+ // 修改 resolve 配置
+ config.resolve.extensions = ['.tsx']
   return config;
 };

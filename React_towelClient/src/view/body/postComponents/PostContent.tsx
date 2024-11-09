@@ -4,8 +4,9 @@ import propTypes from 'prop-types'
 import { getPost } from '../../../services/post/post'
 import postJson from '../../../assets/json/post.json'
 // import NullDat from '../../../components/NullData'
+import {Article} from '../../../types/body/postComponents/PostContent'
 export default function PostPage() {
-  const [articles, setarticles] = useState([]) // 存储加载的数据
+  const [articles, setarticles] = useState<Article[]>([]) // 存储加载的数据
   const [reload, setLoad] = useState(false)
   const [page, setPage] = useState(1);   // 当前页码
   const [loading, setLoading] = useState(false);  // 加载状态

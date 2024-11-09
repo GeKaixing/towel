@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import '../src/styles/index.css'
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootHtml:HTMLElement|null= document.getElementById('root');
+if(!rootHtml) throw new Error('root element not found');
+const root = ReactDOM.createRoot(rootHtml);
 document.documentElement.style.fontSize = 100 / 750 + 'vm';
 document.body.setAttribute('color-model', `light`);
 root.render(
