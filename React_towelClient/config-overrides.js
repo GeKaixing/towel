@@ -7,6 +7,6 @@ module.exports = function override(config) {
     type: 'asset/source',
   });
  // 修改 resolve 配置
- config.resolve.extensions = ['.tsx']
+ config.resolve.extensions = ['.tsx','.js','.ts']
   return config;
 };

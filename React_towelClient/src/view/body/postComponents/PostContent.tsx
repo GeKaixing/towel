@@ -3,7 +3,6 @@ import Post from '../../../components/Post'
 import propTypes from 'prop-types'
 import { getPost } from '../../../services/post/post'
 import postJson from '../../../assets/json/post.json'
-// import NullDat from '../../../components/NullData'
 import {Article} from '../../../types/body/postComponents/PostContent'
 export default function PostPage() {
   const [articles, setarticles] = useState<Article[]>([]) // 存储加载的数据
