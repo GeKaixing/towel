@@ -14,7 +14,7 @@
 副颜色:rgba(248, 196, 134, 1)  
 [logo详细](https://github.com/GeKaixing/towel/raw/main/README_static/wexinapp.jpg)
 ## 1. 项目启动
-开发环境：macOS monterey 12.4
+开发环境：macOS monterey 12.7
 安装[node](https://nodejs.org/en)和[git](https://git-scm.com/downloads)     
 1. node版本>=21.6.1，下载适合的系统相对应的版本  
    * 验证node版本和是否安装成功
@@ -249,8 +249,8 @@ src
    └── index.js 
 ├── index.js                             主入口
 ````
-## 2. 项目使用的技术栈，npm i安装了对应不同技术栈，编写时间2024/06/15
-web端使用技术栈react/react-router/axios/socket
+## 2. 项目使用的技术栈，npm i安装了对应不同技术栈，编写时间2024/11/10
+web端使用技术栈react/react-router/axios/socket/ts
 
 [![react](https://img.shields.io/badge/react-18.2.0-red 'react')](https://react.dev/ 'react')
 [![reactRouter](https://img.shields.io/badge/reactRouter-6.13.0-brightgreen 'react')](https://reactrouter.com/en/main 'reactRouter')
@@ -300,7 +300,8 @@ towel 是一个三端同步的项目，在基于expess框架下编写后端项�
 * Eslint 工程化（Web）
 ### 3.1项目疑惑和不足
 为什么没有使用typescript？
-* 因为是个人开发，使用TS编译消耗时间长，使用代码变得冗长，所以并没有采用了typescript。          
+* 因为是个人开发，使用TS编译消耗时间长，使用代码变得冗长，所以并没有采用了typescript。 
+* 11月11日还是有typescript重构了。      
 为什么没有使用react rudex
 * 更多的是使用react的useReduce和useContext做状态管理或者状态提升，使用状态管理的组件并不多，没有必要引入redux框。  
 为什么叫towel/毛巾
