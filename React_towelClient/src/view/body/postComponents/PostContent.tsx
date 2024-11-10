@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import React, { useEffect, useRef, useState } from 'react'
 import Post from '../../../components/Post'
 import propTypes from 'prop-types'
@@ -78,7 +79,7 @@ export default function PostPage() {
                 likes={item.postLike}
                 favorites={item.postFavorite}
                 postImages={item.postImages}
-                postVideos={item.postVideos}
+                postVideos={item.postVideos.join(',')}
                 postUserId={item.postUserId}
                 postTitle={item.postTitle}
                 postCreateDate={item.postCreateDate}
