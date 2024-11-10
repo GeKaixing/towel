@@ -1,4 +1,4 @@
-const { MENTIONS } = require('../DB/index');
+const { MENTIONS } = require('../models/index');
 const ObjectID = require('mongodb').ObjectId;
 const userSocketMap = new Map(); 
 module.exports = (io) => {

@@ -1,23 +1,32 @@
-const express = require("express");
-const cors = require('cors')
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
-const ObjectId = require('mongoose').Types.ObjectId;
-const ObjectID = require('mongodb').ObjectId;
+import express from 'express'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
+import http from 'http'
+import multer from 'multer'
+import fs from 'fs'
+import {Server} from 'socket.io'
+import socketio from './src/socket/index'
+import authMiddleware from './src/routers/auth/index'
+import commonRoute from './src/routers/common/index.js';
+import AI from './src/routers/Ai/Llama.js';
+import admin from './src/routers/admin/index.js';
+import toutiaoHot from './src/routers/toutiaoHot/index.js';
+import authRoute from './src/routers/auth/index.js';
+import userRoute from './src/routers/user/index.js';
+import { USERS, STATICDATAS,} from './src/models/index'
+import bing from './src/routers/bing/index.js'
+
 const app = express()
-const http = require('http');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const multer = require('multer')
+const PORT = 4000;
 const upload = multer({ dest: 'upload' }).single('file', 'text')
 const uploadVideo = multer({ dest: 'uploadvideo' }).single('video', 'text')
 const uploadHeadImg = multer({ dest: 'uploadheadimg' }).single('headimg', 'text')
-const fs = require('fs');
-const { Server } = require('socket.io');
-const nodemailer = require('nodemailer');
 const server = http.createServer(app);
-app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5173'] }))
 const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
+
+
+app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5173'] }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('upload'))
@@ -25,52 +34,18 @@ app.use(express.static('uploadvideo'))
 app.use(express.static('uploadheadimg'))
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }))
 app.use(bodyParser.json())
-const PORT = 4000;
+
 mongoose.connect('mongodb://localhost:27017').catch(error => handleError(error))
 mongoose.connection.on('error', error => { console.log(error); })
 mongoose.connection.once('connected', () => {
     console.log('mongodb is connected');
 })
-const { POSTS,
-    COMMENTS,
-    REPLYS,
-    USERS,
-    LIKES,
-    FAVORITES,
-    STATICDATAS,
-    MENTIONS,
-    verificationCodes } = require('./src/DB/index');
+
+
 // 监听客户端连接
-const socketio = require('./src/socket/index');
 socketio(io)
-const authMiddleware = require('./src/auth/index')
-const commonRoute = require('./src/commonRoute/index')
-const AI = require('./src/Ai/Llama')
-const admin=require('./src/admin/index')
-const toutiaoHot = require('./src/toutiaoHot/index')
-const authRoute = require('./src/authRoute/index')
-const userRoute = require('./src/authRoute/userRoute/userRouter')
 // common API
-const axios = require('axios');
-app.get('/HPImageArchive', async (req, res) => {
-    try {
-        const response = await axios.get('https://cn.bing.com/HPImageArchive.aspx', {
-            params: {
-                format: 'js',
-                idx: 0,
-                n: 1,
-                nc: 1586183781119,
-                pid: 'hp',
-                uhd: 1,
-                uhdwidth: 2880,
-                uhdheight: 1620
-            }
-        });
-        res.json(response.data);
-    } catch (error) {
-        res.status(500).send('Error fetching data');
-    }
-});
+app.use(bing)
 //admin
 app.use(admin)
 //ai

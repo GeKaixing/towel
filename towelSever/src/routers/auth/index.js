@@ -10,7 +10,7 @@ const {
     FAVORITES,
     STATICDATAS,
     MENTIONS,
-    verificationCodes } = require('../DB/index');
+    verificationCodes } = require('../../models/index');
 router.get('/getusepost/:id', async (req, res) => {
     try {
         const useId = req.params.id;

@@ -13,7 +13,7 @@ const {
     FAVORITES,
     STATICDATAS,
     MENTIONS,
-    verificationCodes } = require('../../DB/index');
+    verificationCodes } = require('../../models/index');
 router.get('/userinfo/:id', async (req, res) => {
     try {
         const id = req.params.id

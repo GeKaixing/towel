@@ -12,7 +12,7 @@ const {
   STATICDATAS,
   MENTIONS,
   verificationCodes,
-} = require("../DB/index");
+} = require("../../models/index");
 router.get("/alluser", async (req, res) => {
   try {
     const data = await USERS.find();
