@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const MENTION = new mongoose.Schema({
+import mongoose from 'mongoose'
+export const MENTION = new mongoose.Schema({
     /* 全部根据用户的id查选 */
     postId: { type: mongoose.Schema.Types.ObjectId, ref: 'POST' },//post ID
     bymentionUserId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },//被@的用户的id/而这才是自己的id//根据这个ID进行查询
@@ -10,4 +10,3 @@ const MENTION = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },//创建的时间
     read: { type: Boolean, default: false }//是否读取
 });
-module.exports=MENTION

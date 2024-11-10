@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const REPLY = new mongoose.Schema({
+import mongoose from 'mongoose'
+export const REPLY = new mongoose.Schema({
     postId: { type: mongoose.Schema.Types.ObjectID, ref: 'POSTS' },
     commentId: { type: mongoose.Schema.Types.ObjectID, ref: 'COMMENT' },
     replyUserId: {
@@ -21,4 +21,3 @@ const REPLY = new mongoose.Schema({
         required: true,
     },
 })
-module.exports=REPLY;

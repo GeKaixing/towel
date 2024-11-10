@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const USER = new mongoose.Schema({
+import mongoose from 'mongoose'
+export const USER = new mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -52,4 +52,3 @@ const USER = new mongoose.Schema({
         required: true,
     }
 })
-module.exports = USER;

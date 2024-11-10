@@ -1,13 +1,10 @@
-const express = require('express')
-const router = express()
-const axios = require('axios')
-router.get('/toutiaohot',  (req, res) => {
-        axios.get('https://dabenshi.cn/other/api/hot.php?type=toutiaoHot')
-            .then(response => {
-                res.status(200).send(response.data) 
-            })
-            .catch(error => {
-                res.status(500).send({message:error})
-            })
-})
-module.exports = router;
+import express from 'express';
+
+import { toutiaohotApi } from '../../controllers/toutiaoHot.js';
+
+const router = express.Router();
+
+//爬虫爬取今日头条
+router.get('/toutiaohot', toutiaohotApi)
+
+export default  router;

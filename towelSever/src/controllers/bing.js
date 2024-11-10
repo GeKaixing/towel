@@ -1,4 +1,6 @@
 import axios from 'axios'
+
+// 爬取Bing的壁纸
 export const HPImageArchiveApi=async (req, res) => {
     try {
         const response = await axios.get('https://cn.bing.com/HPImageArchive.aspx', {

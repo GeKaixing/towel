@@ -1,5 +1,7 @@
-const mongoose = require('mongoose')
-const COMMENT = new mongoose.Schema({
+
+import mongoose from 'mongoose'
+
+export const COMMENT = new mongoose.Schema({
     postId: { type: mongoose.Schema.Types.ObjectID, ref: 'POSTS' },
     commentUserId: {
         type: mongoose.Schema.Types.ObjectID,
@@ -16,4 +18,3 @@ const COMMENT = new mongoose.Schema({
         required: true,
     },
 })
-module.exports = COMMENT;

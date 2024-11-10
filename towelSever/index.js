@@ -6,15 +6,15 @@ import http from 'http'
 import multer from 'multer'
 import fs from 'fs'
 import {Server} from 'socket.io'
-import socketio from './src/socket/index'
-import authMiddleware from './src/routers/auth/index'
+import socketio from './src/socket/index.js'
+import authMiddleware from './src/routers/auth/index.js'
 import commonRoute from './src/routers/common/index.js';
 import AI from './src/routers/Ai/Llama.js';
 import admin from './src/routers/admin/index.js';
 import toutiaoHot from './src/routers/toutiaoHot/index.js';
 import authRoute from './src/routers/auth/index.js';
 import userRoute from './src/routers/user/index.js';
-import { USERS, STATICDATAS,} from './src/models/index'
+import { USERS, STATICDATAS,} from './src/models/index.js'
 import bing from './src/routers/bing/index.js'
 
 const app = express()

@@ -79,7 +79,8 @@ export default function PostPage() {
                 likes={item.postLike}
                 favorites={item.postFavorite}
                 postImages={item.postImages}
-                postVideos={item.postVideos.join(',')}
+                //@ts-ignore 
+                postVideos={item.postVideos}
                 postUserId={item.postUserId}
                 postTitle={item.postTitle}
                 postCreateDate={item.postCreateDate}

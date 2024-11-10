@@ -1,7 +1,9 @@
-const { MENTIONS } = require('../models/index');
-const ObjectID = require('mongodb').ObjectId;
+import { MENTIONS } from'../models/index.js';
+import mongodb from 'mongodb';
+
+const ObjectID = mongodb.ObjectId;
 const userSocketMap = new Map(); 
-module.exports = (io) => {
+ const socker= (io) => {
     io.on('connection', async (socket) => {
         const UserID = socket.handshake.query.userid
         userSocketMap.set(UserID,socket.id)
@@ -50,3 +52,6 @@ module.exports = (io) => {
         });
     })
 };
+
+
+export default socker;

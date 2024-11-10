@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const POST = new mongoose.Schema({
+import mongoose from 'mongoose'
+export const POST = new mongoose.Schema({
     // postUserImage: String,//header 字段 
     //postUserName: String,//username 字段
     postUserId: {
@@ -30,4 +30,3 @@ const POST = new mongoose.Schema({
         default: 0
     },
 });
-module.exports = POST;
