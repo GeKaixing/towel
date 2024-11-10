@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
-import Footer from './views/footer/footer.vue';
+import Footer from './views/footer/Footer.vue';
 import Tabs from './views/header/tabs/tabs.vue';
 // const islogin = ref(false)
 </script>
