@@ -7,7 +7,6 @@ import socketio from './src/socket/index.js'
 import authMiddleware from './src/routers/auth/index.js'
 import common from './src/routers/common/index.js';
 import AI from './src/routers/Ai/Llama.js';
-import admin from './src/routers/admin/index.js';
 import toutiaoHot from './src/routers/toutiaoHot/index.js';
 import auth from './src/routers/auth/index.js';
 import user from './src/routers/user/index.js';
@@ -33,8 +32,6 @@ app.use(bodyParser.json())
 socketio(io)
 // bing API
 app.use(bing)
-//admin API
-app.use(admin)
 //ai API
 app.use(AI)
 //toutiaoHot API

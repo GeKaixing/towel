@@ -4,9 +4,6 @@ import {
   REPLYS,
   USERS,
 } from "../models/index.js";
-import mongoose from 'mongoose'
-import mongodb from 'mongodb'
-const ObjectID = mongodb.ObjectId;
 
 // 获取所有用户
 export const  alluserAPi= async(req, res)=>{
