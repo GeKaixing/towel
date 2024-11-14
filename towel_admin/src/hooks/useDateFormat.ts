@@ -11,7 +11,6 @@ export default function useDateFormat(dates) {
     const date=computed(()=>{
         return dayjs(dates).format('YYYY-MM-DD HH:mm:ss') 
     })
-
     return date;
     
 }

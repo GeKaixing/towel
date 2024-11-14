@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useDateFormat from '@/hooks/useDateFormat';
 import axios from 'axios'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
@@ -89,7 +89,6 @@ const start = () => {
     :row-selection="{
       selectedRowKeys: state.selectedRowKey,
       type: 'radio', // 使用复选框
-      hideDefaultSelections: true,
       onChange: (selectedRowKeys, selectedRows) => {
         console.log('Selected Row Keys:', selectedRowKeys) // 调试日志
         console.log('Selected Rows:', selectedRows) // 调试日志

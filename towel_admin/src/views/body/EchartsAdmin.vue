@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import * as echarts from 'echarts'
 import { onMounted, ref } from 'vue'
 const echartsDom = ref(null)

@@ -1,3 +1,4 @@
+//@ts-ignore
 import Login from '@/components/Login.vue'
 import CommentAdmin from '@/views/body/CommentAdmin.vue'
 import EchartsAdmin from '@/views/body/EchartsAdmin.vue'
@@ -5,8 +6,9 @@ import PostAdmin from '@/views/body/PostAdmin.vue'
 import ReplyAdmin from '@/views/body/ReplyAdmin.vue'
 import UserAdmin from '@/views/body/UserAdmin.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-// const ISLOGIN=false
+const ISLOGIN=true
 const router = createRouter({
+  //@ts-ignore
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
@@ -41,7 +43,7 @@ const router = createRouter({
     }
   ]
 })
-/*   router.beforeEach((to, from, next) => {   //全局全局前置守卫
+  router.beforeEach((to, from, next) => {   //全局全局前置守卫
   //to : 将要进入的目标路由对象
   //from : 即将离开的目标路由对象
   //执行跳转的下一步钩子
@@ -54,6 +56,6 @@ const router = createRouter({
     if(ISLOGIN)next({name:'/'}) //已登录就跳转到首页
     else  next()  //否则正常进入登录页面
   }
-}) */
+})
 
 export default router

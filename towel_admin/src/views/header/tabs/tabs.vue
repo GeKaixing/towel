@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { UserOutlined, BarChartOutlined, FileOutlined,CommentOutlined,MessageOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router';
 const route=useRoute()
