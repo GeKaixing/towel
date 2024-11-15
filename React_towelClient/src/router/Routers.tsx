@@ -20,7 +20,6 @@ import NotRouter from '../components/NotRouter'
 import H5header from '../components/H5header'
 import PrivateChat from '../view/body/messageComponents/PrivateChat'
 import Ai from '../view/body/AiComponents/Ai'
-import Blog from '../view/body/blogComponents/BlogContent'
 import Foot from '../view/foot/Foot'
 import SettingAuth from '../view/body/settingComponents/SettingUserPage/SettingAuth'
 export default function Routers() {
@@ -48,7 +47,6 @@ export default function Routers() {
                     <Route path='/setting/account' element={<SettingAccount />}> </Route>
                     <Route path='/search' element={<Search />}></Route>
                     <Route path='/ai' element={<Ai />}></Route>
-                    <Route path='/blog' element={<Blog></Blog>}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/signup' element={<Signup />}></Route>
                     <Route path='/postcontent/:id' element={<PostContent ></PostContent>}></Route>

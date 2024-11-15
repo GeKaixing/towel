@@ -94,7 +94,7 @@ export default function MainMenu() {
         <MainMenuLink className='relative' to="/Message" src={icons[2].getIcon('/Message').path} text='消息'>
           <div className='hidden lg:block absolute -right-6 font-[--assistantColor]'>{noReadNumber}</div>
         </MainMenuLink>
-        <MainMenuLink to="/blog" src={icons[7].getIcon('/blog').path} text='博客'/>
+        <MainMenuLink to="https://blog.gekaixing.top/" src={icons[7].getIcon('/blog').path} text='博客'/>
         <MainMenuLink className='hidden md:block' to="/setting" src={icons[4].getIcon('/setting').path} text='设置' />
         {localStorageData.jwt &&
           <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center '}>
