@@ -19,12 +19,12 @@ export default function ToutiaoHot() {
     }, [])
     return (
         <div className='flex flex-col space-x-2 bg-[--boxColor] w-full rounded-my-rounded-10px p-2'>
-            <div className='self-center mb-2'>今日头条</div>
+            <div className='self-center mb-2 text-[--fontColor]'>今日头条</div>
             {
                
                 sliceData.map((item, index) => (
-                    <Link to={item.url} key={index} target="_blank" rel="noopener noreferrer">
-                        <div className='font-semibold text-nowrap text-ellipsis overflow-hidden hover:bg-[--boxHoverColor] hover:rounded-[10px]'>
+                    <Link to={item.url} key={index} target="_blank" rel="noopener noreferrer" >
+                        <div className='font-semibold text-[--fontColor] text-nowrap text-ellipsis overflow-hidden hover:bg-[--boxHoverColor] hover:rounded-[10px]'>
                             {item.title}
                         </div>
                         <div className='text-gray-500'>

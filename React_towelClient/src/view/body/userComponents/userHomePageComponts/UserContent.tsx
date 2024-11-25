@@ -50,7 +50,7 @@ export default function UserHomePage() {
           {localStorageData.userid===params.id&& <div className='text-[--fontColor] cursor-pointer' onClick={closeAnAccountHanlder}>登出</div>}
         </div>
       </div>
-      <div className='text-[fontColor] flex justify-between mt-2 mb-2'>
+      <div className='text-[--fontColor] flex justify-between mt-2 mb-2'>
         <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserArticle') }}>文章</div>
         <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserComment') }}>评论</div>
         <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserReply') }}>回复</div>

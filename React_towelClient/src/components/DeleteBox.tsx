@@ -4,7 +4,7 @@ import Portal from './Portal'
 import  PropTypes  from 'prop-types'
 import { Link } from 'react-router-dom'
 
-function DeleteBox({DeleteBox, postUserId, userName, headimg, deleteHandler, reportHandler = () => { alert('举报成功') }, children,}) {
+function DeleteBox({ postUserId, userName, headimg, deleteHandler, reportHandler = () => { alert('举报成功') }, children,}) {
     const [localStorageData] = useLocalStorage()
     const [showModal, setShowModal] = useState(true);
     return (

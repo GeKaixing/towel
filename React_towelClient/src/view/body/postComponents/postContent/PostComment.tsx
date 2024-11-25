@@ -104,7 +104,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                                             进入文章
                                         </span>
                                     ) : null}
-                                    <span className=' cursor-pointer w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => setInputData({ targetName: '@' + item.users[0].username, commentid: item._id })}>
+                                    <span className='text-[--fontColor] cursor-pointer w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => setInputData({ targetName: '@' + item.users[0].username, commentid: item._id })}>
                                         回复{item.users[0].username}
                                     </span>
                                 </DeleteBox>

@@ -52,8 +52,8 @@ export default function PostCommentButton({cid,replycontent,replycount, likes, c
                             <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>
                     }
                     {likes}</div>
-                <div onClick={() => setInputData({ targetName: '@' + commentName, commentid: commentid })} className='font-[--fontColor] cursor-default'>回复</div>
-                <div className='ml-[10px] font-[--fontColor] cursor-default'  onClick={() => isreplyshow(!replyshow)} >显示回复{replycount}</div>
+                <div onClick={() => setInputData({ targetName: '@' + commentName, commentid: commentid })} className=' cursor-default text-[--fontColor]'>回复</div>
+                <div className='ml-[10px]  cursor-default text-[--fontColor]'  onClick={() => isreplyshow(!replyshow)} >显示回复{replycount}</div>
             </div>
             {/* 这是回复 */}
             {replyshow &&
