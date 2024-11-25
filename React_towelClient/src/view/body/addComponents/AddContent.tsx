@@ -16,6 +16,8 @@ import axios from 'axios';
 import dayjs from 'dayjs'
 export default function Portal() {
 
+
+
     const [textareaData, settextareaData] = useState('');
     const [localStorageData] = useLocalStorage()
     const loginDataParse = localStorageData
@@ -136,6 +138,7 @@ export default function Portal() {
                     {/* postTitle */}
                     <input className='mb-2 mt-2 w-full bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor] my-rounded-10px' placeholder='标题,最多30字哦' onChange={(e)=>{setPostTitle(e.target.value)}} value={postTitle} maxLength={30}></input>
                     {/* textContent */}
+                    <div id='editor'></div>
                     <textarea
                         ref={textareaRef}
                         value={textareaData}
