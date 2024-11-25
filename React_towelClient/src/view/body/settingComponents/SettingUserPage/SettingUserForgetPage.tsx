@@ -91,15 +91,15 @@ export default function SettingUserForgetPage() {
     return (
         <>
             <Backtab text='设置' href='/setting'></Backtab>
-            <div className='font-[--fontColor]'>
+            <div className='text-[--fontColor]'>
                 <form className='flex flex-col justify-center items-center relative' onSubmit={(e) => { e.preventDefault() }}>
                     <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='text' placeholder='您的账户名'  value={inputData.user} onChange={userNameHandle}></input>
                     <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='email' placeholder='电子邮件' value={inputData.email} onChange={emailHandle}></input>
                     {isShowCode ? <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='code' placeholder='电子邮件验证码' value={inputData.code} onChange={codeHandle}></input> : null}
                     <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type={showpassword ? 'text' : 'password'} placeholder='新密码' value={inputData.password} onChange={passwordHandle}></input>
                     <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type={showpassword2 ? 'text' : 'password'} placeholder='确认密码密码' value={inputData.password2} onChange={password2Handle}></input>
-                    <input className='w-24 h-6 bg-[--boxColor] border-none font-[--fontColor]' type='submit' value='发送验证码' onClick={sendCodeHandle}></input>
-                    <input className='w-24 h-6 bg-[--boxColor] border-none font-[--fontColor]' type='submit'  onClick={submitHandler} ></input>
+                    <input className='w-24 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit' value='发送验证码' onClick={sendCodeHandle}></input>
+                    <input className='w-24 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit'  onClick={submitHandler} ></input>
                 </form>
 
             </div>

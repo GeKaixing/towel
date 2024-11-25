@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Backtab from '../../../../components/Backtab';
 export default function SettingDeactivate() {
-    const [localStorageData, setLocalStorageData] = useState<{jwt?:string}>({});
+    const [localStorageData, setLocalStorageData] = useState<{ jwt?: string }>({});
     const [inputData, setinputData] = useState({
         user: '',
         email: '',
@@ -14,7 +14,7 @@ export default function SettingDeactivate() {
 
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
-            setLocalStorageData(JSON.parse(localStorage.getItem('loginData')as string))
+            setLocalStorageData(JSON.parse(localStorage.getItem('loginData') as string))
         }
     }, [])
 
@@ -45,7 +45,7 @@ export default function SettingDeactivate() {
                     }
                 },
                 headers: {
-                    'Authorization': `Bearer ${localStorageData.jwt||''}`,
+                    'Authorization': `Bearer ${localStorageData.jwt || ''}`,
                 }
             }).then(res => {
                 if (res.status === 201) {
@@ -72,7 +72,7 @@ export default function SettingDeactivate() {
                     }
                 },
                 headers: {
-                    'Authorization': `Bearer ${localStorageData.jwt||''}`,
+                    'Authorization': `Bearer ${localStorageData.jwt || ''}`,
                 }
             }).then(res => {
                 if (res.status === 201) {
@@ -91,18 +91,16 @@ export default function SettingDeactivate() {
     }
     return (
         <>
-         <Backtab text='设置' href='/setting'></Backtab>
-        <div className='flex flex-col justify-center items-center'>
-            <form  onSubmit={(e) => { e.preventDefault() }}>
-                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='text' placeholder='您的账户名'  value={inputData.user} onChange={userNameHandle}></input>
-                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]'type='email' placeholder='电子邮件' value={inputData.email} onChange={emailHandle}></input>
-                {isShowCode ? <input type='text'className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' placeholder='电子邮件验证码' value={inputData.code} onChange={codeHandle}></input> : null
-                }                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]'type='password' placeholder='密码' value={inputData.password} onChange={passwordHandle}></input>
-                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit'  value='发送验证码' onClick={sendCodeHandle}></input>
-                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit'  onClick={submitHandler}></input>
-                <strong style={{ color: "red" }}>注销账号不同逆</strong>
+            <Backtab text='设置' href='/setting'></Backtab>
+            <form className='flex flex-col justify-center items-center text-[--fontColor]' onSubmit={(e) => { e.preventDefault() }}>
+                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='text' placeholder='您的账户名' value={inputData.user} onChange={userNameHandle}></input>
+                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='email' placeholder='电子邮件' value={inputData.email} onChange={emailHandle}></input>
+                {isShowCode ? <input type='text' className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' placeholder='电子邮件验证码' value={inputData.code} onChange={codeHandle}></input> : null
+                }                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='password' placeholder='密码' value={inputData.password} onChange={passwordHandle}></input>
+                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit' value='发送验证码' onClick={sendCodeHandle}></input>
+                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit' onClick={submitHandler}></input>
+                <strong className='mt-[10px] text-red-500' >注销账号不同逆</strong>
             </form>
-        </div>
         </>
     )
 }

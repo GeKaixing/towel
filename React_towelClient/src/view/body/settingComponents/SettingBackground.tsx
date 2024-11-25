@@ -33,11 +33,15 @@ export default function SettingBackground() {
         setColorModeldata(colorModeldata)
     }, [colorModel])
     return (
-        <div className='flex felx-col gap-2 mt-2 text-center'>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor] text-[--fontColor] flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={backgroundimgHandler}>背景{colorModeldata === 'bing' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor] text-[--fontColor] flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={autoColorHandler}>跟随系统{colorModeldata === 'system' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor] text-[--fontColor] flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={selectLightHandler}>白天{colorModeldata === 'light' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor] text-[--fontColor] flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={selectDarkHandler}>晚上{colorModeldata === 'dark' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
+        <div className='flex flex-wrap gap-2 mt-2 text-center justify-center items-center text-[--fontColor]'>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={backgroundimgHandler}>背景{colorModeldata === 'bing' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={autoColorHandler}>跟随系统{colorModeldata === 'system' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={selectLightHandler}>白天{colorModeldata === 'light' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={selectDarkHandler}>晚上{colorModeldata === 'dark' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/auth',{replace: true})}>towel权限</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/account',{replace: true})}>账号信息</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/forget',{replace: true})}>忘记密码</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/deactivate',{replace: true})}>注销账号</div>
         </div>
     )
 }
