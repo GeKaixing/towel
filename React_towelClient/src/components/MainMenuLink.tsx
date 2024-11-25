@@ -3,10 +3,10 @@ import MainMenuTitle from './MainMenuTitle'
 import { Link } from 'react-router-dom'
 import  PropTypes  from 'prop-types'
 
-export default function MainMenuLink({ to, src, text, children ,className}) {
+export default function MainMenuLink({ to, src, text, children ,className,target='_self'}) {
 
     return (
-        <Link to={to} target='_blank' className={`${className} lg:flex lg:flex-row lg:items-center lg:mb-5 hover:bg-[--boxColor] hover:rounded-[10px]` }>
+        <Link to={to} target={target} className={`${className} lg:flex lg:flex-row lg:items-center lg:mb-5 hover:bg-[--boxColor] hover:rounded-[10px]` }>
             <div className='w-10 h-10 rounded-full max-lg:m-0 lg:mr-10 '>
                 <img className=' w-10 h-10 ' src={src} ></img>
             </div>
