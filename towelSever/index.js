@@ -13,6 +13,7 @@ import user from './src/routers/user/index.js';
 import bing from './src/routers/bing/index.js'
 import upload from './src/routers/upload/index.js'
 import {connect} from './src/models/index.js'
+import redisClient from './src/redis/index.js'
 
 const app = express()
 connect()

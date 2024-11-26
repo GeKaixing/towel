@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import {USERS,verificationCodes} from '../models/index.js'
-
+import redisClient from '../redis/index.js'
 // 获取用户信息
 export const userinfoApi =async (req, res) => {
     try {
@@ -19,6 +19,14 @@ export const deactivatecodeApi = async (req, res) => {
         if (!user) {
             return res.status(400).json({ meassge: '账号或邮件未存在' })
         }
+         // 检查 Redis 是否已有未过期验证码
+        const rideskey=`deactivate:${email}`
+        const existingCode = await redisClient.get(redisKey);
+        if (existingCode) {
+            return res.status(200).json({
+                message: `您的验证码已发送，请稍后再试`,
+            });
+        }
         /* 生产五位数的验证码的函数
         *  五位数的验证码
         */
@@ -28,10 +36,13 @@ export const deactivatecodeApi = async (req, res) => {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
         const code = generateVerificationCode()
-        const verificationCode = new verificationCodes({
+         // 存储验证码到 Redis，设置 5 分钟过期
+         await redisClient.set(redisKey, code, { EX: 300 });
+
+        /* const verificationCode = new verificationCodes({
             verificationCode: code,
-        });
-        await verificationCode.save()
+        }); */
+       /*  await verificationCode.save() */
         /*
         * 发送确认邮件的函数
         * 创建一个Nodemailer传输器
@@ -68,22 +79,40 @@ export const deactivatecodeApi = async (req, res) => {
     }
 }
 
-// 注销账号
-export const deactivateaccountAPi =async (req, res) => {
+// 注销账号 API
+export const deactivateaccountAPi = async (req, res) => {
     try {
-        const { username, email, code, password } = req.body.data
-        const userAndemail = await USERS.findOne({ $or: [{ username }, { email }, { password }] });//false
-        const user = await verificationCodes.findOne({ verificationCode: code });//true
-        if (!(userAndemail || user)) {
-            return res.status(400).json({ meassge: '验证码错误', status: false })
+        const { username, email, code, password } = req.body.data;
+
+        // 查询用户信息
+        const user = await USERS.findOne({ $or: [{ username }, { email }] });
+        if (!user) {
+            return res.status(404).json({ message: '用户不存在', status: false });
         }
-        await USERS.deleteOne({ email: email })
-        res.status(201).json({ status: true })
+
+        // 验证密码
+        if (user.password !== password) {
+            return res.status(401).json({ message: '密码错误', status: false });
+        }
+
+        // 验证验证码 (从 Redis 中获取)
+        const redisKey = `deactivate:${email}`;
+        const storedCode = await redisClient.get(redisKey);
+
+        if (!storedCode || storedCode !== code) {
+            return res.status(400).json({ message: '验证码错误或已过期', status: false });
+        }
+
+        // 删除用户
+        await USERS.deleteOne({ email });
+        await redisClient.del(redisKey); // 删除 Redis 中的验证码
+
+        res.status(200).json({ message: '账号已成功注销', status: true });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: '服务器错误，请稍后再试', status: false });
     }
-    catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-}
+};
 // 修改用户名
 export const modifyingausernameAPi= async (req, res) => {
     try {
