@@ -3,7 +3,9 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useSelectLightorDark } from '../../../../store/selectLightorDark'
 import { getHPImageArchive } from '../../../../services/setting/setting'
 import Backtab from '../../../../components/Backtab';
+import { useLanguage } from '../../../../store/LanguageContext';
 export default function SettingBackgroundImg() {
+    const {t}=useLanguage();
     const [imgData, setImgDate] = useState<ArrayBuffer|string>('')
     const { colorModel, setColorModel } = useSelectLightorDark();
     const SettingBackgroundImgHandler = (e) => {
@@ -53,14 +55,14 @@ export default function SettingBackgroundImg() {
     }, [imgData, colorModel])
     return (
         <>
-        <Backtab text='设置' href='/setting'></Backtab>
+        <Backtab text={t('setting')} href='/setting'></Backtab>
         <div className='flex flex-col justify-center items-center space-y-2'>
             <div className='absolute top-1/2 '>
-                <div onClick={SettingBackgroundBingImgHandler} className=' flex  items-center text-[--fontColor] font-bold cursor-pointer'>使用bing每日壁纸
+                <div onClick={SettingBackgroundBingImgHandler} className=' flex  items-center text-[--fontColor] font-bold cursor-pointer'>{t('Use_bing_Daily_wallpapers')}
                     {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'bing' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
                 </div>
                 <form onSubmit={(e) => e.preventDefault()} className='flex flex-col  items-center '>
-                    <label htmlFor='upload' className='w-12 h-12 bg-[--boxColor] flex justify-center items-center my-rounded-10px text-[--fontColor] '>上传</label>
+                    <label htmlFor='upload' className='w-12 h-12 bg-[--boxColor] flex justify-center items-center my-rounded-10px text-[--fontColor] '>{t('uploading')}</label>
                     <input className='hidden' id='upload' type='file' onChange={SettingBackgroundImgHandler} accept="image/*"></input>
                     {localStorage.getItem('color-model') === 'bing' ? localStorage.getItem('background-model') === 'diy' ? <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div> : null : null}
                 </form>

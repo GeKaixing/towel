@@ -6,12 +6,13 @@ import { postUpLoadheadimg } from '../../../../services/add/add';
 import dayjs from 'dayjs';
 import Backtab from '../../../../components/Backtab';
 import {responseData} from '../../../../types/body/settingComponents/SettingUserPage/SettingAccount';
+import { useLanguage } from '../../../../store/LanguageContext';
 export default function SettingAccount() {
     const [responseData, setResponseData] = useState<responseData>({})
     const [localStorageData, setLocalStorageData] = useLocalStorage();
     const [isShowBirthday, setisSHowBirthday] = useState(false);
     const [Birthday, setBirthday] = useState('');
-
+    const {t}=useLanguage();
 
     useEffect(() => {
         if (localStorageData) {
@@ -114,33 +115,33 @@ export default function SettingAccount() {
     }
     return (
         <>
-        <Backtab text='设置' href='/setting'></Backtab>
+        <Backtab text={t('setting')} href='/setting'></Backtab>
         <div className='flex flex-col  items-start text-[--fontColor] absolute left-1/2 -translate-x-1/2 mt-2' >
             <p style={{ display: 'flex', alignItems: "center" }}>
                 <img src={responseData.headimg} className='w-12 h-12 rounded-full overflow-hidden'></img>
-                <label  htmlFor='uploadNewHeadImg' title='修改' >
-                    修改
+                <label  htmlFor='uploadNewHeadImg' title={t('amend')} >
+                    {t('amend')}
                 </label>
                 <input type='file' id='uploadNewHeadImg' onChange={upImageApi} style={{ display: "none" }}></input>
             </p>
             <p><strong>id</strong></p>
             <p>{responseData._id}</p>
-            <p><strong>用户名</strong><button onClick={ModifyingaUserName}>修改</button></p>
+            <p><strong>{t('name')}</strong><button onClick={ModifyingaUserName}>{t('amend')}</button></p>
             <p>{responseData.username}</p>
-            <p><strong>电子邮件</strong></p>
+            <p><strong>{t('email')}</strong></p>
             <p>{responseData.email}</p>
-            <p><strong>电话号码</strong><button onClick={ModifyingiIphoneNumber}>修改</button></p>
-            <p>{responseData.phoneNumber === undefined ? '无' : responseData.phoneNumber}</p>
-            <p><strong>生日</strong><button onClick={ModifyingiBirthday}>修改</button></p>
-            <p><strong>创建日期</strong>
+            <p><strong>{t('phonenumber')}</strong><button onClick={ModifyingiIphoneNumber}>{t('amend')}</button></p>
+            <p>{responseData.phoneNumber === undefined ? t('nothing') : responseData.phoneNumber}</p>
+            <p><strong>{t('birthday')}</strong><button onClick={ModifyingiBirthday}>{t('amend')}</button></p>
+            <p><strong>{t('date_created')}</strong>
             <div className='text-sm text-[--boxHoverColor] font-bold'>{ dayjs(responseData.CreateDate).format('YYYY-MM-DD HH:mm:ss') }</div></p>
-            <p>{Birthday ? Birthday : responseData.birthday === undefined ? '无' : responseData.birthday}</p>
+            <p>{Birthday ? Birthday : responseData.birthday === undefined ? t('nothing') : responseData.birthday}</p>
             {isShowBirthday ? <div style={{ position: 'absolute' }}>
                 <Space direction="vertical">
                     <DatePicker onChange={onChangeHandler}  placement="topLeft" />
                 </Space>
                 <br />
-                <button onClick={ModifyingiSendBirthday}>确认</button> </div> : null}
+                <button onClick={ModifyingiSendBirthday}>{t('enter')}</button> </div> : null}
         </div>
         </>
     )

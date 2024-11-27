@@ -3,10 +3,12 @@ import aboutMd from "../../../assets/about/about.md"
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import Backtab from '../../../components/Backtab';
+import { useLanguage } from '../../../store/LanguageContext';
 export default function About() {
+  const {t}=useLanguage();
   return (
     <>
-      <Backtab text="设置" href="/setting"></Backtab> 
+      <Backtab text={t('seeting')} href="/setting"></Backtab> 
         <div className='flex  px-2 py-2 text-[--fontColor] w-full'>
         <div className='prose lg:prose-xl max-w-none text-wrap ' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(aboutMd)as string) }} ></div>
        {/*  <div>

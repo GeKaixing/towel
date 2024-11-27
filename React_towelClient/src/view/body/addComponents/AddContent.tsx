@@ -16,8 +16,10 @@ import axios from 'axios';
 import dayjs from 'dayjs'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-export default function Portal() {
+import { useLanguage } from '../../../store/LanguageContext';
 
+export default function Portal() {
+    const{t}=useLanguage()
 
 
     const [textareaData, settextareaData] = useState('');
@@ -157,7 +159,7 @@ export default function Portal() {
                         <div className='flex items-center space-x-2' onClick={() => setIsMarkdown(!isMarkdown)}><p className={isMarkdown ? 'font-bold' : ''}>markdown</p>{isMarkdown && <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div>}</div>
                     </div>
                     {/* postTitle */}
-                    <input className='mb-2 mt-2 w-full bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor] my-rounded-10px' placeholder='标题,最多30字哦' onChange={(e) => { setPostTitle(e.target.value) }} value={postTitle} maxLength={30}></input>
+                    <input className='mb-2 mt-2 w-full bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor] my-rounded-10px' placeholder={t('addposettitle')} onChange={(e) => { setPostTitle(e.target.value) }} value={postTitle} maxLength={30}></input>
                     {/* textContent */}
                     {/*    <div id='editor'></div> */}
                     {/*           <textarea
@@ -173,7 +175,7 @@ export default function Portal() {
 
                     <ReactQuill modules={modules} value={textareaData} onChange={handleChange} />
 
-                    {wordCount >= 1000 && <p className="text-red-500">最多10000字哦</p>}
+                    {wordCount >= 1000 && <p className="text-red-500">{t('wordsMax')}</p>}
                     {isMarkdown && <div className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(textareaData) as string) }}></div>}
                     {/* boxBottom */}
                     <div className='flex justify-around h-5 w-full'>

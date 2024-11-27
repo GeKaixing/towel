@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getToutiaoHot } from '../../../services/toutiaohot/toutiaohot'
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../../../store/LanguageContext';
 interface resData {
     success?:boolean;
     url: string;
@@ -8,6 +9,7 @@ interface resData {
     hot_value: string;
 }
 export default function ToutiaoHot() {
+    const {t}=useLanguage();
     const [sliceData,setSliceData]=useState<resData[]>([])
     useEffect(() => {
         if (window.innerWidth >= 1024) {
@@ -19,7 +21,7 @@ export default function ToutiaoHot() {
     }, [])
     return (
         <div className='flex flex-col space-x-2 bg-[--boxColor] w-full rounded-my-rounded-10px p-2'>
-            <div className='self-center mb-2 text-[--fontColor]'>今日头条</div>
+            <div className='self-center mb-2 text-[--fontColor]'>{t('hotHews')}</div>
             {
                
                 sliceData.map((item, index) => (

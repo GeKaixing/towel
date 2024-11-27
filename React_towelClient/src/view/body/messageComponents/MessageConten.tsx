@@ -6,8 +6,10 @@ import { useMessageResponseData } from '../../../store/MessageResponseData.tsx'
 import { deleteNotifications, getNotifications, postReadnotifications } from '../../../services/message/Message.ts';
 import { getOnePost } from '../../../services/post/post.ts';
 import { privateChatContext } from '../../../store/privateChat.tsx';
+import { useLanguage } from '../../../store/LanguageContext.tsx';
 
 export default function Message() {
+  const {t}=useLanguage();
   const { MessageResponseData, setMessageResponseData } = useMessageResponseData()//responseData,setResponseData
   const navigate = useNavigate()
   const { setNoReadNumber } = useNoReadNumbers()
@@ -81,7 +83,7 @@ export default function Message() {
 
   return (
     <div className='space-y-2'>
-      <div>私信</div>
+      <div>{t('privateChat')}</div>
       {/* 与你private chata用户id */}
       {privateChatData.length !== 0 && (
         <Link to={`/privatechat/${privateChatData[0].sendid}`} state={{ userName: privateChatData[0].userName, headimg: privateChatData[0].headimg }}>
@@ -91,7 +93,7 @@ export default function Message() {
           </main>
         </Link>
       )}
-      <div>@我的</div>
+      <div>@{t('my')}</div>
       {MessageResponseData.length !== 0 ? (
         MessageResponseData.map((item, index) => (
           <div className='w-full mt-2 flex items-center justify-between border-2 border-boxColor rounded-lg p-2 mb-2' key={index}>
@@ -107,16 +109,16 @@ export default function Message() {
               </div>
               {targetID === item._id && (
                 <div className='box-border absolute right-0 w-50 bg-gray-200 flex flex-col items-center z-50 gap-2 rounded-lg pt-2 pb-2' onClick={e => e.stopPropagation()}>
-                  <span className='rounded-lg font-bold border border-black w-37.5 h-12.5 flex items-center justify-center">' onClick={() => deletReplyHandler(item._id)}>删除</span>
-                  <span className='rounded-lg font-bold border border-black w-37.5 h-12.5 flex items-center justify-center">' onClick={() => getOnePostApi(item.postId, item._id, item.read)}>进入文章</span>
-                  <span className='rounded-lg font-bold border border-black w-37.5 h-12.5 flex items-center justify-center">'>举报</span>
+                  <span className='rounded-lg font-bold border border-black w-37.5 h-12.5 flex items-center justify-center">' onClick={() => deletReplyHandler(item._id)}>{t('delete')}</span>
+                  <span className='rounded-lg font-bold border border-black w-37.5 h-12.5 flex items-center justify-center">' onClick={() => getOnePostApi(item.postId, item._id, item.read)}>{t('intoPost')}</span>
+                  <span className='rounded-lg font-bold border border-black w-37.5 h-12.5 flex items-center justify-center">'>{t('report')}</span>
                 </div>
               )}
             </div>
           </div>
         ))
       ) : (
-        <div className='p-2'>暂无回复</div>
+        <div className='p-2'>{t('noReply')}</div>
       )}
     </div>
   )

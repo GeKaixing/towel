@@ -6,6 +6,7 @@ import UserReply from './UserReply'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getSocket } from '../../../../socket/socket'
 import useLocalStorage from '../../../../hooks/useLocaStorage'
+import { useLanguage } from '../../../../store/LanguageContext'
 export default function UserHomePage() {
   /* 用户的详情页  */
   // 选择组件 用于切换页面使用
@@ -19,6 +20,7 @@ export default function UserHomePage() {
   //   }
   // }, [])
  const[localStorageData]=useLocalStorage()
+ const {t}=useLanguage();
   // 切换组件函数 用switch实现
   const rendercompents = () => {
     switch (seletcpage) {
@@ -46,14 +48,14 @@ export default function UserHomePage() {
           <p className='text-[--fontColor] font-bold cursor-pointer'> {localStorageData.username}</p>
         </div>
         <div className='flex space-x-2'>
-          <div className='text-[--assistantColor] cursor-pointer' onClick={() => Navigate("/setting")}>设置</div> 
-          {localStorageData.userid===params.id&& <div className='text-[--fontColor] cursor-pointer' onClick={closeAnAccountHanlder}>登出</div>}
+          <div className='text-[--assistantColor] cursor-pointer' onClick={() => Navigate("/setting")}>{t('setting')}</div> 
+          {localStorageData.userid===params.id&& <div className='text-[--fontColor] cursor-pointer' onClick={closeAnAccountHanlder}>{t('logout')}</div>}
         </div>
       </div>
       <div className='text-[--fontColor] flex justify-between mt-2 mb-2'>
-        <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserArticle') }}>文章</div>
-        <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserComment') }}>评论</div>
-        <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserReply') }}>回复</div>
+        <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserArticle') }}>{t('post')}</div>
+        <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserComment') }}>{t('comment')}</div>
+        <div className='hover:text-[--assistantColor] cursor-pointer' onClick={() => { setseletcpage('UserReply') }}>{t('reply')}</div>
       </div >
       {rendercompents()}
     </div>

@@ -8,6 +8,8 @@ import {
 } from './MessageResponseData.tsx';
 import { PrivateChatProvider, usePrivateChatContext } from './privateChat.tsx';
 import { NoReadNumbers, useNoReadNumbers } from './noReadNumbers.tsx';
+import { LanguageProvider } from './LanguageContext';
+
 export default function Context({ children }) {
   const { setNoReadNumber } = useNoReadNumbers();
   const { setPrivateChatData } = usePrivateChatContext()as {setPrivateChatData};
@@ -28,6 +30,7 @@ export default function Context({ children }) {
     }
   }, []);
   return (
+    <LanguageProvider>   
     <PrivateChatProvider>
         <NoReadNumbers>
           <MessageResponseDataProvider>
@@ -37,5 +40,6 @@ export default function Context({ children }) {
           </MessageResponseDataProvider>
         </NoReadNumbers>
     </PrivateChatProvider>
+    </LanguageProvider>
   );
 }

@@ -19,8 +19,10 @@ import demo44 from '../../assets/static/MainMenuIconPitchUp/设置.svg'
 import demo55 from '../../assets/static/MainMenuIconPitchUp/进入.svg'
 import demo66 from '../../assets/static/MainMenuIconPitchUp/大脑.svg'
 import demo77 from '../../assets/static/MainMenuIconPitchUp/笔记本.svg'
+import { useLanguage } from '../../store/LanguageContext';
 
 export default function MainMenu() {
+  const {t}=useLanguage();
   const [, setWidth] = useState(window.innerWidth);
   const [localStorageData] = useLocaStorage();
   const { noReadNumber } = useContext(noReadNumbers);
@@ -87,15 +89,15 @@ export default function MainMenu() {
           {/* global process */}
           <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='' />
         </div>
-        <MainMenuLink to="/" src={icons[0].home().path} text='主页' />
+        <MainMenuLink to="/" src={icons[0].home().path} text={t('home')} />
         {/* <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' /> */}
-        <MainMenuLink className="-tracking-widest" to="/ai" src={icons[6].getIcon('/ai').path} text='llama'/>
-        <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text='发帖' />
-        <MainMenuLink className='relative' to="/Message" src={icons[2].getIcon('/Message').path} text='消息'>
+        <MainMenuLink className="-tracking-widest" to="/ai" src={icons[6].getIcon('/ai').path} text={t('ai')}/>
+        <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text={t('add')} />
+        <MainMenuLink className='relative' to="/Message" src={icons[2].getIcon('/Message').path} text={t('message')}>
           <div className='hidden lg:block absolute -right-6 font-[--assistantColor]'>{noReadNumber}</div>
         </MainMenuLink>
-        <MainMenuLink to="https://blog.gekaixing.top/" target={'_blank'} src={icons[7].getIcon('/blog').path} text='博客'/>
-        <MainMenuLink className='hidden md:block' to="/setting" src={icons[4].getIcon('/setting').path} text='设置' />
+        <MainMenuLink to="https://blog.gekaixing.top/" target={'_blank'} src={icons[7].getIcon('/blog').path} text={t('blog')}/>
+        <MainMenuLink className='hidden md:block' to="/setting" src={icons[4].getIcon('/setting').path} text={t('setting')} />
         {localStorageData.jwt &&
           <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center '}>
             <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover lg:mr-10'>
@@ -104,7 +106,7 @@ export default function MainMenu() {
             <div className='max-lg:hidden lg:block text-lg font-bold text-[--fontColor]'>{localStorageData.username}</div>
           </Link>
         }
-        {!localStorageData.jwt && <MainMenuLink to="/login" src={icons[5].getIcon('/login').path} text='登录' />}
+        {!localStorageData.jwt && <MainMenuLink to="/login" src={icons[5].getIcon('/login').path} text={t('login')} />}
       </div>
     
   );

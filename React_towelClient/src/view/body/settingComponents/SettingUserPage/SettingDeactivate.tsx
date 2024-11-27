@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Backtab from '../../../../components/Backtab';
+import { useLanguage } from '../../../../store/LanguageContext';
 export default function SettingDeactivate() {
+    const {t}=useLanguage();
     const [localStorageData, setLocalStorageData] = useState<{ jwt?: string }>({});
     const [inputData, setinputData] = useState({
         user: '',
@@ -33,7 +35,7 @@ export default function SettingDeactivate() {
     const sendCodeHandle = () => {
         const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
         if (inputData.user === "" && emailPattern.test(inputData.email)) {
-            alert("请输入用户名或者电子邮件")
+            alert(t('Please_enter_your_username_or_email_address'))
         } else {
             axios({
                 url: 'http://127.0.0.1:4000/deactivatecode',
@@ -49,11 +51,11 @@ export default function SettingDeactivate() {
                 }
             }).then(res => {
                 if (res.status === 201) {
-                    alert('您的验证码已经到达邮件,注意5分钟后过期')
+                    alert(t('minutes5'))
                     setiSHowCode(!isShowCode)
                 }
             }).catch(() => {
-                alert('用户名或邮箱错误')
+                alert(t('incorrect'))
             })
         }
     }
@@ -91,15 +93,15 @@ export default function SettingDeactivate() {
     }
     return (
         <>
-            <Backtab text='设置' href='/setting'></Backtab>
+            <Backtab text={t('setting')} href='/setting'></Backtab>
             <form className='flex flex-col justify-center items-center text-[--fontColor]' onSubmit={(e) => { e.preventDefault() }}>
-                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='text' placeholder='您的账户名' value={inputData.user} onChange={userNameHandle}></input>
-                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='email' placeholder='电子邮件' value={inputData.email} onChange={emailHandle}></input>
-                {isShowCode ? <input type='text' className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' placeholder='电子邮件验证码' value={inputData.code} onChange={codeHandle}></input> : null
-                }                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='password' placeholder='密码' value={inputData.password} onChange={passwordHandle}></input>
-                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit' value='发送验证码' onClick={sendCodeHandle}></input>
-                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit' onClick={submitHandler}></input>
-                <strong className='mt-[10px] text-red-500' >注销账号不同逆</strong>
+                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='text' placeholder={t('name')} value={inputData.user} onChange={userNameHandle}></input>
+                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='email' placeholder={t('email')} value={inputData.email} onChange={emailHandle}></input>
+                {isShowCode ? <input type='text' className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' placeholder={t('Verification')} value={inputData.code} onChange={codeHandle}></input> : null
+                }                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='password' placeholder={t('password')} value={inputData.password} onChange={passwordHandle}></input>
+                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit' value={t('SendVerificationCode')} onClick={sendCodeHandle}></input>
+                <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit'  value={t('submit')} onClick={submitHandler}></input>
+                <strong className='mt-[10px] text-red-500' >{t('Cancellation_of_account_is_different')}</strong>
             </form>
         </>
     )

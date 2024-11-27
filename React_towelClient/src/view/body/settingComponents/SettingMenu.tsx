@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelectLightorDark } from '../../../store/selectLightorDark'
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from '../../../store/LanguageContext';
 
 export default function SettingMenu() {
+    const {t,switchLanguage,language}=useLanguage();
+    const switchLanguageHandler=()=>{
+       language==='zh'?switchLanguage('en'):switchLanguage('zh');
+    }
+    
     //暗黑模式 
     const { colorModel, setColorModel } = useSelectLightorDark()
     const [colorModeldata, setColorModeldata] = useState<string|null>(null)
@@ -34,18 +40,19 @@ export default function SettingMenu() {
     }, [colorModel])
     return (
         <div className='flex flex-wrap gap-2 mt-2 text-center items-center text-[--fontColor]'>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={backgroundimgHandler}>背景{colorModeldata === 'bing' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={autoColorHandler}>跟随系统{colorModeldata === 'system' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={selectLightHandler}>白天{colorModeldata === 'light' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={selectDarkHandler}>晚上{colorModeldata === 'dark' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/auth',{replace: true})}>towel权限</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/account',{replace: true})}>账号信息</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/forget',{replace: true})}>忘记密码</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/deactivate',{replace: true})}>注销账号</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/orderform',{replace: true})}>订单</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/contactme',{replace: true})}>联系我</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/contactme',{replace: true})}>客服</div>
-            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/about',{replace: true})}>关于</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={backgroundimgHandler}>{t('background')}{colorModeldata === 'bing' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={autoColorHandler}>{t('auto')}{colorModeldata === 'system' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={selectLightHandler}>{t('white')}{colorModeldata === 'light' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={selectDarkHandler}>{t('dark')}{colorModeldata === 'dark' ? <div className='w-2 h-2 rounded-full bg-[rgb(134,196,248,1)]'></div> : null}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/auth',{replace: true})}>towel{t('authority')}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/account',{replace: true})}>{t('accountInformation')}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/forget',{replace: true})}>{t('forgetPassword')}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/deactivate',{replace: true})}>{t('cancelAccount')}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/orderform',{replace: true})}>{t('orderForm')}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/contactme',{replace: true})}>{t('contactMe')}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/setting/contactme',{replace: true})}>{t('customerService')}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={switchLanguageHandler}>{t('Language')}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={()=>navigate('/about',{replace: true})}>{t('about')}</div>
         </div>
     )
 }

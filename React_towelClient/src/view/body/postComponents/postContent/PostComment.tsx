@@ -6,6 +6,7 @@ import propTypes from 'prop-types'
 import { getComment, getOnePost, postDelComment } from '../../../../services/post/post';
 import DeleteBox from '../../../../components/DeleteBox';
 import Date from '../../../../components/Date';
+import { useLanguage } from '../../../../store/LanguageContext';
 interface commentdata {
     _id: string,
     users: [{
@@ -27,6 +28,7 @@ interface commentdata {
     }]
 }
 export default function PostComment({ postId, setInputData, reLoad, userCommentData, setreloadUserlikes, reloadUserlikes }) {
+    const {t}=useLanguage();
     const [commentdata, setCommentData] = useState<commentdata[]>([]);
     // const [localStorageData] = useLocalStorage();
     const [targetID, setTargetID] = useState('');
@@ -75,7 +77,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
     const getOnePostApi = (POSEID) => {
         getOnePost(POSEID).then((response) => {
             if(       response.data.length===0){
-                return alert('文章已删除')
+                return alert(t('PostDeleted'))
             }
             const data = JSON.stringify({ ...response.data, from: 'user' });
             navigate(`/postcontent/${POSEID}`, { state: data });
@@ -101,11 +103,11 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                                 <DeleteBox postUserId={item.users[0]._id} deleteHandler={() => deleteHandler(item._id)}>
                                     {useRoutes.pathname.split('/')[1] !== 'homepage' ? (
                                         <span className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => getOnePostApi(item.postId)}>
-                                            进入文章
+                                            {t('intoPost')}
                                         </span>
                                     ) : null}
                                     <span className='text-[--fontColor] cursor-pointer w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => setInputData({ targetName: '@' + item.users[0].username, commentid: item._id })}>
-                                        回复{item.users[0].username}
+                                        {t('reply')}{item.users[0].username}
                                     </span>
                                 </DeleteBox>
                             }

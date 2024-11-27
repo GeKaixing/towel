@@ -8,7 +8,9 @@ import { postAddPostComment, postAddPostReply } from '../../../../services/post/
 import useLocalStorage from '../../../../hooks/useLocaStorage'
 import dayjs from 'dayjs'
 import {inputReplyData} from '../../../../types/body/postComponents/postContent/postInput'
+import { useLanguage } from '../../../../store/LanguageContext'
 export default function PostInput({ postId }) {
+    const{t}=useLanguage();
     const navigate = useNavigate()
     const [localStorageData] = useLocalStorage()
     const [inputData, setInputData] = useState('')//get the input value
@@ -80,8 +82,8 @@ export default function PostInput({ postId }) {
                             <div className=' w-6 h-6 rounded-full bg-[--boxColor] hover:bg-[--assistantColor] flex items-center justify-center cursor-pointer' onClick={() => setInputReplyData({})}>X</div>
                         </div> : null
                 }
-                <input className='w-[15rem] bg-[--boxColor] rounded-my-rounded-10px focus:border-[--assistantColor] ' value={inputData} onChange={(e) => setInputData(e.target.value)} placeholder='评论'></input>
-                <button className='w-[4rem] h-8 rounded-my-rounded-10px bg-[--boxColor] hover:bg-[--assistantColor] hover:text-[--hostColor]' onClick={sendInputDataApi}>发表</button>
+                <input className='w-[15rem] bg-[--boxColor] rounded-my-rounded-10px focus:border-[--assistantColor] ' value={inputData} onChange={(e) => setInputData(e.target.value)} placeholder={t('comment')}></input>
+                <button className='w-[4rem] h-8 rounded-my-rounded-10px bg-[--boxColor] hover:bg-[--assistantColor] hover:text-[--hostColor]' onClick={sendInputDataApi}>{t('send')}</button>
             </div>
             <PostComment reLoad={reLoad} postId={postId} setInputData={setInputReplyData}></PostComment>
         </>

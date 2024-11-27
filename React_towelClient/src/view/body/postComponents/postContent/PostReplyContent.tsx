@@ -4,6 +4,7 @@ import propTypes from 'prop-types'
 import { getAllreply, getOnePost, postDelReply } from '../../../../services/post/post'
 import DeleteBox from '../../../../components/DeleteBox'
 import Date from '../../../../components/Date'
+import { useLanguage } from '../../../../store/LanguageContext'
 interface ReplyItem {
     _id: string;
     replyUser: { username: string };
@@ -15,6 +16,7 @@ interface ReplyItem {
     replyToreplyUserId?: string;
 }
 export default function Replycontent({ reLoad, commentid, userReplyData, setInputData, reloadUserReply, setreloadUserReplys }) {
+    const{t}=useLanguage();
     const [responseData, setResponseData] = useState<ReplyItem[]>([])
     const [reLoadPostReply, setReLoadPostReply] = useState(false)
     const useRoutes = useLocation()
@@ -51,7 +53,7 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
     const getOnePostApi = (POSEID) => {
         getOnePost(POSEID).then((response) => {
             if(       response.data.length===0){
-                return alert('文章已删除')
+                return alert(t('PostDeleted'))
             }
             const data = JSON.stringify({ ...response.data, from: 'user' })
             navigate(`/postcontent/${POSEID}`, { state: data });
@@ -101,8 +103,8 @@ export default function Replycontent({ reLoad, commentid, userReplyData, setInpu
                         {targetID === item._id &&
                             <DeleteBox postUserId={item.replyUserId} deleteHandler={() => deletReplyHandler(item._id)}>
                                 {useRoutes.pathname.split('/')[1] !== 'homepage' &&
-                                    <span className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => getOnePostApi(item.postId)}>进入文章</span>}
-                                <span className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => setInputData({ targetName: '@' + item.replyUser.username, commentid: commentid, replyToreplyUserId: item.replyUserId })}>回复{item.replyUser.username}</span>
+                                    <span className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => getOnePostApi(item.postId)}>{t('intoPost')}</span>}
+                                <span className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={() => setInputData({ targetName: '@' + item.replyUser.username, commentid: commentid, replyToreplyUserId: item.replyUserId })}>{t('reply')}{item.replyUser.username}</span>
                             </DeleteBox>
                         }
                     </div>
