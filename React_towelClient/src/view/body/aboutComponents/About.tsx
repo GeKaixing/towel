@@ -2,9 +2,12 @@ import React from 'react'
 import aboutMd from "../../../assets/about/about.md"
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
+import Backtab from '../../../components/Backtab';
 export default function About() {
   return (
-    <div className='flex  px-2 py-2 text-[--fontColor] w-full'>
+    <>
+      <Backtab text="设置" href="/setting"></Backtab> 
+        <div className='flex  px-2 py-2 text-[--fontColor] w-full'>
         <div className='prose lg:prose-xl max-w-none text-wrap ' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(aboutMd)as string) }} ></div>
        {/*  <div>
           <span>卡普空</span>
@@ -23,5 +26,7 @@ export default function About() {
           </ul>
         </div> */}
     </div>
+    </>
+
   )
 }

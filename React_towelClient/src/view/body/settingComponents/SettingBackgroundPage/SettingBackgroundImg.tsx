@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 // import style from './SettingBackgroundImg.module.css'
 import { useSelectLightorDark } from '../../../../store/selectLightorDark'
 import { getHPImageArchive } from '../../../../services/setting/setting'
+import Backtab from '../../../../components/Backtab';
 export default function SettingBackgroundImg() {
     const [imgData, setImgDate] = useState<ArrayBuffer|string>('')
     const { colorModel, setColorModel } = useSelectLightorDark();
@@ -51,6 +52,8 @@ export default function SettingBackgroundImg() {
         bgi.style.margin = '0';
     }, [imgData, colorModel])
     return (
+        <>
+        <Backtab text='设置' href='/setting'></Backtab>
         <div className='flex flex-col justify-center items-center space-y-2'>
             <div className='absolute top-1/2 '>
                 <div onClick={SettingBackgroundBingImgHandler} className=' flex  items-center text-[--fontColor] font-bold cursor-pointer'>使用bing每日壁纸
@@ -63,5 +66,6 @@ export default function SettingBackgroundImg() {
                 </form>
             </div>
         </div>
+        </>
     )
 }
