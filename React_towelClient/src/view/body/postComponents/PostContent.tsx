@@ -1,32 +1,38 @@
-/// <reference types="node" />
-import React, { useEffect, useRef, useState } from 'react'
-import Post from '../../../components/Post'
-import propTypes from 'prop-types'
-import { getPost } from '../../../services/post/post'
-import postJson from '../../../assets/json/post.json'
-import {Article} from '../../../types/body/postComponents/PostContent'
+import React, { useEffect, useRef, useState } from 'react';
+import Post from '../../../components/Post';
+import propTypes from 'prop-types';
+import { getPost } from '../../../services/post/post';
+import postJson from '../../../assets/json/post.json';
+import { Article } from '../../../types/body/postComponents/PostContent';
+
 export default function PostPage() {
-  const [articles, setarticles] = useState<Article[]>([]) // 存储加载的数据
-  const [reload, setLoad] = useState(false)
-  const [page, setPage] = useState(1);   // 当前页码
-  const [loading, setLoading] = useState(false);  // 加载状态
-  const [hasMore, setHasMore] = useState(true);   // 是否还有更多数据
+  const [articles, setArticles] = useState<Article[]>([]); // 存储加载的数据
+  const [reload, setLoad] = useState(false);
+  const [page, setPage] = useState(1); // 当前页码
+  const [loading, setLoading] = useState(false); // 加载状态
+  const [hasMore, setHasMore] = useState(true); // 是否还有更多数据
   const loaderRef = useRef(null); 
-  const getPostApi = async (page) => {
+
+  const getPostApi = async (page: number) => {
+    if (loading) return; // 防止重复请求
     setLoading(true);
-    const response = await getPost(`post?page=${page}&limit=5`); // 根据页码获取数据
-    const newData = await response.data
-      //判断是否有更多数据
-     if (newData.length === 0) {
-       setHasMore(false);
-     } else {
-      setarticles((prevData) => [...prevData, ...newData]); // 追加新数据
-     }
-     setLoading(false);
+    try {
+      const response = await getPost(`post?page=${page}&limit=5`); // 根据页码获取数据
+      const newData = await response.data;
+      // 判断是否有更多数据
+      if (newData.length === 0) {
+        setHasMore(false);
+      } else {
+        setArticles((prevData) => [...prevData, ...newData]); // 追加新数据
+      }
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+    setLoading(false);
   };
 
-   // 使用 IntersectionObserver 监听加载器
-   useEffect(() => {
+  // 使用 IntersectionObserver 监听加载器
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore && !loading) {
@@ -51,54 +57,52 @@ export default function PostPage() {
     };
   }, [hasMore, loading]);
 
+  // 当页码变化时触发获取数据
   useEffect(() => {
-    /*global process */
-    process.env.REACT_APP_TEST === 'TEST' ?
-      setarticles(postJson) :
-      getPostApi(page);
-  }, [page])
+    if (process.env.REACT_APP_TEST === 'TEST') {
+      setArticles(postJson); // 如果是测试环境使用假数据
+    } else {
+      getPostApi(page); // 获取 API 数据
+    }
+  }, [page]);
 
   useEffect(() => {
-    getPost().then((res)=>{
-      setarticles(res.data);
-    })
+    if (reload) {
+      getPostApi(1); // 当 reload 变化时从第一页加载数据
+    }
   }, [reload]);
+
   return (
     <>
-      {
-        <div className='p-2'>
-          {articles.map(function (item,index) {
-            return (
-              <Post
-                key={`${item._id}-${index}`}
-                id={item._id}
-                name={item.user.username}
-                headimg={item.user.headimg}
-                content={item.postText}
-                comments={item.postComment}
-                likes={item.postLike}
-                favorites={item.postFavorite}
-                postImages={item.postImages}
-                //@ts-ignore 
-                postVideos={item.postVideos}
-                postUserId={item.postUserId}
-                postTitle={item.postTitle}
-                postCreateDate={item.postCreateDate}
-                reload={{ reload, setLoad }}
-              >
-              </Post>
-            );
-          })
+      <div className='p-2'>
+        {articles.map((item, index) => (
+          <Post
+            key={`${item._id}-${index}`}
+            id={item._id}
+            name={item.user.username}
+            headimg={item.user.headimg}
+            content={item.postText}
+            comments={item.postComment}
+            likes={item.postLike}
+            favorites={item.postFavorite}
+            postImages={item.postImages}
+            //@ts-ignore 
+            postVideos={item.postVideos}
+            postUserId={item.postUserId}
+            postTitle={item.postTitle}
+            postCreateDate={item.postCreateDate}
+            reload={{ reload, setLoad }}
+          />
+        ))}
+      </div>
 
-          }
-        </div >
-        }
       {loading && <p>加载中...</p>}
       {/* {!hasMore && <p>没有更多数据了</p>} */}
-      <div ref={loaderRef}></div>  {/* 用于触发加载下一页 */}
+      <div ref={loaderRef}></div> {/* 用于触发加载下一页 */}
     </>
-  )
+  );
 }
+
 PostPage.propTypes = {
   userarticles: propTypes.array,
-}
+};

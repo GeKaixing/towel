@@ -152,7 +152,7 @@ export default function PostContent() {
                             <div className='self-start w-full'>
                                 {contentdata.blog ? <div className='prose lg:prose-xl max-w-none ' dangerouslySetInnerHTML={{ __html: contentdata.content||'' }} /> :
                                     contentdata.markdown ? <div className='prose lg:prose-xl max-w-none' dangerouslySetInnerHTML={{ __html: contentdata.content||'<img src={contentdata.postImages[0]} ></img>:' }}></div> :
-                                        <div className='whitespace-normal break-words'>{contentdata.content}</div>
+                                        <div className='whitespace-normal break-words' dangerouslySetInnerHTML={{ __html: contentdata.content||''}}></div>
                                 }
                             </div>
                             {(contentdata.postImages?.length === 0 ) ? null : (contentdata.postImages?.length===0?<img src={contentdata.postImages[0]} ></img>:null)}

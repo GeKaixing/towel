@@ -156,7 +156,7 @@ export default function Post(props) {
                     <div onClick={() => targetIDHandler(props.id)} className='relative cursor-pointer'>
                     ...
                         {targetID === props.id ?    
-                            <DeleteBox postUserId={props.postUserId} headimg={props.headimg} userName={props.name} deleteHandler={deletePostApi} DeleteBox={postDeleteBox} reportHandler={reportApi}></DeleteBox>
+                            <DeleteBox postUserId={props.postUserId} headimg={props.headimg} userName={props.name} deleteHandler={deletePostApi}  reportHandler={reportApi}></DeleteBox>
                             : null}
                     </div>
                 </div>
@@ -164,7 +164,7 @@ export default function Post(props) {
                     <div className='text-2xl font-bold'>{props.postTitle}</div>
                     <div className='md:max-w-[39rem] lg:w-full '>{detectMarkdown(props.content) ?
                      <div className="prose lg:prose-xl max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(props.content as string)as string) }} /> 
-                    : <div className='whitespace-normal  break-words'>{props.content}</div>}</div>
+                    : <div className='whitespace-normal  break-words' dangerouslySetInnerHTML={{__html:props.content}}></div>}</div>
                     {(props.postImages?.length !== 0 ) &&
                         <div className='flex justify-between flex-wrap gap-2'>
                          <img src={props.postImages} className='w-[30%]'></img>
