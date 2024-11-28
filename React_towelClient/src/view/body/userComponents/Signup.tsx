@@ -69,23 +69,23 @@ export default function Signup() {
       <form className='flex flex-col justify-center items-center ' onSubmit={(e) => { e.preventDefault(); }}>
         <input required className='w-36 h-6 mt-2.5 bg-[--boxColor] border-0 text-[--fontColor]' type='text' value={valuename_signup} onChange={(e) => { e.preventDefault(); setValuename_signup(e.target.value) }} placeholder={t('name')} >
         </input>
-        <input required type='password' className='w-36 h-6 mt-2.5 bg-boxColor border-0 text-[--fontColor]' value={valuepassword_signup} onChange={(e) => { e.preventDefault(); setValuepassword_signup(e.target.value) }} placeholder={t('password')}>
+        <input required type='password' className='w-36 h-6 mt-2.5 bg-[--boxColor] border-0 text-[--fontColor]' value={valuepassword_signup} onChange={(e) => { e.preventDefault(); setValuepassword_signup(e.target.value) }} placeholder={t('password')}>
         </input>
-        <input required type='email' className='w-36 h-6 mt-2.5 bg-boxColor border-0 text-[--fontColor]' value={inputEmailData} onChange={validateEmail} placeholder={t('EmailTheVerificationCode')}>
+        <input required type='email' className='w-36 h-6 mt-2.5 bg-[--boxColor] border-0 text-[--fontColor]' value={inputEmailData} onChange={validateEmail} placeholder={t('EmailTheVerificationCode')}>
         </input>
         {isEmail ?
           <>
-            <input required type='text' minLength={6} maxLength={6} className='w-36 h-6 mt-2.5 bg-boxColor border-0 text-[--fontColor]' value={verificationcode} onChange={(e) => { e.preventDefault(); setVerificationCode(e.target.value) }} placeholder={t('Verification')}>
+            <input required type='text' minLength={5} maxLength={5} className='w-36 h-6 mt-2.5 bg-[--boxColor] border-0 text-[--fontColor]' value={verificationcode} onChange={(e) => { e.preventDefault(); setVerificationCode(e.target.value) }} placeholder={t('Verification')}>
             </input>
-            <button className='mt-2.5 w-24 h-6 bg-boxColor border-0 text-[--fontColor]' onClick={e => { e.preventDefault; sendEmailRegister() }}>
+            <button className='mt-2.5 w-24 h-6 bg-[--boxColor] border-0 text-[--fontColor]' onClick={e => { e.preventDefault; sendEmailRegister() }}>
             {t('SendVerificationCode')}
             </button>
           </>
           : null}
-        <button type='submit' className='mt-2.5 w-24 h-6 bg-boxColor border-0 text-[--fontColor]' onClick={e => { e.preventDefault; signupApi() }}>
+        <button type='submit' className='mt-2.5 w-24 h-6 bg-[--boxColor] border-0 text-[--fontColor]' onClick={e => { e.preventDefault; signupApi() }}>
           {t('register')}
         </button>
-        <Link to={'/login'} className='mt-2.5 w-24 h-6 bg-boxColor border-0 text-[--fontColor] text-center' >
+        <Link to={'/login'} className='mt-2.5 w-24 h-6 bg-[--boxColor] border-0 text-[--fontColor] text-center' >
           <p className='text-[--fontColor]'>
             {t('login')}
           </p>

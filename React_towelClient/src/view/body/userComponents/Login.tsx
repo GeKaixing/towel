@@ -40,14 +40,14 @@ export default function Login() {
             <form className='flex flex-col items-center space-y-2' onSubmit={(e) => { e.preventDefault(); LoginApi() }} >
                 <input className="w-36 h-6 mt-2.5 bg-[--boxColor] border-0 text-[--fontColor]" type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder={t('name')} required />
                 <div className='relative'>
-                    <input className='w-36 h-6 mt-2.5 bg-boxColor border-0 text-[--fontColor]' type={showpassword ? 'text' : 'password'} autoComplete='off'
+                    <input className='w-36 h-6 mt-2.5 bg-[--boxColor] border-0 text-[--fontColor]' type={showpassword ? 'text' : 'password'} autoComplete='off'
                         value={valuepassword} onChange={(e) => { setValuepassword(e.target.value) }} placeholder={t('password')} required></input>
                     {/* 显示密码的图标 */}
-                    {showpassword ?
+                  {/*   {showpassword ?
                         <img className='olute top-3 -translate-x-1/2 left-56 z-2 h-6 w-6' onClick={() => setshowpassword(!showpassword)} src={eyeIconOpen} alt="预览打开" />
                         :
                         <img className='olute top-3 -translate-x-1/2 left-56 z-2 h-6 w-6' onClick={() => setshowpassword(!showpassword)} src={eyeIconClose} alt="预览关闭" />
-                    }
+                    } */}
                 </div>
                 <button className='font-bold w-[6.5rem] h-[1.5rem] bg-[--boxColor] hover:bg-[--boxColor] text-[--fontColor]' type='submit'>
                     {t('login')}

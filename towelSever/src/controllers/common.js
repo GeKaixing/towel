@@ -137,13 +137,15 @@ export const loginApi = async (req, res) => {
 // 注册
 export const registerApi = async (req, res) => {
   try {
-    const { username, password, email, code, CreateDate } = req.body.data;
+    const { username, password, email, code, createDate } = req.body.data;
+    console.log(username, password, email, createDate )
     const userAndemail = await USERS.findOne({
       $or: [{ username }, { email }],
     }); //false
     // const user = await verificationCodes.findOne({ verificationCode: code }); //true
     const rediskey=`nodemailerRegister:${email}`;
     const user= await redisClient.get(`nodemailerRegister:${email}`);
+    console.log('dddd'+user)
     if (!(userAndemail || user)) {
       return res.status(400).json({ meassge: "验证码错误", status: false });
     }
@@ -154,7 +156,7 @@ export const registerApi = async (req, res) => {
       username,
       password: hashpassword,
       email,
-      CreateDate: CreateDate,
+      createDate:createDate
     });
     await userdata.save();
     res.status(201).json({ status: true });
@@ -172,6 +174,7 @@ export const nodemailerRegisterApi = async (req, res) => {
     }
     const rediskey = `nodemailerRegister:${email}`;
     const existingCode = await redisClient.get(rediskey);
+    console.log(existingCode)
     if (existingCode) {
       return res.status(200).json({
           message: `您的验证码已发送，请稍后再试`,

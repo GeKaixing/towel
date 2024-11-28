@@ -4,6 +4,7 @@ import  PropTypes from 'prop-types'
 import Dot from './Dot'
 import check from "../assets/static/otherIcon/check.svg"
 import wexinapp from '../assets/static/otherIcon/wexinapp.png'
+import Stripe from '../stripe/Stripe'
 export default function Premium({ setShowPremium }) {
    const [isDot,setDot]=useState('Premium')
    const checkhandler=(event)=>{
@@ -43,6 +44,7 @@ export default function Premium({ setShowPremium }) {
                     <p className='w-96 h-22 text-xs'>订阅即表示你同意我们的 购买者服务条款。如条款中所述，除非提前取消，否则订阅服务将自动续订。随时取消. 请在续订前至少 24 小时取消订阅，以免产生额外费用。订阅需提供一个经认证的手机号码。如果你在其他平台上进行了订阅，请通过该平台来管理相关订阅服务。</p>
                 </div>
             </div>
+            <Stripe></Stripe>
         </Portal>
     )
 }
