@@ -131,7 +131,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                         </div>
                     </div>
                 </li>
-            )):<div className='flex items-center justify-center font-bold'>暂无评论</div>}
+            )):<div className='flex items-center justify-center font-bold'>{t('noReply')}</div>}
         </div>
     );
 }

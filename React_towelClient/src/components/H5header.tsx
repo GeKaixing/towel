@@ -4,6 +4,7 @@ import { useLocation,useNavigate } from 'react-router'
 import leftIcon from '../assets/static/otherIcon/左_left.svg'
 import sreachIcon from '../assets/static/otherIcon/搜索.svg'
 import sreachPithIcon from '../assets/static/otherIconPitchUp/搜索.svg'
+
 export default function H5header() {
     const [cc, setcc] = useState('')
    const navigate= useNavigate()
@@ -64,7 +65,6 @@ export default function H5header() {
                 </button>
                 <div>{cc}</div>
             </div>
-
             {/* global process*/}
             <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='w-10 h-10 self-center absolute left-1/2 -translate-x-1/2' onClick={() => window.scrollTo({ top: 0 })}></img>
 

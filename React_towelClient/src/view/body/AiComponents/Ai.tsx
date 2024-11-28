@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { postAi } from '../../../services/ai/ai'
 import useLocalStorage from '../../../hooks/useLocaStorage';
 import { resData } from '../../../types/body/aiComponents/Ai';
+import { useLanguage } from '../../../store/LanguageContext';
 export default function Ai() {
+    const {t}=useLanguage();
     const [inputData, setInputData] = useState('')
     const [resData, setResData] = useState<resData[]>([])
     const [localStorageData] = useLocalStorage()
@@ -33,8 +35,8 @@ export default function Ai() {
                 }
             </div>
             <form onSubmit={postAiHandler} className=' fixed  bottom-14 w-full md:w-[90%] lg:w-[40%] h-10 flex space-x-2 justify-center items-center '>
-                <input className='lg:w-full basis-1/2   bg-[--boxColor] h-10 rounded-my-rounded-10px focus:border-[--assistantColor]' value={inputData} onChange={(e) => setInputData(e.target.value)} placeholder='评论'></input>
-                <button type='submit' className='h-10 basis-1/4    p-2 w-fit text-nowrap rounded-my-rounded-10px bg-[--boxColor] hover:bg-[--assistantColor] hover:text-[--hostColor] ' >发表</button>
+                <input className='lg:w-full basis-1/2   bg-[--boxColor] h-10 rounded-my-rounded-10px focus:border-[--assistantColor]' value={inputData} onChange={(e) => setInputData(e.target.value)}></input>
+                <button type='submit' className='h-10 basis-1/4    p-2 w-fit text-nowrap rounded-my-rounded-10px bg-[--boxColor] hover:bg-[--assistantColor] hover:text-[--hostColor] ' >{t('send')}</button>
             </form>
         </div>
     )

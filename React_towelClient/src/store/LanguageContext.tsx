@@ -110,7 +110,7 @@ const resources = {
         signin: 'signin',
         name: 'name',
         password: 'password',
-        background: 'background',
+        background: 'backg round',
         auto: 'auto',
         dark: 'dark',
         white: 'white',

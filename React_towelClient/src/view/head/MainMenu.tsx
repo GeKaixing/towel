@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { noReadNumbers } from '../../store/noReadNumbers';
@@ -76,8 +77,10 @@ export default function MainMenu() {
   return (
     
       <div className=' flex md:mr-4 md:mt-2 md:ml-4 md:w-20 md:h-[80%] md:py-2 md:flex-col 
+        max-md:left-[50%] max-md:translate-x-[-50%] 
+        md:bg-transparent
         lg:w-[20%] lg:ml-[10%]
-        px-2 fixed md:left-0 max-md:bottom-2  
+        px-2 fixed md:left-0 max-md:bottom-0  
         justify-around w-full items-center rounded-my-rounded-10px
         bg-[--boxColor]
         lg:bg-transparent
@@ -91,17 +94,17 @@ export default function MainMenu() {
         </div>
         <MainMenuLink to="/" src={icons[0].home().path} text={t('home')} />
         {/* <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' /> */}
-        <MainMenuLink className="-tracking-widest" to="/ai" src={icons[6].getIcon('/ai').path} text={t('ai')}/>
+        <MainMenuLink to="/ai" src={icons[6].getIcon('/ai').path} text={t('ai')}/>
         <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text={t('add')} />
         <MainMenuLink className='relative' to="/Message" src={icons[2].getIcon('/Message').path} text={t('message')}>
           <div className='hidden lg:block absolute -right-6 font-[--assistantColor]'>{noReadNumber}</div>
         </MainMenuLink>
-        <MainMenuLink to="https://blog.gekaixing.top/" target={'_blank'} src={icons[7].getIcon('/blog').path} text={t('blog')}/>
+        {/* <MainMenuLink to="https://blog.gekaixing.top/" target={'_blank'} src={icons[7].getIcon('/blog').path} text={t('blog')}/> */}
         <MainMenuLink className='hidden md:block' to="/setting" src={icons[4].getIcon('/setting').path} text={t('setting')} />
         {localStorageData.jwt &&
           <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center '}>
-            <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover lg:mr-10'>
-              <img className='w-10 h-10 rounded-full' src={localStorageData.headimg} ></img>
+            <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover lg:mr-10 flex justify-center items-center'>
+              <img className='w-10 h-10 rounded-full max-md:w-[26px] max-md:h-[26px]' src={localStorageData.headimg} ></img>
             </div>
             <div className='max-lg:hidden lg:block text-lg font-bold text-[--fontColor]'>{localStorageData.username}</div>
           </Link>
