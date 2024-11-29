@@ -22,6 +22,8 @@ connect()
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
 
+// 使用 raw body 解析器来处理 Stripe Webhook 请求
+app.use(bodyParser.raw({ type: 'application/json' }));
 app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5173'] }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
