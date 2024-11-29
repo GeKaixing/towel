@@ -11,9 +11,11 @@ import toutiaoHot from './src/routers/toutiaoHot/index.js';
 import auth from './src/routers/auth/index.js';
 import user from './src/routers/user/index.js';
 import bing from './src/routers/bing/index.js'
+import stripe from './src/routers/stripe/index.js'
 import upload from './src/routers/upload/index.js'
 import {connect} from './src/models/index.js'
 import redisClient from './src/redis/index.js'
+
 
 const app = express()
 connect()
@@ -43,6 +45,8 @@ app.use(common)
 app.use(authMiddleware)
 //auth API
 app.use(auth)
+//stripe API
+app.use(stripe)
 //user API
 app.use(user)
 //upload API
