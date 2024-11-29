@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 
+
 const stripe = new Stripe('sk_test_51PnB6xRs7Bcn7mLsRqQtpznNz0tDZZ5LgKpx6IDiDJXs3neM7Zbh0BqlZdNWhVvwmWa1eZibFADCWGjy9rdaDPuN00Twpw8jWs');
 const endpointSecret = 'whsec_52dee8753289eac11cc7608fe02a779dbcce7abd0a4f319b55d308af53860464'
 

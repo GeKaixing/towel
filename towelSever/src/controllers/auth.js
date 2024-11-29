@@ -309,6 +309,7 @@ export const findonepostApi = async (req, res) => {
 // 新增post
 export const addpostApi = async (req, res) => {
     const { UserId, Image, Text, Share, Like, Comment, Video, Title, createDate } = req.body.data
+    console.log(UserId, Image, Text, Share, Like, Comment, Video, Title, createDate)
     const data = new POSTS({
         postUserId: UserId,
         postText: Text,
