@@ -17,7 +17,7 @@ const CheckoutForm = () => {
     const result = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "/", // 支付完成后的重定向地址
+        return_url: "http://localhost:3000/", // 支付完成后的重定向地址
       },
     });
 
