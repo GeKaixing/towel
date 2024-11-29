@@ -5,9 +5,11 @@ import Dot from './Dot'
 // @ts-ignore
 import check from "../assets/static/otherIcon/check.svg"
 import Stripe from '../stripe/Stripe'
+import useLocalStorage from '../hooks/useLocaStorage'
 export default function Premium({ setShowPremium }) {
     const [isDot, setDot] = useState('Premium')
     const [show, setShow] = useState(false);
+    const  [localStorageData]=useLocalStorage();
     const checkhandler = (event: any) => {
         setDot(event.currentTarget.dataset.name);
     }
@@ -15,7 +17,10 @@ export default function Premium({ setShowPremium }) {
     const buyHandler = async (amount: number) => {
         const response = await fetch("http://127.0.0.1:4000/create-payment-intent", {
             method: "POST",
-            body: JSON.stringify({ amount: amount }),  // 传递支付金额
+            body: JSON.stringify({
+                 amount: amount,
+                 user_id: localStorageData.userid
+                 }),  // 传递支付金额
             headers: {
                 "Content-Type": "application/json",
             },

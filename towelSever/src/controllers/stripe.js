@@ -2,6 +2,7 @@ import Stripe from 'stripe';
 
 const stripe = new Stripe('sk_test_51PnB6xRs7Bcn7mLsRqQtpznNz0tDZZ5LgKpx6IDiDJXs3neM7Zbh0BqlZdNWhVvwmWa1eZibFADCWGjy9rdaDPuN00Twpw8jWs');
 const endpointSecret = 'whsec_52dee8753289eac11cc7608fe02a779dbcce7abd0a4f319b55d308af53860464'
+
 export const stripeApi=async (req, res) => {
   const { amount } = req.body;
 
@@ -36,7 +37,9 @@ export const webhookapi= async (req, res) => {
   // 处理不同类型的事件
   switch (event.type) {
     case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
+      const paymentIntent = event.data.object; // 获取支付意图对象
+      const customerId = paymentIntent.customer; // 获取客户 ID
+      console.log(paymentIntent,customerId)
       console.log('PaymentIntent was successful!');
       // 这里可以进行支付成功后的处理逻辑
       break;
