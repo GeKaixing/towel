@@ -5,8 +5,8 @@ import likeIcon from '../../../assets/static/postIcon/赞.svg'
 import commentIcon from '../../../assets/static/postIcon/评论.svg'
 import startIcon from '../../../assets/static/postIcon/星星.svg'
 import shareIcon from '../../../assets/static/postIcon/分享.svg'
-import addIcon from '../../../assets/static/MainMenuIcon/添加.svg'
-import addPichIcon from '../../../assets/static/MainMenuIconPitchUp/添加.svg'
+import addIcon from '../../../assets/static/MainMenuIcon/add.svg'
+import addPichIcon from '../../../assets/static/MainMenuIconPitchUp/add.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import Addvideo from './addvideo/Addvideo';
@@ -19,7 +19,7 @@ import 'react-quill/dist/quill.snow.css';
 import { useLanguage } from '../../../store/LanguageContext';
 
 export default function Portal() {
-    const{t}=useLanguage()
+    const { t } = useLanguage()
 
 
     const [textareaData, settextareaData] = useState('');
@@ -133,7 +133,7 @@ export default function Portal() {
             [{ header: [1, 2, 3, false] }], // 标题选项
             ['bold', 'italic', 'underline', 'strike'], // 加粗、斜体等
             [{ list: 'ordered' }, { list: 'bullet' }], // 列表
-            ['link', 'image','video'], // 链接和图片
+            ['link', 'image', 'video'], // 链接和图片
             [{ color: [] }, { background: [] }], // 颜色
             ['clean'], // 清除格式
         ],
@@ -153,10 +153,24 @@ export default function Portal() {
                 {/* the box */}
                 <div className='w-full'>
                     {/* headImg userName */}
-                    <div className='flex flex-row  items-center space-x-2 '>
-                        <img src={loginDataParse.headimg} className='h-10 w-10 rounded-full' alt="user" />
-                        <div className='font-bold text=[--fontColor] cursor-pointer'>{loginDataParse.username}</div>
-                        <div className='flex items-center space-x-2' onClick={() => setIsMarkdown(!isMarkdown)}><p className={isMarkdown ? 'font-bold' : ''}>markdown</p>{isMarkdown && <div className='w-2 h-2 rounded-full bg-[--hostColor]'></div>}</div>
+                    <div className=' flex flex-row  items-center justify-between '>
+                        <div className='flex flex-row  items-center space-x-2'>
+                            <img src={loginDataParse.headimg} className='h-10 w-10 rounded-full' alt="user" />
+                            <div className='font-bold text=[--fontColor] cursor-pointer'>{loginDataParse.username}</div>
+                            <div className='flex items-center space-x-2 ' onClick={() => setIsMarkdown(!isMarkdown)}>
+                                <p className={isMarkdown ? 'font-bold' : ''}>markdown</p>{isMarkdown && <div className='w-2 h-2 rounded-full bg-[--hostColor] '></div>}
+                            </div>
+                        </div>
+                        {/* 功能 */}
+                        <div className='flex flex-row justify-center items-center '>
+                            {/*  <AddImge setImageData={setImageData} showImageData={showImageData} setShowImageData={setShowImageData}></AddImge> */}
+                            <Addvideo setVideoData={setVideoData} showVideo={showVideo} setShowVideo={setShowVideo}></Addvideo>
+                            <div className='w-12 h-12' onClick={sendPostApi}
+                                onMouseEnter={() => setIsHovered(true)}
+                                onMouseLeave={() => setIsHovered(false)}>
+                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={isHovered ? postIcon7.path : postIcon6.path} alt='发布'></img>
+                            </div>
+                        </div>
                     </div>
                     {/* postTitle */}
                     <input className='mb-2 mt-2 w-full bg-[--boxHoverColor] border-2 border-[--boxHoverColor] hover:border-[--assistColor] my-rounded-10px' placeholder={t('addposettitle')} onChange={(e) => { setPostTitle(e.target.value) }} value={postTitle} maxLength={30}></input>
@@ -186,16 +200,7 @@ export default function Portal() {
                     </div>
                 </div>
             </div>
-            {/* 功能 */}
-            <div className='flex flex-col justify-center items-center mt-2'>
-                {/*  <AddImge setImageData={setImageData} showImageData={showImageData} setShowImageData={setShowImageData}></AddImge> */}
-                <Addvideo setVideoData={setVideoData} showVideo={showVideo} setShowVideo={setShowVideo}></Addvideo>
-                <div className='w-12 h-12' onClick={sendPostApi}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}>
-                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={isHovered ? postIcon7.path : postIcon6.path} alt='发布'></img>
-                </div>
-            </div>
+
         </div>
     );
 }
