@@ -96,7 +96,6 @@ export const getusepostApi = async (req, res) => {
                 }
             }
         ])
-        console.log(useByPost)
         res.status(200).send(useByPost)
     } catch (error) {
         res.status(500).json({ message: error.message })
