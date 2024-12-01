@@ -98,7 +98,7 @@ export default function PostComment({ postId, setInputData, reLoad, userCommentD
                             <div onClick={() => setInputData('@' + item.users[0].username + ':')} className='font-bold text-[--fontColor]'>{item.users[0].username}</div>
                             <Date>{item.commentCreateDate}</Date>
                         </div>
-                        <div onClick={() => targetIDHandler(item._id)} className='relative cursor-pointer' >...
+                        <div onClick={() => targetIDHandler(item._id)} className='relative cursor-pointer text-[--fontColor]' >...
                             {targetID === item._id &&
                                 <DeleteBox postUserId={item.users[0]._id} deleteHandler={() => deleteHandler(item._id)}>
                                     {useRoutes.pathname.split('/')[1] !== 'homepage' ? (

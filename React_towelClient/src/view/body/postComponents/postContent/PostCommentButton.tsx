@@ -23,9 +23,7 @@ export default function PostCommentButton({cid,replycontent,replycount, likes, c
         }).then((response) => {
             if (response.status === 201) {
                 seReLoadPostComment(!reloadPostComment)
-            } else if (response.status === 200) {
-                alert(response.data.message)
-            }
+            } 
         })
             .catch((error) => {
                 console.log(error)

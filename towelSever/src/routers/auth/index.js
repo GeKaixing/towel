@@ -1,9 +1,12 @@
 import express from 'express';
-import { likeRouter, addcommentApi, addpostApi,
+import { addcommentApi, addpostApi,
    addreplyApi, delcommentApi, delpostApi, delreplyApi, 
    findonepostApi, getusecommentApi, getusepostApi, 
    getusereplyApi, postfavoriteApi, dellikeApi, 
-   notificationsApi, readnotificationsApi, delnotificationsApi, uppostApi } from '../../controllers/auth.js';
+   notificationsApi, readnotificationsApi, delnotificationsApi, uppostApi, 
+   postlikeApi,
+   commentlikeApi,
+   replylikeApi} from '../../controllers/auth.js';
 
 const router = express.Router();
 
@@ -40,12 +43,12 @@ router.delete('/delreply/:id', delreplyApi)
       参数2：类型
       返回值：点赞api
   */
-//点赞post
-likeRouter('/post/like/:id', 'post');
-// 点赞评论
-likeRouter('/comments/like/:id', 'comment');
-// 点赞回复
-likeRouter('/replies/like/:id', 'reply');
+//点赞post API
+router.post( '/post/like/:id',postlikeApi)
+// 点赞评论 API
+router.post( '/comments/like/:id',commentlikeApi)
+// 点赞回复 API
+router.post( '/replies/like/:id',replylikeApi)
 //收藏post API
 router.post('/post/favorite/:id', postfavoriteApi);
 //delete like button

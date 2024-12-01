@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
@@ -50,12 +51,9 @@ export default function Post(props) {
                 userId: localStorageData.userid
             }
         }).then((response) => {
-            console.log(response.data)
             if (response.status === 201) {
                 props.reload.setLoad(!props.reload.reload)
-            } else if (response.status === 200) {
-                alert(response.data.message)
-            }
+            } 
         })
             .catch((error) => {
                 console.log(error)

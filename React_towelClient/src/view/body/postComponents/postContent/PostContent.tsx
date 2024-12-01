@@ -1,3 +1,4 @@
+//@ts-ignore
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import PostInput from './PostInput';
@@ -19,6 +20,7 @@ export default function PostContent() {
     // 获取文章数据的useState
     const [contentdata, setcontent] = useState<contentdata>({})
     const [localStorageData] = useLocalStorage()
+    const [reload,setload] = useState(false)
     // const navigate = useNavigate()
     //获取当前路由
     const { pathname, state } = useLocation()
@@ -33,6 +35,24 @@ export default function PostContent() {
         const markdownRegex = /^(# |- \s|\*\*|\*|`|>\s)/;
         return markdownRegex.test(text);
     };
+    const getOnePostAPi=async()=>{
+        getOnePost(params.id).then( async(response) => {
+            const datas = {
+                comments: response.data[0].postComment,
+                content: detectMarkdown(response.data[0].postText) ? await DOMPurify.sanitize(marked(response.data[0].postText)as string) : response.data[0].postText,
+                headimg: response.data[0].user.headimg,
+                id: response.data[0]._id,
+                likes: response.data[0].postLike,
+                name: response.data[0].user.username,
+                postImages: response.data[0].postImages,
+                postVideos: response.data[0].postVideos,
+                postUserId: response.data[0].postUserId,
+                markdown: detectMarkdown(response.data[0].postText)
+            }
+            setcontent(datas)
+        }).catch(error => console.log(error))
+
+    }
     useEffect(() => {
         if (state) {
             const data = JSON.parse(state)
@@ -56,25 +76,11 @@ export default function PostContent() {
             }
             
         } else {
-            getOnePost(params.id).then( async(response) => {
-                console.log(response.data)
-                const datas = {
-                    comments: response.data[0].postComment,
-                    content: detectMarkdown(response.data[0].postText) ? await DOMPurify.sanitize(marked(response.data[0].postText)as string) : response.data[0].postText,
-                    headimg: response.data[0].user.headimg,
-                    id: response.data[0]._id,
-                    likes: response.data[0].postLike,
-                    name: response.data[0].user.username,
-                    postImages: response.data[0].postImages,
-                    postVideos: response.data[0].postVideos,
-                    postUserId: response.data[0].postUserId,
-                    markdown: detectMarkdown(response.data[0].postText)
-                }
-                setcontent(datas)
-            }).catch(error => console.log(error))
+            getOnePostAPi()
         }
     }, [state, pathname])
-    // 点赞按钮
+    useEffect(()=>{getOnePostAPi()},[reload])
+     // 点赞按钮
     const likehandle = (event) => {
         event.stopPropagation()
         postPostLike(contentdata.id, {
@@ -84,10 +90,8 @@ export default function PostContent() {
         })
             .then((response) => {
                 if (response.status === 201) {
-                    setcontent({ ...contentdata, likes: (contentdata.likes||0) + 1 })
-                } else if (response.status === 200) {
-                    alert(response.data.message)
-                }
+                    setload(i=>!i)
+                } 
             })
             .catch((error) => {
                 console.log(error)

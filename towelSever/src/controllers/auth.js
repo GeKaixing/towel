@@ -234,12 +234,7 @@ export const findonepostApi = async (req, res) => {
         const data = await POSTS.aggregate([
             {
                 $match: {
-                    postDelete: false,
-                },
-            },
-            {
-                $match: {
-                    _id: new ObjectID(`${_id}`)
+                    _id: new ObjectID(`${_id}`),
                 }
             },
             {
@@ -449,39 +444,104 @@ export const delreplyApi = async (req, res) => {
     }
 }
 
-// 点赞
-export const likeRouter = function (url, targetType) {
-    const url_value = url;
-    const targetType_value = targetType;
-    router.post(url_value, async (req, res) => {
+// 点赞文章
+export const postlikeApi =  async (req, res) => {
         try {
-
             const commentId = req.params.id;
             const userId = req.body.data.userId;
+            console.log(commentId,userId)
             const existingLike = await LIKES.findOne({
                 userId: new mongoose.Types.ObjectId(userId),
-                targetType: targetType_value,
+                targetType: 'post',
                 targetId: new mongoose.Types.ObjectId(commentId)
             });
             if (existingLike) {
-                const likes = await LIKES.find({ targetType: targetType_value, targetId: new mongoose.Types.ObjectId(commentId) });
-                return res.status(200).json({ message: '已经点赞了，不能重复点赞', likenum: likes.length });
+                await LIKES.deleteOne({
+                    targetType: 'post',
+                    targetId: new mongoose.Types.ObjectId(commentId)
+                });
+                const likes = await LIKES.find({ targetType: 'post', targetId: new mongoose.Types.ObjectId(commentId) });
+                return res.status(201).json({  likenum: likes.length });
             } else {
                 const newLike = new LIKES({
                     userId: new mongoose.Types.ObjectId(userId),
-                    targetType: targetType_value,
+                    targetType: 'post',
                     targetId: new mongoose.Types.ObjectId(commentId)
                 });
                 await newLike.save();
-                const likes = await LIKES.find({ targetType: targetType_value, targetId: new mongoose.Types.ObjectId(commentId) });
+                const likes = await LIKES.find({ targetType: 'post', targetId: new mongoose.Types.ObjectId(commentId) });
                 res.status(201).json({ newLike, likenum: likes.length });
             }
 
         } catch (err) {
             res.status(500).json({ message: err.message });
         }
-    });
-}
+    }
+//点赞评论
+export const commentlikeApi =  async (req, res) => {
+        try {
+            const commentId = req.params.id;
+            const userId = req.body.data.userId;
+            const existingLike = await LIKES.findOne({
+                userId: new mongoose.Types.ObjectId(userId),
+                targetType: 'comment',
+                targetId: new mongoose.Types.ObjectId(commentId)
+            });
+            if (existingLike) {
+                await LIKES.deleteOne({
+                    targetType: 'comment',
+                    targetId: new mongoose.Types.ObjectId(commentId)
+                });
+                const likes = await LIKES.find({ targetType: 'comment', targetId: new mongoose.Types.ObjectId(commentId) });
+                return res.status(201).json({ likenum: likes.length });
+            } else {
+                const newLike = new LIKES({
+                    userId: new mongoose.Types.ObjectId(userId),
+                    targetType: 'comment',
+                    targetId: new mongoose.Types.ObjectId(commentId)
+                });
+                await newLike.save();
+                const likes = await LIKES.find({ targetType: 'comment', targetId: new mongoose.Types.ObjectId(commentId) });
+                res.status(201).json({ newLike, likenum: likes.length });
+            }
+
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    }
+//点赞回复
+export const replylikeApi =  async (req, res) => {
+        try {
+            const commentId = req.params.id;
+            const userId = req.body.data.userId;
+            console.log(commentId,userId)
+            const existingLike = await LIKES.findOne({
+                userId: new mongoose.Types.ObjectId(userId),
+                targetType:  'reply',
+                targetId: new mongoose.Types.ObjectId(commentId)
+            });
+            if (existingLike) {
+                await LIKES.deleteOne({
+                    targetType: 'reply',
+                    targetId: new mongoose.Types.ObjectId(commentId)
+                });
+                const likes = await LIKES.find({ targetType: 'reply', targetId: new mongoose.Types.ObjectId(commentId) });
+                return res.status(201).json({ likenum: likes.length });
+            } else {
+                const newLike = new LIKES({
+                    userId: new mongoose.Types.ObjectId(userId),
+                    targetType:  'reply',
+                    targetId: new mongoose.Types.ObjectId(commentId)
+                });
+                await newLike.save();
+                const likes = await LIKES.find({ targetType:'reply' , targetId: new mongoose.Types.ObjectId(commentId) });
+                res.status(201).json({ newLike, likenum: likes.length });
+            }
+
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    }
 
 export const postfavoriteApi = async (req, res) => {
     try {

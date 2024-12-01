@@ -31,7 +31,7 @@ export default function PostPage() {
     setLoading(false);
   };
 
-  // 使用 IntersectionObserver 监听加载器
+  /* // 使用 IntersectionObserver 监听加载器
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -55,22 +55,25 @@ export default function PostPage() {
         observer.unobserve(loaderRef.current);
       }
     };
-  }, [hasMore, loading]);
+  }, [hasMore, loading]); */
 
   // 当页码变化时触发获取数据
   useEffect(() => {
     if (process.env.REACT_APP_TEST === 'TEST') {
       setArticles(postJson); // 如果是测试环境使用假数据
     } else {
-      getPostApi(page); // 获取 API 数据
+      getPost().then(data => {
+        setArticles(data.data)
+      });
+      // getPostApi(page); // 获取 API 数据
     }
-  }, [page]);
+  }, [reload]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (reload) {
       getPostApi(1); // 当 reload 变化时从第一页加载数据
     }
-  }, [reload]);
+  }, [reload]); */
 
   return (
     <>

@@ -10,7 +10,7 @@ function DeleteBox({ postUserId, userName, headimg, deleteHandler, reportHandler
     return (
         <>
             {showModal && < Portal >
-                <div className='flex flex-col w-[200px] justify-center items-center space-y-2 ' onClick={e => e.stopPropagation()} >
+                <div className='flex flex-col w-[200px] justify-center items-center space-y-2 text-[--fontColor]' onClick={e => e.stopPropagation()} >
                     {localStorageData.userid === postUserId ? <span className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' onClick={deleteHandler}>删除</span> : null}
                     {children}
                     <Link to={`/privatechat/${postUserId}`}   state={{ userName, headimg }} className='w-[150px] h-[50px] bg-[--boxColor] flex justify-center items-center rounded-my-rounded-10px hover:bg-[--boxHoverColor] hover:text-[--hostColor]' >私信</Link>
