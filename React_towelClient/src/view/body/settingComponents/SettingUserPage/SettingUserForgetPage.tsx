@@ -1,11 +1,11 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Form } from "antd";
 import Backtab from '../../../../components/Backtab'
 import { useLanguage } from '../../../../store/LanguageContext';
+import Widget from '../../../../cloudflare/cloudflare';
 export default function SettingUserForgetPage() {
-    const {t}=useLanguage();
+    const { t } = useLanguage();
     const [, setLocalStorageData] = useState({});
     const [inputData, setinputData] = useState({
         user: '',
@@ -18,9 +18,11 @@ export default function SettingUserForgetPage() {
     const [showpassword, setshowpassword] = useState(false)
     const [showpassword2, setshowpassword2] = useState(false)
 
+
+
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
-            setLocalStorageData(JSON.parse(localStorage.getItem('loginData')as string))
+            setLocalStorageData(JSON.parse(localStorage.getItem('loginData') as string))
         }
     }, [])
     const emailHandle = (e) => {
@@ -95,13 +97,15 @@ export default function SettingUserForgetPage() {
             <Backtab text={t('setting')} href='/setting'></Backtab>
             <div className='text-[--fontColor]'>
                 <form className='flex flex-col justify-center items-center relative' onSubmit={(e) => { e.preventDefault() }}>
-                    <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='text' placeholder={t('name')}  value={inputData.user} onChange={userNameHandle}></input>
-                    <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='email' placeholder={t('email')} value={inputData.email} onChange={emailHandle}></input>
-                    {isShowCode ? <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='code' placeholder={t('Verification')} value={inputData.code} onChange={codeHandle}></input> : null}
-                    <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type={showpassword ? 'text' : 'password'} placeholder={t('newPassword')} value={inputData.password} onChange={passwordHandle}></input>
-                    <input className='w-60 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type={showpassword2 ? 'text' : 'password'} placeholder={t('enterPassword')} value={inputData.password2} onChange={password2Handle}></input>
+                    <input className='w-[300px] h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='text' placeholder={t('name')} value={inputData.user} onChange={userNameHandle}></input>
+                    <input className='w-[300px] h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='email' placeholder={t('email')} value={inputData.email} onChange={emailHandle}></input>
+                    {isShowCode ? <input className='w-[300px] h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='code' placeholder={t('Verification')} value={inputData.code} onChange={codeHandle}></input> : null}
+                    <input className='w-[300px] h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type={showpassword ? 'text' : 'password'} placeholder={t('newPassword')} value={inputData.password} onChange={passwordHandle}></input>
+                    <input className='w-[300px] h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type={showpassword2 ? 'text' : 'password'} placeholder={t('enterPassword')} value={inputData.password2} onChange={password2Handle}></input>
+
                     <input className='w-24 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit' value={t('SendVerificationCode')} onClick={sendCodeHandle}></input>
-                    <input className='w-24 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit' value={t('submit')}  onClick={submitHandler} ></input>
+                    <input className='w-24 h-6 mt-[10px] bg-[--boxColor] border-none font-[--fontColor]' type='submit' value={t('submit')} onClick={submitHandler} ></input>
+                        <Widget></Widget>
                 </form>
 
             </div>
