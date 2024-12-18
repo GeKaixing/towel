@@ -1,22 +1,33 @@
-import axios from 'axios'
+import axios from "axios";
 
 // Ai接口
-export const llanaApi=(req, res) => {
-    const { context } = req.body.data
-    axios.post('http://localhost:11434/api/chat', {
-            "model": "llama3",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": context
-                }
-            ],
-            "stream": false
-        })
-        .then(response => {
-            res.status(200).send(response.data.message) 
-        })
-        .catch(error => {
-            res.status(500).send({message:error})
-        })
-}
+export const llamaApi = (req, res) => {
+  const { context } = req.body.data;
+  // 设置响应类型为流式
+  res.setHeader("Content-Type", "text/plain;charset=utf-8");
+  axios
+    .post("http://localhost:11434/api/chat", {
+      model: "llama3.2:1b",
+      messages: [
+        {
+          role: "user",
+          content: context,
+        },
+      ],
+      stream: true,
+    },{ responseType: 'stream' })
+    .then((response) => {
+      response.data.on("data", (chunk) => {
+        // 每次收到数据块时，逐字输出
+        res.write(chunk);
+      });
+
+      response.data.on("end", () => {
+        // 结束流时，结束响应
+        res.end();
+      });
+    })
+    .catch((error) => {
+      res.status(500).send({ message: error });
+    });
+};

@@ -1,5 +1,14 @@
 import { open } from "../config"
 
-export const postAi = (context) => {
-    return open({ url: `llama`,method:'post',data:{data:{context}}})
+export const postAi =async (context) => {
+    // return open({ url: `llama`,method:'post',data:{data:{context}}})
+    //@ts-ignore
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}llama`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: { context } })
+    });
+    return response;
  }
