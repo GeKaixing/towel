@@ -63,9 +63,14 @@
 
     Set-ExecutionPolicy RemoteSigned
 
-安装Llama 3.1 本地部署
+安装Llama 3.2:1b 本地部署(轻量化模型)
+```
+    brew install ollama  
 
-    https://llama.meta.com/docs/overview
+    ollama run llama3.2:1b  
+
+    详细https://llama.meta.com
+```
 
 ### 1.1项目目录结构
 web端目录结构
@@ -293,7 +298,7 @@ towel 是一个三端同步的项目，在基于expess框架下编写后端项�
 * 注册验证（nodemailer的实践）
 * 文件上传（multer的实践）
 * 消息推送 (socket的实践)
-* AI Llama3.1 8b 模型 （Llama3.1的实践）  
+* AI Llama3.2 1b 模型 （Llama3.2的实践）  
 * react/Rn 使用同一技术栈react，小程序使用uniapp/vue
 * RN使用expo 开发环境，快速开发
 * 小程序和RN和web使用同一个ui/ux，ui统一，icon统一使用[iconpark](https://iconpark.oceanengine.com/home)
