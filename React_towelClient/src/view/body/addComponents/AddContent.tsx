@@ -14,7 +14,7 @@ import Addvideo from './addvideo/Addvideo';
 import { postUpLoad } from '../../../services/add/add';
 import axios from 'axios';
 import dayjs from 'dayjs'
-import ReactQuill from 'react-quill';
+import ReactQuill from 'react-quill';//不支持react 19
 import 'react-quill/dist/quill.snow.css';
 import { useLanguage } from '../../../store/LanguageContext';
 
@@ -64,7 +64,7 @@ export default function Portal() {
         formData.append('video', videoData);
         formData.append('targetId', localStorageData.userid);
         formData.append('staticType', 'add');
-        /* global process */
+        /* global process */ // @ts-ignore
         const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}uploadvideo/${localStorageData.userid}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -187,7 +187,7 @@ export default function Portal() {
                         style={{ resize: "vertical", backgroundColor: 'var(--boxColor)', color: 'var(--fontColor)' }}
                     ></textarea> */}
 
-                    <ReactQuill modules={modules} value={textareaData} onChange={handleChange} />
+                    {/* <ReactQuill modules={modules} value={textareaData} onChange={handleChange} /> */}
 
                     {wordCount >= 1000 && <p className="text-red-500">{t('wordsMax')}</p>}
                     {isMarkdown && <div className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(textareaData) as string) }}></div>}
