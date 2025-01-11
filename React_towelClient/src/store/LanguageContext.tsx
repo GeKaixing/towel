@@ -6,9 +6,9 @@ interface LanguageContextType {
     switchLanguage: (lang: string) => void;
     t: (key: string) => string;
 }
-const defaultState={
+const defaultState = {
     language: 'en',
-    switchLanguage: () => {},
+    switchLanguage: () => { },
     t: (key: string) => key
 }
 // 语言资源
@@ -77,7 +77,8 @@ const resources = {
         submit: "提交",
         newPassword: "新密码",
         enterPassword: '确认密码',
-        Language: 'Language'
+        Language: 'Language',
+        wallet: '钱包'
     },
     en: {
         home: "home",
@@ -144,11 +145,12 @@ const resources = {
         submit: "submit",
         newPassword: 'new pawssword',
         enterPassword: 'enterPassword',
-        Language: '语言'
+        Language: '语言',
+        wallet: 'wallet'
     }
 };
 
-const LanguageContext = createContext<LanguageContextType >(defaultState);
+const LanguageContext = createContext<LanguageContextType>(defaultState);
 
 export const useLanguage = () => {
     return useContext(LanguageContext);
@@ -156,7 +158,7 @@ export const useLanguage = () => {
 
 export const LanguageProvider = ({ children }) => {
     // 尝试从 localStorage 获取保存的语言，默认是 'en'
-  const savedLanguage = localStorage.getItem('language') || 'en';
+    const savedLanguage = localStorage.getItem('language') || 'en';
     const [language, setLanguage] = useState(savedLanguage);
 
     const switchLanguage = (lang: string) => {

@@ -24,6 +24,7 @@ import Foot from '../view/foot/Foot'
 import SettingAuth from '../view/body/settingComponents/SettingUserPage/SettingAuth'
 import Orderform from '../view/body/settingComponents/Orderform'
 import Contactme from '../view/body/settingComponents/Contactme'
+import Wallet from '../view/body/settingComponents/Wallet'
 export default function Routers() {
     return (
         <div className='flex '>
@@ -49,6 +50,7 @@ export default function Routers() {
                     <Route path='/setting/account' element={<SettingAccount />}> </Route>
                     <Route path='/setting/orderform' element={<Orderform />}> </Route>
                     <Route path='/setting/contactme' element={<Contactme />}> </Route>
+                    <Route path='/setting/wallet' element={<Wallet />}> </Route>
                     <Route path='/search' element={<Search />}></Route>
                     <Route path='/ai' element={<Ai />}></Route>
                     <Route path='/login' element={<Login />}></Route>

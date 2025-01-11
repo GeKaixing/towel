@@ -54,6 +54,7 @@ export default function SettingMenu() {
             <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={switchLanguageHandler}>{t('Language')}</div>
             <Link to={"https://blog.gekaixing.top/"} target={'_blank'}> <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' >{t('blog')}</div></Link>
             <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={() => navigate('/about', { replace: true })}>{t('about')}</div>
+            <div className='w-[80px] h-[60px] rounded-[10px] bg-[--boxColor]  flex flex-col justify-between items-center hover:bg-[--boxHoverColor]' onClick={() => navigate('/setting/wallet', { replace: true })}>{t('wallet')}</div>
         </div>
     )
 }
