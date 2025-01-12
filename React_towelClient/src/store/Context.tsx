@@ -9,15 +9,16 @@ import {
 import { PrivateChatProvider, usePrivateChatContext } from './privateChat.tsx';
 import { NoReadNumbers, useNoReadNumbers } from './noReadNumbers.tsx';
 import { LanguageProvider } from './LanguageContext';
+import ConnectWallet from './ConnectWallet.tsx';
 
 export default function Context({ children }) {
   const { setNoReadNumber } = useNoReadNumbers();
-  const { setPrivateChatData } = usePrivateChatContext()as {setPrivateChatData};
+  const { setPrivateChatData } = usePrivateChatContext() as { setPrivateChatData };
   const { setMessageResponseData } = useMessageResponseData();
 
   useEffect(() => {
     if (localStorage.getItem('loginData')) {
-      const localStorageDatas = JSON.parse(localStorage.getItem('loginData')as string);
+      const localStorageDatas = JSON.parse(localStorage.getItem('loginData') as string);
       let socket = initSocket(localStorageDatas.userid);
       socket.on(`${localStorageDatas.userid}`, data => {
         setMessageResponseData(data.datas);
@@ -30,16 +31,18 @@ export default function Context({ children }) {
     }
   }, []);
   return (
-    <LanguageProvider>   
-    <PrivateChatProvider>
+    <LanguageProvider>
+      <PrivateChatProvider>
         <NoReadNumbers>
           <MessageResponseDataProvider>
             <SelectLightorDarkProvider>
+              <ConnectWallet>
                 {children}
+              </ConnectWallet>
             </SelectLightorDarkProvider>
           </MessageResponseDataProvider>
         </NoReadNumbers>
-    </PrivateChatProvider>
+      </PrivateChatProvider>
     </LanguageProvider>
   );
 }

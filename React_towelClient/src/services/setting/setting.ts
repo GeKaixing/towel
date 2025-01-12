@@ -18,3 +18,7 @@ export const postModifyingiphoneNumber = (data) => {
 export const postModifyingbirthday = (data) => {
     return auth({ url: `modifyingbirthday`,data })
 }
+//购买vip
+export const postPremium = (data) => {
+    return auth({ url: `premium`,data })
+}

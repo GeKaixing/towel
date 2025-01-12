@@ -4,7 +4,8 @@ const router = express.Router();
 
 import  { userinfoApi, deactivatecodeApi, 
     deactivateaccountAPi, modifyingausernameAPi, 
-    modifyingiphoneNumberApi, modifyingbirthdayApi } from '../../controllers/user.js';
+    modifyingiphoneNumberApi, modifyingbirthdayApi,
+    updataPremium } from '../../controllers/user.js';
 
 
 // 获取用户信息
@@ -19,5 +20,7 @@ router.post('/modifyingausername',modifyingausernameAPi);
 router.post('/modifyingiphoneNumber', modifyingiphoneNumberApi);
 // 修改生日
 router.post('/modifyingbirthday',modifyingbirthdayApi );
+// 购买vip
+router.post('/premium',updataPremium );
 
 export default  router;

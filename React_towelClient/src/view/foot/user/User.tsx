@@ -12,6 +12,7 @@ export default function User() {
                 <Link className='font-bold' to={`/userhomepage/${localStorageData.userid}`}>{localStorageData.username}</Link>
             </div>
             <div className={`w-20 h-8  ${localStorageData.premium?'bg-[--assistantColor]':'bg-gray-300'} rounded-my-rounded-10px flex justify-center items-center cursor-pointer`} onClick={() => { setShowPremium(i => !i) }}>Premium</div>
+            
             {isShowPremium && <Premium setShowPremium={setShowPremium}></Premium>}
         </div>
     )
