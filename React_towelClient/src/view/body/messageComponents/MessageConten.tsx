@@ -82,7 +82,7 @@ export default function Message() {
   }
 
   return (
-    <div className='space-y-2'>
+    <div className='p-2  '>
       <div>{t('privateChat')}</div>
       {/* 与你private chata用户id */}
       {privateChatData.length !== 0 && (

@@ -23,7 +23,7 @@ import demo77 from '../../assets/static/MainMenuIconPitchUp/笔记本.svg'
 import { useLanguage } from '../../store/LanguageContext';
 
 export default function MainMenu() {
-  const {t}=useLanguage();
+  const { t } = useLanguage();
   const [, setWidth] = useState(window.innerWidth);
   const [localStorageData] = useLocaStorage();
   const { noReadNumber } = useContext(noReadNumbers);
@@ -75,8 +75,9 @@ export default function MainMenu() {
     new HowShowIcon(demo7, demo77),
   ];
   return (
-    
-      <div className=' flex md:mr-4 md:mt-2 md:ml-4 md:w-20 md:h-[80%] md:py-2 md:flex-col 
+
+    <div className=' flex 
+        md:mr-4 md:mt-2 md:ml-4 md:w-20 md:h-[80%] md:py-2 md:flex-col 
         max-md:left-[50%] max-md:translate-x-[-50%] 
         md:bg-transparent
         lg:w-[20%] lg:ml-[10%]
@@ -85,32 +86,32 @@ export default function MainMenu() {
         bg-[--boxColor]
         lg:bg-transparent
        '>
-        <div className='hidden md:block md:w-10 md:h-10
+      <div className='hidden md:block md:w-10 md:h-10
           lg:w-20 lg:h-20
           mb-2
         '>
-          {/* global process */}
-          <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='' />
-        </div>
-        <MainMenuLink to="/" src={icons[0].home().path} text={t('home')} />
-        {/* <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' /> */}
-        <MainMenuLink to="/ai" src={icons[6].getIcon('/ai').path} text={t('ai')}/>
-        <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text={t('add')} />
-        <MainMenuLink className='relative' to="/Message" src={icons[2].getIcon('/Message').path} text={t('message')}>
-          <div className='hidden lg:block absolute -right-6 font-[--assistantColor]'>{noReadNumber}</div>
-        </MainMenuLink>
-        {/* <MainMenuLink to="https://blog.gekaixing.top/" target={'_blank'} src={icons[7].getIcon('/blog').path} text={t('blog')}/> */}
-        <MainMenuLink className='hidden md:block' to="/setting" src={icons[4].getIcon('/setting').path} text={t('setting')} />
-        {localStorageData.jwt &&
-          <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center '}>
-            <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover lg:mr-10 flex justify-center items-center'>
-              <img className='w-10 h-10 rounded-full max-md:w-[26px] max-md:h-[26px]' src={localStorageData.headimg} ></img>
-            </div>
-            <div className='max-lg:hidden lg:block text-lg font-bold text-[--fontColor]'>{localStorageData.username}</div>
-          </Link>
-        }
-        {!localStorageData.jwt && <MainMenuLink to="/login" src={icons[5].getIcon('/login').path} text={t('login')} />}
+        {/* global process */}
+        <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='' />
       </div>
-    
+      <MainMenuLink to="/" src={icons[0].home().path} text={t('home')} />
+      {/* <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' /> */}
+      <MainMenuLink to="/ai" src={icons[6].getIcon('/ai').path} text={t('ai')} />
+      <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text={t('add')} />
+      <MainMenuLink className='relative' to="/Message" src={icons[2].getIcon('/Message').path} text={t('message')}>
+        <div className='hidden lg:block absolute -right-6 font-[--assistantColor]'>{noReadNumber}</div>
+      </MainMenuLink>
+      {/* <MainMenuLink to="https://blog.gekaixing.top/" target={'_blank'} src={icons[7].getIcon('/blog').path} text={t('blog')}/> */}
+      <MainMenuLink className='hidden md:block' to="/setting" src={icons[4].getIcon('/setting').path} text={t('setting')} />
+      {localStorageData.jwt &&
+        <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center '}>
+          <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover lg:mr-10 flex justify-center items-center'>
+            <img className='w-10 h-10 rounded-full max-md:w-[26px] max-md:h-[26px]' src={localStorageData.headimg} ></img>
+          </div>
+          <div className='max-lg:hidden lg:block text-lg font-bold text-[--fontColor]'>{localStorageData.username}</div>
+        </Link>
+      }
+      {!localStorageData.jwt && <MainMenuLink to="/login" src={icons[5].getIcon('/login').path} text={t('login')} />}
+    </div>
+
   );
 }
