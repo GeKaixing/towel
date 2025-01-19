@@ -152,7 +152,6 @@ export default function Portal() {
     };
 
     const {isShow, setShow}= useShowAddPost();  
-    console.log(isShow)
     return (
         <div className='flex flex-col w-full px-2 py-2 '>
             <div className='flex flex-row w-full bg-[--boxColor] px-2 py-2 rounded-my-rounded-10px'>
