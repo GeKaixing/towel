@@ -10,6 +10,7 @@ import { PrivateChatProvider, usePrivateChatContext } from './privateChat.tsx';
 import { NoReadNumbers, useNoReadNumbers } from './noReadNumbers.tsx';
 import { LanguageProvider } from './LanguageContext';
 import ConnectWallet from './ConnectWallet.tsx';
+import AddPostContext from './AddPostContext.tsx';
 
 export default function Context({ children }) {
   const { setNoReadNumber } = useNoReadNumbers();
@@ -37,7 +38,9 @@ export default function Context({ children }) {
           <MessageResponseDataProvider>
             <SelectLightorDarkProvider>
               <ConnectWallet>
-                {children}
+                <AddPostContext>
+                  {children}
+                </AddPostContext>
               </ConnectWallet>
             </SelectLightorDarkProvider>
           </MessageResponseDataProvider>

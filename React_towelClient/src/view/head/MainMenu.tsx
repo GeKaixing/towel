@@ -21,6 +21,7 @@ import demo55 from '../../assets/static/MainMenuIconPitchUp/进入.svg'
 import demo66 from '../../assets/static/MainMenuIconPitchUp/大脑.svg'
 import demo77 from '../../assets/static/MainMenuIconPitchUp/笔记本.svg'
 import { useLanguage } from '../../store/LanguageContext';
+import {useShowAddPost} from '../../store/AddPostContext'
 
 export default function MainMenu() {
   const { t } = useLanguage();
@@ -28,6 +29,7 @@ export default function MainMenu() {
   const [localStorageData] = useLocaStorage();
   const { noReadNumber } = useContext(noReadNumbers);
   const router = useLocation();
+  const {setShow}=useShowAddPost();
 
   useEffect(() => {
     const handleResize = () => {
@@ -96,7 +98,7 @@ export default function MainMenu() {
       <MainMenuLink to="/" src={icons[0].home().path} text={t('home')} />
       {/* <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' /> */}
       <MainMenuLink to="/ai" src={icons[6].getIcon('/ai').path} text={t('ai')} />
-      <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text={t('add')} />
+      <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text={t('add')} onClick={()=>{setShow(true)}} />
       <MainMenuLink className='relative' to="/Message" src={icons[2].getIcon('/Message').path} text={t('message')}>
         <div className='hidden lg:block absolute -right-6 font-[--assistantColor]'>{noReadNumber}</div>
       </MainMenuLink>

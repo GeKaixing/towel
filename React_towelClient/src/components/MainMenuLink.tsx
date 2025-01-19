@@ -3,7 +3,7 @@ import MainMenuTitle from './MainMenuTitle'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-export default function MainMenuLink({ to, src, text, children, className, target = '_self' }) {
+export default function MainMenuLink({ to, src, text, children, className, target = '_self', onClick }) {
 
     return (
         <Link to={to} target={target} className={`
@@ -13,7 +13,8 @@ export default function MainMenuLink({ to, src, text, children, className, targe
         hover:rounded-[10px]
         p-2
         `
-        }>
+        }
+            onClick={onClick}>
             <div className=' hover:bg-[--boxHoverColor] w-10 h-10 rounded-full max-lg:m-0  lg:mr-20 flex justify-center items-center '>
                 <img className=' w-10 h-10 max-md:w-[26px] max-md:h-[26px]' src={src} ></img>
             </div>

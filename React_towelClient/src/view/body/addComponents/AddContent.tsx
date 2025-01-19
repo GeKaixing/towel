@@ -10,13 +10,16 @@ import addPichIcon from '../../../assets/static/MainMenuIconPitchUp/add.svg'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import Addvideo from './addvideo/Addvideo';
-/* import AddImge from './addimge/AddImge'; */
+import AddImge from './addimge/AddImge';
 import { postUpLoad } from '../../../services/add/add';
 import axios from 'axios';
 import dayjs from 'dayjs'
 import ReactQuill from 'react-quill';//不支持react 19
 import 'react-quill/dist/quill.snow.css';
 import { useLanguage } from '../../../store/LanguageContext';
+import { createPortal } from 'react-dom';
+import PortalComponent from '../../../components/Portal';
+import { useShowAddPost } from '../../../store/AddPostContext';
 
 export default function Portal() {
     const { t } = useLanguage()
@@ -147,6 +150,10 @@ export default function Portal() {
         const plainText = content.replace(/<\/?[^>]*>/g, '').trim(); // 去除 HTML 标签
         setWordCount(plainText.length);
     };
+
+    const {isShow, setShow}= useShowAddPost();
+    console.log(isShow)
+  
     return (
         <div className='flex flex-col w-full px-2 py-2 '>
             <div className='flex flex-row w-full bg-[--boxColor] px-2 py-2 rounded-my-rounded-10px'>
@@ -156,7 +163,7 @@ export default function Portal() {
                     <div className=' flex flex-row  items-center justify-between '>
                         <div className='flex flex-row  items-center space-x-2'>
                             <img src={loginDataParse.headimg} className='h-10 w-10 rounded-full' alt="user" />
-                            <div className='font-bold text=[--fontColor] cursor-pointer'>{loginDataParse.username}</div>
+                            <div className='font-bold text-[--fontColor] cursor-pointer'>{loginDataParse.username}</div>
                             <div className='flex items-center space-x-2 ' onClick={() => setIsMarkdown(!isMarkdown)}>
                                 <p className={isMarkdown ? 'font-bold' : ''}>markdown</p>{isMarkdown && <div className='w-2 h-2 rounded-full bg-[--hostColor] '></div>}
                             </div>
@@ -201,6 +208,37 @@ export default function Portal() {
                 </div>
             </div>
 
+             {isShow &&
+                <PortalComponent>
+                    <div className='h-80 bg-white w-[600px] p-2 rounded-[10px]'>
+                        <header className='flex justify-between'>
+                            <div className='text-[--hostColor] font-bold cursor-pointer' onClick={()=>{setShow(false)}}>cancel</div>
+                            <div className='font-bold w-14 bg-[--hostColor] cursor-pointer rounded-[10px] flex justify-center items-center text-[--fontColor] h-8'>post</div>
+                        </header>
+                        <div className='flex gap-2 '>
+
+                            <img src={localStorageData.headimg} className='w-12 h-12  rounded-full bg-white' alt="头像"></img>
+                            <div className=' h-64 overflow-auto'>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
+                            </div>
+                        </div>
+                        <hr></hr>
+                        <div className='flex gap-2'>
+                            <div className='w-6 h-6 '>
+                                <Addvideo setVideoData={setVideoData} showVideo={showVideo} setShowVideo={setShowVideo}></Addvideo>
+                            </div>
+                            <div className='w-6 h-6 '>
+                                <AddImge setImageData={setImageData} showImageData={showImageData} setShowImageData={setShowImageData}></AddImge>
+                            </div>
+                        </div>
+                    </div>
+                </PortalComponent>
+            } 
         </div>
     );
 }
