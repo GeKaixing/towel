@@ -78,7 +78,8 @@ const resources = {
         newPassword: "新密码",
         enterPassword: '确认密码',
         Language: 'Language',
-        wallet: '钱包'
+        wallet: '钱包',
+        share:'分享'
     },
     en: {
         home: "home",
@@ -146,7 +147,8 @@ const resources = {
         newPassword: 'new pawssword',
         enterPassword: 'enterPassword',
         Language: '语言',
-        wallet: 'wallet'
+        wallet: 'wallet',
+        share:'share'
     }
 };
 
