@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface AddPostContextType {
     isShow: boolean;
@@ -8,8 +8,21 @@ interface AddPostContextType {
 const AddPost = createContext<AddPostContextType | null>(null);
 
 export default function AddPostContext({ children }) {
-    const [isShow, setShow] = useState(false);
-
+    const [isShow, setShows] = useState(false);
+    const [width, setWidth] = useState(window.innerWidth);
+    const setShow = (params:boolean) => {
+        if (width > 768) {
+             setShows(params)
+        } else {
+            return null;
+        }
+    }
+    
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            setWidth(window.innerWidth);
+        })
+    },[])
     return (
         <AddPost value={{ isShow, setShow }}>
             {children}
