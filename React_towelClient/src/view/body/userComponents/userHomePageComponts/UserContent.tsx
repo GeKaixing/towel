@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getSocket } from '../../../../socket/socket'
 import useLocalStorage from '../../../../hooks/useLocaStorage'
 import { useLanguage } from '../../../../store/LanguageContext'
+//@ts-ignore
 import moretwo from "../../../../assets/static/otherIcon/more-two.svg"
 export default function UserHomePage() {
   /* 用户的详情页  */

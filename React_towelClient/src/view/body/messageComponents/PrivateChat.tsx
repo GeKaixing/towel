@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+//@ts-ignore
 import addImgaIcon from '../../../assets/static/otherIcon/图片添加.svg';
 import { getSocket } from '../../../socket/socket';
 import { useLocation, useParams } from 'react-router';
