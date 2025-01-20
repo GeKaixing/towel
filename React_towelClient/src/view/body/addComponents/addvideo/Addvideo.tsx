@@ -24,20 +24,7 @@ export default function Addvideo({setVideoData,showVideo, setShowVideo}) {
 
     return (
         <>
-            {showVideo && (
-                <div className='w-full h-auto flex flex-col items-center'>
-                    <video className='w-full h-auto' controls>
-                        <source src={showVideo} type="video/mp4" />
-                    </video>
-                    <div
-                        className=' cursor-pointer'
-                        onClick={handleDeleteVideo}
-                        title='删除视频'
-                    >
-                        删除视频
-                    </div>
-                </div>
-            )}
+            
             <label
                 htmlFor='inputfilevedio'
                 className='w-12 h-12'

@@ -27,11 +27,7 @@ export default function AddImge({setImageData,showImageData,setShowImageData}) {
 
     return (
         <>
-            {showImageData &&  <>
-                    <img src={showImageData} alt="preview" style={{ width: '50px', height: '50px', borderRadius: '10px' }} />
-                    <div className='w-12 h-12' onClick={() => setShowImageData('')}>删除图片</div>
-                </>
-            }
+          
             <label htmlFor='inputfile' className='w-12 h-12' title='添加图片'
                 onMouseEnter={() => setIsHoveredImage(true)}
                 onMouseLeave={() => setIsHoveredImage(false)}

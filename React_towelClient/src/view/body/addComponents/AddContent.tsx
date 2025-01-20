@@ -151,7 +151,7 @@ export default function Portal() {
         setWordCount(plainText.length);
     };
 
-    const {isShow, setShow}= useShowAddPost();  
+    const { isShow, setShow } = useShowAddPost();
     return (
         <div className='flex flex-col w-full px-2 py-2 '>
             <div className='flex flex-row w-full bg-[--boxColor] px-2 py-2 rounded-my-rounded-10px'>
@@ -206,23 +206,32 @@ export default function Portal() {
                 </div>
             </div>
 
-             {isShow &&
+            {isShow &&
                 <PortalComponent>
                     <div className='h-80 bg-white w-[600px] p-2 rounded-[10px]'>
                         <header className='flex justify-between'>
-                            <div className='text-[--hostColor] font-bold cursor-pointer' onClick={()=>{setShow(false)}}>cancel</div>
+                            <div className='text-[--hostColor] font-bold cursor-pointer' onClick={() => { setShow(false) }}>cancel</div>
                             <div className='font-bold w-14 bg-[--hostColor] cursor-pointer rounded-[10px] flex justify-center items-center text-[--fontColor] h-8'>post</div>
                         </header>
                         <div className='flex gap-2 '>
 
                             <img src={localStorageData.headimg} className='w-12 h-12  rounded-full bg-white' alt="头像"></img>
                             <div className=' h-64 overflow-auto'>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquam sed veniam cum quos, est quas adipisci? Iste natus praesentium quis nam, nesciunt quas ea explicabo repellat cupiditate veritatis commodi?
+                                <textarea ></textarea>
+                               {showImageData && <div className=''>
+                                    <img src={showImageData} alt="preview" style={{ width: '50px', height: '50px', borderRadius: '10px' }} />
+                                    <DleComponent fn={()=>setShowImageData('')}></DleComponent>
+                                    {/* <div onClick={() => setShowImageData('')} className='cursor-pointer bg-[--hostColor] rounded-full w-4 h-4 flex justify-center items-center font-bold text-sm self-end'  >X</div> */}
+                                </div>
+                                }
+                                {showVideo && (
+                                    <div className='w-full h-auto flex flex-col items-center'>
+                                        <video className='w-full h-auto' controls>
+                                            <source src={showVideo} type="video/mp4" />
+                                        </video>
+                                        <DleComponent fn={()=>setShowVideo('')}></DleComponent>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <hr></hr>
@@ -236,7 +245,11 @@ export default function Portal() {
                         </div>
                     </div>
                 </PortalComponent>
-            } 
-        </div>
+            }
+        </div >
     );
 }
+
+const DleComponent: React.FC<{ fn: () => void }> = ({ fn }) => (
+    <div onClick={fn} className='cursor-pointer bg-[--hostColor] rounded-full w-4 h-4 flex justify-center items-center font-bold text-sm self-end'>X</div>
+);
