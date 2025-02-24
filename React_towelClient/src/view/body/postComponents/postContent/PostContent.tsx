@@ -1,8 +1,6 @@
-//@ts-ignore
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import PostInput from './PostInput';
-// import axios from 'axios';
 import { getOnePost, postPostfavorite, postPostLike } from '../../../../services/post/post';
 import useLocalStorage from '../../../../hooks/useLocaStorage';
 import likeIcon from '../../../../assets/static/postIcon/赞.svg'
@@ -119,26 +117,13 @@ export default function PostContent() {
     // 分享按钮
     const sharehandler = (event) => {
         event.stopPropagation()
-        const at_present_pathname = `${process.env.REACT_APP_DOMAIN}${pathname}`
+        //@ts-ignore
+        const at_present_pathname = `${import.meta.env.VITE_DOMAIN}${pathname}`
         navigator.clipboard.writeText(at_present_pathname).then(() => {
         }, (error) => {
             console.log("复制失败：", error);
         });
     }
-    class PostIcon {
-        path:string;
-        constructor(path:string) {
-            {/* global process*/ }
-            this.path = process.env.PUBLIC_URL + path
-        }
-    }
-    let postIcon1 = new PostIcon(likeIcon)
-    let postIcon3 = new PostIcon(startIcon)
-    let postIcon4 = new PostIcon(shareIcon)
-
-    const postIcon11 = new PostIcon(likeIPichcon)
-    const postIcon33 = new PostIcon(startPichIcon)
-    const postIcon44 = new PostIcon(sharePichIcon)
 
     return (
         <div className='flex flex-col p-2'>
@@ -170,9 +155,9 @@ export default function PostContent() {
                                 onMouseLeave={() => setMouseOver({ ...mouseOver, like: false })}
                             >
                                 {mouseOver.like ?
-                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon11.path} alt='点赞'></img>
+                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={likeIPichcon} alt='点赞'></img>
                                     :
-                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>}
+                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={likeIcon} alt='点赞'></img>}
                                 {contentdata.likes}
                             </div>
                             <div className='flex text-[--fontColor] ' onClick={favoritehandler}
@@ -180,9 +165,9 @@ export default function PostContent() {
                                 onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
                                 {
                                     mouseOver.star ?
-                                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon33.path} alt='收藏'></img>
+                                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={startPichIcon} alt='收藏'></img>
                                         :
-                                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon3.path} alt='收藏'></img>
+                                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={startIcon} alt='收藏'></img>
 
                                 }{contentdata.favorites}
                             </div>
@@ -190,9 +175,9 @@ export default function PostContent() {
                                 onMouseEnter={() => setMouseOver({ ...mouseOver, share: true })}
                                 onMouseLeave={() => setMouseOver({ ...mouseOver, share: false })}>
                                 {mouseOver.share ?
-                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon44.path} alt='分享'></img>
+                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={shareIcon} alt='分享'></img>
                                     :
-                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon4.path} alt='分享'></img>
+                                    <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={sharePichIcon} alt='分享'></img>
                                 } </div>
                         </div>
                         <PostInput postId={contentdata.id}></PostInput>

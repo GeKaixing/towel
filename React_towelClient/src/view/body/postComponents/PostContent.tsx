@@ -60,7 +60,7 @@ export default function PostPage() {
   // 当页码变化时触发获取数据
   useEffect(() => {
     //@ts-ignore
-    if (process.env.REACT_APP_TEST === 'TEST') {
+    if (import.meta.env.VITE_TEST === 'TEST') {
       setArticles(postJson); // 如果是测试环境使用假数据
     } else {
       getPost().then(data => {

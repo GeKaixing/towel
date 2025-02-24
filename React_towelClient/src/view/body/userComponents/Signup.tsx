@@ -63,8 +63,7 @@ export default function Signup() {
     <div className='flex justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex-col space-y-2'>
       {/* 注册页面 */}
       <div className='w-10 h-10'>
-        {/* global process*/}
-        <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
+        <img src={'/logo.png'} ></img>
       </div>
       <form className='flex flex-col justify-center items-center ' onSubmit={(e) => { e.preventDefault(); }}>
         <input required className='w-60 h-6 mt-2.5 bg-[--boxColor] border-0 text-[--fontColor]' type='text' value={valuename_signup} onChange={(e) => { e.preventDefault(); setValuename_signup(e.target.value) }} placeholder={t('name')} >

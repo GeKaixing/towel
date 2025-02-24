@@ -29,16 +29,6 @@ export default function PostCommentButton({cid,replycontent,replycount, likes, c
                 console.log(error)
             })
     }
-    class PostIcon {
-        path:string;
-        constructor(path:string) {
-            {/* global process*/ }
-            this.path = process.env.PUBLIC_URL + path
-        }
-    }
-    let postIcon1 = new PostIcon(likeIcon)
-
-    const postIcon11 = new PostIcon(likePithIcon)
     return (
         <>
             <div className='flex w-[90%] justify-around items-center'>
@@ -47,9 +37,9 @@ export default function PostCommentButton({cid,replycontent,replycount, likes, c
                     onMouseLeave={() => setMouseOver(false)}>
                     {
                         mouseOver ?
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon11.path} alt='点赞'></img>
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={likePithIcon} alt='点赞'></img>
                             :
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={likeIcon} alt='点赞'></img>
                     }
                     {likes}</div>
                 <div onClick={() => setInputData({ targetName: '@' + commentName, commentid: commentid })} className=' cursor-default text-[--fontColor]'>{t('reply')}</div>

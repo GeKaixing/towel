@@ -13,14 +13,14 @@ export default function ConnectWallet({ children }: { children: React.ReactNode 
     const [contracts, setContracts] = useState<Contract>()
     useEffect(() => {
         async function connectWallet() {
-            const providerValue = process.env.REACT_APP_RPC
+            const providerValue = import.meta.env.VITE_RPC
             if (!providerValue) return;
             try {
                 const provider = new ethers.JsonRpcProvider(providerValue)
                 setProvider(provider)
                 const signer = await provider.getSigner()
                 setSigners(signer)
-                const contractValue = process.env.REACT_APP_CONTRACT_ADDRESS
+                const contractValue = import.meta.env.VITE_CONTRACT_ADDRESS
                 if (!contractValue) return;
                 const contract = new Contract(contractValue, VIPMembership, signer)
                 setContracts(contract)

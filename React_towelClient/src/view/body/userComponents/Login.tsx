@@ -33,9 +33,8 @@ export default function Login() {
     return (
         <div className=' flex justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex-col space-y-2'>
             {/* 登录页面 */}
-            {/* global process*/}
             <div className='w-10 h-10 '>
-                <img src={process.env.PUBLIC_URL + '/logo.png'} ></img>
+                <img src={'/logo.png'} ></img>
             </div>
             <form className='flex flex-col items-center space-y-2' onSubmit={(e) => { e.preventDefault(); LoginApi() }} >
                 <input className="w-60 h-6 mt-2.5 bg-[--boxColor] border-0 text-[--fontColor]" type={'text'} value={valuename} onChange={(e) => { setValuename(e.target.value) }} placeholder={t('name')} required />

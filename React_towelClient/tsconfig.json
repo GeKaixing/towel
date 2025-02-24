@@ -2,6 +2,9 @@
     "compilerOptions": {
         "jsx": "react",
         "typeRoots": ["src/types", "node_modules/@types"],
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "module": "es2022",
+        "moduleResolution": "node" ,
     }
+     
 }

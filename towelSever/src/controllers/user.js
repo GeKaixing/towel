@@ -181,7 +181,7 @@ export const updataPremium = async (req, res) => {
     if (!userAndemail) {
       return res.status(400).json({ meassge: "找不到账号", status: false });
     }
-    const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+    const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");  
     const contractAddress = process.env.CONTRACT_ADRESS;
     const contract = new Contract(contractAddress, VIPMembership, provider);
     // 检查该地址是否为 VIP

@@ -5,6 +5,7 @@ import leftIcon from '../assets/static/otherIcon/左_left.svg'
 import sreachIcon from '../assets/static/otherIcon/搜索.svg'
 import sreachPithIcon from '../assets/static/otherIconPitchUp/搜索.svg'
 import settingIcon from "../assets/static/MainMenuIcon/设置.svg"
+// import logoPng from '../../public/logo.png'
 
 export default function H5header() {
     const [titlte, setTitlte] = useState('')
@@ -83,8 +84,7 @@ export default function H5header() {
                 }
 
             </div>
-            {/* global process*/}
-            {pathname === '/' && <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='w-10 h-10 self-center absolute left-1/2 -translate-x-1/2' onClick={() => window.scrollTo({ top: 0 })}></img>}
+            {pathname === '/' && <img src={'/logo.png'} alt="Logo" className='w-10 h-10 self-center absolute left-1/2 -translate-x-1/2' onClick={() => window.scrollTo({ top: 0 })}></img>}
             {pathname === '/search' ?
                 <form className=' h-10 w-[80%]'>
                     <input className='w-full h-full bg-[--boxColor] rounded-my-rounded-10px 'placeholder='&nbsp;&nbsp;搜索'></input>

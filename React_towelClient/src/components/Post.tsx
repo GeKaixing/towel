@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
@@ -90,7 +89,8 @@ export default function Post(props) {
     // 分享按钮设置，点击然后分享url
     const sharehandler = (e) => {
         e.stopPropagation()
-        const pathname = `${process.env.REACT_APP_DOMAIN}/postcontent/${props.id}`
+        //@ts-ignore
+        const pathname = `${import.meta.env.VITE_DOMAIN}/postcontent/${props.id}`
         navigator.clipboard.writeText(pathname).then(() => {
             console.log("复制成功");
         }, (error) => {
@@ -121,22 +121,6 @@ export default function Post(props) {
         const markdownRegex = /^(# |- \s|\*\*|\*|`|>\s)/;
         return markdownRegex.test(text);
     };
-    class PostIcon {
-        path:string
-        constructor(path:string) {
-            {/* global process*/ }
-            this.path = process.env.PUBLIC_URL + path
-        }
-    }
-    const postIcon1 = new PostIcon(likeIcon)
-    const postIcon2 = new PostIcon(commentIcon)
-    const postIcon3 = new PostIcon(startIcon)
-    const postIcon4 = new PostIcon(shareIcon)
-    const postIcon11 = new PostIcon(likeIPichcon)
-    const postIcon22 = new PostIcon(commentPichIcon)
-    const postIcon33 = new PostIcon(startPichIcon)
-    const postIcon44 = new PostIcon(sharePichIcon)
-
     const reportApi = () => {
         alert('举报成功')
     }
@@ -178,18 +162,18 @@ export default function Post(props) {
                         onMouseLeave={() => setMouseOver({ ...mouseOver, like: false })}
                     >
                         {mouseOver.like ?
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon11.path} alt='点赞'></img>
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={likeIPichcon} alt='点赞'></img>
                             :
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path} alt='点赞'></img>}
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={likeIcon} alt='点赞'></img>}
                         {props.likes}
                     </div>
                     <div className='flex flex-row items-center'
                         onMouseEnter={() => setMouseOver({ ...mouseOver, comments: true })}
                         onMouseLeave={() => setMouseOver({ ...mouseOver, comments: false })}>
                         {mouseOver.comments ?
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon22.path} alt='评论'></img>
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={commentPichIcon} alt='评论'></img>
                             :
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon2.path} alt='评论'></img>}
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={commentIcon} alt='评论'></img>}
                         {props.comments}
                     </div>
                     <div className='flex flex-row items-center'
@@ -198,9 +182,9 @@ export default function Post(props) {
                         onMouseLeave={() => setMouseOver({ ...mouseOver, star: false })}>
                         {
                             mouseOver.star ?
-                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon33.path} alt='收藏'></img>
+                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={startPichIcon} alt='收藏'></img>
                                 :
-                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon3.path} alt='收藏'></img>
+                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={startIcon} alt='收藏'></img>
                         }
                         {props.favorites}
                     </div>
@@ -209,9 +193,9 @@ export default function Post(props) {
                         onMouseEnter={() => setMouseOver({ ...mouseOver, share: true })}
                         onMouseLeave={() => setMouseOver({ ...mouseOver, share: false })}>
                         {mouseOver.share ?
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon44.path} alt='分享'></img>
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={sharePichIcon} alt='分享'></img>
                             :
-                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon4.path} alt='分享'></img>
+                            <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={shareIcon} alt='分享'></img>
                         }
                     </div>
                 </div>

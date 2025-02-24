@@ -1,6 +1,8 @@
 // @ts-nocheck
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+// import logo from '../../../public/logo.png'
+
 import { noReadNumbers } from '../../store/noReadNumbers';
 import useLocaStorage from '../../hooks/useLocaStorage';
 import MainMenuLink from '../../components/MainMenuLink';
@@ -21,15 +23,15 @@ import demo55 from '../../assets/static/MainMenuIconPitchUp/进入.svg'
 import demo66 from '../../assets/static/MainMenuIconPitchUp/大脑.svg'
 import demo77 from '../../assets/static/MainMenuIconPitchUp/笔记本.svg'
 import { useLanguage } from '../../store/LanguageContext';
-import {useShowAddPost} from '../../store/AddPostContext'
-
+import { useShowAddPost } from '../../store/AddPostContext'
+const logo='/logo.png'
 export default function MainMenu() {
   const { t } = useLanguage();
   const [, setWidth] = useState(window.innerWidth);
   const [localStorageData] = useLocaStorage();
   const { noReadNumber } = useContext(noReadNumbers);
   const router = useLocation();
-  const {setShow}=useShowAddPost();
+  const { setShow } = useShowAddPost();
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,42 +42,9 @@ export default function MainMenu() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  class IconPath {
-    path: string;
-    constructor(path: string) {
-      this.path = process.env.PUBLIC_URL + path;
-    }
-  }
-
-  class HowShowIcon {
-    icon: IconPath;
-    iconActive: IconPath;
-    constructor(icon = demo0, iconActive = demo00) {
-      this.icon = new IconPath(icon);
-      this.iconActive = new IconPath(iconActive);
-    }
-
-    getIcon(path = '/') {
-      return router.pathname === path ? this.iconActive : this.icon;
-    }
-
-    home() {
-      const pathname = router.pathname.split('/');
-      return (router.pathname === '/' || pathname[1] === 'homepage') ? this.iconActive : this.icon;
-    }
-  }
-
-  const icons = [
-    new HowShowIcon(),
-    new HowShowIcon(demo1, demo11),
-    new HowShowIcon(demo2, demo22),
-    new HowShowIcon(demo3, demo33),
-    new HowShowIcon(demo4, demo44),
-    new HowShowIcon(demo5, demo55),
-    new HowShowIcon(demo6, demo66),
-    new HowShowIcon(demo7, demo77),
-  ];
+  const selectImgIcon = useCallback((iconActive, icon, url = '/') => {
+    return router.pathname === url ? icon : iconActive;
+  }, [router])
   return (
 
     <div className=' flex 
@@ -92,18 +61,18 @@ export default function MainMenu() {
           lg:w-20 lg:h-20
           mb-2
         '>
-        {/* global process */}
-        <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className='' />
+        <img src={logo} alt="Logo" className='' />
       </div>
-      <MainMenuLink to="/" src={icons[0].home().path} text={t('home')} />
+      <MainMenuLink to="/" src={
+        selectImgIcon(demo0, demo00, '/')} text={t('home')} />
       {/* <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' /> */}
-      <MainMenuLink to="/ai" src={icons[6].getIcon('/ai').path} text={t('ai')} />
-      <MainMenuLink to="/post" src={icons[3].getIcon('/post').path} text={t('add')} onClick={()=>{setShow(true)}} />
-      <MainMenuLink className='relative' to="/Message" src={icons[2].getIcon('/Message').path} text={t('message')}>
-        <div className='hidden lg:block absolute -right-6 font-[--assistantColor]'>{noReadNumber}</div>
-      </MainMenuLink>
-      {/* <MainMenuLink to="https://blog.gekaixing.top/" target={'_blank'} src={icons[7].getIcon('/blog').path} text={t('blog')}/> */}
-      <MainMenuLink className='hidden md:block' to="/setting" src={icons[4].getIcon('/setting').path} text={t('setting')} />
+      <MainMenuLink to="/ai" src={selectImgIcon(demo6, demo66, '/ai')} text={t('ai')} />
+      <MainMenuLink to="/post" src={selectImgIcon(demo3, demo33, '/post')} text={t('add')} onClick={() => { setShow(true) }} />
+      <MainMenuLink className='relative' to="/Message" src={selectImgIcon(demo2, demo22, '/Message')} text={t('message')}>
+      <div className='hidden lg:block absolute -right-6 font-[--assistantColor]'>{noReadNumber}</div> 
+       </MainMenuLink> 
+       {/* <MainMenuLink to="https://blog.gekaixing.top/" target={'_blank'} src={selectImgIcon(demo7, demo77, '/Message')} text={t('blog')}/>  */}
+       <MainMenuLink className='hidden md:block' to="/setting" src={selectImgIcon(demo4, demo44, '/setting')} text={t('setting')} /> 
       {localStorageData.jwt &&
         <Link to={`/userhomepage/${localStorageData.userid}`} className={'lg:flex lg:flex-row lg:items-center '}>
           <div className='w-10 h-10 rounded-full max-lg:m-0 object-cover lg:mr-10 flex justify-center items-center'>
@@ -112,7 +81,7 @@ export default function MainMenu() {
           <div className='max-lg:hidden lg:block text-lg font-bold text-[--fontColor]'>{localStorageData.username}</div>
         </Link>
       }
-      {!localStorageData.jwt && <MainMenuLink to="/login" src={icons[5].getIcon('/login').path} text={t('login')} />}
+      {!localStorageData.jwt && <MainMenuLink to="/login" src={selectImgIcon(demo5, demo55, '/login')} text={t('login')} />} 
     </div>
 
   );

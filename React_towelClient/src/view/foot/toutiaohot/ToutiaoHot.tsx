@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { getToutiaoHot } from '../../../services/toutiaohot/toutiaohot'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../../../store/LanguageContext';
 export interface resData {
@@ -15,10 +14,12 @@ export default function ToutiaoHot() {
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth >= 1024) {
-                console.log('dadasdad')
-                getToutiaoHot().then(res => {
-                    setSliceData(res.data.data.slice(1, 5))
-                }).catch((e) => { console.log(e) })
+                fetch('https://dabenshi.cn/other/api/hot.php?type=toutiaoHot')
+                    .then(response => response.json())
+                    .then(data => {
+                        setSliceData(data.data.slice(1, 5))
+                    })
+                    .catch(e => { console.log(e) })
             }
         }
         handleResize()

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { postAi } from '../../../services/ai/ai'
+import { postAi,postDeepSeekAi } from '../../../services/ai/ai'
 import useLocalStorage from '../../../hooks/useLocaStorage';
 import { resData } from '../../../types/body/aiComponents/Ai';
 import { useLanguage } from '../../../store/LanguageContext';

@@ -13,12 +13,12 @@ import user from './src/routers/user/index.js';
 import bing from './src/routers/bing/index.js'
 import stripe from './src/routers/stripe/index.js'
 import upload from './src/routers/upload/index.js'
-import {connect} from './src/models/index.js'
+import './src/models/index.js'
 import redisClient from './src/redis/index.js'
-
+import 'dotenv/config'
 
 const app = express()
-connect()
+
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
 
@@ -56,6 +56,6 @@ app.use(upload)
 //启动服务器
 server.listen(4000, () => {
     console.log(
-        'server is open'
+        'server 开启成功端口:4000'
     )
 })

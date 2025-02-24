@@ -67,8 +67,7 @@ export default function Portal() {
         formData.append('video', videoData);
         formData.append('targetId', localStorageData.userid);
         formData.append('staticType', 'add');
-        /* global process */ // @ts-ignore
-        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}uploadvideo/${localStorageData.userid}`, formData, {
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}uploadvideo/${localStorageData.userid}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${localStorageData?.jwt}`
@@ -117,20 +116,6 @@ export default function Portal() {
 
         } catch (error) { console.log(error) }
     }
-    class PostIcon {
-        path: string;
-        constructor(path: string) {
-
-            this.path = process.env.PUBLIC_URL + path
-        }
-    }
-    const postIcon1 = new PostIcon(likeIcon)
-    const postIcon2 = new PostIcon(commentIcon)
-    const postIcon3 = new PostIcon(startIcon)
-    const postIcon4 = new PostIcon(shareIcon)
-    const postIcon6 = new PostIcon(addIcon)
-    const postIcon7 = new PostIcon(addPichIcon)
-
     const modules = {
         toolbar: [
             [{ header: [1, 2, 3, false] }], // 标题选项
@@ -173,7 +158,7 @@ export default function Portal() {
                             <div className='w-12 h-12' onClick={sendPostApi}
                                 onMouseEnter={() => setIsHovered(true)}
                                 onMouseLeave={() => setIsHovered(false)}>
-                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={isHovered ? postIcon7.path : postIcon6.path} alt='发布'></img>
+                                <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={isHovered ? addPichIcon : addIcon} alt='发布'></img>
                             </div>
                         </div>
                     </div>
@@ -198,10 +183,10 @@ export default function Portal() {
                     {isMarkdown && <div className='prose lg:prose-xl' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(textareaData) as string) }}></div>}
                     {/* boxBottom */}
                     <div className='flex justify-around h-5 w-full'>
-                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon1.path}></img>
-                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon2.path}></img>
-                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon3.path}></img>
-                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={postIcon4.path}></img>
+                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={likeIcon}></img>
+                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={commentIcon}></img>
+                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={startIcon}></img>
+                        <img style={{ width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }} src={shareIcon}></img>
                     </div>
                 </div>
             </div>
