@@ -38,7 +38,6 @@ export default function Routers() {
                     <Route element={<Protected />}>
                         <Route path='/Message' element={<Message />}></Route>
                         <Route path='/userhomepage/:id' element={<UserHomePage></UserHomePage>}></Route>
-                        <Route path='/post' element={<Add></Add>}></Route>
                         <Route path='/privatechat/:id' element={<PrivateChat />}></Route>
                     </Route>
                     <Route path="/about" element={<About />}></Route>

@@ -45,6 +45,9 @@ export default function MainMenu() {
   const selectImgIcon = useCallback((iconActive, icon, url = '/') => {
     return router.pathname === url ? icon : iconActive;
   }, [router])
+  const selectShow=()=>{
+    setShow(true); 
+  }
   return (
 
     <div className=' flex 
@@ -67,7 +70,7 @@ export default function MainMenu() {
         selectImgIcon(demo0, demo00, '/')} text={t('home')} />
       {/* <MainMenuLink className='hidden md:block' to="/about" src={icons[1].getIcon('/about').path} text='关于' /> */}
       <MainMenuLink to="/ai" src={selectImgIcon(demo6, demo66, '/ai')} text={t('ai')} />
-      <MainMenuLink to="/post" src={selectImgIcon(demo3, demo33, '/post')} text={t('add')} onClick={() => { setShow(true) }} />
+      <MainMenuLink src={selectImgIcon(demo3, demo33, '/post')} text={t('add')} onClick={selectShow} />
       <MainMenuLink className='relative' to="/Message" src={selectImgIcon(demo2, demo22, '/Message')} text={t('message')}>
       <div className='hidden lg:block absolute -right-6 font-[--assistantColor]'>{noReadNumber}</div> 
        </MainMenuLink> 

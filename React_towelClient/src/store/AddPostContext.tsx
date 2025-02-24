@@ -16,7 +16,7 @@ export default function AddPostContext({ children }) {
         } else {
             return null;
         }
-    }
+    }  
     
     useEffect(() => {
         window.addEventListener('resize', () => {
@@ -24,9 +24,9 @@ export default function AddPostContext({ children }) {
         })
     },[])
     return (
-        <AddPost value={{ isShow, setShow }}>
+        <AddPost.Provider value={{ isShow, setShow }}>
             {children}
-        </AddPost>
+        </AddPost.Provider>
     );
 }
 
