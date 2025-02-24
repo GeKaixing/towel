@@ -3,7 +3,7 @@
 <img src='https://github.com/GeKaixing/towel/raw/main/README_static/logo.png'/>
 </div>
 
-一个 web/android/ios/uniapp 小程序的论坛app，将````持续开源和维护````    
+一个 web/android/ios/uniapp 小程序的论坛app,将````持续开源和维护````    
 [towel静态部署,在线查看](https://gekaixing.top/)````https://gekaixing.top````  
 [微信小程序搜索==>towel毛巾,或者微信扫码在线查看]  
 <div align=center>   
@@ -14,23 +14,32 @@
 副颜色:rgba(248, 196, 134, 1)  
 [logo详细](https://github.com/GeKaixing/towel/raw/main/README_static/wexinapp.jpg)
 ## 1. 项目启动
-开发环境：macOS monterey 12.7
+开发环境：macOS monterey 12.7(这不是必须的)
 安装[node](https://nodejs.org/en)和[git](https://git-scm.com/downloads)     
 1. node版本>=21.6.1，下载适合的系统相对应的版本  
    * 验证node版本和是否安装成功
 ````
  node -v
 ````
-1. 安装[git](https://git-scm.com/downloads)下载适合的系统相对应的版本   
+2. 安装[git](https://git-scm.com/downloads)下载适合的系统相对应的版本   
    * 验证git版本和是否安装成功
 ````
  git -v
 ````
-1. 安装[mongoDB](https://www.mongodb.com/try/download/community)下载适合的系统相对应的版本   
+3. 安装[mongoDB](https://www.mongodb.com/try/download/community)下载适合的系统相对应的版本   
    * 验证mongosh版本和是否安装成功
+   * 目前放弃本地部署mongoDB,使用mongodb atlas 托管数据库,免费额度512MB
+   * https://cloud.mongodb.com
 ````
  mongosh --version
 ````
+4. 安装redis
+    * 目前放弃本地部署redis,使用redislabs 托管数据库,免费额度30MB
+    * https://app.redislabs.com
+```
+brew install redis
+```
+
 **web端启动**，须安装node和git
 
     git clone https://github.com/GeKaixing/towel.git  
@@ -42,33 +51,24 @@
 
     npm i  
 
-启动开发服务器  
-
-    npm run start
-安装服务器 **须安装node和mongodb** 
-
-    cd towelSever
-安装所需要的依赖包   
-
+启动开发web端  
+    npm run dev  
+安装服务器 **须安装node和mongodb**   
+    cd towelSever  
+安装所需要的依赖包    
     npm i  
-启动开发服务器  
-
-    nodex index.js
-
-使用nodemon自动刷新
-
-    nodemon
-
-当window系统无法识别nodemon(修改执行策略)
-
-    Set-ExecutionPolicy RemoteSigned
-
+启动开发服务端  
+     npm run start  
+使用nodemon自动刷新  
+    nodemon  
+当window系统无法识别nodemon(修改执行策略)  
+    Set-ExecutionPolicy RemoteSigned  
 安装Llama 3.2:1b 本地部署(轻量化模型)
+ * 使用deepseek ,阿里云免费100wtoken
+ * https://www.aliyun.com/
 ```
     brew install ollama  
-
     ollama run llama3.2:1b  
-
     详细https://llama.meta.com
 ```
 
@@ -315,7 +315,6 @@ towel 是一个三端同步的项目，在基于expess框架下编写后端项�
   
 不足：
 * 未做性能优化
-* 未使用reids去做缓存
 ### 3.2 后续将完成的功能
 * 使用redis进行后端的性能优化，实现排行榜功能，数据缓存等，首页文章推送算法 （太难了）
 * 使用socket.io私聊功能（已完成）
