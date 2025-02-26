@@ -90,7 +90,7 @@ export default function AddContent() {
                 videourl = await uploadvideo(); // 等待视频上传完成
             }
             console.log(textareaData)
-            if (textareaData ) {
+            if (textareaData) {
                 const loginDataParse = JSON.parse(localStorage.getItem('loginData') || '');
                 await postAddPost({
                     data: {
@@ -128,7 +128,7 @@ export default function AddContent() {
     };
 
     const [wordCount, setWordCount] = useState(0);
-    const handleChange = (e:any) => {
+    const handleChange = (e: any) => {
         console.log(e.target.value)
         settextareaData(e.target.value);
         // 统计字数（仅统计纯文本部分）
@@ -194,7 +194,7 @@ export default function AddContent() {
         <>
             {isShow &&
                 <PortalComponent>
-                    <div className='relative flex flex-col justify-between h-80 bg-white w-[600px] p-2 rounded-[10px]'>
+                    <div className='relative flex flex-col justify-between bg-white w-[600px] p-2 rounded-[10px] max-h-[600px] overflow-auto'>
                         {/* header */}
                         <header className='flex justify-between'>
                             <div className='text-[--hostColor] font-bold cursor-pointer' onClick={() => { setShow(false) }}>cancel</div>
@@ -203,17 +203,39 @@ export default function AddContent() {
                         {/* body */}
                         <main className='h-full gap-2 '>
                             <div className='flex'>
-                                <img src={localStorageData.headimg} className='w-12 h-12  rounded-full bg-white' alt="头像"></img>
-                                <div className=' h-full overflow-auto w-full'>
-                                    <textarea className='w-full mt-2 h-full ' placeholder='输入内容' onChange={handleChange} value={textareaData}></textarea>
-
+                                <div className='flex flex-col items-center gap-2'>
+                                    {/* 头像 */}
+                                    <img src={localStorageData.headimg} className='w-12 h-12  rounded-full bg-white' alt="头像"></img>
+                                    {/* 功能区 */} {/*  h-36 用来撑起高 */}
+                                    <div className=' bg-white h-36'>
+                                        <div className='flex gap-2 flex-col justify-between'>
+                                            <div className='w-6 h-6 '>
+                                                <Addvideo setVideoData={setVideoData} showVideo={showVideo} setShowVideo={setShowVideo}></Addvideo>
+                                            </div>
+                                            <div className='w-6 h-6 '>
+                                                <AddImge setImageData={setImageData} showImageData={showImageData} setShowImageData={setShowImageData}></AddImge>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* 功能区 */}
+                                </div>
+                                <div className=' h-full  w-full'>
+                                    <textarea
+                                        ref={textareaRef}
+                                        className='w-full mt-2 h-auto resize-none outline-none text-xl max-h-[552px] '
+                                        placeholder='输入内容'
+                                        onChange={handleChange}
+                                        value={textareaData}
+                                        rows={1}
+                                    ></textarea>
+                                    {/* 预览图片  */}
                                     {showImageData && <div className=''>
-                                        <img src={showImageData} alt="preview" style={{ width: '50px', height: '50px', borderRadius: '10px' }} />
+                                        <img src={showImageData} alt="preview" style={{ borderRadius: '10px' }} />
                                         <DleComponent fn={() => setShowImageData('')}></DleComponent>
                                         {/* <div onClick={() => setShowImageData('')} className='cursor-pointer bg-[--hostColor] rounded-full w-4 h-4 flex justify-center items-center font-bold text-sm self-end'  >X</div> */}
                                     </div>
                                     }
-
+                                    {/* 预览视频 */}
                                     {showVideo && (
                                         <div className='w-full h-auto flex flex-col items-center'>
                                             <video className='w-full h-auto' controls>
@@ -227,18 +249,6 @@ export default function AddContent() {
 
                         </main>
 
-                        {/* footer */}
-                        <footer className='absolute bottom-0 bg-white'>
-                            <hr></hr>
-                            <div className='flex gap-2'>
-                                <div className='w-6 h-6 '>
-                                    <Addvideo setVideoData={setVideoData} showVideo={showVideo} setShowVideo={setShowVideo}></Addvideo>
-                                </div>
-                                <div className='w-6 h-6 '>
-                                    <AddImge setImageData={setImageData} showImageData={showImageData} setShowImageData={setShowImageData}></AddImge>
-                                </div>
-                            </div>
-                        </footer>
                     </div>
                 </PortalComponent>
             }
