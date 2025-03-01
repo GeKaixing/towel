@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@theme {
+    --color-assistantColor: #f8c486;/* 辅助色 */
+    --color-hostColor: #86c4f8;/* 主色 */
+}
+*{
+    box-sizing: border-box;
+}
