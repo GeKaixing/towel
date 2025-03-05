@@ -4,6 +4,8 @@ import Image from "next/image";
 import testImg from "@/assets/test.png";
 import Button from '@/components/Button';
 import { createPortal } from 'react-dom';
+import { LikeIcon, ShareIcon, StarIcon } from '@/components/icon';
+import { formattingDate } from '@/util/date';
 
 type Comment = {
   commentUserId: string;
@@ -89,7 +91,6 @@ export default function Page({ params }: { params: any }) {
       getReply(commentId);
     }
   };
-
   return (
     <div className="flex flex-col">
       <div className="w-full border-2 dark:bg-[#0a0a0a] dark:border-[#0a0a0a] dark:hover:border-[#353535] border-gray-100 hover:border-gray-200 p-2 rounded-xl">
@@ -97,30 +98,30 @@ export default function Page({ params }: { params: any }) {
           <Image width={30} height={30} src={testImg} alt="react logo" />
           <div className="text-xl font-bold">{resData.user?.username || ' '}</div>
         </header>
-        <main>
-          <div className="text-sm text-gray-400">{resData.postText}</div>
+        <main className='mt-2 mb-2'>
+          <div className="font-bold text-black">{resData.postText}</div>
         </main>
         <footer className="flex justify-between">
           <div className="flex items-center gap-2">
-            <Image width={30} height={30} src={testImg} alt="react logo" />
+            <LikeIcon></LikeIcon>
             <span>{resData.postLike}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Image width={30} height={30} src={testImg} alt="react logo" />
+            <StarIcon></StarIcon>
             <span>{resData.postShare}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Image width={30} height={30} src={testImg} alt="react logo" />
+            <ShareIcon></ShareIcon>
           </div>
         </footer>
       </div>
-      <form onSubmit={addComment} className='self-center flex flex-row gap-2 items-center mt-2'>
+      <form onSubmit={addComment} className='mb-2 self-center flex flex-row gap-2 items-center mt-2'>
         <input onChange={(e) => { setInputData(e.target.value) }} name="comment" placeholder='  发表评论' className='dark:hover:bg-[#353535] dark:bg-[#0a0a0a] rounded-xl w-[350px] h-[40px] bg-gray-100 hover:bg-gray-200' />
         <Button type="submit">发表</Button>
       </form>
       {/* 评论区 */}
       {comments.map((item: any) => (
-        <div key={item._id}>
+        <div key={item._id} className='mb-4'>
           <header className="flex items-center gap-2">
             <Image width={30} height={30} src={testImg} alt="react logo" />
             <div className="text-xl font-bold">{item.users[0].username || 'towel'}</div>
@@ -130,14 +131,12 @@ export default function Page({ params }: { params: any }) {
           </main>
           <footer className="flex flex-col justify-between">
             <div className='flex justify-between'>
-              <div className='text-gray-400'>{item.commentCreateDate}</div>
+              <div className='text-gray-400'>{
+                formattingDate(item.commentCreateDate)
+              }</div>
               <div className='flex gap-2'>
-                <Image width={10} height={10} src={testImg} alt="react logo" />
+                <LikeIcon></LikeIcon>
                 <div>{item.commentLike}</div>
-              </div>
-              <div className='flex gap-2'>
-                <Image width={10} height={10} src={testImg} alt="react logo" />
-                <div>10</div>
               </div>
               <div className='flex gap-2'>
                 <div onClick={() => {
@@ -145,7 +144,9 @@ export default function Page({ params }: { params: any }) {
                   setIsShowPortalState(!isShowPortalState);
                   setGetCommentId(item._id);
                   setGetCommentUserId(item.users[0]._id);
-                }}>回复</div>
+                }}
+                  className='cursor-pointer'
+                >回复</div>
               </div>
             </div>
             <div className='text-sm text-gray-400 cursor-pointer' onClick={() => toggleReply(item._id)}>
@@ -153,17 +154,19 @@ export default function Page({ params }: { params: any }) {
             </div>
           </footer>
           {showReplyMap[item._id] && replyDataMap[item._id]?.map((reply: any) => (
-            <div className='ml-[38px]' key={reply._id}>
+            <div className='ml-[38px] mt-2' key={reply._id}>
               <header className="flex items-center gap-2">
                 <Image width={25} height={25} src={testImg} alt="react logo" />
                 <div className="text-xl font-bold">{reply.replyUser.username}</div>@
-                <div className="text-xl font-bold">{reply.replyToreplyUser.username}</div>
+                <div className="text-xl font-bold text-gray-400">{reply.replyToreplyUser.username}</div>
               </header>
               <div className="text-xl ml-[30px]">{reply.replyText}</div>
               <div className='flex justify-between'>
-                <div className='text-gray-400'>{reply.replyCreateDate}</div>
+                <div className='text-gray-400'>{
+                  formattingDate(reply.replyCreateDate)
+                }</div>
                 <div className='flex gap-2'>
-                  <Image width={10} height={10} src={testImg} alt="react logo" />
+                  <LikeIcon></LikeIcon>
                   <div>{reply.replyLike}</div>
                 </div>
                 <div className='flex gap-2'>
@@ -172,7 +175,9 @@ export default function Page({ params }: { params: any }) {
                     setIsShowPortalState(!isShowPortalState);
                     setGetReplyToreplyUserId(reply.replyToreplyUserId);
                     setReplyorComment('reply');
-                  }}>回复</div>
+                  }}
+                    className='cursor-pointer'
+                  >回复</div>
                 </div>
               </div>
             </div>
@@ -181,7 +186,7 @@ export default function Page({ params }: { params: any }) {
       ))}
       {isShowPortalState && createPortal(
         <div
-          className="flex justify-center items-center absolute top-0 left-0 w-screen h-screen bg-gray-100/70 z-50"
+          className="flex fixed justify-center items-center  top-0 left-0 w-screen h-screen  bg-gray-800/70 z-50 "
           onClick={() => setIsShowPortalState(!isShowPortalState)}
         >
           <div onClick={(e) => { e.stopPropagation(); }}>

@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Button from '@/components/Button';
 import Link from 'next/link';
 import testImg from "@/assets/test.png";
+import { CommentIcon, LikeIcon, StarIcon } from '@/components/icon';
+import { formattingDate } from '@/util/date';
 
 type order = 0 | 1 | 2;
 
@@ -56,21 +58,21 @@ export default function Page() {
                                         <Image width={30} height={30} src={testImg} alt="react logo" />
                                         <div className="text-xl font-bold">{item.user.username}</div>
                                     </header>
-                                    <main>
-                                        <div className="text-sm text-gray-400">{item.postText}</div>
+                                    <main className='mt-2 mb-2'>
+                                        <div className="font-bold text-black">{item.postText}</div>
                                     </main>
                                     <footer className="flex justify-between">
                                         <div className="flex items-center gap-2">
-                                            <Image width={30} height={30} src={testImg} alt="react logo" />
-                                            <span>{item.postLike}</span>
+                                            <LikeIcon></LikeIcon>
+                                            <span className='text-gray-400 hover:text-gray-800'>{item.postLike}</span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Image width={30} height={30} src={testImg} alt="react logo" />
-                                            <span>{item.postComment}</span>
+                                            <CommentIcon></CommentIcon>
+                                            <span className='text-gray-400 hover:text-gray-800'>{item.postComment}</span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Image width={30} height={30} src={testImg} alt="react logo" />
-                                            <span>{item.postFavorite}</span>
+                                            <StarIcon></StarIcon>
+                                            <span className='text-gray-400 hover:text-gray-800'>{item.postFavorite}</span>
                                         </div>
                                     </footer>
                                 </Link>
@@ -93,12 +95,12 @@ export default function Page() {
                                     <div className='flex justify-between'>
                                         <div className='text-gray-400'>{item.commentCreateDate}</div>
                                         <div className='flex gap-2'>
-                                            <Image width={10} height={10} src={testImg} alt="react logo" />
-                                            <div>{item.commentLike}</div>
+                                            <LikeIcon></LikeIcon>
+                                            <div className='text-gray-400 hover:text-gray-800'>{item.commentLike}</div>
                                         </div>
                                         <div className='flex gap-2'>
-                                            <Image width={10} height={10} src={testImg} alt="react logo" />
-                                            <div>10</div>
+                                            <StarIcon></StarIcon>
+                                            <div className='text-gray-400 hover:text-gray-800'>10</div>
                                         </div>
                                     </div>
                                 </footer>
@@ -109,18 +111,20 @@ export default function Page() {
                 {order === 2 && (
                     <div>
                         {replyData?.map((reply: any) => (
-                            <div className='ml-[38px]' key={reply._id}>
+                            <div className=' mt-2 mb-2' key={reply._id}>
                                 <header className="flex items-center gap-2">
-                                    <Image width={25} height={25} src={testImg} alt="react logo" />
+                                    <Image width={30} height={30} src={testImg} alt="react logo" />
                                     <div className="text-xl font-bold">{reply.replyUser.username}</div>@
-                                    <div className="text-xl font-bold">{reply.replyToreplyUser.username}</div>
+                                    <div className="text-xl font-bold text-gray-400">{reply.replyToreplyUser.username}</div>
                                 </header>
                                 <div className="text-xl ml-[30px]">{reply.replyText}</div>
                                 <div className='flex justify-between'>
-                                    <div className='text-gray-400'>{reply.replyCreateDate}</div>
+                                    <div className='text-gray-400'>{
+                                    formattingDate( reply.replyCreateDate)
+                                   }</div>
                                     <div className='flex gap-2'>
-                                        <Image width={10} height={10} src={testImg} alt="react logo" />
-                                        <div>{reply.replyLike}</div>
+                                        <LikeIcon></LikeIcon>
+                                        <div className='text-gray-400 hover:text-gray-800'>{reply.replyLike}</div>
                                     </div>
                                 </div>
                             </div>

@@ -41,7 +41,7 @@ export default function AddPortal() {
         <>
             {isShowPortalState && createPortal(
                 <div
-                    className="flex justify-center items-center absolute top-0 left-0 w-screen h-screen bg-gray-800/70 z-50"
+                    className="flex justify-center items-center fixed top-0 left-0 w-screen h-screen bg-gray-800/70 z-50"
                     onClick={() => setIsShow()} // 点击外部区域关闭模态框
                 >
                     <div
