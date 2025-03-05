@@ -44,6 +44,7 @@ export default function Page() {
             if (response) {
                 localStorage.setItem('userinfo', JSON.stringify(response));
                 (event.target as HTMLFormElement).reset();
+                window.location.href = '/';
             } else {
                 setIsError(true)
             }
@@ -56,9 +57,9 @@ export default function Page() {
         <form onSubmit={handleSubmit} className='w-full flex flex-col justify-center items-center gap-2'>
             <div className='w-[400px] flex flex-col justify-center items-center gap-2'>
                 <div className='self-start'>username</div>
-                <input name="username" type="text" className='w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  username"></input>
+                <input name="username" type="text" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  username"></input>
                 <div className='self-start'>password</div>
-                <input name="password" type="password" className='w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  password"></input>
+                <input name="password" type="password" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  password"></input>
                 <Button type="submit">login</Button>
                 <Link href="/signup">signup</Link>
                 {/* <Link href="/reset" className='text-gray-400'>reset</Link> */}

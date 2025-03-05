@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import React from 'react';
 import jwt from 'jsonwebtoken'
 import { z } from 'zod'
+import { Input } from '@/components/ui/input';
 const typeSafe = z.object({
   oldPassword: z.string().min(6).max(20),
   newPassword: z.string().min(6).max(20),
@@ -54,9 +55,9 @@ async function handleFormSubmit(formData: FormData) {
 export default function Page() {
   return (
     <form action={handleFormSubmit} className='flex flex-col gap-2'>
-      <input name='oldpassword' type='password' className='rounded-xl bg-white dark:text-black' />
-      <input name='newpassword' type='password' className='rounded-xl bg-white dark:text-black' />
-      <input name='confirmpassword' type='password' className='rounded-xl bg-white dark:text-black' />
+      <Input name='oldpassword' type='password' placeholder="oldpassword"></Input>
+      <Input name='newpassword' type='password' placeholder="newpassword"></Input>
+      <Input name='confirmpassword' type='password' placeholder="confirmpassword"></Input>
       <Button type="submit">提交</Button>
     </form>
   );

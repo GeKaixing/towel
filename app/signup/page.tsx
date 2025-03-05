@@ -84,7 +84,7 @@ export default function Page() {
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
-                    className='w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl'
+                    className=' dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl'
                     placeholder="  username"
                 />
                 <div className='self-start'>password</div>
@@ -93,7 +93,7 @@ export default function Page() {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className='w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl'
+                    className=' dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl'
                     placeholder="  password"
                 />
                 <div className='self-start flex flex-row gap-2'>
@@ -106,12 +106,12 @@ export default function Page() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className='bg-gray-100 hover:bg-gray-200 rounded-xl'
+                        className=' dark:text-black bg-gray-100 hover:bg-gray-200 rounded-xl'
                         placeholder="  email"
                     />
                     <div
                         onClick={verificationCodeHandle}
-                        className='h-[32px] cursor-pointer bg-gray-100 flex justify-center items-center rounded-xl hover:bg-assistantColor w-auto p-2'
+                        className='dark:text-black h-[32px] cursor-pointer bg-gray-100 flex justify-center items-center rounded-xl hover:bg-assistantColor w-auto p-2'
                     >
                         发送验证码
                     </div>
@@ -122,10 +122,10 @@ export default function Page() {
                     name="code"
                     value={formData.code}
                     onChange={handleChange}
-                    className='w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl'
+                    className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl'
                     placeholder="  code"
                 />
-                <Button type="submit">signup</Button>
+                <Button type="submit" >signup</Button>
                 <Link href="/login">login</Link>
             </div>
         </form>

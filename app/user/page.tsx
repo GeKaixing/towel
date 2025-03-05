@@ -32,7 +32,6 @@ export default function Page() {
         const res = await GETPOST(userid);
         setPostData(res);
     }
-
     return (
         <div className='flex flex-col w-full'>
             <div className='flex justify-center items-center flex-col gap-2'>
@@ -59,7 +58,7 @@ export default function Page() {
                                         <div className="text-xl font-bold">{item.user.username}</div>
                                     </header>
                                     <main className='mt-2 mb-2'>
-                                        <div className="font-bold text-black">{item.postText}</div>
+                                        <div className="font-bold ">{item.postText}</div>
                                     </main>
                                     <footer className="flex justify-between">
                                         <div className="flex items-center gap-2">

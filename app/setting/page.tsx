@@ -8,11 +8,7 @@ export default function page() {
             title: '钱包',
             href: '/setting/wallet'
         },
-        {
-            index: 2,
-            title: '权限',
-            href: '/setting/auth'
-        },
+      
         {
             index: 3,
             title: '忘记密码',

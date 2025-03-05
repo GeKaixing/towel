@@ -6,9 +6,10 @@ import Button from "@/components/Button";
 import Image from "next/image";
 import textImg from "@/assets/test.png";
 import AIButton from "@/components/AIButton";
-import AddPortal from "@/components/AddPortal";
+// import AddPortal from "@/components/AddPortal";
 import Head from "next/head";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { getCookie } from "@/util/getcookie";
 
 interface dataProps {
   index: number,
@@ -53,23 +54,22 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const data = await resData()
-
-
+  const cookie=await getCookie()
   return (
     <html lang="en">
       <Head>
-        <link rel="icon" href="/favicon.ico"  />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased `}>
         <div className="flex flex-row justify-center items-center gap-2">
-          <AddPortal></AddPortal>
+          {/* <AddPortal></AddPortal> */}
           <header className="w-[200px] h-screen dark:bg-[#0a0a0a] bg-white flex flex-col gap-2">
             <Link href='/'>主页</Link>
             <AIButton></AIButton>
             <Link href='/ai'>AI</Link>
             <Link href='/message'>消息</Link>
             <Link href='/setting'>设置</Link>
-            <Link href='/user'>我的</Link>
+            <Link href='/user'>{cookie?'我的':'登录'}</Link>
           </header>
           <main className="w-[500px] h-screen  dark:bg-[#0a0a0a] bg-white">
             {children}

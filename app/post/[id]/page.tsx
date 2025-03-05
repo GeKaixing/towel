@@ -99,7 +99,7 @@ export default function Page({ params }: { params: any }) {
           <div className="text-xl font-bold">{resData.user?.username || ' '}</div>
         </header>
         <main className='mt-2 mb-2'>
-          <div className="font-bold text-black">{resData.postText}</div>
+          <div className="font-bold">{resData.postText}</div>
         </main>
         <footer className="flex justify-between">
           <div className="flex items-center gap-2">

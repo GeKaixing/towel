@@ -33,7 +33,7 @@ export async function POST(request: Request) {
   // 如果密码匹配，生成 JWT 令牌
   const token = jwt.sign(
     { userid: user._id, username: username, headimg: user.headimg },
-    "hello world",
+    process.env.JWT_SECRET,
     {
       expiresIn: "30d",
     }

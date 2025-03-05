@@ -39,8 +39,8 @@ export default function Home() {
               <Image width={30} height={30} src={testImg} alt="react logo"></Image>
               <div className="font-bold">{item.user.username}</div>
             </header>
-            <main className="mt-2 mb-2">
-              <div className="font-bold text-black">{item.postText}</div>
+            <main className="mt-2 mb-2 ">
+              <div className="font-bold ">{item.postText}</div>
             </main>
             <footer className="flex justify-between">
               <div className="flex items-center gap-2">
