@@ -8,6 +8,8 @@ import textImg from "@/assets/test.png";
 import AIButton from "@/components/AIButton";
 import AddPortal from "@/components/AddPortal";
 import Head from "next/head";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 interface dataProps {
   index: number,
   title: string,
@@ -65,13 +67,13 @@ export default async function RootLayout({
             <Link href='/'>主页</Link>
             <AIButton></AIButton>
             <Link href='/ai'>AI</Link>
-
             <Link href='/message'>消息</Link>
             <Link href='/setting'>设置</Link>
             <Link href='/user'>我的</Link>
           </header>
           <main className="w-[500px] h-screen  dark:bg-[#0a0a0a] bg-white">
             {children}
+            <SpeedInsights />
           </main>
           <footer className="w-[200px] h-screen dark:bg-[#0a0a0a]  bg-white flex flex-col gap-2">
             <form className="flex flex-row items-center gap-2">
