@@ -10,7 +10,7 @@ import AIButton from "@/components/AIButton";
 import Head from "next/head";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { getCookie } from "@/util/getcookie";
-
+import { Analytics } from "@vercel/analytics/react"
 interface dataProps {
   index: number,
   title: string,
@@ -73,6 +73,7 @@ export default async function RootLayout({
           </header>
           <main className="w-[500px] h-screen  dark:bg-[#0a0a0a] bg-white">
             {children}
+            <Analytics></Analytics>
             <SpeedInsights />
           </main>
           <footer className="w-[200px] h-screen dark:bg-[#0a0a0a]  bg-white flex flex-col gap-2">
