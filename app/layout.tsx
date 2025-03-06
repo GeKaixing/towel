@@ -54,9 +54,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const data = await resData()
-  const cookie=await getCookie()
+  const cookie = await getCookie()
   return (
     <html lang="en">
+      {/* <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script> */}
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -69,7 +70,7 @@ export default async function RootLayout({
             <Link href='/ai'>AI</Link>
             <Link href='/message'>消息</Link>
             <Link href='/setting'>设置</Link>
-            <Link href='/user'>{cookie?'我的':'登录'}</Link>
+            <Link href='/user'>{cookie ? '我的' : '登录'}</Link>
           </header>
           <main className="w-[500px] h-screen  dark:bg-[#0a0a0a] bg-white">
             {children}

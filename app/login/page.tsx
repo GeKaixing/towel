@@ -1,5 +1,8 @@
 "use client"
 import Button from '@/components/Button'
+import Cloudflare from '@/components/ui/cloudflare';
+import { Input } from '@/components/ui/input';
+import { isForbid } from '@/store/isForbid';
 import Link from 'next/link'
 import React, { useState } from 'react'
 
@@ -17,6 +20,7 @@ interface FetchResponse {
 
 
 async function fetchData(data: LoginData): Promise<FetchResponse> {
+
     const res = await fetch(`/api/login`, {
         method: 'POST',
         headers: {
@@ -31,6 +35,7 @@ async function fetchData(data: LoginData): Promise<FetchResponse> {
     return await res.json();
 }
 export default function Page() {
+    const { isForbid: cloudflare } = isForbid()
     const [isError, setIsError] = useState(false);
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         try {
@@ -57,14 +62,16 @@ export default function Page() {
         <form onSubmit={handleSubmit} className='w-full flex flex-col justify-center items-center gap-2'>
             <div className='w-[400px] flex flex-col justify-center items-center gap-2'>
                 <div className='self-start'>username</div>
-                <input name="username" type="text" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  username"></input>
+                <Input name="username" type="text"></Input>
+                {/* <input name="username" type="text" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  username"></input> */}
                 <div className='self-start'>password</div>
-                <input name="password" type="password" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  password"></input>
-                <Button type="submit">login</Button>
+                <Input name="password" type="password"></Input>
+                {/* <input name="password" type="password" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  password"></input> */}
+                <Button type="submit" disabled={cloudflare!=='solved'}>login</Button>
                 <Link href="/signup">signup</Link>
                 {/* <Link href="/reset" className='text-gray-400'>reset</Link> */}
                 {isError && <div className='text-red-500'>账号或者密码错误</div>}
-              
+                <Cloudflare></Cloudflare>
             </div>
         </form>
     )
