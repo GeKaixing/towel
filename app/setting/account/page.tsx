@@ -15,14 +15,14 @@ export default async function Page() {
     }
     return (
         <div>
-            <h1>用户信息</h1>
+            <div>用户信息</div>
             {/* 将数据传递给客户端组件 */}
-            <p>用户名：{res?.username}</p>
-            <p>邮箱：{res?.email}</p>
-            <p>创建时间：{res?.createDate}</p>
-            <p>头像：{res?.headimg}</p>
-            <p>电话：{res?.phoneNumber}</p>
-            <p>生日：{res?.birthday || '还没有设置'}</p>
+            <div>用户名：{res?.username}</div>
+            <div>邮箱：{res?.email}</div>
+            <div>创建时间：{res?.createDate}</div>
+            <div>头像：{res?.headimg}</div>
+            <div>电话：{res?.phoneNumber}</div>
+            <div>生日：{res?.birthday || '还没有设置'}</div>
             <OutButton></OutButton>
         </div>
     );
