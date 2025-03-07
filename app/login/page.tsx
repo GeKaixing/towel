@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { isForbid } from '@/store/isForbid';
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { z } from 'zod';
 
 interface LoginData {
     username: FormDataEntryValue | null;
@@ -17,9 +18,12 @@ interface FetchResponse {
     success: boolean;
     message: string;
 }
+const loginSchema = z.object({
+    username: z.string().min(4).max(16).trim(),
+    password: z.string().min(4).max(16).trim(),
+})
 
-
-async function fetchData(data: LoginData): Promise<FetchResponse> {
+async function fetchData(data: LoginData): Promise<FetchResponse | undefined> {
 
     const res = await fetch(`/api/login`, {
         method: 'POST',
@@ -32,8 +36,10 @@ async function fetchData(data: LoginData): Promise<FetchResponse> {
         }),
         credentials: "include",
     });
-    return await res.json();
+    if (res.ok) { return await res.json(); }
+    return undefined;
 }
+
 export default function Page() {
     const { isForbid: cloudflare } = isForbid()
     const [isError, setIsError] = useState(false);
@@ -45,6 +51,9 @@ export default function Page() {
                 username: formData.get('username'),
                 password: formData.get('password')
             };
+            const resdata = loginSchema.safeParse(data).success
+            if (!resdata) { setIsError(i => !i); return; }
+            if (!data.password || !data.username) { setIsError(i => !i); return; }
             const response = await fetchData(data);
             if (response) {
                 localStorage.setItem('userinfo', JSON.stringify(response));
@@ -67,7 +76,7 @@ export default function Page() {
                 <div className='self-start'>password</div>
                 <Input name="password" type="password"></Input>
                 {/* <input name="password" type="password" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  password"></input> */}
-                <Button type="submit" disabled={cloudflare!=='solved'}>login</Button>
+                <Button type="submit" disabled={cloudflare !== 'solved'}>login</Button>
                 <Link href="/signup">signup</Link>
                 {/* <Link href="/reset" className='text-gray-400'>reset</Link> */}
                 {isError && <div className='text-red-500'>账号或者密码错误</div>}

@@ -10,6 +10,12 @@
   --color-assistantColor: #f8c486;/* 辅助色 */
   --color-hostColor: #86c4f8;/* 主色 */
 }
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
 
 :root {
   --background: oklch(1 0 0);
@@ -129,3 +135,4 @@
     @apply bg-background text-foreground;
   }
 }
+

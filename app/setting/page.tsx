@@ -1,3 +1,4 @@
+import { ModeToggle } from '@/components/ui/theme-button'
 import Link from 'next/link'
 import React from 'react'
 
@@ -29,6 +30,7 @@ export default function page() {
     return (
         <div className='flex flex-col gap-2'>
             {data.map((item) => <SettingLink key={item.index} href={item.href} title={item.title}></SettingLink>)}
+            <ModeToggle></ModeToggle>
         </div>
     )
 }

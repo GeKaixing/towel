@@ -11,6 +11,7 @@ import Head from "next/head";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { getCookie } from "@/util/getcookie";
 import { Analytics } from "@vercel/analytics/react"
+import { ThemeProvider } from "@/components/theme-provider"
 interface dataProps {
   index: number,
   title: string,
@@ -61,7 +62,7 @@ export default async function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased `}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased  dark:bg-black`}>
         <div className="flex flex-row justify-center items-center gap-2">
           {/* <AddPortal></AddPortal> */}
           <header className="w-[200px] h-screen dark:bg-[#0a0a0a] bg-white flex flex-col gap-2">
@@ -73,7 +74,14 @@ export default async function RootLayout({
             <Link href='/user'>{cookie ? '我的' : '登录'}</Link>
           </header>
           <main className="w-[500px] h-screen  dark:bg-[#0a0a0a] bg-white">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             {children}
+          </ThemeProvider>
             <Analytics></Analytics>
             <SpeedInsights />
           </main>
