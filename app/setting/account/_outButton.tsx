@@ -1,5 +1,6 @@
 'use client'
-import Button from '@/components/Button';
+// import Button from '@/components/Button';
+import TowelButton from '@/components/ui/towel-button';
 import { useRouter } from 'next/navigation';
 export default function LogoutButton() {
     const router = useRouter();
@@ -12,5 +13,5 @@ export default function LogoutButton() {
         // 重定向到首页
         router.push('/');
     };
-    return <Button onClick={handleLogout}>退出登录</Button>
+    return <TowelButton onClick={handleLogout}>退出登录</TowelButton>
 };

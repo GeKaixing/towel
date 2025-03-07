@@ -1,7 +1,7 @@
 import React from 'react';
 import { cookies } from 'next/headers'; // 从 cookies 中获取用户信息
 import jwt from 'jsonwebtoken';
-import _outButton from './_outButton';
+import OutButton from './_outButton';
 
 export default async function Page() {
     // 从 cookies 中获取用户信息
@@ -25,7 +25,7 @@ export default async function Page() {
                 <p>电话：{res?.phoneNumber}</p>
                 <p>生日：{res?.birthday || '还没有设置'}</p>
             </div>
-            <_outButton></_outButton>
+            <OutButton></OutButton>
         </div>
     );
 }

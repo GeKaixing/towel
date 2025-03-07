@@ -53,7 +53,7 @@ async function handleFormSubmit(formData: FormData) {
 }
 
 export default function Page() {
-  return (
+  return (  
     <form action={handleFormSubmit} className='flex flex-col gap-2'>
       <Input name='oldpassword' type='password' placeholder="oldpassword"></Input>
       <Input name='newpassword' type='password' placeholder="newpassword"></Input>
