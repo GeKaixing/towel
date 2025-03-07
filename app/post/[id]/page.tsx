@@ -219,7 +219,6 @@ async function GET(id: string) {
 }
 //获取评论
 async function GETCOMMENT(id: string) {
-  console.log(id)
   const res = await fetch(`/api/comment/${id}`, {
     method: 'GET',
     headers: {

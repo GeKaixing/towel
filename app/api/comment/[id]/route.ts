@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request, { params }: { params: any }) {
   try {
     const { id } = await params;
-    console.log(id);
     const data = await COMMENTS.aggregate([
       {
         $match: {
@@ -87,7 +86,6 @@ export const POST = async (req: Request, { params }: { params: any }) => {
   try {
     const reqs = await req.json();
     const { commentUserId, Text, Image, Like, CreateDate }: Comment = reqs;
-    console.log(commentUserId, Text, Image, Like, CreateDate);
     if (!commentUserId || !CreateDate) {
       return NextResponse.json(
         { message: "commentUserId and CreateDate are required" },

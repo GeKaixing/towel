@@ -73,7 +73,7 @@ export default async function RootLayout({
             <Link href='/setting'>设置</Link>
             <Link href='/user'>{cookie ? '我的' : '登录'}</Link>
           </header>
-          <main className="w-[500px] h-screen  dark:bg-[#0a0a0a] bg-white">
+          <main className=" w-[500px] h-screen  dark:bg-[#0a0a0a] bg-white">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

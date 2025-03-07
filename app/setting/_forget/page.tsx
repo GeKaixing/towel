@@ -53,12 +53,18 @@ async function handleFormSubmit(formData: FormData) {
 }
 
 export default function Page() {
-  return (  
-    <form action={handleFormSubmit} className='flex flex-col gap-2'>
-      <Input name='oldpassword' type='password' placeholder="oldpassword"></Input>
-      <Input name='newpassword' type='password' placeholder="newpassword"></Input>
-      <Input name='confirmpassword' type='password' placeholder="confirmpassword"></Input>
-      <Button type="submit">提交</Button>
-    </form>
+  return (
+    <div className='w-full flex justify-center  items-center'>
+      <form action={handleFormSubmit} className='flex w-[300px] flex-col gap-2 justify-center items-center'>
+        <label htmlFor='oldpassword' className='self-start'>老密码</label>
+        <Input name='oldpassword' type='password' placeholder="oldpassword"></Input>
+        <label htmlFor='oldpassword' className='self-start'>新密码</label>
+        <Input name='newpassword' type='password' placeholder="newpassword"></Input>
+        <label htmlFor='oldpassword' className='self-start'>确认密码</label>
+        <Input name='confirmpassword' type='password' placeholder="confirmpassword"></Input>
+        <Button type="submit">提交</Button>
+      </form>
+    </div>
+
   );
 }

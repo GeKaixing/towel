@@ -1,4 +1,5 @@
 'use client'
+import TowelButton from '@/components/ui/towel-button';
 import React, { useState } from 'react';
 
 declare global {
@@ -26,14 +27,14 @@ const WalletPage: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className='w-full flex flex-col justify-center items-center'>
             <h1>Connect to MetaMask Wallet</h1>
             {walletAddress ? (
                 <div>
                     <p>Connected Wallet Address: {walletAddress}</p>
                 </div>
             ) : (
-                <button onClick={connectWallet}>Connect Wallet</button>
+                <TowelButton onClick={connectWallet}>Connect Wallet</TowelButton>
             )}
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </div>

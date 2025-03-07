@@ -37,7 +37,6 @@ export default function Page() {
             if (response) {
                 (event.target as HTMLFormElement).reset();
             }
-            console.log('Response:', response);
         } catch (error) {
             if (error instanceof z.ZodError) {
                 console.log('Validation errors:', error.errors);

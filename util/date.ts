@@ -1,5 +1,4 @@
 export const formattingDate = (day: any) => {
-    console.log(day)
   const dateObj = new Date(day);
   if (isNaN(dateObj.getTime())) {
     throw new Error("Invalid date");

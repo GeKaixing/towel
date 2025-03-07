@@ -12,8 +12,8 @@ export default function page() {
       
         {
             index: 3,
-            title: '忘记密码',
-            href: '/setting/forget'
+            title: '修改密码',
+            href: '/setting/changepassword'
         },
         {
             index: 4,
