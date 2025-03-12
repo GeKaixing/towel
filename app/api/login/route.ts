@@ -29,15 +29,14 @@ export async function POST(request: Request) {
       { status: 401 }
     );
   }
-
   // 如果密码匹配，生成 JWT 令牌
-  const token = jwt.sign(
-    { userid: user._id, username: username, headimg: user.headimg },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "30d",
-    }
-  );
+    const token = jwt.sign(
+      { userid: user._id, username: username, headimg: user.headimg,premium:user.premium },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "30d",
+      }
+    );
 
   const expiresAt = new Date();
   expiresAt.setDate(expiresAt.getDate() + 30);

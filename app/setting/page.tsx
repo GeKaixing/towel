@@ -5,31 +5,35 @@ import React from 'react'
 export default function page() {
     const data = [
         {
-            index: 1,
+            id: 1,
             title: '钱包',
             href: '/setting/wallet'
         },
       
         {
-            index: 3,
+            id: 3,
             title: '修改密码',
             href: '/setting/changepassword'
         },
         {
-            index: 4,
+            id: 4,
             title: '关于',
             href: '/setting/about'
         },
         {
-            index: 5,
+            id: 5,
             title: '账号',
             href: '/setting/account'
         },
-
+        {
+            id: 6,
+            title: '购买会员',
+            href: '/setting/stripe'
+        },
     ]
     return (
         <div className='flex flex-col gap-2'>
-            {data.map((item) => <SettingLink key={item.index} href={item.href} title={item.title}></SettingLink>)}
+            {data.map((item) => <SettingLink key={item.id} href={item.href} title={item.title}></SettingLink>)}
             <ModeToggle></ModeToggle>
         </div>
     )
