@@ -58,14 +58,11 @@ export default async function RootLayout({
   const cookie = await getCookie()
   return (
     <html lang="en">
-      {/* <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script> */}
-
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased  dark:bg-black`}>
         <div className="flex flex-row justify-center items-center gap-2">
-          {/* <AddPortal></AddPortal> */}
           <header className="w-[200px] h-screen dark:bg-[#0a0a0a] bg-white flex flex-col gap-2">
             <Link href='/'>主页</Link>
             <AIButton></AIButton>
