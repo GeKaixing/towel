@@ -29,7 +29,7 @@ export default async function Page() {
 }
 
 async function GETaccount(userid: string) {
-    const res = await fetch(`http://localhost:3000/api/profile/account/${userid}`, {
+    const res = await fetch(`${process.env.ORIGIN}/api/profile/account/${userid}`, {
         headers: {
             'Content-Type': 'application/json',
         },
