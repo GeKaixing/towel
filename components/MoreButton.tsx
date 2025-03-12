@@ -14,7 +14,6 @@ export default function MoreButton({
 }) {
   const [show, setShow] = useState(false);
   const [isPending, startTransition] = useTransition();
-  console.log(isPending)
   return (
     <div className="relative cursor-pointer">
       {show && (
