@@ -2,7 +2,7 @@ import Image from "next/image";
 import testImg from "@/assets/test.png";
 import Link from "next/link";
 import { CommentIcon, LikeIcon, ShareIcon, StarIcon } from "@/components/icon";
-import MoreButton from "@/components/moreButton";
+import MoreButton from "@/components/MoreButton";
 
 interface Post {
   _id: string;
