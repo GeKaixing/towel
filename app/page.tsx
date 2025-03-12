@@ -37,7 +37,7 @@ export default async function Home() {
               ></Image>
               <div className="font-bold">{item.user.username}</div>
             </div>
-              <MoreButton userId={cookie?.userid} postUserid={item.postUserId}></MoreButton>
+              <MoreButton  userId={cookie?.userid} postUserid={item.postUserId} postId={item._id}></MoreButton>
           </header>
           <Link href={`/post/${item._id}`}>
             <main className="mt-2 mb-2 ">

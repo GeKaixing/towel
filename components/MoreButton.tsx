@@ -1,16 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
+import submit from "./MoreButtonActions";
 
 export default function MoreButton({
   userId,
   postUserid,
+  postId,
   ...props
 }: {
   userId: string;
   postUserid: string;
+  postId: string;
 }) {
-  console.log(userId, postUserid);
   const [show, setShow] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  console.log(isPending)
   return (
     <div className="relative cursor-pointer">
       {show && (
@@ -20,8 +24,15 @@ export default function MoreButton({
           "
         >
           {userId === postUserid && (
-            <div className=" whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer">
-              删除
+            <div
+              className=" whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer"
+              onClick={() => {
+                startTransition(() => {
+                  submit(postId);
+                });
+              }}
+            >
+              {isPending?'删除成功':'删除'}
             </div>
           )}
           <div className="whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer">

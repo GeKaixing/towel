@@ -1,4 +1,5 @@
 import { POSTS } from "@/models/db";
+import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 export const GET = async () => {
   try {
@@ -117,3 +118,18 @@ export const POST = async (Request: Request) => {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 };
+
+ export const DELETE = async (Request: Request) => {
+  try { 
+      const {postId} = await Request.json();
+      console.log(postId)
+      const delPost = await POSTS.findByIdAndDelete({ _id: postId })
+      revalidateTag('posts')
+      return NextResponse.json(delPost, { status: 200 })
+  }
+  catch (error:any) {
+    console.log(error)
+      return NextResponse.json({ message: error.message }, { status: 500 })
+
+  }
+}
