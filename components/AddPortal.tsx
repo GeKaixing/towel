@@ -6,6 +6,7 @@ import Button from './Button';
 import Image from 'next/image';
 import testImg from "@/assets/test.png";
 import { isRefresh } from '@/store/isRefresh';
+import { revalidateTag } from 'next/cache';
 
 export default function AddPortal() {
     const isShowPortalState = isShowPortal((state) => state.isShow);
@@ -29,6 +30,7 @@ export default function AddPortal() {
         };
         await POST(postData);
         setData('');
+        revalidateTag('post');
         setRefresh();
     };
 
@@ -36,13 +38,14 @@ export default function AddPortal() {
     const handleModalClick = (e: React.MouseEvent) => {
         e.stopPropagation();
     };
-
     return (
         <>
             {isShowPortalState && createPortal(
                 <div
                     className="flex justify-center items-center fixed top-0 left-0 w-screen h-screen bg-gray-800/70 z-50"
-                    onClick={() => setIsShow()} // 点击外部区域关闭模态框
+                    onClick={() => {
+                        setIsShow();
+                        }} // 点击外部区域关闭模态框
                 >
                     <div
                         className="

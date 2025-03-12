@@ -1,11 +1,8 @@
-"use client"
 import Image from "next/image";
 import testImg from "@/assets/test.png";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { isRefresh } from "@/store/isRefresh";
 import { CommentIcon, LikeIcon, ShareIcon, StarIcon } from "@/components/icon";
-// import SignIn from "@/components/sign-in";
+import MoreButton from "@/components/moreButton";
 
 interface Post {
   _id: string;
@@ -19,25 +16,19 @@ interface Post {
   postComment: number;
   postFavorite: number;
 }
-export default function Home() {
-  const isRefreshStore = isRefresh((state) => state.isRefresh)
-  const [posts, setPosts] = useState<Post[]>([])
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await GET();
-      setPosts(res);
-    };
-    fetchPosts();
-  }, [isRefreshStore])
+export default async function Home() {
+  const posts = await GET()
   return (
     <div className="space-y-2">
-      {/* <SignIn></SignIn> */}
       {posts.map((item) => (
         <div key={item.postCreateDate} className="w-full border-2 dark:hover:border-[#353535] dark:border-[#0a0a0a]  border-gray-100 hover:border-gray-200 p-2 rounded-xl ">
           <Link href={`/post/${item._id}`}  >
-            <header className="flex items-center gap-2">
-              <Image width={30} height={30} src={testImg} alt="react logo"></Image>
-              <div className="font-bold">{item.user.username}</div>
+            <header className="flex justify-between items-center gap-2">
+              <div className="flex flex-row gap-2 items-center">
+                <Image width={30} height={30} src={testImg} alt="react logo"></Image>
+                <div className="font-bold">{item.user.username}</div>
+              </div>
+              <MoreButton></MoreButton>
             </header>
             <main className="mt-2 mb-2 ">
               <div className="font-bold ">{item.postText}</div>
@@ -65,11 +56,14 @@ export default function Home() {
     </div >
   );
 }
-async function GET() {
-  const res = await fetch('/api/post', {
+async function GET(): Promise<Post[]> {
+  const res = await fetch(`${process.env.ORIGIN}/api/post`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+    },
+    next: {
+      tags: ['post'],
     },
   })
   return await res.json()

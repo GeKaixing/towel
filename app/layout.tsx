@@ -6,12 +6,12 @@ import Button from "@/components/Button";
 import Image from "next/image";
 import textImg from "@/assets/test.png";
 import AIButton from "@/components/AIButton";
-// import AddPortal from "@/components/AddPortal";
 import Head from "next/head";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { getCookie } from "@/util/getcookie";
 import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "@/components/theme-provider"
+import AddPortal from "./add/page";
 interface dataProps {
   index: number,
   title: string,
@@ -59,6 +59,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       {/* <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script> */}
+
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -74,14 +75,15 @@ export default async function RootLayout({
             <Link href='/user'>{cookie ? '我的' : '登录'}</Link>
           </header>
           <main className=" w-[500px] h-screen  dark:bg-[#0a0a0a] bg-white">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <AddPortal></AddPortal>
+              {children}
+            </ThemeProvider>
             <Analytics></Analytics>
             <SpeedInsights />
           </main>
