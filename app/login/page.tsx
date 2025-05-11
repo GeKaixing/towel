@@ -6,6 +6,7 @@ import { isForbid } from '@/store/isForbid';
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { z } from 'zod';
+import GoogleAuthButton from './_component/GoogleButton';
 
 interface LoginData {
     username: FormDataEntryValue | null;
@@ -78,6 +79,8 @@ export default function Page() {
                 {/* <input name="password" type="password" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  password"></input> */}
                 <Button type="submit" disabled={cloudflare !== 'solved'}>login</Button>
                 <Link href="/signup">signup</Link>
+                <GoogleAuthButton buttonText="continue with google"
+                    className="!rounded-[18px] border-[#D9D9D9]"></GoogleAuthButton>
                 {/* <Link href="/reset" className='text-gray-400'>reset</Link> */}
                 {isError && <div className='text-red-500'>账号或者密码错误</div>}
                 <Cloudflare></Cloudflare>
