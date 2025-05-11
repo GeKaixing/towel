@@ -82,5 +82,5 @@ async function GET(): Promise<Post[]> {
       tags: ["post"],
     },
   });
-  return await res.json();
+  return await [];
 }

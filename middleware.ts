@@ -9,7 +9,6 @@ const authRoutes = ["/login", "/signup"]; // 登录和注册页面，已登录�
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get("jwt")?.value; // 从 cookies 中获取 token
-
   // 如果用户未登录且访问受保护的路由，重定向到登录页
   if (!token && protectedRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/login", request.url));
