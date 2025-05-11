@@ -1,14 +1,19 @@
-export { auth  } from "@/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { auth } from "./auth";
 
 // 定义需要保护的路径
 const protectedRoutes = ["/user", "/add",'/ai','/message','/setting']; // 需要登录才能访问的路径
 const authRoutes = ["/login", "/signup"]; // 登录和注册页面，已登录用户不能访问
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get("jwt")?.value; // 从 cookies 中获取 token
+  const session = await auth()
+  console.log('session',session)
+  const token = request.cookies.get("jwt")?.value // 从 cookies 中获取 token
+  // request.cookies.get("authjs.session-token")?.value
+              
+                  
   // 如果用户未登录且访问受保护的路由，重定向到登录页
   if (!token && protectedRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/login", request.url));
