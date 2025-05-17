@@ -9,7 +9,6 @@ const authRoutes = ["/login", "/signup"]; // 登录和注册页面，已登录�
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const session = await auth()
-  console.log('session',session)
   const token = request.cookies.get("jwt")?.value // 从 cookies 中获取 token
   // request.cookies.get("authjs.session-token")?.value
               
