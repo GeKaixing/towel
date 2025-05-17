@@ -19,10 +19,11 @@ interface Post {
 }
 export default async function Home() {
   const posts = await GET();
+  const postsData=await posts.json()
   const cookie = await getCookie();
   return (
     <div className="space-y-2">
-      {posts.map((item) => (
+      {postsData.lenght!==0&&postsData.map((item:Post) => (
         <div
           key={item.postCreateDate}
           className="w-full border-2 dark:hover:border-[#353535] dark:border-[#0a0a0a]  border-gray-100 hover:border-gray-200 p-2 rounded-xl "
@@ -72,8 +73,8 @@ export default async function Home() {
     </div>
   );
 }
-async function GET(): Promise<Post[]> {
-   await fetch(`${process.env.ORIGIN}/api/post`, {
+async function GET() {
+   const res= await fetch(`${process.env.ORIGIN}/api/post`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -82,5 +83,6 @@ async function GET(): Promise<Post[]> {
       tags: ["post"],
     },
   });
-  return await [];
+  
+  return res;
 }
