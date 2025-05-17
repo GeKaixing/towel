@@ -7,7 +7,7 @@ import { LIKE } from './likeModule.js';
 import { MENTION } from './mentionModule.js';
 import { REPLY } from './replyModule.js';
 import { STATICDATA } from './staticdataModule.js';
-import { verificationCode } from './verificationcodeModule.js';
+import { verificationCode } from './verificationcodeModule.ts';
 
 export const POSTS = mongoose.models.POSTS || mongoose.model('POSTS', POST)
 export const COMMENTS = mongoose.models.COMMENTS || mongoose.model('COMMENTS', COMMENT)

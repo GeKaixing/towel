@@ -1,5 +1,6 @@
 "use client";
 import Button from '@/components/Button';
+import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { z } from 'zod';
@@ -78,16 +79,17 @@ export default function Page() {
         >
             <div className='w-[400px] flex flex-col justify-center items-center gap-2'>
                 <div className='self-start'>username</div>
-                <input
-                    type="text"
+
+                <Input  type="text"
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
                     className=' dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl'
-                    placeholder="  username"
-                />
+                    placeholder="  username">
+                </Input>
+                
                 <div className='self-start'>password</div>
-                <input
+                <Input
                     type="password"
                     name="password"
                     value={formData.password}
@@ -100,7 +102,7 @@ export default function Page() {
                     <div className='text-bold text-red-500'>{isError && '邮箱不符合格式'}</div>
                 </div>
                 <div className='flex self-start gap-2'>
-                    <input
+                    <Input
                         type="email"
                         name="email"
                         value={formData.email}
@@ -110,13 +112,13 @@ export default function Page() {
                     />
                     <div
                         onClick={verificationCodeHandle}
-                        className='dark:text-black h-[32px] cursor-pointer bg-gray-100 flex justify-center items-center rounded-xl hover:bg-assistantColor w-auto p-2'
+                        className=' whitespace-nowrap dark:text-black h-[32px] cursor-pointer bg-gray-100 flex justify-center items-center rounded-xl hover:bg-assistantColor w-auto p-2'
                     >
                         发送验证码
                     </div>
                 </div>
                 <div className='self-start'>code</div>
-                <input
+                <Input
                     type="password"
                     name="code"
                     value={formData.code}
@@ -166,6 +168,7 @@ async function fetchCodeData(data: LoginData): Promise<FetchResponse> {
         body: JSON.stringify({
             username: data.username,
             email: data.email,
+            purpose:"account-registration"
         }),
     });
     return await res.json();

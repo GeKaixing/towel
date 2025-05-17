@@ -1,25 +1,22 @@
-import { USERS } from "@/models/db";
-import redisClient from "@/redis";
+import { USERS, verificationCodes } from "@/models/db";
+// import redisClient from "@/redis";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 // 邮箱验证
 export const POST = async (request: Request) => {
   try {
-    const { username, email } = await request.json();
+    const { username, email, purpose } = await request.json();
     const user = await USERS.findOne({ $or: [{ username }, { email }] });
+    await verificationCodes.findOneAndDelete({
+      email: email,
+      purpose: purpose,
+    });
+    
     if (user) {
       return NextResponse.json(
         { message: "账号或邮件已经存在" },
         { status: 401 }
-      );
-    }
-    const rediskey = `nodemailerRegister:${email}`;
-    const existingCode = await redisClient.get(rediskey);
-    if (existingCode) {
-      return NextResponse.json(
-        { message: `您的验证码已发送，请稍后再试` },
-        { status: 200 }
       );
     }
     /* 生产五位数的验证码的函数
@@ -46,24 +43,30 @@ export const POST = async (request: Request) => {
       subject: "Verification Code for Registration",
       text: `Your verification code is: ${code}. Please use this code to complete your registration process.`,
     };
-    transporter.sendMail(
-      mailOptions,
-      (error: Error | null, info:any ) => {
-        if (error) {
-          console.log("Error sending email: ", error);
-        } else {
-          console.log("Email sent: ", info.response);
-        }
+    transporter.sendMail(mailOptions, (error: Error | null, info: any) => {
+      if (error) {
+        console.log("Error sending email: ", error);
+      } else {
+        console.log("Email sent: ", info.response);
       }
-    );
-    //5分钟过期
-    await redisClient.set(rediskey, code, { EX: 300 });
+    });
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5分钟有效
+    console.log(purpose);
+    const d = new verificationCodes({
+      email: email,
+      userId: null,
+      purpose: purpose,
+      code: code,
+      expiresAt: expiresAt,
+    });
+    d.save();
+
     return NextResponse.json(
       { message: "您的验证码已经到达邮件,注意5分钟后过期" },
       { status: 201 }
     );
   } catch (error) {
     console.error("Error in nodemailerRegisterApi:", error);
-    return NextResponse.json({ message: "服务区错误" }, { status: 501 });
+    return NextResponse.json({ message: "服务器错误" }, { status: 501 });
   }
 };
