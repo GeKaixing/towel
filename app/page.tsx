@@ -73,7 +73,7 @@ export default async function Home() {
   );
 }
 async function GET(): Promise<Post[]> {
-  const res = await fetch(`${process.env.ORIGIN}/api/post`, {
+   await fetch(`${process.env.ORIGIN}/api/post`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

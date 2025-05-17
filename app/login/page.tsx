@@ -73,12 +73,25 @@ export default function Page() {
             <div className='w-[400px] flex flex-col justify-center items-center gap-2'>
                 <div className='self-start'>username</div>
                 <Input name="username" type="text"></Input>
-                {/* <input name="username" type="text" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  username"></input> */}
                 <div className='self-start'>password</div>
                 <Input name="password" type="password"></Input>
-                {/* <input name="password" type="password" className='dark:text-black w-[400px] bg-gray-100 hover:bg-gray-200 rounded-xl' placeholder="  password"></input> */}
                 <Button type="submit" disabled={cloudflare !== 'solved'}>login</Button>
+             
+
                 <Link href="/signup">signup</Link>
+
+                   <div className='flex'>
+                    <span className='text-(--color-hostColor) hover:underline'>
+                        <Link href='/privacy-policy'>
+                            Privacy Policy
+                        </Link>
+                    </span>&nbsp;or&nbsp;<span className='text-(--color-assistantColor)  hover:underline'>
+                        <Link href='/terms-of-service'>
+                            Terms of Service
+                        </Link>
+                    </span>
+                </div>
+
                 <GoogleAuthButton buttonText="continue with google"
                     className="!rounded-[18px] border-[#D9D9D9]"></GoogleAuthButton>
                 {/* <Link href="/reset" className='text-gray-400'>reset</Link> */}
